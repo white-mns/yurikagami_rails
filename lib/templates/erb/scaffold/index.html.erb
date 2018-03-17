@@ -75,11 +75,19 @@
     <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
       <tr>
         <td><%%= <%= singular_table_name %>.result_no %></td>
-        <td><%%= <%= singular_table_name %>.p_name.name.html_safe + "(" + sprintf("%d",<%= singular_table_name %>.e_no) + ")" %></td>
+        <td><%%= e_no_f_no = sprintf("%d",<%= singular_table_name %>.e_no)
+            if <%= singular_table_name %>.sub_no > 0 then
+                e_no_f_no += ", " + sprintf("%d",<%= singular_table_name %>.sub_no)
+            end
+            <%= singular_table_name %>.p_name.name.html_safe + "(" + e_no_f_no + ")" %></td>
 <% attributes.reject(&:password_digest?).each do |attribute| -%>
         <td><%%= <%= singular_table_name %>.<%= attribute.name %> %></td>
 <% end -%>
-    	<td><%%= link_to " 結果", "http://csyuki.sakura.ne.jp/cgi-bin/prism/result/status"+sprintf("%d",<%= singular_table_name %>.e_no)+".html", :target => "_blank" %></td>
+        <td><%%= file_name = sprintf("%d",<%= singular_table_name %>.e_no)
+            if <%= singular_table_name %>.sub_no > 0 then
+                file_name += "_" + sprintf("%d",<%= singular_table_name %>.sub_no)
+            end
+            link_to " 結果", "http://csyuki.sakura.ne.jp/cgi-bin/prism/result/status"+file_name+".html", :target => "_blank" %></td>
       </tr>
     <%% end %>
   </tbody>
