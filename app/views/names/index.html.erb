@@ -1,4 +1,4 @@
-<h1>Listing names</h1>
+<h1>名前一覧</h1>
 
 <div class="bs-docs-section">
   <div class="row">
@@ -39,17 +39,9 @@
   <tr><td><%= f.label :e_no_form, 'Eno' %></td>
     <td class="formNum"><%= text_field_tag :e_no_form, @e_no_form %></td></tr>
   <tr><td><%= f.label :p_name_form, 'キャラクター名' %></td>
-    <td class="formText"><%= text_field_tag :p_name_form, @p_name_form %></td></tr>
-  <tr><td><%= f.label :result_no_form, 'Result no' %></td>
-    <td class="formNum"><%= text_field_tag :result_no_form, @result_no_form %></td></tr>
-  <tr><td><%= f.label :generate_no_form, 'Generate no' %></td>
-    <td class="formNum"><%= text_field_tag :generate_no_form, @generate_no_form %></td></tr>
-  <tr><td><%= f.label :e_no_form, 'E no' %></td>
-    <td class="formNum"><%= text_field_tag :e_no_form, @e_no_form %></td></tr>
-  <tr><td><%= f.label :sub_no_form, 'Sub no' %></td>
+    <td class="formText"><%= text_field_tag :name_form, @name_form %></td></tr>
+  <tr><td><%= f.label :sub_no_form, 'サブキャラ番号' %></td>
     <td class="formNum"><%= text_field_tag :sub_no_form, @sub_no_form %></td></tr>
-  <tr><td><%= f.label :name_form, 'Name' %></td>
-    <td class="formNum"><%= text_field_tag :name_form, @name_form %></td></tr>
   <tr><td></td><td>
     <%= f.submit '検索する' %>
     </td></tr>
@@ -69,12 +61,7 @@
   <thead>
     <tr>
       <th><%= sort_link(@search, :result_no,'更新回', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :e_no,'キャラクター(Eno)', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :result_no, 'Result no', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :generate_no, 'Generate no', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :e_no, 'E no', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :sub_no, 'Sub no', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :name, 'Name', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :e_no,'キャラクター(Eno, Fno)', default_order: :desc) %></th>
       <th colspan="1">結果リンク</th>
     </tr>
   </thead>
@@ -83,13 +70,16 @@
     <% @names.each do |name| %>
       <tr>
         <td><%= name.result_no %></td>
-        <td><%= name.p_name.name.html_safe + "(" + sprintf("%d",name.e_no) + ")" %></td>
-        <td><%= name.result_no %></td>
-        <td><%= name.generate_no %></td>
-        <td><%= name.e_no %></td>
-        <td><%= name.sub_no %></td>
-        <td><%= name.name %></td>
-    	<td><%= link_to " 結果", "http://csyuki.sakura.ne.jp/cgi-bin/prism/result/status"+sprintf("%d",name.e_no)+".html", :target => "_blank" %></td>
+        <td><%= e_no_f_no = sprintf("%d",name.e_no)
+            if name.sub_no > 0 then
+                e_no_f_no += ", " + sprintf("%d",name.sub_no)
+            end
+            name.name.html_safe + "(" + e_no_f_no + ")" %></td>
+        <td><%= file_name = sprintf("%d",name.e_no)
+            if name.sub_no > 0 then
+                file_name += "_" + sprintf("%d",name.sub_no)
+            end
+            link_to " 結果", "http://csyuki.sakura.ne.jp/cgi-bin/prism/result/status"+file_name+".html", :target => "_blank" %></td>
       </tr>
     <% end %>
   </tbody>
