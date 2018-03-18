@@ -103,6 +103,26 @@ module MyUtility
       param_adr[:q][data_name + "_" + match_suffix + "_any"].push(text)
 
   end
+  
+  # メインキャラ、サブキャラの指定情報の割当
+  def sub_no_set(param_adr, show_param_adr)
+    show_param_adr["show_main"] = param_adr["show_main"]
+    show_param_adr["show_sub"] = param_adr["show_sub"]
+
+    param_adr[:q]["sub_no_eq_any"]  = param_adr[:q]["sub_no_eq_any"] ? param_adr[:q]["sub_no_eq_any"] : []
+
+    if param_adr["show_main"] == "on" then param_adr[:q]["sub_no_eq_any"].push(0) end
+    if param_adr["show_sub"] == "on" then
+        param_adr[:q]["sub_no_eq_any"].push(1)
+        param_adr[:q]["sub_no_eq_any"].push(2)
+        param_adr[:q]["sub_no_eq_any"].push(3)
+    end
+    
+    if param_adr[:q]["sub_no_eq_any"].size == 0 then 
+        show_param_adr["show_main"] = "on"
+        param_adr[:q]["sub_no_eq_any"].push(0)
+    end
+  end
 
   private
 

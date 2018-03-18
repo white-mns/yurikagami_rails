@@ -29,7 +29,8 @@ class ProfilesController < ApplicationController
     reference_text_assign(params, "age", "age_form")
     reference_text_assign(params, "height", "height_form")
     reference_text_assign(params, "weight", "weight_form")
-        
+    
+            
     @result_no_form = params["result_no_form"]
     @generate_no_form = params["generate_no_form"]
     @e_no_form = params["e_no_form"]
@@ -43,6 +44,11 @@ class ProfilesController < ApplicationController
     @age_form = params["age_form"]
     @height_form = params["height_form"]
     @weight_form = params["weight_form"]
+ 
+    show_sub_hash =  {"show_main"=> @show_main,"show_sub" => @show_sub}
+    sub_no_set(params, show_sub_hash)
+    @show_main = show_sub_hash["show_main"]
+    @show_sub = show_sub_hash["show_sub"]
   end
   # GET /profiles/1
   #def show
