@@ -30,6 +30,11 @@ class <%= controller_class_name %>Controller < ApplicationController
     <% attributes.reject(&:password_digest?).each do |attribute| -%>
     @<%= attribute.name %>_form = params["<%= attribute.name %>_form"]
     <% end -%>
+    
+    show_sub_hash =  {"show_main"=> @show_main,"show_sub" => @show_sub}
+    sub_no_set(params, show_sub_hash)
+    @show_main = show_sub_hash["show_main"]
+    @show_sub = show_sub_hash["show_sub"]
   end
   # GET <%= route_url %>/1
   #def show
