@@ -5,25 +5,21 @@ class ProperNamesController < ApplicationController
   # GET /proper_names
   def index
     param_set
-    @count	= ProperName.includes([:p_name]).search(params[:q]).result.count()
-    @search	= ProperName.includes([:p_name]).page(params[:page]).search(params[:q])
+    @count	= ProperName.search(params[:q]).result.count()
+    @search	= ProperName.page(params[:page]).search(params[:q])
     @search.sorts = 'id asc' if @search.sorts.empty?
     @proper_names	= @search.result.per(50)
   end
 
   def param_set
-    @last_result = Name.maximum('result_no')
-    params["result_no_form"] = params["result_no_form"] ? params["result_no_form"] : sprintf('%d',@last_result)
     params[:q]  = params[:q] ? params[:q] : {}
     
-    reference_text_assign(params, "p_name_name", "p_name_form")
-        reference_number_assign(params, "proper_id", "proper_id_form")
-        reference_number_assign(params, "name", "name_form")
+    reference_number_assign(params, "proper_id", "proper_id_form")
+    reference_text_assign(params, "name", "name_form")
         
-    @p_name_form = params["p_name_form"]
-        @proper_id_form = params["proper_id_form"]
-        @name_form = params["name_form"]
-      end
+    @proper_id_form = params["proper_id_form"]
+    @name_form = params["name_form"]
+  end
   # GET /proper_names/1
   #def show
   #end
