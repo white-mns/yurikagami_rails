@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  result_no: 1
+  generate_no: 1
+  e_no: 1
+  sub_no: 1
+  nickname: MyString
+  title: MyString
+  job: MyString
+  tribe: 1
+  sex: MyString
+  age: MyString
+  height: MyString
+  weight: MyString
+
+two:
+  result_no: 1
+  generate_no: 1
+  e_no: 1
+  sub_no: 1
+  nickname: MyString
+  title: MyString
+  job: MyString
+  tribe: 1
+  sex: MyString
+  age: MyString
+  height: MyString
+  weight: MyString
