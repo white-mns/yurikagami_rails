@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  proper_id: 1
+  name: MyString
+
+two:
+  proper_id: 1
+  name: MyString

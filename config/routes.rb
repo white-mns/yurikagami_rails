@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :proper_names
   resources :names
   get 'top_page/index'
   root 'top_page#index'
