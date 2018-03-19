@@ -40,15 +40,13 @@
     <td class="formNum"><%= text_field_tag :e_no_form, @e_no_form %></td>
   <td><%= f.label :p_name_form, 'キャラクター名' %></td>
     <td class="formText"><%= text_field_tag :p_name_form, @p_name_form %></td></tr>
-  <tr><td></td><td><%= check_box_tag :show_main, @show_main, @show_main %><%= f.label_tag :show_main, 'メインキャラ' %><%= check_box_tag :show_sub, @show_sub, @show_sub %><%= f.label_tag :show_sub, 'サブキャラ' %></td></tr>
+  <tr><td></td><td colspan="3"><%= check_box_tag :show_main, @show_main, @show_main %><%= f.label_tag :show_main, 'メインキャラ' %><%= check_box_tag :show_sub, @show_sub, @show_sub %><%= f.label_tag :show_sub, 'サブキャラ' %></td></tr>
   <tr><td><%= f.label :nickname_form, '通り名' %></td>
     <td class="formText"><%= text_field_tag :nickname_form, @nickname_form %></td>
   <td><%= f.label :title_form, '肩書き' %></td>
     <td class="formText"><%= text_field_tag :title_form, @title_form %></td></tr>
   <tr><td><%= f.label :job_form, '職業' %></td>
-    <td class="formText"><%= text_field_tag :job_form, @job_form %></td>
-  <td><%= f.label :tribe_form, '種族' %></td>
-    <td class="formText"><%= text_field_tag :tribe_form, @tribe_form %></td></tr>
+    <td colspan="3" class="formText"><%= text_field_tag :job_form, @job_form %></td></tr>
   <tr><td><%= f.label :sex_form, '性別' %></td>
     <td class="formText"><%= text_field_tag :sex_form, @sex_form %></td>
   <td><%= f.label :age_form, '年齢' %></td>
@@ -80,7 +78,6 @@
       <th><%= sort_link(@search, :nickname, '通名', default_order: :desc) %></th>
       <th><%= sort_link(@search, :title, '肩書', default_order: :desc) %></th>
       <th><%= sort_link(@search, :job, '職業', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :tribe, '種族', default_order: :desc) %></th>
       <th><%= sort_link(@search, :sex, '性別', default_order: :desc) %></th>
       <th><%= sort_link(@search, :age, '年齢', default_order: :desc) %></th>
       <th><%= sort_link(@search, :height, '身長', default_order: :desc) %></th>
@@ -101,7 +98,6 @@
         <td><%= profile.nickname %></td>
         <td><%= profile.title %></td>
         <td><%= profile.job %></td>
-        <td><%= profile.tribe_name.name %></td>
         <td><%= profile.sex %></td>
         <td><%= profile.age %></td>
         <td><%= profile.height %></td>

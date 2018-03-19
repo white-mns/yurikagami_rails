@@ -24,7 +24,6 @@ class ProfilesController < ApplicationController
     reference_text_assign(params, "nickname", "nickname_form")
     reference_text_assign(params, "title", "title_form")
     reference_text_assign(params, "job", "job_form")
-    reference_text_assign(params, "tribe_name_name", "tribe_form")
     reference_text_assign(params, "sex", "sex_form")
     reference_text_assign(params, "age", "age_form")
     reference_text_assign(params, "height", "height_form")
@@ -39,7 +38,6 @@ class ProfilesController < ApplicationController
     @nickname_form = params["nickname_form"]
     @title_form = params["title_form"]
     @job_form = params["job_form"]
-    @tribe_form = params["tribe_form"]
     @sex_form = params["sex_form"]
     @age_form = params["age_form"]
     @height_form = params["height_form"]
@@ -97,6 +95,6 @@ class ProfilesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def profile_params
-      params.require(:profile).permit(:result_no, :generate_no, :e_no, :sub_no, :nickname, :title, :job, :tribe, :sex, :age, :height, :weight)
+      params.require(:profile).permit(:result_no, :generate_no, :e_no, :sub_no, :nickname, :title, :job, :sex, :age, :height, :weight)
     end
 end
