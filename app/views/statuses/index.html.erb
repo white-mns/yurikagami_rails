@@ -48,9 +48,9 @@
   <td><%= f.label :mexp_form, 'MExp' %></td>
     <td class="formNum"><%= text_field_tag :mexp_form, @mexp_form %></td></tr>
   <tr><td><%= f.label :job1_form, '戦型1' %></td>
-    <td class="formNum"><%= text_field_tag :job1_form, @job1_form %></td>
+    <td class="formText"><%= text_field_tag :job1_form, @job1_form %></td>
   <td><%= f.label :job2_form, '戦型2' %></td>
-    <td class="formNum"><%= text_field_tag :job2_form, @job2_form %></td></tr>
+    <td class="formText"><%= text_field_tag :job2_form, @job2_form %></td></tr>
   <tr><td><%= f.label :hp_form, 'HP' %></td>
     <td class="formNum"><%= text_field_tag :hp_form, @hp_form %></td>
   <td><%= f.label :mhp_form, 'MHP' %></td>
@@ -143,8 +143,8 @@
         <td><%= status.lv %></td>
         <td><%= status.exp %></td>
         <td><%= status.mexp %></td>
-        <td><%= status.job1 %></td>
-        <td><%= status.job2 %></td>
+        <td><%= status.job1_name.name %></td>
+        <td><%= status.job2_name.name %></td>
         <td><%= status.hp %></td>
         <td><%= status.mhp %></td>
         <td><%= status.hp_rate %></td>
