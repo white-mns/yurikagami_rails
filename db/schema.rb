@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180318022246) do
+ActiveRecord::Schema.define(version: 20180319021026) do
 
   create_table "names", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "result_no"
@@ -51,6 +51,60 @@ ActiveRecord::Schema.define(version: 20180318022246) do
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_proper_names_on_name"
     t.index ["proper_id"], name: "index_proper_names_on_proper_id"
+  end
+
+  create_table "statuses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "result_no"
+    t.integer "generate_no"
+    t.integer "e_no"
+    t.integer "sub_no"
+    t.integer "lv"
+    t.integer "exp"
+    t.integer "mexp"
+    t.integer "job1"
+    t.integer "job2"
+    t.integer "hp"
+    t.integer "mhp"
+    t.float "hp_rate", limit: 24
+    t.integer "mp"
+    t.integer "mmp"
+    t.float "mp_rate", limit: 24
+    t.integer "sp"
+    t.integer "str"
+    t.integer "int"
+    t.integer "tec"
+    t.integer "agi"
+    t.integer "def"
+    t.integer "skill"
+    t.integer "personality"
+    t.integer "tribe"
+    t.integer "money"
+    t.integer "sundries"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["agi"], name: "index_statuses_on_agi"
+    t.index ["def"], name: "index_statuses_on_def"
+    t.index ["e_no", "result_no", "sub_no", "generate_no"], name: "unique_eno"
+    t.index ["exp"], name: "index_statuses_on_exp"
+    t.index ["hp"], name: "index_statuses_on_hp"
+    t.index ["hp_rate"], name: "index_statuses_on_hp_rate"
+    t.index ["int"], name: "index_statuses_on_int"
+    t.index ["job1"], name: "index_statuses_on_job1"
+    t.index ["job2"], name: "index_statuses_on_job2"
+    t.index ["lv"], name: "index_statuses_on_lv"
+    t.index ["mexp"], name: "index_statuses_on_mexp"
+    t.index ["mhp"], name: "index_statuses_on_mhp"
+    t.index ["mmp"], name: "index_statuses_on_mmp"
+    t.index ["money"], name: "index_statuses_on_money"
+    t.index ["mp"], name: "index_statuses_on_mp"
+    t.index ["mp_rate"], name: "index_statuses_on_mp_rate"
+    t.index ["personality"], name: "index_statuses_on_personality"
+    t.index ["skill"], name: "index_statuses_on_skill"
+    t.index ["sp"], name: "index_statuses_on_sp"
+    t.index ["str"], name: "index_statuses_on_str"
+    t.index ["sundries"], name: "index_statuses_on_sundries"
+    t.index ["tec"], name: "index_statuses_on_tec"
+    t.index ["tribe"], name: "index_statuses_on_tribe"
   end
 
 end

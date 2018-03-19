@@ -1,0 +1,57 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  result_no: 1
+  generate_no: 1
+  e_no: 1
+  sub_no: 1
+  lv: 1
+  exp: 1
+  mexp: 1
+  job1: 1
+  job2: 1
+  hp: 1
+  mhp: 1
+  hp_rate: 1.5
+  mp: 1
+  mmp: 1
+  mp_rate: 1.5
+  sp: 1
+  str: 1
+  int: 1
+  tec: 1
+  agi: 1
+  def: 1
+  skill: 1
+  personality: 1
+  tribe: 1
+  money: 1
+  sundries: 1
+
+two:
+  result_no: 1
+  generate_no: 1
+  e_no: 1
+  sub_no: 1
+  lv: 1
+  exp: 1
+  mexp: 1
+  job1: 1
+  job2: 1
+  hp: 1
+  mhp: 1
+  hp_rate: 1.5
+  mp: 1
+  mmp: 1
+  mp_rate: 1.5
+  sp: 1
+  str: 1
+  int: 1
+  tec: 1
+  agi: 1
+  def: 1
+  skill: 1
+  personality: 1
+  tribe: 1
+  money: 1
+  sundries: 1
