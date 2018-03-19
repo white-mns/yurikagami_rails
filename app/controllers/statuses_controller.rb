@@ -5,8 +5,8 @@ class StatusesController < ApplicationController
   # GET /statuses
   def index
     param_set
-    @count	= Status.includes([:p_name]).search(params[:q]).result.count()
-    @search	= Status.includes([:p_name]).page(params[:page]).search(params[:q])
+    @count	= Status.includes([:p_name, :tribe_name]).search(params[:q]).result.count()
+    @search	= Status.includes([:p_name, :tribe_name]).page(params[:page]).search(params[:q])
     @search.sorts = 'id asc' if @search.sorts.empty?
     @statuses	= @search.result.per(50)
   end
@@ -17,60 +17,60 @@ class StatusesController < ApplicationController
     params[:q]  = params[:q] ? params[:q] : {}
     
     reference_text_assign(params, "p_name_name", "p_name_form")
-        reference_number_assign(params, "result_no", "result_no_form")
-        reference_number_assign(params, "generate_no", "generate_no_form")
-        reference_number_assign(params, "e_no", "e_no_form")
-        reference_number_assign(params, "sub_no", "sub_no_form")
-        reference_number_assign(params, "lv", "lv_form")
-        reference_number_assign(params, "exp", "exp_form")
-        reference_number_assign(params, "mexp", "mexp_form")
-        reference_number_assign(params, "job1", "job1_form")
-        reference_number_assign(params, "job2", "job2_form")
-        reference_number_assign(params, "hp", "hp_form")
-        reference_number_assign(params, "mhp", "mhp_form")
-        reference_number_assign(params, "hp_rate", "hp_rate_form")
-        reference_number_assign(params, "mp", "mp_form")
-        reference_number_assign(params, "mmp", "mmp_form")
-        reference_number_assign(params, "mp_rate", "mp_rate_form")
-        reference_number_assign(params, "sp", "sp_form")
-        reference_number_assign(params, "str", "str_form")
-        reference_number_assign(params, "int", "int_form")
-        reference_number_assign(params, "tec", "tec_form")
-        reference_number_assign(params, "agi", "agi_form")
-        reference_number_assign(params, "def", "def_form")
-        reference_number_assign(params, "skill", "skill_form")
-        reference_number_assign(params, "personality", "personality_form")
-        reference_number_assign(params, "tribe", "tribe_form")
-        reference_number_assign(params, "money", "money_form")
-        reference_number_assign(params, "sundries", "sundries_form")
+    reference_number_assign(params, "result_no", "result_no_form")
+    reference_number_assign(params, "generate_no", "generate_no_form")
+    reference_number_assign(params, "e_no", "e_no_form")
+    reference_number_assign(params, "sub_no", "sub_no_form")
+    reference_number_assign(params, "lv", "lv_form")
+    reference_number_assign(params, "exp", "exp_form")
+    reference_number_assign(params, "mexp", "mexp_form")
+    reference_number_assign(params, "job1", "job1_form")
+    reference_number_assign(params, "job2", "job2_form")
+    reference_number_assign(params, "hp", "hp_form")
+    reference_number_assign(params, "mhp", "mhp_form")
+    reference_number_assign(params, "hp_rate", "hp_rate_form")
+    reference_number_assign(params, "mp", "mp_form")
+    reference_number_assign(params, "mmp", "mmp_form")
+    reference_number_assign(params, "mp_rate", "mp_rate_form")
+    reference_number_assign(params, "sp", "sp_form")
+    reference_number_assign(params, "str", "str_form")
+    reference_number_assign(params, "int", "int_form")
+    reference_number_assign(params, "tec", "tec_form")
+    reference_number_assign(params, "agi", "agi_form")
+    reference_number_assign(params, "def", "def_form")
+    reference_number_assign(params, "skill", "skill_form")
+    reference_number_assign(params, "personality", "personality_form")
+    reference_text_assign(params, "tribe_name_name", "tribe_form")
+    reference_number_assign(params, "money", "money_form")
+    reference_number_assign(params, "sundries", "sundries_form")
         
     @p_name_form = params["p_name_form"]
-        @result_no_form = params["result_no_form"]
-        @generate_no_form = params["generate_no_form"]
-        @e_no_form = params["e_no_form"]
-        @sub_no_form = params["sub_no_form"]
-        @lv_form = params["lv_form"]
-        @exp_form = params["exp_form"]
-        @mexp_form = params["mexp_form"]
-        @job1_form = params["job1_form"]
-        @job2_form = params["job2_form"]
-        @hp_form = params["hp_form"]
-        @mhp_form = params["mhp_form"]
-        @hp_rate_form = params["hp_rate_form"]
-        @mp_form = params["mp_form"]
-        @mmp_form = params["mmp_form"]
-        @mp_rate_form = params["mp_rate_form"]
-        @sp_form = params["sp_form"]
-        @str_form = params["str_form"]
-        @int_form = params["int_form"]
-        @tec_form = params["tec_form"]
-        @agi_form = params["agi_form"]
-        @def_form = params["def_form"]
-        @skill_form = params["skill_form"]
-        @personality_form = params["personality_form"]
-        @tribe_form = params["tribe_form"]
-        @money_form = params["money_form"]
-        @sundries_form = params["sundries_form"]
+    @result_no_form = params["result_no_form"]
+    @generate_no_form = params["generate_no_form"]
+    @e_no_form = params["e_no_form"]
+    @sub_no_form = params["sub_no_form"]
+    @lv_form = params["lv_form"]
+    @exp_form = params["exp_form"]
+    @mexp_form = params["mexp_form"]
+    @job1_form = params["job1_form"]
+    @job2_form = params["job2_form"]
+    @hp_form = params["hp_form"]
+    @mhp_form = params["mhp_form"]
+    @hp_rate_form = params["hp_rate_form"]
+    @mp_form = params["mp_form"]
+    @mmp_form = params["mmp_form"]
+    @mp_rate_form = params["mp_rate_form"]
+    @sp_form = params["sp_form"]
+    @str_form = params["str_form"]
+    @int_form = params["int_form"]
+    @tec_form = params["tec_form"]
+    @agi_form = params["agi_form"]
+    @def_form = params["def_form"]
+    @skill_form = params["skill_form"]
+    @personality_form = params["personality_form"]
+    @tribe_form = params["tribe_form"]
+    @money_form = params["money_form"]
+    @sundries_form = params["sundries_form"]
         
     show_sub_hash =  {"show_main"=> @show_main,"show_sub" => @show_sub}
     sub_no_set(params, show_sub_hash)

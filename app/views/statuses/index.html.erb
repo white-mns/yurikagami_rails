@@ -1,4 +1,4 @@
-<h1>Listing statuses</h1>
+<h1>ステータス一覧</h1>
 
 <div class="bs-docs-section">
   <div class="row">
@@ -33,67 +33,59 @@
 <table id="search_table" class="table table-striped table-bordered table-hover">
 
   <tbody>
-  <tr><td colspan="2" style="cursor:pointer;" onclick="search_open(false);">絞り込み検索<span style="font-size:80%">(クリックで閉じます)</span></td></tr>
+  <tr><td colspan="4" style="cursor:pointer;" onclick="search_open(false);">絞り込み検索<span style="font-size:80%">(クリックで閉じます)</span></td></tr>
   <tr><td><%= f.label :result_no_form, '更新回' %></td>
-    <td class="formNum"><%= text_field_tag :result_no_form, @result_no_form %></td></tr>
+    <td colspan="3" class="formNum"><%= text_field_tag :result_no_form, @result_no_form %></td></tr>
   <tr><td><%= f.label :e_no_form, 'Eno' %></td>
-    <td class="formNum"><%= text_field_tag :e_no_form, @e_no_form %></td></tr>
-  <tr><td><%= f.label :p_name_form, 'キャラクター名' %></td>
+    <td class="formNum"><%= text_field_tag :e_no_form, @e_no_form %></td>
+  <td><%= f.label :p_name_form, 'キャラクター名' %></td>
     <td class="formText"><%= text_field_tag :p_name_form, @p_name_form %></td></tr>
-  <tr><td></td><td><%= check_box_tag :show_main, @show_main, @show_main %><%= f.label_tag :show_main, 'メインキャラ' %><%= check_box_tag :show_sub, @show_sub, @show_sub %><%= f.label_tag :show_sub, 'サブキャラ' %></td></tr>
-  <tr><td><%= f.label :result_no_form, 'Result no' %></td>
-    <td class="formNum"><%= text_field_tag :result_no_form, @result_no_form %></td></tr>
-  <tr><td><%= f.label :generate_no_form, 'Generate no' %></td>
-    <td class="formNum"><%= text_field_tag :generate_no_form, @generate_no_form %></td></tr>
-  <tr><td><%= f.label :e_no_form, 'E no' %></td>
-    <td class="formNum"><%= text_field_tag :e_no_form, @e_no_form %></td></tr>
-  <tr><td><%= f.label :sub_no_form, 'Sub no' %></td>
-    <td class="formNum"><%= text_field_tag :sub_no_form, @sub_no_form %></td></tr>
+  <tr><td></td><td colspan="4"><%= check_box_tag :show_main, @show_main, @show_main %><%= f.label_tag :show_main, 'メインキャラ' %><%= check_box_tag :show_sub, @show_sub, @show_sub %><%= f.label_tag :show_sub, 'サブキャラ' %></td></tr>
   <tr><td><%= f.label :lv_form, 'Lv' %></td>
-    <td class="formNum"><%= text_field_tag :lv_form, @lv_form %></td></tr>
+    <td colspan="3" class="formNum"><%= text_field_tag :lv_form, @lv_form %></td></tr>
   <tr><td><%= f.label :exp_form, 'Exp' %></td>
-    <td class="formNum"><%= text_field_tag :exp_form, @exp_form %></td></tr>
-  <tr><td><%= f.label :mexp_form, 'Mexp' %></td>
+    <td class="formNum"><%= text_field_tag :exp_form, @exp_form %></td>
+  <td><%= f.label :mexp_form, 'MExp' %></td>
     <td class="formNum"><%= text_field_tag :mexp_form, @mexp_form %></td></tr>
-  <tr><td><%= f.label :job1_form, 'Job1' %></td>
-    <td class="formNum"><%= text_field_tag :job1_form, @job1_form %></td></tr>
-  <tr><td><%= f.label :job2_form, 'Job2' %></td>
+  <tr><td><%= f.label :job1_form, '戦型1' %></td>
+    <td class="formNum"><%= text_field_tag :job1_form, @job1_form %></td>
+  <td><%= f.label :job2_form, '戦型2' %></td>
     <td class="formNum"><%= text_field_tag :job2_form, @job2_form %></td></tr>
-  <tr><td><%= f.label :hp_form, 'Hp' %></td>
-    <td class="formNum"><%= text_field_tag :hp_form, @hp_form %></td></tr>
-  <tr><td><%= f.label :mhp_form, 'Mhp' %></td>
+  <tr><td><%= f.label :hp_form, 'HP' %></td>
+    <td class="formNum"><%= text_field_tag :hp_form, @hp_form %></td>
+  <td><%= f.label :mhp_form, 'MHP' %></td>
     <td class="formNum"><%= text_field_tag :mhp_form, @mhp_form %></td></tr>
-  <tr><td><%= f.label :hp_rate_form, 'Hp rate' %></td>
-    <td class="formNum"><%= text_field_tag :hp_rate_form, @hp_rate_form %></td></tr>
-  <tr><td><%= f.label :mp_form, 'Mp' %></td>
-    <td class="formNum"><%= text_field_tag :mp_form, @mp_form %></td></tr>
-  <tr><td><%= f.label :mmp_form, 'Mmp' %></td>
+  <tr><td><%= f.label :hp_rate_form, 'HP割合' %></td>
+    <td colspan="3" class="formNum"><%= text_field_tag :hp_rate_form, @hp_rate_form %></td></tr>
+  <tr><td><%= f.label :mp_form, 'MP' %></td>
+    <td class="formNum"><%= text_field_tag :mp_form, @mp_form %></td>
+  <td><%= f.label :mmp_form, 'MMP' %></td>
     <td class="formNum"><%= text_field_tag :mmp_form, @mmp_form %></td></tr>
-  <tr><td><%= f.label :mp_rate_form, 'Mp rate' %></td>
-    <td class="formNum"><%= text_field_tag :mp_rate_form, @mp_rate_form %></td></tr>
-  <tr><td><%= f.label :sp_form, 'Sp' %></td>
-    <td class="formNum"><%= text_field_tag :sp_form, @sp_form %></td></tr>
-  <tr><td><%= f.label :str_form, 'Str' %></td>
-    <td class="formNum"><%= text_field_tag :str_form, @str_form %></td></tr>
-  <tr><td><%= f.label :int_form, 'Int' %></td>
+  <tr><td><%= f.label :mp_rate_form, 'MP割合' %></td>
+    <td colspan="3" class="formNum"><%= text_field_tag :mp_rate_form, @mp_rate_form %></td></tr>
+  <tr><td><%= f.label :sp_form, 'SP' %></td>
+    <td colspan="3" class="formNum"><%= text_field_tag :sp_form, @sp_form %></td></tr>
+  <tr><td><%= f.label :str_form, '腕力' %></td>
+    <td class="formNum"><%= text_field_tag :str_form, @str_form %></td>
+  <td><%= f.label :int_form, '魔力' %></td>
     <td class="formNum"><%= text_field_tag :int_form, @int_form %></td></tr>
-  <tr><td><%= f.label :tec_form, 'Tec' %></td>
-    <td class="formNum"><%= text_field_tag :tec_form, @tec_form %></td></tr>
-  <tr><td><%= f.label :agi_form, 'Agi' %></td>
+  <tr><td><%= f.label :tec_form, '器用' %></td>
+    <td class="formNum"><%= text_field_tag :tec_form, @tec_form %></td>
+  <td><%= f.label :agi_form, '反応' %></td>
     <td class="formNum"><%= text_field_tag :agi_form, @agi_form %></td></tr>
-  <tr><td><%= f.label :def_form, 'Def' %></td>
-    <td class="formNum"><%= text_field_tag :def_form, @def_form %></td></tr>
-  <tr><td><%= f.label :skill_form, 'Skill' %></td>
+  <tr><td><%= f.label :def_form, '守護' %></td>
+    <td class="formNum"><%= text_field_tag :def_form, @def_form %></td>
+  <td><%= f.label :skill_form, '熟練' %></td>
     <td class="formNum"><%= text_field_tag :skill_form, @skill_form %></td></tr>
-  <tr><td><%= f.label :personality_form, 'Personality' %></td>
-    <td class="formNum"><%= text_field_tag :personality_form, @personality_form %></td></tr>
-  <tr><td><%= f.label :tribe_form, 'Tribe' %></td>
-    <td class="formNum"><%= text_field_tag :tribe_form, @tribe_form %></td></tr>
-  <tr><td><%= f.label :money_form, 'Money' %></td>
-    <td class="formNum"><%= text_field_tag :money_form, @money_form %></td></tr>
-  <tr><td><%= f.label :sundries_form, 'Sundries' %></td>
+  <tr><td><%= f.label :personality_form, '性格' %></td>
+    <td class="formNum"><%= text_field_tag :personality_form, @personality_form %></td>
+  <td><%= f.label :tribe_form, '種族' %></td>
+    <td class="formText"><%= text_field_tag :tribe_form, @tribe_form %></td></tr>
+  <tr><td><%= f.label :money_form, '金' %></td>
+    <td class="formNum"><%= text_field_tag :money_form, @money_form %></td>
+  <td><%= f.label :sundries_form, '雑貨' %></td>
     <td class="formNum"><%= text_field_tag :sundries_form, @sundries_form %></td></tr>
-  <tr><td></td><td>
+  <tr><td></td><td colspan="3">
     <%= f.submit '検索する' %>
     </td></tr>
 </tbody>
@@ -113,32 +105,28 @@
     <tr>
       <th><%= sort_link(@search, :result_no,'更新回', default_order: :desc) %></th>
       <th><%= sort_link(@search, :e_no,'キャラクター(Eno)', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :result_no, 'Result no', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :generate_no, 'Generate no', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :e_no, 'E no', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :sub_no, 'Sub no', default_order: :desc) %></th>
       <th><%= sort_link(@search, :lv, 'Lv', default_order: :desc) %></th>
       <th><%= sort_link(@search, :exp, 'Exp', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :mexp, 'Mexp', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :job1, 'Job1', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :job2, 'Job2', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :hp, 'Hp', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :mhp, 'Mhp', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :hp_rate, 'Hp rate', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :mp, 'Mp', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :mmp, 'Mmp', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :mp_rate, 'Mp rate', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :sp, 'Sp', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :str, 'Str', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :int, 'Int', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :tec, 'Tec', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :agi, 'Agi', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :def, 'Def', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :skill, 'Skill', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :personality, 'Personality', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :tribe, 'Tribe', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :money, 'Money', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :sundries, 'Sundries', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :mexp, 'MExp', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :job1, '戦型1', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :job2, '戦型2', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :hp, 'HP', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :mhp, 'MHP', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :hp_rate, 'HP割合', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :mp, 'MP', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :mmp, 'MMP', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :mp_rate, 'MP割合', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :sp, 'SP', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :str, '腕力', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :int, '魔力', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :tec, '器用', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :agi, '反応', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :def, '守護', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :skill, '熟練', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :personality, '性格', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :tribe, '種族', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :money, '金', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :sundries, '雑貨', default_order: :desc) %></th>
       <th colspan="1">結果リンク</th>
     </tr>
   </thead>
@@ -152,10 +140,6 @@
                 e_no_f_no += ", " + sprintf("%d",status.sub_no)
             end
             status.p_name.name.html_safe + "(" + e_no_f_no + ")" %></td>
-        <td><%= status.result_no %></td>
-        <td><%= status.generate_no %></td>
-        <td><%= status.e_no %></td>
-        <td><%= status.sub_no %></td>
         <td><%= status.lv %></td>
         <td><%= status.exp %></td>
         <td><%= status.mexp %></td>
@@ -175,7 +159,7 @@
         <td><%= status.def %></td>
         <td><%= status.skill %></td>
         <td><%= status.personality %></td>
-        <td><%= status.tribe %></td>
+        <td><%= status.tribe_name.name %></td>
         <td><%= status.money %></td>
         <td><%= status.sundries %></td>
         <td><%= file_name = sprintf("%d",status.e_no)
