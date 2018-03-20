@@ -22,7 +22,7 @@ class ItemsController < ApplicationController
     reference_number_assign(params, "e_no", "e_no_form")
     reference_number_assign(params, "sub_no", "sub_no_form")
     reference_number_assign(params, "item_no", "item_no_form")
-    reference_number_assign(params, "name", "name_form")
+    reference_text_assign(params, "name", "name_form")
     reference_text_assign(params, "kind_name_name", "kind_form")
     reference_text_assign(params, "effect_name_name", "effect_form")
     reference_number_assign(params, "effect_num", "effect_num_form")

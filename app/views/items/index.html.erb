@@ -42,7 +42,7 @@
     <td class="formText"><%= text_field_tag :p_name_form, @p_name_form %></td></tr>
   <tr><td></td><td colspan="3"><%= check_box_tag :show_main, @show_main, @show_main %><%= f.label_tag :show_main, 'メインキャラ' %><%= check_box_tag :show_sub, @show_sub, @show_sub %><%= f.label_tag :show_sub, 'サブキャラ' %></td></tr>
   <tr><td><%= f.label :name_form, 'アイテム名' %></td>
-    <td class="formNum"><%= text_field_tag :name_form, @name_form %></td>
+    <td class="formText"><%= text_field_tag :name_form, @name_form %></td>
   <td><%= f.label :kind_form, '種類' %></td>
     <td class="formText"><%= text_field_tag :kind_form, @kind_form %></td></tr>
   <tr><td><%= f.label :effect_form, '効果' %></td>
