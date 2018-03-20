@@ -1,4 +1,4 @@
-<h1>Listing items</h1>
+<h1>アイテム一覧</h1>
 
 <div class="bs-docs-section">
   <div class="row">
@@ -33,53 +33,44 @@
 <table id="search_table" class="table table-striped table-bordered table-hover">
 
   <tbody>
-  <tr><td colspan="2" style="cursor:pointer;" onclick="search_open(false);">絞り込み検索<span style="font-size:80%">(クリックで閉じます)</span></td></tr>
+  <tr><td colspan="4" style="cursor:pointer;" onclick="search_open(false);">絞り込み検索<span style="font-size:80%">(クリックで閉じます)</span></td></tr>
   <tr><td><%= f.label :result_no_form, '更新回' %></td>
-    <td class="formNum"><%= text_field_tag :result_no_form, @result_no_form %></td></tr>
+    <td colspan="3" class="formNum"><%= text_field_tag :result_no_form, @result_no_form %></td></tr>
   <tr><td><%= f.label :e_no_form, 'Eno' %></td>
-    <td class="formNum"><%= text_field_tag :e_no_form, @e_no_form %></td></tr>
-  <tr><td><%= f.label :p_name_form, 'キャラクター名' %></td>
+    <td class="formNum"><%= text_field_tag :e_no_form, @e_no_form %></td>
+  <td><%= f.label :p_name_form, 'キャラクター名' %></td>
     <td class="formText"><%= text_field_tag :p_name_form, @p_name_form %></td></tr>
-  <tr><td></td><td><%= check_box_tag :show_main, @show_main, @show_main %><%= f.label_tag :show_main, 'メインキャラ' %><%= check_box_tag :show_sub, @show_sub, @show_sub %><%= f.label_tag :show_sub, 'サブキャラ' %></td></tr>
-  <tr><td><%= f.label :result_no_form, 'Result no' %></td>
-    <td class="formNum"><%= text_field_tag :result_no_form, @result_no_form %></td></tr>
-  <tr><td><%= f.label :generate_no_form, 'Generate no' %></td>
-    <td class="formNum"><%= text_field_tag :generate_no_form, @generate_no_form %></td></tr>
-  <tr><td><%= f.label :e_no_form, 'E no' %></td>
-    <td class="formNum"><%= text_field_tag :e_no_form, @e_no_form %></td></tr>
-  <tr><td><%= f.label :sub_no_form, 'Sub no' %></td>
-    <td class="formNum"><%= text_field_tag :sub_no_form, @sub_no_form %></td></tr>
-  <tr><td><%= f.label :item_no_form, 'Item no' %></td>
-    <td class="formNum"><%= text_field_tag :item_no_form, @item_no_form %></td></tr>
-  <tr><td><%= f.label :name_form, 'Name' %></td>
-    <td class="formNum"><%= text_field_tag :name_form, @name_form %></td></tr>
-  <tr><td><%= f.label :kind_form, 'Kind' %></td>
-    <td class="formNum"><%= text_field_tag :kind_form, @kind_form %></td></tr>
-  <tr><td><%= f.label :effect_form, 'Effect' %></td>
-    <td class="formNum"><%= text_field_tag :effect_form, @effect_form %></td></tr>
-  <tr><td><%= f.label :effect_num_form, 'Effect num' %></td>
+  <tr><td></td><td colspan="3"><%= check_box_tag :show_main, @show_main, @show_main %><%= f.label_tag :show_main, 'メインキャラ' %><%= check_box_tag :show_sub, @show_sub, @show_sub %><%= f.label_tag :show_sub, 'サブキャラ' %></td></tr>
+  <tr><td><%= f.label :name_form, 'アイテム名' %></td>
+    <td class="formNum"><%= text_field_tag :name_form, @name_form %></td>
+  <td><%= f.label :kind_form, '種類' %></td>
+    <td class="formText"><%= text_field_tag :kind_form, @kind_form %></td></tr>
+  <tr><td><%= f.label :effect_form, '効果' %></td>
+    <td class="formText"><%= text_field_tag :effect_form, @effect_form %></td>
+  <td><%= f.label :effect_num_form, '効果量' %></td>
     <td class="formNum"><%= text_field_tag :effect_num_form, @effect_num_form %></td></tr>
-  <tr><td><%= f.label :slash_form, 'Slash' %></td>
-    <td class="formNum"><%= text_field_tag :slash_form, @slash_form %></td></tr>
-  <tr><td><%= f.label :charge_form, 'Charge' %></td>
+  <tr><td><%= f.label :slash_form, '斬撃' %></td>
+    <td class="formNum"><%= text_field_tag :slash_form, @slash_form %></td>
+  <td><%= f.label :charge_form, '突撃' %></td>
     <td class="formNum"><%= text_field_tag :charge_form, @charge_form %></td></tr>
-  <tr><td><%= f.label :magic_form, 'Magic' %></td>
-    <td class="formNum"><%= text_field_tag :magic_form, @magic_form %></td></tr>
-  <tr><td><%= f.label :guard_form, 'Guard' %></td>
+  <tr><td><%= f.label :magic_form, '魔力' %></td>
+    <td class="formNum"><%= text_field_tag :magic_form, @magic_form %></td>
+  <td><%= f.label :guard_form, '防御' %></td>
     <td class="formNum"><%= text_field_tag :guard_form, @guard_form %></td></tr>
-  <tr><td><%= f.label :protect_form, 'Protect' %></td>
-    <td class="formNum"><%= text_field_tag :protect_form, @protect_form %></td></tr>
-  <tr><td><%= f.label :have_rest_form, 'Have rest' %></td>
-    <td class="formNum"><%= text_field_tag :have_rest_form, @have_rest_form %></td></tr>
-  <tr><td><%= f.label :have_max_form, 'Have max' %></td>
+  <tr><td><%= f.label :protect_form, '守護' %></td>
+    <td colspan="3" class="formNum"><%= text_field_tag :protect_form, @protect_form %></td></tr>
+  <tr><td><%= f.label :have_rest_form, '個数' %></td>
+    <td class="formNum"><%= text_field_tag :have_rest_form, @have_rest_form %></td>
+  <td><%= f.label :have_max_form, '最大個数' %></td>
     <td class="formNum"><%= text_field_tag :have_max_form, @have_max_form %></td></tr>
-  <tr><td><%= f.label :prize_form, 'Prize' %></td>
-    <td class="formNum"><%= text_field_tag :prize_form, @prize_form %></td></tr>
-  <tr><td><%= f.label :ability_form, 'Ability' %></td>
-    <td class="formNum"><%= text_field_tag :ability_form, @ability_form %></td></tr>
-  <tr><td><%= f.label :equip_form, 'Equip' %></td>
-    <td class="formNum"><%= text_field_tag :equip_form, @equip_form %></td></tr>
-  <tr><td></td><td>
+  <tr><td><%= f.label :prize_form, '価値' %></td>
+    <td class="formNum"><%= text_field_tag :prize_form, @prize_form %></td>
+  <td><%= f.label :ability_form, '能力' %></td>
+    <td class="formText"><%= text_field_tag :ability_form, @ability_form %></td></tr>
+  <tr><td></td><td colspan="3"><%= check_box_tag :is_equiped, @is_equiped, @is_equiped %><%= f.label_tag :is_equiped, '装備中' %><%= check_box_tag :no_equiped, @no_equiped, @no_equiped %><%= f.label_tag :no_equiped, '未装備' %></td></tr>
+  <tr><td><%= f.label :equip_form, '装備' %></td>
+    <td colspan="3" class="formNum"><%= text_field_tag :equip_form, @equip_form %></td></tr>
+  <tr><td></td><td colspan="3">
     <%= f.submit '検索する' %>
     </td></tr>
 </tbody>
@@ -99,25 +90,21 @@
     <tr>
       <th><%= sort_link(@search, :result_no,'更新回', default_order: :desc) %></th>
       <th><%= sort_link(@search, :e_no,'キャラクター(Eno)', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :result_no, 'Result no', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :generate_no, 'Generate no', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :e_no, 'E no', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :sub_no, 'Sub no', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :item_no, 'Item no', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :name, 'Name', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :kind, 'Kind', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :effect, 'Effect', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :effect_num, 'Effect num', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :slash, 'Slash', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :charge, 'Charge', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :magic, 'Magic', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :guard, 'Guard', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :protect, 'Protect', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :have_rest, 'Have rest', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :have_max, 'Have max', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :prize, 'Prize', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :ability, 'Ability', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :equip, 'Equip', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :item_no, 'No', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :name, 'アイテム名', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :kind, '種類', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :effect, '効果', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :effect_num, '効果量', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :slash, '斬撃', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :charge, '突撃', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :magic, '魔力', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :guard, '防御', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :protect, '守護', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :have_rest, '個数', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :have_max, '最大個数', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :prize, '価値', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :ability, '能力', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :equip, '装備', default_order: :desc) %></th>
       <th colspan="1">結果リンク</th>
     </tr>
   </thead>
@@ -131,14 +118,10 @@
                 e_no_f_no += ", " + sprintf("%d",item.sub_no)
             end
             item.p_name.name.html_safe + "(" + e_no_f_no + ")" %></td>
-        <td><%= item.result_no %></td>
-        <td><%= item.generate_no %></td>
-        <td><%= item.e_no %></td>
-        <td><%= item.sub_no %></td>
         <td><%= item.item_no %></td>
         <td><%= item.name %></td>
-        <td><%= item.kind %></td>
-        <td><%= item.effect %></td>
+        <td><%= item.kind_name.name %></td>
+        <td><%= item.effect_name.name %></td>
         <td><%= item.effect_num %></td>
         <td><%= item.slash %></td>
         <td><%= item.charge %></td>
@@ -148,8 +131,8 @@
         <td><%= item.have_rest %></td>
         <td><%= item.have_max %></td>
         <td><%= item.prize %></td>
-        <td><%= item.ability %></td>
-        <td><%= item.equip %></td>
+        <td><%= item.ability_name.name %></td>
+        <td><%= "装備" if item.equip == 1 %></td>
         <td><%= file_name = sprintf("%d",item.e_no)
             if item.sub_no > 0 then
                 file_name += "_" + sprintf("%d",item.sub_no)
