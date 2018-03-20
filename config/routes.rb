@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :items
   resources :job_names
   resources :statuses
   resources :profiles

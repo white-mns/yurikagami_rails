@@ -1,0 +1,43 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  result_no: 1
+  generate_no: 1
+  e_no: 1
+  sub_no: 1
+  item_no: 1
+  name: MyString
+  kind: 1
+  effect: 1
+  effect_num: 1
+  slash: 1
+  charge: 1
+  magic: 1
+  guard: 1
+  protect: 1
+  have_rest: 1
+  have_max: 1
+  prize: 1
+  ability: 1
+  equip: 1
+
+two:
+  result_no: 1
+  generate_no: 1
+  e_no: 1
+  sub_no: 1
+  item_no: 1
+  name: MyString
+  kind: 1
+  effect: 1
+  effect_num: 1
+  slash: 1
+  charge: 1
+  magic: 1
+  guard: 1
+  protect: 1
+  have_rest: 1
+  have_max: 1
+  prize: 1
+  ability: 1
+  equip: 1

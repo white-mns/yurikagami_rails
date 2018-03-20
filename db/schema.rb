@@ -10,7 +10,46 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180319025239) do
+ActiveRecord::Schema.define(version: 20180320010411) do
+
+  create_table "items", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "result_no"
+    t.integer "generate_no"
+    t.integer "e_no"
+    t.integer "sub_no"
+    t.integer "item_no"
+    t.string "name"
+    t.integer "kind"
+    t.integer "effect"
+    t.integer "effect_num"
+    t.integer "slash"
+    t.integer "charge"
+    t.integer "magic"
+    t.integer "guard"
+    t.integer "protect"
+    t.integer "have_rest"
+    t.integer "have_max"
+    t.integer "prize"
+    t.integer "ability"
+    t.integer "equip"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ability"], name: "index_items_on_ability"
+    t.index ["charge"], name: "index_items_on_charge"
+    t.index ["e_no", "result_no", "sub_no", "generate_no"], name: "unique_eno"
+    t.index ["effect"], name: "index_items_on_effect"
+    t.index ["effect_num"], name: "index_items_on_effect_num"
+    t.index ["equip"], name: "index_items_on_equip"
+    t.index ["guard"], name: "index_items_on_guard"
+    t.index ["have_max"], name: "index_items_on_have_max"
+    t.index ["have_rest"], name: "index_items_on_have_rest"
+    t.index ["kind"], name: "index_items_on_kind"
+    t.index ["magic"], name: "index_items_on_magic"
+    t.index ["name"], name: "index_items_on_name"
+    t.index ["prize"], name: "index_items_on_prize"
+    t.index ["protect"], name: "index_items_on_protect"
+    t.index ["slash"], name: "index_items_on_slash"
+  end
 
   create_table "job_names", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "job_id"
