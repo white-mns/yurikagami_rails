@@ -15,6 +15,8 @@ class ItemsController < ApplicationController
     @last_result = Name.maximum('result_no')
     params["result_no_form"] = params["result_no_form"] ? params["result_no_form"] : sprintf('%d',@last_result)
     params[:q]  = params[:q] ? params[:q] : {}
+
+    if params["name_form"] then params["name_form"].gsub!(/©/,"copy ") end # 鍛冶アイテム検索用に置換
     
     reference_text_assign(params, "p_name_name", "p_name_form")
     reference_number_assign(params, "result_no", "result_no_form")
