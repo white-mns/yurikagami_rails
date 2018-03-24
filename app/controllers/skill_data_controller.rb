@@ -37,6 +37,12 @@ class SkillDataController < ApplicationController
     @property_form = params["property_form"]
     @element_form = params["element_form"]
     @text_form = params["text_form"]
+    
+    params[:q]["range_eq_any"] = []
+    if params["equip_range"] == "on" then params[:q]["range_eq_any"].push(-2) end
+    if params["no_range"] == "on" then params[:q]["range_eq_any"].push(-1) end
+    @equip_range = params["equip_range"]
+    @no_range  = params["no_range"]
   end
   # GET /skill_data/1
   #def show

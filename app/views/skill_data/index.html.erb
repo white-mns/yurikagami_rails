@@ -50,6 +50,7 @@
     <td class="formText"><%= text_field_tag :target_form, @target_form %></td></tr>
   <tr><td><%= f.label :range_form, '射程' %></td>
     <td class="formNum"><%= text_field_tag :range_form, @range_form %></td></tr>
+  <tr><td></td><td colspan="3"><%= check_box_tag :equip_range, @equip_range, @equip_range %><%= f.label_tag :equip_range, '武器の射程' %><%= check_box_tag :no_range, @no_range, @no_range %><%= f.label_tag :no_range, '射程なし' %></td></tr>
   <tr><td><%= f.label :property_form, '特性' %></td>
     <td class="formText"><%= text_field_tag :property_form, @property_form %></td></tr>
   <tr><td><%= f.label :element_form, '属性' %></td>
@@ -94,7 +95,11 @@
         <td><%= skill_datum.skill_id %></td>
         <td><%= skill_datum.name %></td>
         <td><%= skill_datum.at if skill_datum.at && skill_datum.at >= 0 %></td>
-        <td><%= skill_datum.ct if skill_datum.ct && skill_datum.ct >= 0 %></td>
+        <td><%= if skill_datum.ct && skill_datum.ct >= 0 then 
+                    skill_datum.ct
+                elsif skill_datum.ct && skill_datum.ct == -2 then
+                   "多"
+                end %></td>
         <td><%= skill_datum.timing_name.name if skill_datum.timing_name %></td>
         <td><%= skill_datum.mp %></td>
         <td><%= skill_datum.target_name.name if skill_datum.target_name %></td>
