@@ -5,8 +5,8 @@ class SkillsController < ApplicationController
   # GET /skills
   def index
     param_set
-    @count	= Skill.includes([:p_name]).search(params[:q]).result.count()
-    @search	= Skill.includes([:p_name]).page(params[:page]).search(params[:q])
+    @count	= Skill.includes([:p_name, :skill_data]).search(params[:q]).result.count()
+    @search	= Skill.includes([:p_name, :skill_data]).page(params[:page]).search(params[:q])
     @search.sorts = 'id asc' if @search.sorts.empty?
     @skills	= @search.result.per(50)
   end
@@ -17,20 +17,20 @@ class SkillsController < ApplicationController
     params[:q]  = params[:q] ? params[:q] : {}
     
     reference_text_assign(params, "p_name_name", "p_name_form")
-        reference_number_assign(params, "result_no", "result_no_form")
-        reference_number_assign(params, "generate_no", "generate_no_form")
-        reference_number_assign(params, "e_no", "e_no_form")
-        reference_number_assign(params, "sub_no", "sub_no_form")
-        reference_number_assign(params, "skill_no", "skill_no_form")
-        reference_number_assign(params, "skill_id", "skill_id_form")
+    reference_number_assign(params, "result_no", "result_no_form")
+    reference_number_assign(params, "generate_no", "generate_no_form")
+    reference_number_assign(params, "e_no", "e_no_form")
+    reference_number_assign(params, "sub_no", "sub_no_form")
+    reference_number_assign(params, "skill_no", "skill_no_form")
+    reference_text_assign(params, "skill_data_name", "skill_id_form")
         
     @p_name_form = params["p_name_form"]
-        @result_no_form = params["result_no_form"]
-        @generate_no_form = params["generate_no_form"]
-        @e_no_form = params["e_no_form"]
-        @sub_no_form = params["sub_no_form"]
-        @skill_no_form = params["skill_no_form"]
-        @skill_id_form = params["skill_id_form"]
+    @result_no_form = params["result_no_form"]
+    @generate_no_form = params["generate_no_form"]
+    @e_no_form = params["e_no_form"]
+    @sub_no_form = params["sub_no_form"]
+    @skill_no_form = params["skill_no_form"]
+    @skill_id_form = params["skill_id_form"]
         
     show_sub_hash =  {"show_main"=> @show_main,"show_sub" => @show_sub}
     sub_no_set(params, show_sub_hash)

@@ -1,4 +1,4 @@
-<h1>Listing skills</h1>
+<h1>スキル一覧</h1>
 
 <div class="bs-docs-section">
   <div class="row">
@@ -41,18 +41,10 @@
   <tr><td><%= f.label :p_name_form, 'キャラクター名' %></td>
     <td class="formText"><%= text_field_tag :p_name_form, @p_name_form %></td></tr>
   <tr><td></td><td><%= check_box_tag :show_main, @show_main, @show_main %><%= f.label_tag :show_main, 'メインキャラ' %><%= check_box_tag :show_sub, @show_sub, @show_sub %><%= f.label_tag :show_sub, 'サブキャラ' %></td></tr>
-  <tr><td><%= f.label :result_no_form, 'Result no' %></td>
-    <td class="formNum"><%= text_field_tag :result_no_form, @result_no_form %></td></tr>
-  <tr><td><%= f.label :generate_no_form, 'Generate no' %></td>
-    <td class="formNum"><%= text_field_tag :generate_no_form, @generate_no_form %></td></tr>
-  <tr><td><%= f.label :e_no_form, 'E no' %></td>
-    <td class="formNum"><%= text_field_tag :e_no_form, @e_no_form %></td></tr>
-  <tr><td><%= f.label :sub_no_form, 'Sub no' %></td>
-    <td class="formNum"><%= text_field_tag :sub_no_form, @sub_no_form %></td></tr>
-  <tr><td><%= f.label :skill_no_form, 'Skill no' %></td>
+  <tr><td><%= f.label :skill_no_form, '技番' %></td>
     <td class="formNum"><%= text_field_tag :skill_no_form, @skill_no_form %></td></tr>
-  <tr><td><%= f.label :skill_id_form, 'Skill' %></td>
-    <td class="formNum"><%= text_field_tag :skill_id_form, @skill_id_form %></td></tr>
+  <tr><td><%= f.label :skill_id_form, 'スキル名' %></td>
+    <td class="formText"><%= text_field_tag :skill_id_form, @skill_id_form %></td></tr>
   <tr><td></td><td>
     <%= f.submit '検索する' %>
     </td></tr>
@@ -73,12 +65,8 @@
     <tr>
       <th><%= sort_link(@search, :result_no,'更新回', default_order: :desc) %></th>
       <th><%= sort_link(@search, :e_no,'キャラクター(Eno)', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :result_no, 'Result no', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :generate_no, 'Generate no', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :e_no, 'E no', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :sub_no, 'Sub no', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :skill_no, 'Skill no', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :skill_id, 'Skill', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :skill_no, '技番', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :skill_id, 'スキル名', default_order: :desc) %></th>
       <th colspan="1">結果リンク</th>
     </tr>
   </thead>
@@ -92,12 +80,8 @@
                 e_no_f_no += ", " + sprintf("%d",skill.sub_no)
             end
             skill.p_name.name.html_safe + "(" + e_no_f_no + ")" %></td>
-        <td><%= skill.result_no %></td>
-        <td><%= skill.generate_no %></td>
-        <td><%= skill.e_no %></td>
-        <td><%= skill.sub_no %></td>
         <td><%= skill.skill_no %></td>
-        <td><%= skill.skill_id %></td>
+        <td><%= skill.skill_data.name if skill.skill_data %></td>
         <td><%= file_name = sprintf("%d",skill.e_no)
             if skill.sub_no > 0 then
                 file_name += "_" + sprintf("%d",skill.sub_no)
