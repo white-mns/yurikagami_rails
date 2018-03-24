@@ -1,0 +1,72 @@
+<%= form_with(model: skill_datum, local: true) do |form| %>
+  <% if skill_datum.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(skill_datum.errors.count, "error") %> prohibited this skill_datum from being saved:</h2>
+
+      <ul>
+      <% skill_datum.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :skill_id %>
+    <%= form.number_field :skill_id, id: :skill_datum_skill_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :skill_datum_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :at %>
+    <%= form.number_field :at, id: :skill_datum_at %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ct %>
+    <%= form.number_field :ct, id: :skill_datum_ct %>
+  </div>
+
+  <div class="field">
+    <%= form.label :timing %>
+    <%= form.number_field :timing, id: :skill_datum_timing %>
+  </div>
+
+  <div class="field">
+    <%= form.label :mp %>
+    <%= form.number_field :mp, id: :skill_datum_mp %>
+  </div>
+
+  <div class="field">
+    <%= form.label :target %>
+    <%= form.number_field :target, id: :skill_datum_target %>
+  </div>
+
+  <div class="field">
+    <%= form.label :range %>
+    <%= form.number_field :range, id: :skill_datum_range %>
+  </div>
+
+  <div class="field">
+    <%= form.label :property %>
+    <%= form.number_field :property, id: :skill_datum_property %>
+  </div>
+
+  <div class="field">
+    <%= form.label :element %>
+    <%= form.number_field :element, id: :skill_datum_element %>
+  </div>
+
+  <div class="field">
+    <%= form.label :text %>
+    <%= form.text_field :text, id: :skill_datum_text %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
