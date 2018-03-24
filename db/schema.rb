@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180324011902) do
+ActiveRecord::Schema.define(version: 20180324031239) do
 
   create_table "items", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "result_no"
@@ -123,6 +123,20 @@ ActiveRecord::Schema.define(version: 20180324011902) do
     t.index ["skill_id"], name: "index_skill_data_on_skill_id"
     t.index ["target"], name: "index_skill_data_on_target"
     t.index ["timing"], name: "index_skill_data_on_timing"
+  end
+
+  create_table "skills", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "result_no"
+    t.integer "generate_no"
+    t.integer "e_no"
+    t.integer "sub_no"
+    t.integer "skill_no"
+    t.integer "skill_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["e_no", "result_no", "sub_no", "generate_no"], name: "unique_eno"
+    t.index ["skill_id"], name: "index_skills_on_skill_id"
+    t.index ["skill_no"], name: "index_skills_on_skill_no"
   end
 
   create_table "statuses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
