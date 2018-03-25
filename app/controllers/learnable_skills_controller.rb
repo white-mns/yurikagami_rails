@@ -5,35 +5,41 @@ class LearnableSkillsController < ApplicationController
   # GET /learnable_skills
   def index
     param_set
-    @count	= LearnableSkill.includes([:p_name]).search(params[:q]).result.count()
-    @search	= LearnableSkill.includes([:p_name]).page(params[:page]).search(params[:q])
+    @count	= LearnableSkill.includes([:job_name, :skill_data]).search(params[:q]).result.count()
+    @search	= LearnableSkill.includes([:job_name, :skill_data]).page(params[:page]).search(params[:q])
     @search.sorts = 'id asc' if @search.sorts.empty?
     @learnable_skills	= @search.result.per(50)
   end
 
   def param_set
-    @last_result = Name.maximum('result_no')
-    params["result_no_form"] = params["result_no_form"] ? params["result_no_form"] : sprintf('%d',@last_result)
     params[:q]  = params[:q] ? params[:q] : {}
     
-    reference_text_assign(params, "p_name_name", "p_name_form")
-        reference_number_assign(params, "chara_type", "chara_type_form")
-        reference_number_assign(params, "job_id", "job_id_form")
-        reference_number_assign(params, "sp", "sp_form")
-        reference_number_assign(params, "skill_no", "skill_no_form")
-        reference_number_assign(params, "skill_id", "skill_id_form")
+    reference_number_assign(params, "chara_type", "chara_type_form")
+    reference_text_assign(params, "job_name_name", "job_id_form")
+    reference_number_assign(params, "sp", "sp_form")
+    reference_number_assign(params, "skill_no", "skill_no_form")
+    reference_text_assign(params, "skill_data_name", "skill_id_form")
+    
+    @chara_type_form = params["chara_type_form"]
+    @job_id_form = params["job_id_form"]
+    @sp_form = params["sp_form"]
+    @skill_no_form = params["skill_no_form"]
+    @skill_id_form = params["skill_id_form"]
         
-    @p_name_form = params["p_name_form"]
-        @chara_type_form = params["chara_type_form"]
-        @job_id_form = params["job_id_form"]
-        @sp_form = params["sp_form"]
-        @skill_no_form = params["skill_no_form"]
-        @skill_id_form = params["skill_id_form"]
-        
-    show_sub_hash =  {"show_main"=> @show_main,"show_sub" => @show_sub}
-    sub_no_set(params, show_sub_hash)
-    @show_main = show_sub_hash["show_main"]
-    @show_sub = show_sub_hash["show_sub"]
+    params[:q]["chara_type_eq_any"]  = params[:q]["chara_type_eq_any"] ? params[:q]["chara_type_eq_any"] : []
+
+    if params["show_main"] == "on" then params[:q]["chara_type_eq_any"].push(0) end
+    if params["show_sub"] == "on" then
+        params[:q]["chara_type_eq_any"].push(1)
+    end
+    
+    if params[:q]["chara_type_eq_any"].size == 0 then 
+        params["show_main"] = "on"
+        params[:q]["chara_type_eq_any"].push(0)
+    end
+
+    @show_main = params["show_main"]
+    @show_sub = params["show_sub"]
   end
   # GET /learnable_skills/1
   #def show
