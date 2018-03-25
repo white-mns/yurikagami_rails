@@ -40,7 +40,7 @@
     <td class="formNum"><%%= text_field_tag :e_no_form, @e_no_form %></td></tr>
   <tr><td><%%= f.label :p_name_form, 'キャラクター名' %></td>
     <td class="formText"><%%= text_field_tag :p_name_form, @p_name_form %></td></tr>
-  <tr><td></td><td><%%= check_box_tag :show_main, @show_main, @show_main %><%%= f.label_tag :show_main, 'メインキャラ' %><%%= check_box_tag :show_sub, @show_sub, @show_sub %><%%= f.label_tag :show_sub, 'サブキャラ' %></td></tr>
+  <tr><td></td><td><%%= check_box_tag :show_main, @show_main, @show_main %><%%= f.label_tag :show_main, 'メインキャラ' %>　<%%= check_box_tag :show_sub, @show_sub, @show_sub %><%%= f.label_tag :show_sub, 'サブキャラ' %></td></tr>
 <% attributes.reject(&:password_digest?).each do |attribute| -%>
   <tr><td><%%= f.label :<%= attribute.name %>_form, '<%= attribute.human_name %>' %></td>
     <td class="formNum"><%%= text_field_tag :<%= attribute.name %>_form, @<%= attribute.name %>_form %></td></tr>

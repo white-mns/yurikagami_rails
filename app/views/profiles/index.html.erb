@@ -40,7 +40,7 @@
     <td class="formNum"><%= text_field_tag :e_no_form, @e_no_form %></td>
   <td><%= f.label :p_name_form, 'キャラクター名' %></td>
     <td class="formText"><%= text_field_tag :p_name_form, @p_name_form %></td></tr>
-  <tr><td></td><td colspan="3"><%= check_box_tag :show_main, @show_main, @show_main %><%= f.label_tag :show_main, 'メインキャラ' %><%= check_box_tag :show_sub, @show_sub, @show_sub %><%= f.label_tag :show_sub, 'サブキャラ' %></td></tr>
+  <tr><td></td><td colspan="3"><%= check_box_tag :show_main, @show_main, @show_main %><%= f.label_tag :show_main, 'メインキャラ' %>　<%= check_box_tag :show_sub, @show_sub, @show_sub %><%= f.label_tag :show_sub, 'サブキャラ' %></td></tr>
   <tr><td><%= f.label :nickname_form, '通り名' %></td>
     <td class="formText"><%= text_field_tag :nickname_form, @nickname_form %></td>
   <td><%= f.label :title_form, '肩書き' %></td>

@@ -50,7 +50,7 @@
     <td class="formText"><%= text_field_tag :target_form, @target_form %></td></tr>
   <tr><td><%= f.label :range_form, '射程' %></td>
     <td class="formNum"><%= text_field_tag :range_form, @range_form %></td></tr>
-  <tr><td></td><td colspan="3"><%= check_box_tag :equip_range, @equip_range, @equip_range %><%= f.label_tag :equip_range, '武器の射程' %><%= check_box_tag :no_range, @no_range, @no_range %><%= f.label_tag :no_range, '射程なし' %></td></tr>
+  <tr><td></td><td colspan="3"><%= check_box_tag :equip_range, @equip_range, @equip_range %><%= f.label_tag :equip_range, '武器の射程' %>　<%= check_box_tag :no_range, @no_range, @no_range %><%= f.label_tag :no_range, '射程なし' %></td></tr>
   <tr><td><%= f.label :property_form, '特性' %></td>
     <td class="formText"><%= text_field_tag :property_form, @property_form %></td></tr>
   <tr><td><%= f.label :element_form, '属性' %></td>
