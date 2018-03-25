@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180324031239) do
+ActiveRecord::Schema.define(version: 20180325032727) do
 
   create_table "items", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "result_no"
@@ -58,6 +58,21 @@ ActiveRecord::Schema.define(version: 20180324031239) do
     t.datetime "updated_at", null: false
     t.index ["job_id"], name: "index_job_names_on_job_id"
     t.index ["name"], name: "index_job_names_on_name"
+  end
+
+  create_table "learnable_skills", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "chara_type"
+    t.integer "job_id"
+    t.integer "sp"
+    t.integer "skill_no"
+    t.integer "skill_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chara_type"], name: "index_learnable_skills_on_chara_type"
+    t.index ["job_id"], name: "index_learnable_skills_on_job_id"
+    t.index ["skill_id"], name: "index_learnable_skills_on_skill_id"
+    t.index ["skill_no"], name: "index_learnable_skills_on_skill_no"
+    t.index ["sp"], name: "index_learnable_skills_on_sp"
   end
 
   create_table "names", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

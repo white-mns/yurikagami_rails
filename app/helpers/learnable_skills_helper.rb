@@ -1,0 +1,2 @@
+module LearnableSkillsHelper
+end
