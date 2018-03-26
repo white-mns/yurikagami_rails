@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Result no:</strong>
+  <%= @event.result_no %>
+</p>
+
+<p>
+  <strong>Generate no:</strong>
+  <%= @event.generate_no %>
+</p>
+
+<p>
+  <strong>E no:</strong>
+  <%= @event.e_no %>
+</p>
+
+<p>
+  <strong>Sub no:</strong>
+  <%= @event.sub_no %>
+</p>
+
+<p>
+  <strong>Event:</strong>
+  <%= @event.event %>
+</p>
+
+<p>
+  <strong>Flag:</strong>
+  <%= @event.flag %>
+</p>
+
+<p>
+  <strong>Text:</strong>
+  <%= @event.text %>
+</p>
+
+<%= link_to 'Edit', edit_event_path(@event) %> |
+<%= link_to 'Back', events_path %>

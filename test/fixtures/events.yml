@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  result_no: 1
+  generate_no: 1
+  e_no: 1
+  sub_no: 1
+  event: 1
+  flag: 1
+  text: 1
+
+two:
+  result_no: 1
+  generate_no: 1
+  e_no: 1
+  sub_no: 1
+  event: 1
+  flag: 1
+  text: 1
