@@ -1,7 +1,7 @@
 <h1>百合鏡4期データ小屋</h1>
 <p>このサイトでは<a href="http://csyuki.sakura.ne.jp/cgi-bin/prism/" target="_blank">百合鏡</a>を解析して得られる情報を扱っています。<br>
 データ更新は本家の圧縮結果が公開されてから行います。</p><br>
-<p>第<%= @last_result %>回更新結果まで反映済です。</p>
+<p>第<%= @last_result %>回<%= "再" if @last_generate > 0 %><%= num = 2; text = ""; while num <= @last_generate do num += 1; text += "々" end; text %>更新結果まで反映済です。</p>
 
 <div class="col-lg-12">
   <div class="bs-component">
