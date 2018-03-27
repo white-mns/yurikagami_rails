@@ -1,4 +1,4 @@
-<h1>Listing event_proceeds</h1>
+<h1>イベント進行一覧</h1>
 
 <div class="bs-docs-section">
   <div class="row">
@@ -40,21 +40,12 @@
     <td class="formNum"><%= text_field_tag :e_no_form, @e_no_form %></td></tr>
   <tr><td><%= f.label :p_name_form, 'キャラクター名' %></td>
     <td class="formText"><%= text_field_tag :p_name_form, @p_name_form %></td></tr>
-  <tr><td></td><td><%= check_box_tag :show_main, @show_main, @show_main %><%= f.label_tag :show_main, 'メインキャラ' %>　<%= check_box_tag :show_sub, @show_sub, @show_sub %><%= f.label_tag :show_sub, 'サブキャラ' %></td></tr>
-  <tr><td><%= f.label :result_no_form, 'Result no' %></td>
-    <td class="formNum"><%= text_field_tag :result_no_form, @result_no_form %></td></tr>
-  <tr><td><%= f.label :generate_no_form, 'Generate no' %></td>
-    <td class="formNum"><%= text_field_tag :generate_no_form, @generate_no_form %></td></tr>
-  <tr><td><%= f.label :e_no_form, 'E no' %></td>
-    <td class="formNum"><%= text_field_tag :e_no_form, @e_no_form %></td></tr>
-  <tr><td><%= f.label :sub_no_form, 'Sub no' %></td>
-    <td class="formNum"><%= text_field_tag :sub_no_form, @sub_no_form %></td></tr>
-  <tr><td><%= f.label :event_form, 'Event' %></td>
-    <td class="formNum"><%= text_field_tag :event_form, @event_form %></td></tr>
-  <tr><td><%= f.label :last_flag_form, 'Last flag' %></td>
-    <td class="formNum"><%= text_field_tag :last_flag_form, @last_flag_form %></td></tr>
-  <tr><td><%= f.label :flag_form, 'Flag' %></td>
-    <td class="formNum"><%= text_field_tag :flag_form, @flag_form %></td></tr>
+  <tr><td><%= f.label :event_form, 'イベント名' %></td>
+    <td class="formText"><%= text_field_tag :event_form, @event_form %></td></tr>
+  <tr><td><%= f.label :last_flag_form, '前回の状況' %></td>
+    <td class="formText"><%= text_field_tag :last_flag_form, @last_flag_form %></td></tr>
+  <tr><td><%= f.label :flag_form, '状況' %></td>
+    <td class="formText"><%= text_field_tag :flag_form, @flag_form %></td></tr>
   <tr><td></td><td>
     <%= f.submit '検索する' %>
     </td></tr>
@@ -75,13 +66,9 @@
     <tr>
       <th><%= sort_link(@search, :result_no,'更新回', default_order: :desc) %></th>
       <th><%= sort_link(@search, :e_no,'キャラクター(Eno)', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :result_no, 'Result no', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :generate_no, 'Generate no', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :e_no, 'E no', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :sub_no, 'Sub no', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :event, 'Event', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :last_flag, 'Last flag', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :flag, 'Flag', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :event, 'イベント名', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :last_flag, '前回', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :flag, '状況', default_order: :desc) %></th>
       <th colspan="1">結果リンク</th>
     </tr>
   </thead>
@@ -95,13 +82,9 @@
                 e_no_f_no += ", " + sprintf("%d",event_proceed.sub_no)
             end
             event_proceed.p_name.name.html_safe + "(" + e_no_f_no + ")" %></td>
-        <td><%= event_proceed.result_no %></td>
-        <td><%= event_proceed.generate_no %></td>
-        <td><%= event_proceed.e_no %></td>
-        <td><%= event_proceed.sub_no %></td>
-        <td><%= event_proceed.event %></td>
-        <td><%= event_proceed.last_flag %></td>
-        <td><%= event_proceed.flag %></td>
+        <td><%= event_proceed.event_name.name %></td>
+        <td><%= event_proceed.last_flag_name.name %></td>
+        <td><%= event_proceed.flag_name.name %></td>
         <td><%= file_name = sprintf("%d",event_proceed.e_no)
             if event_proceed.sub_no > 0 then
                 file_name += "_" + sprintf("%d",event_proceed.sub_no)
