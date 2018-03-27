@@ -1,4 +1,4 @@
-<h1>Listing new_events</h1>
+<h1>新出イベント状況一覧</h1>
 
 <div class="bs-docs-section">
   <div class="row">
@@ -36,19 +36,10 @@
   <tr><td colspan="2" style="cursor:pointer;" onclick="search_open(false);">絞り込み検索<span style="font-size:80%">(クリックで閉じます)</span></td></tr>
   <tr><td><%= f.label :result_no_form, '更新回' %></td>
     <td class="formNum"><%= text_field_tag :result_no_form, @result_no_form %></td></tr>
-  <tr><td><%= f.label :e_no_form, 'Eno' %></td>
-    <td class="formNum"><%= text_field_tag :e_no_form, @e_no_form %></td></tr>
-  <tr><td><%= f.label :p_name_form, 'キャラクター名' %></td>
-    <td class="formText"><%= text_field_tag :p_name_form, @p_name_form %></td></tr>
-  <tr><td></td><td><%= check_box_tag :show_main, @show_main, @show_main %><%= f.label_tag :show_main, 'メインキャラ' %>　<%= check_box_tag :show_sub, @show_sub, @show_sub %><%= f.label_tag :show_sub, 'サブキャラ' %></td></tr>
-  <tr><td><%= f.label :result_no_form, 'Result no' %></td>
-    <td class="formNum"><%= text_field_tag :result_no_form, @result_no_form %></td></tr>
-  <tr><td><%= f.label :generate_no_form, 'Generate no' %></td>
-    <td class="formNum"><%= text_field_tag :generate_no_form, @generate_no_form %></td></tr>
-  <tr><td><%= f.label :event_form, 'Event' %></td>
-    <td class="formNum"><%= text_field_tag :event_form, @event_form %></td></tr>
-  <tr><td><%= f.label :flag_form, 'Flag' %></td>
-    <td class="formNum"><%= text_field_tag :flag_form, @flag_form %></td></tr>
+  <tr><td><%= f.label :event_form, 'イベント名' %></td>
+    <td class="formText"><%= text_field_tag :event_form, @event_form %></td></tr>
+  <tr><td><%= f.label :flag_form, 'フラグ' %></td>
+    <td class="formText"><%= text_field_tag :flag_form, @flag_form %></td></tr>
   <tr><td></td><td>
     <%= f.submit '検索する' %>
     </td></tr>
@@ -68,12 +59,7 @@
   <thead>
     <tr>
       <th><%= sort_link(@search, :result_no,'更新回', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :e_no,'キャラクター(Eno)', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :result_no, 'Result no', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :generate_no, 'Generate no', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :event, 'Event', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :flag, 'Flag', default_order: :desc) %></th>
-      <th colspan="1">結果リンク</th>
+      <th><%= sort_link(@search, :event, 'イベント名 フラグ', default_order: :desc) %></th>
     </tr>
   </thead>
 
@@ -81,20 +67,8 @@
     <% @new_events.each do |new_event| %>
       <tr>
         <td><%= new_event.result_no %></td>
-        <td><%= e_no_f_no = sprintf("%d",new_event.e_no)
-            if new_event.sub_no > 0 then
-                e_no_f_no += ", " + sprintf("%d",new_event.sub_no)
-            end
-            new_event.p_name.name.html_safe + "(" + e_no_f_no + ")" %></td>
-        <td><%= new_event.result_no %></td>
-        <td><%= new_event.generate_no %></td>
-        <td><%= new_event.event %></td>
-        <td><%= new_event.flag %></td>
-        <td><%= file_name = sprintf("%d",new_event.e_no)
-            if new_event.sub_no > 0 then
-                file_name += "_" + sprintf("%d",new_event.sub_no)
-            end
-            link_to " 結果", "http://csyuki.sakura.ne.jp/cgi-bin/prism/result/status"+file_name+".html", :target => "_blank" %></td>
+        <td><%= @result_num = sprintf("%d", new_event.result_no)
+                link_to new_event.event_name.name + "　" + new_event.flag_name.name, events_path + "?result_no_form=" + @result_num +"&event_form=\"" + new_event.event_name.name + "\"&flag_form=\"" + new_event.flag_name.name + "\"" %></td>
       </tr>
     <% end %>
   </tbody>

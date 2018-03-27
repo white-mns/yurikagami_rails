@@ -5,8 +5,8 @@ class NewEventsController < ApplicationController
   # GET /new_events
   def index
     param_set
-    @count	= NewEvent.includes([:p_name]).search(params[:q]).result.count()
-    @search	= NewEvent.includes([:p_name]).page(params[:page]).search(params[:q])
+    @count	= NewEvent.includes([:event_name, :flag_name]).search(params[:q]).result.count()
+    @search	= NewEvent.includes([:event_name, :flag_name]).page(params[:page]).search(params[:q])
     @search.sorts = 'id asc' if @search.sorts.empty?
     @new_events	= @search.result.per(50)
   end
@@ -16,22 +16,15 @@ class NewEventsController < ApplicationController
     params["result_no_form"] = params["result_no_form"] ? params["result_no_form"] : sprintf('%d',@last_result)
     params[:q]  = params[:q] ? params[:q] : {}
     
-    reference_text_assign(params, "p_name_name", "p_name_form")
-        reference_number_assign(params, "result_no", "result_no_form")
-        reference_number_assign(params, "generate_no", "generate_no_form")
-        reference_number_assign(params, "event", "event_form")
-        reference_number_assign(params, "flag", "flag_form")
+    reference_number_assign(params, "result_no", "result_no_form")
+    reference_number_assign(params, "generate_no", "generate_no_form")
+    reference_text_assign(params, "event_name_name", "event_form")
+    reference_text_assign(params, "flag_name_name", "flag_form")
         
-    @p_name_form = params["p_name_form"]
-        @result_no_form = params["result_no_form"]
-        @generate_no_form = params["generate_no_form"]
-        @event_form = params["event_form"]
-        @flag_form = params["flag_form"]
-        
-    show_sub_hash =  {"show_main"=> @show_main,"show_sub" => @show_sub}
-    sub_no_set(params, show_sub_hash)
-    @show_main = show_sub_hash["show_main"]
-    @show_sub = show_sub_hash["show_sub"]
+    @result_no_form = params["result_no_form"]
+    @generate_no_form = params["generate_no_form"]
+    @event_form = params["event_form"]
+    @flag_form = params["flag_form"]
   end
   # GET /new_events/1
   #def show
