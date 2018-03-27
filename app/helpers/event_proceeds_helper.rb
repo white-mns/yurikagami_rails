@@ -1,0 +1,2 @@
+module EventProceedsHelper
+end

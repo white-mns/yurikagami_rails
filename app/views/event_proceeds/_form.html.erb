@@ -1,0 +1,52 @@
+<%= form_with(model: event_proceed, local: true) do |form| %>
+  <% if event_proceed.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(event_proceed.errors.count, "error") %> prohibited this event_proceed from being saved:</h2>
+
+      <ul>
+      <% event_proceed.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :result_no %>
+    <%= form.number_field :result_no, id: :event_proceed_result_no %>
+  </div>
+
+  <div class="field">
+    <%= form.label :generate_no %>
+    <%= form.number_field :generate_no, id: :event_proceed_generate_no %>
+  </div>
+
+  <div class="field">
+    <%= form.label :e_no %>
+    <%= form.number_field :e_no, id: :event_proceed_e_no %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sub_no %>
+    <%= form.number_field :sub_no, id: :event_proceed_sub_no %>
+  </div>
+
+  <div class="field">
+    <%= form.label :event %>
+    <%= form.number_field :event, id: :event_proceed_event %>
+  </div>
+
+  <div class="field">
+    <%= form.label :last_flag %>
+    <%= form.number_field :last_flag, id: :event_proceed_last_flag %>
+  </div>
+
+  <div class="field">
+    <%= form.label :flag %>
+    <%= form.number_field :flag, id: :event_proceed_flag %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

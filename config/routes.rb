@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :event_proceeds
   resources :events
   resources :learnable_skills
   resources :skills
