@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Result no:</strong>
+  <%= @new_event.result_no %>
+</p>
+
+<p>
+  <strong>Generate no:</strong>
+  <%= @new_event.generate_no %>
+</p>
+
+<p>
+  <strong>Event:</strong>
+  <%= @new_event.event %>
+</p>
+
+<p>
+  <strong>Flag:</strong>
+  <%= @new_event.flag %>
+</p>
+
+<%= link_to 'Edit', edit_new_event_path(@new_event) %> |
+<%= link_to 'Back', new_events_path %>
