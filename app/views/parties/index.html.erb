@@ -1,4 +1,4 @@
-<h1>Listing parties</h1>
+<h1>パーティ一覧</h1>
 
 <div class="bs-docs-section">
   <div class="row">
@@ -36,21 +36,12 @@
   <tr><td colspan="2" style="cursor:pointer;" onclick="search_open(false);">絞り込み検索<span style="font-size:80%">(クリックで閉じます)</span></td></tr>
   <tr><td><%= f.label :result_no_form, '更新回' %></td>
     <td class="formNum"><%= text_field_tag :result_no_form, @result_no_form %></td></tr>
+  <tr><td><%= f.label :party_no_form, 'パーティ番号' %></td>
+    <td class="formNum"><%= text_field_tag :party_no_form, @party_no_form %></td></tr>
   <tr><td><%= f.label :e_no_form, 'Eno' %></td>
     <td class="formNum"><%= text_field_tag :e_no_form, @e_no_form %></td></tr>
   <tr><td><%= f.label :p_name_form, 'キャラクター名' %></td>
     <td class="formText"><%= text_field_tag :p_name_form, @p_name_form %></td></tr>
-  <tr><td></td><td><%= check_box_tag :show_main, @show_main, @show_main %><%= f.label_tag :show_main, 'メインキャラ' %>　<%= check_box_tag :show_sub, @show_sub, @show_sub %><%= f.label_tag :show_sub, 'サブキャラ' %></td></tr>
-  <tr><td><%= f.label :result_no_form, 'Result no' %></td>
-    <td class="formNum"><%= text_field_tag :result_no_form, @result_no_form %></td></tr>
-  <tr><td><%= f.label :generate_no_form, 'Generate no' %></td>
-    <td class="formNum"><%= text_field_tag :generate_no_form, @generate_no_form %></td></tr>
-  <tr><td><%= f.label :party_no_form, 'Party no' %></td>
-    <td class="formNum"><%= text_field_tag :party_no_form, @party_no_form %></td></tr>
-  <tr><td><%= f.label :e_no_form, 'E no' %></td>
-    <td class="formNum"><%= text_field_tag :e_no_form, @e_no_form %></td></tr>
-  <tr><td><%= f.label :sub_no_form, 'Sub no' %></td>
-    <td class="formNum"><%= text_field_tag :sub_no_form, @sub_no_form %></td></tr>
   <tr><td></td><td>
     <%= f.submit '検索する' %>
     </td></tr>
@@ -70,13 +61,9 @@
   <thead>
     <tr>
       <th><%= sort_link(@search, :result_no,'更新回', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :party_no, 'パーティ', default_order: :desc) %></th>
       <th><%= sort_link(@search, :e_no,'キャラクター(Eno)', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :result_no, 'Result no', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :generate_no, 'Generate no', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :party_no, 'Party no', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :e_no, 'E no', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :sub_no, 'Sub no', default_order: :desc) %></th>
-      <th colspan="1">結果リンク</th>
+      <th colspan="2">結果リンク</th>
     </tr>
   </thead>
 
@@ -84,21 +71,19 @@
     <% @parties.each do |party| %>
       <tr>
         <td><%= party.result_no %></td>
+        <td><%= party.party_no %></td>
         <td><%= e_no_f_no = sprintf("%d",party.e_no)
             if party.sub_no > 0 then
                 e_no_f_no += ", " + sprintf("%d",party.sub_no)
             end
             party.p_name.name.html_safe + "(" + e_no_f_no + ")" %></td>
-        <td><%= party.result_no %></td>
-        <td><%= party.generate_no %></td>
-        <td><%= party.party_no %></td>
-        <td><%= party.e_no %></td>
-        <td><%= party.sub_no %></td>
         <td><%= file_name = sprintf("%d",party.e_no)
             if party.sub_no > 0 then
                 file_name += "_" + sprintf("%d",party.sub_no)
             end
             link_to " 結果", "http://csyuki.sakura.ne.jp/cgi-bin/prism/result/status"+file_name+".html", :target => "_blank" %></td>
+        <td><%= file_name = sprintf("%d",party.party_no)
+            link_to " 戦闘結果", "http://csyuki.sakura.ne.jp/cgi-bin/prism/result/result"+file_name+".html", :target => "_blank" %></td>
       </tr>
     <% end %>
   </tbody>
