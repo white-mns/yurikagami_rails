@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :parties
   resources :new_events
   resources :event_proceeds
   resources :events

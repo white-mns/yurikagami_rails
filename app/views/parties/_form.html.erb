@@ -1,0 +1,42 @@
+<%= form_with(model: party, local: true) do |form| %>
+  <% if party.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(party.errors.count, "error") %> prohibited this party from being saved:</h2>
+
+      <ul>
+      <% party.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :result_no %>
+    <%= form.number_field :result_no, id: :party_result_no %>
+  </div>
+
+  <div class="field">
+    <%= form.label :generate_no %>
+    <%= form.number_field :generate_no, id: :party_generate_no %>
+  </div>
+
+  <div class="field">
+    <%= form.label :party_no %>
+    <%= form.number_field :party_no, id: :party_party_no %>
+  </div>
+
+  <div class="field">
+    <%= form.label :e_no %>
+    <%= form.number_field :e_no, id: :party_e_no %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sub_no %>
+    <%= form.number_field :sub_no, id: :party_sub_no %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
