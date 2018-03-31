@@ -5,8 +5,8 @@ class PartyInfosController < ApplicationController
   # GET /party_infos
   def index
     param_set
-    @count	= PartyInfo.includes([:p_name]).search(params[:q]).result.count()
-    @search	= PartyInfo.includes([:p_name]).page(params[:page]).search(params[:q])
+    @count	= PartyInfo.search(params[:q]).result.count()
+    @search	= PartyInfo.page(params[:page]).search(params[:q])
     @search.sorts = 'id asc' if @search.sorts.empty?
     @party_infos	= @search.result.per(50)
   end
@@ -16,28 +16,21 @@ class PartyInfosController < ApplicationController
     params["result_no_form"] = params["result_no_form"] ? params["result_no_form"] : sprintf('%d',@last_result)
     params[:q]  = params[:q] ? params[:q] : {}
     
-    reference_text_assign(params, "p_name_name", "p_name_form")
-        reference_number_assign(params, "result_no", "result_no_form")
-        reference_number_assign(params, "generate_no", "generate_no_form")
-        reference_number_assign(params, "party_no", "party_no_form")
-        reference_number_assign(params, "name", "name_form")
-        reference_number_assign(params, "member_num", "member_num_form")
-        reference_number_assign(params, "battler_num", "battler_num_form")
-        reference_number_assign(params, "sook_num", "sook_num_form")
-        
-    @p_name_form = params["p_name_form"]
-        @result_no_form = params["result_no_form"]
-        @generate_no_form = params["generate_no_form"]
-        @party_no_form = params["party_no_form"]
-        @name_form = params["name_form"]
-        @member_num_form = params["member_num_form"]
-        @battler_num_form = params["battler_num_form"]
-        @sook_num_form = params["sook_num_form"]
-        
-    show_sub_hash =  {"show_main"=> @show_main,"show_sub" => @show_sub}
-    sub_no_set(params, show_sub_hash)
-    @show_main = show_sub_hash["show_main"]
-    @show_sub = show_sub_hash["show_sub"]
+    reference_number_assign(params, "result_no", "result_no_form")
+    reference_number_assign(params, "generate_no", "generate_no_form")
+    reference_number_assign(params, "party_no", "party_no_form")
+    reference_number_assign(params, "name", "name_form")
+    reference_number_assign(params, "member_num", "member_num_form")
+    reference_number_assign(params, "battler_num", "battler_num_form")
+    reference_number_assign(params, "sook_num", "sook_num_form")
+    
+    @result_no_form = params["result_no_form"]
+    @generate_no_form = params["generate_no_form"]
+    @party_no_form = params["party_no_form"]
+    @name_form = params["name_form"]
+    @member_num_form = params["member_num_form"]
+    @battler_num_form = params["battler_num_form"]
+    @sook_num_form = params["sook_num_form"]
   end
   # GET /party_infos/1
   #def show

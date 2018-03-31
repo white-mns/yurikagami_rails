@@ -1,8 +1,9 @@
-<h1>Listing party_infos</h1>
+<h1>パーティ情報一覧</h1>
 
 <div class="bs-docs-section">
   <div class="row">
     <div class="col-md-12">
+        <p>参戦人数、参戦臆病者人数において、ボスフラグのあるキャラクターは二人分でカウントしています。</p>
         <p class="formNum">テキストフォームの隣に赤い破線がある項目は数値検索です。<br>
         「/」区切りでOR、「100~」や「100~200」のように「~」をつけて範囲指定となります。<br>
         OR指定と範囲指定を同時に行うことはできません。</p>
@@ -36,24 +37,15 @@
   <tr><td colspan="2" style="cursor:pointer;" onclick="search_open(false);">絞り込み検索<span style="font-size:80%">(クリックで閉じます)</span></td></tr>
   <tr><td><%= f.label :result_no_form, '更新回' %></td>
     <td class="formNum"><%= text_field_tag :result_no_form, @result_no_form %></td></tr>
-  <tr><td><%= f.label :e_no_form, 'Eno' %></td>
-    <td class="formNum"><%= text_field_tag :e_no_form, @e_no_form %></td></tr>
-  <tr><td><%= f.label :p_name_form, 'キャラクター名' %></td>
-    <td class="formText"><%= text_field_tag :p_name_form, @p_name_form %></td></tr>
-  <tr><td></td><td><%= check_box_tag :show_main, @show_main, @show_main %><%= f.label_tag :show_main, 'メインキャラ' %>　<%= check_box_tag :show_sub, @show_sub, @show_sub %><%= f.label_tag :show_sub, 'サブキャラ' %></td></tr>
-  <tr><td><%= f.label :result_no_form, 'Result no' %></td>
-    <td class="formNum"><%= text_field_tag :result_no_form, @result_no_form %></td></tr>
-  <tr><td><%= f.label :generate_no_form, 'Generate no' %></td>
-    <td class="formNum"><%= text_field_tag :generate_no_form, @generate_no_form %></td></tr>
-  <tr><td><%= f.label :party_no_form, 'Party no' %></td>
+  <tr><td><%= f.label :party_no_form, 'パーティ番号' %></td>
     <td class="formNum"><%= text_field_tag :party_no_form, @party_no_form %></td></tr>
-  <tr><td><%= f.label :name_form, 'Name' %></td>
+  <tr><td><%= f.label :name_form, 'パーティ名' %></td>
     <td class="formNum"><%= text_field_tag :name_form, @name_form %></td></tr>
-  <tr><td><%= f.label :member_num_form, 'Member num' %></td>
+  <tr><td><%= f.label :member_num_form, 'パーティ人数' %></td>
     <td class="formNum"><%= text_field_tag :member_num_form, @member_num_form %></td></tr>
-  <tr><td><%= f.label :battler_num_form, 'Battler num' %></td>
+  <tr><td><%= f.label :battler_num_form, '参戦人数' %></td>
     <td class="formNum"><%= text_field_tag :battler_num_form, @battler_num_form %></td></tr>
-  <tr><td><%= f.label :sook_num_form, 'Sook num' %></td>
+  <tr><td><%= f.label :sook_num_form, '参戦臆病者人数' %></td>
     <td class="formNum"><%= text_field_tag :sook_num_form, @sook_num_form %></td></tr>
   <tr><td></td><td>
     <%= f.submit '検索する' %>
@@ -74,14 +66,11 @@
   <thead>
     <tr>
       <th><%= sort_link(@search, :result_no,'更新回', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :e_no,'キャラクター(Eno)', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :result_no, 'Result no', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :generate_no, 'Generate no', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :party_no, 'Party no', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :name, 'Name', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :member_num, 'Member num', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :battler_num, 'Battler num', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :sook_num, 'Sook num', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :party_no, 'Pno', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :name, 'パーティ名', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :member_num, '人数', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :battler_num, '参戦', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :sook_num, '臆病者', default_order: :desc) %></th>
       <th colspan="1">結果リンク</th>
     </tr>
   </thead>
@@ -90,23 +79,13 @@
     <% @party_infos.each do |party_info| %>
       <tr>
         <td><%= party_info.result_no %></td>
-        <td><%= e_no_f_no = sprintf("%d",party_info.e_no)
-            if party_info.sub_no > 0 then
-                e_no_f_no += ", " + sprintf("%d",party_info.sub_no)
-            end
-            party_info.p_name.name.html_safe + "(" + e_no_f_no + ")" %></td>
-        <td><%= party_info.result_no %></td>
-        <td><%= party_info.generate_no %></td>
         <td><%= party_info.party_no %></td>
         <td><%= party_info.name %></td>
         <td><%= party_info.member_num %></td>
         <td><%= party_info.battler_num %></td>
         <td><%= party_info.sook_num %></td>
-        <td><%= file_name = sprintf("%d",party_info.e_no)
-            if party_info.sub_no > 0 then
-                file_name += "_" + sprintf("%d",party_info.sub_no)
-            end
-            link_to " 結果", "http://csyuki.sakura.ne.jp/cgi-bin/prism/result/status"+file_name+".html", :target => "_blank" %></td>
+        <td><%= file_name = sprintf("%d",party_info.party_no)
+            link_to " 結果", "http://csyuki.sakura.ne.jp/cgi-bin/prism/result/result"+file_name+".html", :target => "_blank" %></td>
       </tr>
     <% end %>
   </tbody>
