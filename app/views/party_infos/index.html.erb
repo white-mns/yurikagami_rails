@@ -40,7 +40,11 @@
   <tr><td><%= f.label :party_no_form, 'パーティ番号' %></td>
     <td class="formNum"><%= text_field_tag :party_no_form, @party_no_form %></td></tr>
   <tr><td><%= f.label :name_form, 'パーティ名' %></td>
-    <td class="formNum"><%= text_field_tag :name_form, @name_form %></td></tr>
+    <td class="formText"><%= text_field_tag :name_form, @name_form %></td></tr>
+  <tr><td><%= f.label :e_no_form, 'Eno' %></td>
+    <td class="formNum"><%= text_field_tag :e_no_form, @e_no_form %></td></tr>
+  <tr><td><%= f.label :p_name_form, 'キャラクター名' %></td>
+    <td class="formText"><%= text_field_tag :p_name_form, @p_name_form %></td></tr>
   <tr><td><%= f.label :member_num_form, 'パーティ人数' %></td>
     <td class="formNum"><%= text_field_tag :member_num_form, @member_num_form %></td></tr>
   <tr><td><%= f.label :battler_num_form, '参戦人数' %></td>
@@ -68,6 +72,7 @@
       <th><%= sort_link(@search, :result_no,'更新回', default_order: :desc) %></th>
       <th><%= sort_link(@search, :party_no, 'Pno', default_order: :desc) %></th>
       <th><%= sort_link(@search, :name, 'パーティ名', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :party_members_e_no, 'メンバー', default_order: :desc) %></th>
       <th><%= sort_link(@search, :member_num, '人数', default_order: :desc) %></th>
       <th><%= sort_link(@search, :battler_num, '参戦', default_order: :desc) %></th>
       <th><%= sort_link(@search, :sook_num, '臆病者', default_order: :desc) %></th>
@@ -81,6 +86,9 @@
         <td><%= party_info.result_no %></td>
         <td><%= party_info.party_no %></td>
         <td><%= party_info.name %></td>
+        <td><% party_info.party_members.each do |party_member| %>
+            <%= party_member.p_name.name.html_safe + "(" + sprintf("%d",party_member.e_no) + ")" %><br>
+            <% end %></td>
         <td><%= party_info.member_num %></td>
         <td><%= party_info.battler_num %></td>
         <td><%= party_info.sook_num %></td>
