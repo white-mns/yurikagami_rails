@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  result_no: 1
+  generate_no: 1
+  party_no: 1
+  name: MyString
+  member_num: 1
+  battler_num: 1
+  sook_num: 1
+
+two:
+  result_no: 1
+  generate_no: 1
+  party_no: 1
+  name: MyString
+  member_num: 1
+  battler_num: 1
+  sook_num: 1

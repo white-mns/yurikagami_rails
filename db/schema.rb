@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180330084311) do
+ActiveRecord::Schema.define(version: 20180331071239) do
 
   create_table "event_proceeds", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "result_no"
@@ -141,6 +141,23 @@ ActiveRecord::Schema.define(version: 20180330084311) do
     t.datetime "updated_at", null: false
     t.index ["e_no", "result_no", "sub_no", "generate_no"], name: "unique_eno"
     t.index ["party_no"], name: "index_parties_on_party_no"
+  end
+
+  create_table "party_infos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "result_no"
+    t.integer "generate_no"
+    t.integer "party_no"
+    t.string "name"
+    t.integer "member_num"
+    t.integer "battler_num"
+    t.integer "sook_num"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["battler_num"], name: "index_party_infos_on_battler_num"
+    t.index ["member_num"], name: "index_party_infos_on_member_num"
+    t.index ["name"], name: "index_party_infos_on_name"
+    t.index ["party_no", "result_no", "generate_no"], name: "unique_pno"
+    t.index ["sook_num"], name: "index_party_infos_on_sook_num"
   end
 
   create_table "profiles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

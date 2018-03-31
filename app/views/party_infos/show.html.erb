@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Result no:</strong>
+  <%= @party_info.result_no %>
+</p>
+
+<p>
+  <strong>Generate no:</strong>
+  <%= @party_info.generate_no %>
+</p>
+
+<p>
+  <strong>Party no:</strong>
+  <%= @party_info.party_no %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @party_info.name %>
+</p>
+
+<p>
+  <strong>Member num:</strong>
+  <%= @party_info.member_num %>
+</p>
+
+<p>
+  <strong>Battler num:</strong>
+  <%= @party_info.battler_num %>
+</p>
+
+<p>
+  <strong>Sook num:</strong>
+  <%= @party_info.sook_num %>
+</p>
+
+<%= link_to 'Edit', edit_party_info_path(@party_info) %> |
+<%= link_to 'Back', party_infos_path %>
