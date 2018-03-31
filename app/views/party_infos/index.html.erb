@@ -49,8 +49,6 @@
     <td class="formNum"><%= text_field_tag :member_num_form, @member_num_form %></td></tr>
   <tr><td><%= f.label :battler_num_form, '参戦人数' %></td>
     <td class="formNum"><%= text_field_tag :battler_num_form, @battler_num_form %></td></tr>
-  <tr><td><%= f.label :sook_num_form, '参戦臆病者人数' %></td>
-    <td class="formNum"><%= text_field_tag :sook_num_form, @sook_num_form %></td></tr>
   <tr><td></td><td>
     <%= f.submit '検索する' %>
     </td></tr>
@@ -75,7 +73,6 @@
       <th><%= sort_link(@search, :party_members_e_no, 'メンバー', default_order: :desc) %></th>
       <th><%= sort_link(@search, :member_num, '人数', default_order: :desc) %></th>
       <th><%= sort_link(@search, :battler_num, '参戦', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :sook_num, '臆病者', default_order: :desc) %></th>
       <th colspan="1">結果リンク</th>
     </tr>
   </thead>
@@ -91,7 +88,6 @@
             <% end %></td>
         <td><%= party_info.member_num %></td>
         <td><%= party_info.battler_num %></td>
-        <td><%= party_info.sook_num %></td>
         <td><%= file_name = sprintf("%d",party_info.party_no)
             link_to " 結果", "http://csyuki.sakura.ne.jp/cgi-bin/prism/result/result"+file_name+".html", :target => "_blank" %></td>
       </tr>
