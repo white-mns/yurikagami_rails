@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Result no:</strong>
+  <%= @current_place.result_no %>
+</p>
+
+<p>
+  <strong>Generate no:</strong>
+  <%= @current_place.generate_no %>
+</p>
+
+<p>
+  <strong>Party no:</strong>
+  <%= @current_place.party_no %>
+</p>
+
+<p>
+  <strong>Place:</strong>
+  <%= @current_place.place %>
+</p>
+
+<p>
+  <strong>Shop:</strong>
+  <%= @current_place.shop %>
+</p>
+
+<p>
+  <strong>Inn:</strong>
+  <%= @current_place.inn %>
+</p>
+
+<%= link_to 'Edit', edit_current_place_path(@current_place) %> |
+<%= link_to 'Back', current_places_path %>
