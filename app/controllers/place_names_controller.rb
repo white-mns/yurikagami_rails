@@ -5,29 +5,20 @@ class PlaceNamesController < ApplicationController
   # GET /place_names
   def index
     param_set
-    @count	= PlaceName.includes([:p_name]).search(params[:q]).result.count()
-    @search	= PlaceName.includes([:p_name]).page(params[:page]).search(params[:q])
+    @count	= PlaceName.search(params[:q]).result.count()
+    @search	= PlaceName.page(params[:page]).search(params[:q])
     @search.sorts = 'id asc' if @search.sorts.empty?
     @place_names	= @search.result.per(50)
   end
 
   def param_set
-    @last_result = Name.maximum('result_no')
-    params["result_no_form"] = params["result_no_form"] ? params["result_no_form"] : sprintf('%d',@last_result)
     params[:q]  = params[:q] ? params[:q] : {}
     
-    reference_text_assign(params, "p_name_name", "p_name_form")
-        reference_number_assign(params, "place_id", "place_id_form")
-        reference_number_assign(params, "name", "name_form")
-        
-    @p_name_form = params["p_name_form"]
-        @place_id_form = params["place_id_form"]
-        @name_form = params["name_form"]
-        
-    show_sub_hash =  {"show_main"=> @show_main,"show_sub" => @show_sub}
-    sub_no_set(params, show_sub_hash)
-    @show_main = show_sub_hash["show_main"]
-    @show_sub = show_sub_hash["show_sub"]
+    reference_number_assign(params, "place_id", "place_id_form")
+    reference_text_assign(params, "name", "name_form")
+    
+    @place_id_form = params["place_id_form"]
+    @name_form = params["name_form"]
   end
   # GET /place_names/1
   #def show
