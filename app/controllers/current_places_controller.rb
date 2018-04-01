@@ -5,8 +5,8 @@ class CurrentPlacesController < ApplicationController
   # GET /current_places
   def index
     param_set
-    @count	= CurrentPlace.includes([:p_name]).search(params[:q]).result.count()
-    @search	= CurrentPlace.includes([:p_name]).page(params[:page]).search(params[:q])
+    @count	= CurrentPlace.includes(:place_name, party_info: [party_members: :p_name]).search(params[:q]).result.count()
+    @search	= CurrentPlace.includes(:place_name, party_info: [party_members: :p_name]).page(params[:page]).search(params[:q])
     @search.sorts = 'id asc' if @search.sorts.empty?
     @current_places	= @search.result.per(50)
   end
@@ -16,26 +16,35 @@ class CurrentPlacesController < ApplicationController
     params["result_no_form"] = params["result_no_form"] ? params["result_no_form"] : sprintf('%d',@last_result)
     params[:q]  = params[:q] ? params[:q] : {}
     
-    reference_text_assign(params, "p_name_name", "p_name_form")
-        reference_number_assign(params, "result_no", "result_no_form")
-        reference_number_assign(params, "generate_no", "generate_no_form")
-        reference_number_assign(params, "party_no", "party_no_form")
-        reference_number_assign(params, "place", "place_form")
-        reference_number_assign(params, "shop", "shop_form")
-        reference_number_assign(params, "inn", "inn_form")
+    reference_number_assign(params, "result_no", "result_no_form")
+    reference_number_assign(params, "generate_no", "generate_no_form")
+    reference_number_assign(params, "party_no", "party_no_form")
+    reference_text_assign(params, "place_name_name", "place_form")
+    reference_number_assign(params, "shop", "shop_form")
+    reference_number_assign(params, "inn", "inn_form")
+    reference_text_assign(params, "party_info_party_members_p_name_name", "p_name_form")
+    reference_text_assign(params, "party_info_name", "name_form")
+    reference_number_assign(params, "party_info_party_members_e_no", "e_no_form")
         
+    @result_no_form = params["result_no_form"]
+    @generate_no_form = params["generate_no_form"]
+    @party_no_form = params["party_no_form"]
+    @place_form = params["place_form"]
+    @shop_form = params["shop_form"]
+    @inn_form = params["inn_form"]
     @p_name_form = params["p_name_form"]
-        @result_no_form = params["result_no_form"]
-        @generate_no_form = params["generate_no_form"]
-        @party_no_form = params["party_no_form"]
-        @place_form = params["place_form"]
-        @shop_form = params["shop_form"]
-        @inn_form = params["inn_form"]
-        
-    show_sub_hash =  {"show_main"=> @show_main,"show_sub" => @show_sub}
-    sub_no_set(params, show_sub_hash)
-    @show_main = show_sub_hash["show_main"]
-    @show_sub = show_sub_hash["show_sub"]
+    @party_name_form = params["party_name_form"]
+    @e_no_form = params["e_no_form"]
+    
+    params[:q]["inn_eq_any"] = []
+    if params["is_inn"] == "on" then params[:q]["inn_eq_any"].push(1) end
+    if params["no_inn"] == "on" then params[:q]["inn_eq_any"].push(0) end
+    @is_inn = params["is_inn"]
+    @no_inn  = params["no_inn"]
+    if params[:q]["inn_eq_any"].size == 0 then 
+        @is_inn = "on"
+        @no_inn  = "on"
+    end
   end
   # GET /current_places/1
   #def show
