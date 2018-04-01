@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180331071239) do
+ActiveRecord::Schema.define(version: 20180401005905) do
 
   create_table "event_proceeds", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "result_no"
@@ -158,6 +158,15 @@ ActiveRecord::Schema.define(version: 20180331071239) do
     t.index ["name"], name: "index_party_infos_on_name"
     t.index ["party_no", "result_no", "generate_no"], name: "unique_pno"
     t.index ["sook_num"], name: "index_party_infos_on_sook_num"
+  end
+
+  create_table "place_names", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "place_id"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_place_names_on_name"
+    t.index ["place_id"], name: "index_place_names_on_place_id"
   end
 
   create_table "profiles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :place_names
   resources :party_infos
   resources :parties
   resources :new_events
