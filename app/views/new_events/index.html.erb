@@ -68,7 +68,7 @@
       <tr>
         <td><%= new_event.result_no %></td>
         <td><%= @result_num = sprintf("%d", new_event.result_no)
-                link_to new_event.event_name.name + "　" + new_event.flag_name.name, events_path + "?result_no_form=" + @result_num +"&event_form=\"" + new_event.event_name.name + "\"&flag_form=\"" + new_event.flag_name.name + "\"" %></td>
+                link_to new_event.event_name.name + "　" + new_event.flag_name.name, events_path + "?result_no_form=" + @result_num + "&event_form=\"" + new_event.event_name.name + "\"&flag_form=\"" + new_event.flag_name.name + "\"" %></td>
       </tr>
     <% end %>
   </tbody>
