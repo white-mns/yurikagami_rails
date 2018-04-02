@@ -1,0 +1,2 @@
+module NewPlacesHelper
+end
