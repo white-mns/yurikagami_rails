@@ -36,7 +36,7 @@
   <tr><td colspan="2" style="cursor:pointer;" onclick="search_open(false);">絞り込み検索<span style="font-size:80%">(クリックで閉じます)</span></td></tr>
   <tr><td><%= f.label :result_no_form, '更新回' %></td>
     <td class="formNum"><%= text_field_tag :result_no_form, @result_no_form %></td></tr>
-  <tr><td><%= f.label :place_form, '現在地' %></td>
+  <tr><td><%= f.label :place_form, '地点名' %></td>
     <td class="formText"><%= text_field_tag :place_form, @place_form %></td></tr>
   <tr><td></td><td>
     <%= f.submit '検索する' %>
@@ -57,7 +57,7 @@
   <thead>
     <tr>
       <th><%= sort_link(@search, :result_no,'更新回', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :place, '現在地', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :place, '地点', default_order: :desc) %></th>
     </tr>
   </thead>
 
