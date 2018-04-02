@@ -5,8 +5,8 @@ class NewPlacesController < ApplicationController
   # GET /new_places
   def index
     param_set
-    @count	= NewPlace.includes([:p_name]).search(params[:q]).result.count()
-    @search	= NewPlace.includes([:p_name]).page(params[:page]).search(params[:q])
+    @count	= NewPlace.includes(current_place: [:place_name, party_info: [party_members: :p_name]]).search(params[:q]).result.count()
+    @search	= NewPlace.includes(current_place: [:place_name, party_info: [party_members: :p_name]]).page(params[:page]).search(params[:q])
     @search.sorts = 'id asc' if @search.sorts.empty?
     @new_places	= @search.result.per(50)
   end
@@ -16,20 +16,13 @@ class NewPlacesController < ApplicationController
     params["result_no_form"] = params["result_no_form"] ? params["result_no_form"] : sprintf('%d',@last_result)
     params[:q]  = params[:q] ? params[:q] : {}
     
-    reference_text_assign(params, "p_name_name", "p_name_form")
-        reference_number_assign(params, "result_no", "result_no_form")
-        reference_number_assign(params, "generate_no", "generate_no_form")
-        reference_number_assign(params, "place", "place_form")
-        
-    @p_name_form = params["p_name_form"]
-        @result_no_form = params["result_no_form"]
-        @generate_no_form = params["generate_no_form"]
-        @place_form = params["place_form"]
-        
-    show_sub_hash =  {"show_main"=> @show_main,"show_sub" => @show_sub}
-    sub_no_set(params, show_sub_hash)
-    @show_main = show_sub_hash["show_main"]
-    @show_sub = show_sub_hash["show_sub"]
+    reference_number_assign(params, "result_no", "result_no_form")
+    reference_number_assign(params, "generate_no", "generate_no_form")
+    reference_text_assign(params, "current_place_place_name_name", "place_form")
+    
+    @result_no_form = params["result_no_form"]
+    @generate_no_form = params["generate_no_form"]
+    @place_form = params["place_form"]
   end
   # GET /new_places/1
   #def show

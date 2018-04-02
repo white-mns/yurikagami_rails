@@ -1,4 +1,4 @@
-<h1>Listing new_places</h1>
+<h1>新出地点一覧</h1>
 
 <div class="bs-docs-section">
   <div class="row">
@@ -36,17 +36,8 @@
   <tr><td colspan="2" style="cursor:pointer;" onclick="search_open(false);">絞り込み検索<span style="font-size:80%">(クリックで閉じます)</span></td></tr>
   <tr><td><%= f.label :result_no_form, '更新回' %></td>
     <td class="formNum"><%= text_field_tag :result_no_form, @result_no_form %></td></tr>
-  <tr><td><%= f.label :e_no_form, 'Eno' %></td>
-    <td class="formNum"><%= text_field_tag :e_no_form, @e_no_form %></td></tr>
-  <tr><td><%= f.label :p_name_form, 'キャラクター名' %></td>
-    <td class="formText"><%= text_field_tag :p_name_form, @p_name_form %></td></tr>
-  <tr><td></td><td><%= check_box_tag :show_main, @show_main, @show_main %><%= f.label_tag :show_main, 'メインキャラ' %>　<%= check_box_tag :show_sub, @show_sub, @show_sub %><%= f.label_tag :show_sub, 'サブキャラ' %></td></tr>
-  <tr><td><%= f.label :result_no_form, 'Result no' %></td>
-    <td class="formNum"><%= text_field_tag :result_no_form, @result_no_form %></td></tr>
-  <tr><td><%= f.label :generate_no_form, 'Generate no' %></td>
-    <td class="formNum"><%= text_field_tag :generate_no_form, @generate_no_form %></td></tr>
-  <tr><td><%= f.label :place_form, 'Place' %></td>
-    <td class="formNum"><%= text_field_tag :place_form, @place_form %></td></tr>
+  <tr><td><%= f.label :place_form, '現在地' %></td>
+    <td class="formText"><%= text_field_tag :place_form, @place_form %></td></tr>
   <tr><td></td><td>
     <%= f.submit '検索する' %>
     </td></tr>
@@ -66,11 +57,7 @@
   <thead>
     <tr>
       <th><%= sort_link(@search, :result_no,'更新回', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :e_no,'キャラクター(Eno)', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :result_no, 'Result no', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :generate_no, 'Generate no', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :place, 'Place', default_order: :desc) %></th>
-      <th colspan="1">結果リンク</th>
+      <th><%= sort_link(@search, :place, '現在地', default_order: :desc) %></th>
     </tr>
   </thead>
 
@@ -78,19 +65,10 @@
     <% @new_places.each do |new_place| %>
       <tr>
         <td><%= new_place.result_no %></td>
-        <td><%= e_no_f_no = sprintf("%d",new_place.e_no)
-            if new_place.sub_no > 0 then
-                e_no_f_no += ", " + sprintf("%d",new_place.sub_no)
-            end
-            new_place.p_name.name.html_safe + "(" + e_no_f_no + ")" %></td>
-        <td><%= new_place.result_no %></td>
-        <td><%= new_place.generate_no %></td>
-        <td><%= new_place.place %></td>
-        <td><%= file_name = sprintf("%d",new_place.e_no)
-            if new_place.sub_no > 0 then
-                file_name += "_" + sprintf("%d",new_place.sub_no)
-            end
-            link_to " 結果", "http://csyuki.sakura.ne.jp/cgi-bin/prism/result/status"+file_name+".html", :target => "_blank" %></td>
+        <td><%= result_num = sprintf("%d", new_place.result_no)
+                place_name = new_place.current_place.place_name.name
+                place_name = (place_name.match(" ")) ? place_name : "\"" + place_name + "\""
+                link_to new_place.current_place.place_name.name, current_places_path + "?result_no_form=" + result_num + "&place_form=" + place_name %></td>
       </tr>
     <% end %>
   </tbody>
