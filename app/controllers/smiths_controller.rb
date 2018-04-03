@@ -24,18 +24,11 @@ class SmithsController < ApplicationController
     reference_number_assign(params, "party_no", "party_no_form")
     reference_number_assign(params, "e_no", "e_no_form")
     reference_number_assign(params, "sub_no", "sub_no_form")
-    reference_number_assign(params, "result_i_no", "result_i_no_form")
-    reference_number_assign(params, "source_i_no", "source_i_no_form")
-    reference_number_assign(params, "main_material_i_no", "main_material_i_no_form")
-    reference_number_assign(params, "sub_material_1_i_no", "sub_material_1_i_no_form")
-    reference_number_assign(params, "sub_material_2_i_no", "sub_material_2_i_no_form")
-    reference_number_assign(params, "sub_material_3_i_no", "sub_material_3_i_no_form")
-    reference_number_assign(params, "sub_material_4_i_no", "sub_material_4_i_no_form")
-    reference_text_assign(params, "main_material_name", "main_material_name_id_form")
-    reference_text_assign(params, "sub_material_1_name", "sub_material_1_name_id_form")
-    reference_text_assign(params, "sub_material_2_name", "sub_material_2_name_id_form")
-    reference_text_assign(params, "sub_material_3_name", "sub_material_3_name_id_form")
-    reference_text_assign(params, "sub_material_4_name", "sub_material_4_name_id_form")
+    reference_text_assign(params, "main_material_name_name", "main_material_name_form")
+    reference_text_assign(params, "sub_material_1_name_name_or_sub_material_2_name_name_or_sub_material_3_name_name_or_sub_material_4_name_name", "sub_material_name_form")
+    reference_text_assign(params, "result_kind_name_name", "result_kind_form")
+    reference_text_assign(params, "source_kind_name_name", "source_kind_form")
+    reference_text_assign(params, "result_ability_name_name", "result_ability_form")
         
     @p_name_form = params["p_name_form"]
     @result_no_form = params["result_no_form"]
@@ -45,23 +38,12 @@ class SmithsController < ApplicationController
     @party_no_form = params["party_no_form"]
     @e_no_form = params["e_no_form"]
     @sub_no_form = params["sub_no_form"]
-    @result_i_no_form = params["result_i_no_form"]
-    @source_i_no_form = params["source_i_no_form"]
-    @main_material_i_no_form = params["main_material_i_no_form"]
-    @sub_material_1_i_no_form = params["sub_material_1_i_no_form"]
-    @sub_material_2_i_no_form = params["sub_material_2_i_no_form"]
-    @sub_material_3_i_no_form = params["sub_material_3_i_no_form"]
-    @sub_material_4_i_no_form = params["sub_material_4_i_no_form"]
-    @main_material_name_id_form = params["main_material_name_id_form"]
-    @sub_material_1_name_id_form = params["sub_material_1_name_id_form"]
-    @sub_material_2_name_id_form = params["sub_material_2_name_id_form"]
-    @sub_material_3_name_id_form = params["sub_material_3_name_id_form"]
-    @sub_material_4_name_id_form = params["sub_material_4_name_id_form"]
+    @main_material_name_form = params["main_material_name_form"]
+    @sub_material_name_form = params["sub_material_name_form"]
+    @result_kind_form = params["result_kind_form"]
+    @source_kind_form = params["source_kind_form"]
+    @result_ability_form = params["result_ability_form"]
         
-    show_sub_hash =  {"show_main"=> @show_main,"show_sub" => @show_sub}
-    sub_no_set(params, show_sub_hash)
-    @show_main = show_sub_hash["show_main"]
-    @show_sub = show_sub_hash["show_sub"]
   end
   # GET /smiths/1
   #def show

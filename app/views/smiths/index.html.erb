@@ -3,6 +3,7 @@
 <div class="bs-docs-section">
   <div class="row">
     <div class="col-md-12">
+        <p>作成装備、参考装備のアイテム番号は、アイテム名をもとに割り出した推測のものです。同名の別の装備が誤判定されることがあります。</p>
         <p class="formNum">テキストフォームの隣に赤い破線がある項目は数値検索です。<br>
         「/」区切りでOR、「100~」や「100~200」のように「~」をつけて範囲指定となります。<br>
         OR指定と範囲指定を同時に行うことはできません。</p>
@@ -43,30 +44,16 @@
   <tr><td></td><td><%= check_box_tag :show_main, @show_main, @show_main %><%= f.label_tag :show_main, 'メインキャラ' %>　<%= check_box_tag :show_sub, @show_sub, @show_sub %><%= f.label_tag :show_sub, 'サブキャラ' %></td></tr>
   <tr><td><%= f.label :party_no_form, 'パーティ番号' %></td>
     <td class="formNum"><%= text_field_tag :party_no_form, @party_no_form %></td></tr>
-  <tr><td><%= f.label :result_i_no_form, 'Result i no' %></td>
-    <td class="formNum"><%= text_field_tag :result_i_no_form, @result_i_no_form %></td></tr>
-  <tr><td><%= f.label :source_i_no_form, 'Source i no' %></td>
-    <td class="formNum"><%= text_field_tag :source_i_no_form, @source_i_no_form %></td></tr>
-  <tr><td><%= f.label :main_material_i_no_form, 'メイン素材INo' %></td>
-    <td class="formNum"><%= text_field_tag :main_material_i_no_form, @main_material_i_no_form %></td></tr>
-  <tr><td><%= f.label :sub_material_1_i_no_form, 'サブ素材1 INo' %></td>
-    <td class="formNum"><%= text_field_tag :sub_material_1_i_no_form, @sub_material_1_i_no_form %></td></tr>
-  <tr><td><%= f.label :sub_material_2_i_no_form, 'サブ素材2 INo' %></td>
-    <td class="formNum"><%= text_field_tag :sub_material_2_i_no_form, @sub_material_2_i_no_form %></td></tr>
-  <tr><td><%= f.label :sub_material_3_i_no_form, 'サブ素材3 INo' %></td>
-    <td class="formNum"><%= text_field_tag :sub_material_3_i_no_form, @sub_material_3_i_no_form %></td></tr>
-  <tr><td><%= f.label :sub_material_4_i_no_form, 'サブ素材4 INo' %></td>
-    <td class="formNum"><%= text_field_tag :sub_material_4_i_no_form, @sub_material_4_i_no_form %></td></tr>
+  <td><%= f.label :kind_form, '作成装備の種類' %></td>
+    <td class="formText"><%= text_field_tag :result_kind_form, @result_kind_form %></td></tr>
+  <td><%= f.label :kind_form, '参考装備の種類' %></td>
+    <td class="formText"><%= text_field_tag :source_kind_form, @source_kind_form %></td></tr>
+  <td><%= f.label :ability_form, '作成装備の能力' %></td>
+    <td class="formText"><%= text_field_tag :result_ability_form, @result_ability_form %></td></tr>
   <tr><td><%= f.label :main_material_name_id_form, 'メイン素材名' %></td>
-    <td class="formNum"><%= text_field_tag :main_material_name_id_form, @main_material_name_id_form %></td></tr>
-  <tr><td><%= f.label :sub_material_1_name_id_form, 'サブ素材名1' %></td>
-    <td class="formNum"><%= text_field_tag :sub_material_1_name_id_form, @sub_material_1_name_id_form %></td></tr>
-  <tr><td><%= f.label :sub_material_2_name_id_form, 'サブ素材名2' %></td>
-    <td class="formNum"><%= text_field_tag :sub_material_2_name_id_form, @sub_material_2_name_id_form %></td></tr>
-  <tr><td><%= f.label :sub_material_3_name_id_form, 'サブ素材名3' %></td>
-    <td class="formNum"><%= text_field_tag :sub_material_3_name_id_form, @sub_material_3_name_id_form %></td></tr>
-  <tr><td><%= f.label :sub_material_4_name_id_form, 'サブ素材名4' %></td>
-    <td class="formNum"><%= text_field_tag :sub_material_4_name_id_form, @sub_material_4_name_id_form %></td></tr>
+    <td class="formText"><%= text_field_tag :main_material_name_form, @main_material_name_form %></td></tr>
+  <tr><td><%= f.label :sub_material_1_name_id_form, 'サブ素材名' %></td>
+    <td class="formText"><%= text_field_tag :sub_material_name_form, @sub_material_name_form %></td></tr>
   <tr><td></td><td>
     <%= f.submit '検索する' %>
     </td></tr>
@@ -98,6 +85,7 @@
       <th><%= sort_link(@search, :guard, '防御', default_order: :desc) %></th>
       <th><%= sort_link(@search, :protect, '守護', default_order: :desc) %></th>
       <th><%= sort_link(@search, :ability, '能力', default_order: :desc) %></th>
+      <th></th>
       <th><%= sort_link(@search, :main_material_name_id, 'メイン素材', default_order: :desc) %></th>
       <th><%= sort_link(@search, :sub_material_1_name_id, 'サブ素材1', default_order: :desc) %></th>
       <th><%= sort_link(@search, :sub_material_2_name_id, 'サブ素材2', default_order: :desc) %></th>
@@ -117,7 +105,7 @@
             end
             smith.p_name.name.html_safe + "(" + e_no_f_no + ")" %></td>
         <td rowspan="2"><%= smith.party_no %></td>
-        <td><%= "作成" %></td>
+        <td>作成</td>
         <td><%= smith.result_i_no %></td>
         <td><%= smith.result.name.html_safe %></td>
         <td><%= smith.result.kind_name.name %></td>
@@ -127,6 +115,7 @@
         <td><%= smith.result.guard %></td>
         <td><%= smith.result.protect %></td>
         <td><%= smith.result.ability_name.name %></td>
+        <td style="border-left: 0.2em solid #ccc !important;"></td>
         <td><%= smith.main_material_name.name + "(INo." + sprintf("%d", smith.main_material_i_no) + ")" if smith.main_material_name %></td>
         <td><%= smith.sub_material_1_name.name + "(INo." + sprintf("%d", smith.sub_material_1_i_no) + ")" if smith.sub_material_1_name %></td>
         <td><%= smith.sub_material_2_name.name + "(INo." + sprintf("%d", smith.sub_material_2_i_no) + ")" if smith.sub_material_2_name %></td>
@@ -138,7 +127,7 @@
             link_to " 戦闘結果", "http://csyuki.sakura.ne.jp/cgi-bin/prism/result/result"+file_name+".html", :target => "_blank" %></td>
       </tr>
       <tr>
-        <td><%= "参考" %></td>
+        <td>参考</td>
         <td><%= smith.source_i_no %></td>
         <td><%= smith.source.name.html_safe %></td>
         <td><%= smith.source.kind_name.name %></td>
@@ -148,11 +137,12 @@
         <td><%= smith.source.guard %></td>
         <td><%= smith.source.protect %></td>
         <td><%= smith.source.ability_name.name %></td>
-        <td><%= sprintf("%d", smith.main_material.prize) + "Lem" if smith.main_material %></td>
-        <td><%= sprintf("%d", smith.sub_material_1.prize) + "Lem" if smith.sub_material_1 %></td>
-        <td><%= sprintf("%d", smith.sub_material_2.prize) + "Lem" if smith.sub_material_2 %></td>
-        <td><%= sprintf("%d", smith.sub_material_3.prize) + "Lem" if smith.sub_material_3 %></td>
-        <td><%= sprintf("%d", smith.sub_material_4.prize) + "Lem" if smith.sub_material_4 %></td>
+        <td style="border-left: 0.2em solid #ccc !important;">価値</td>
+        <td><%= sprintf("%d", smith.main_material.prize) if smith.main_material %></td>
+        <td><%= sprintf("%d", smith.sub_material_1.prize) if smith.sub_material_1 %></td>
+        <td><%= sprintf("%d", smith.sub_material_2.prize) if smith.sub_material_2 %></td>
+        <td><%= sprintf("%d", smith.sub_material_3.prize) if smith.sub_material_3 %></td>
+        <td><%= sprintf("%d", smith.sub_material_4.prize) if smith.sub_material_4 %></td>
       </tr>
       <tr>
       </tr>
