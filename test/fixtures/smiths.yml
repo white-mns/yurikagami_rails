@@ -1,0 +1,41 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  result_no: 1
+  generate_no: 1
+  last_result_no: 1
+  last_generate_no: 1
+  party_no: 1
+  e_no: 1
+  result_i_no: 1
+  source_i_no: 1
+  main_material_i_no: 1
+  sub_material_1_i_no: 1
+  sub_material_2_i_no: 1
+  sub_material_3_i_no: 1
+  sub_material_4_i_no: 1
+  main_material_name_id: 1
+  sub_material_1_name_id: 1
+  sub_material_2_name_id: 1
+  sub_material_3_name_id: 1
+  sub_material_4_name_id: 1
+
+two:
+  result_no: 1
+  generate_no: 1
+  last_result_no: 1
+  last_generate_no: 1
+  party_no: 1
+  e_no: 1
+  result_i_no: 1
+  source_i_no: 1
+  main_material_i_no: 1
+  sub_material_1_i_no: 1
+  sub_material_2_i_no: 1
+  sub_material_3_i_no: 1
+  sub_material_4_i_no: 1
+  main_material_name_id: 1
+  sub_material_1_name_id: 1
+  sub_material_2_name_id: 1
+  sub_material_3_name_id: 1
+  sub_material_4_name_id: 1

@@ -1,0 +1,161 @@
+<h1>Listing smiths</h1>
+
+<div class="bs-docs-section">
+  <div class="row">
+    <div class="col-md-12">
+        <p class="formNum">テキストフォームの隣に赤い破線がある項目は数値検索です。<br>
+        「/」区切りでOR、「100~」や「100~200」のように「~」をつけて範囲指定となります。<br>
+        OR指定と範囲指定を同時に行うことはできません。</p>
+        <p class="formText">テキストフォームの隣に青い太線がある項目は文字検索です。<br>
+        半角スペース区切りでAND、「/」区切りでOR、単語の前に「-」でNOT、単語の前後に「"」をつけて完全一致が使えます<br>
+        ANDとORを組み合わせた時は、ANDで区切った後にORで区切るという順番になります。</p>
+        <p><span id="example_open" class="example_select pointer" onclick="example_open(true)">入力例（クリックで開きます）<br></span>
+        <span id="example_close" class="example_select pointer" style="display:none;" onclick="example_open(false)">入力例（クリックで閉じます）<br></span>
+        <div id="example" style="display:none;">
+            <p class="formNum">数値入力で「100/105/110」と入力　→ 入力した項目の数値が100、105、110の結果がヒット<br>
+            「100~」で100以上、「~100」で100以下、「-200~100」で-200～-100の範囲指定となります。</p>
+            <p class="formText">現在地に「テネルメント」と入力　→　テネルメント、テネルメント城が検索結果にヒット<br>
+            現在地に「"テネルメント"」　→　完全一致で「テネルメント」のみ検索結果にヒット<br>
+            現在地に「-テネルメント」　→　「テネルメント」の単語を含まない目的が検索結果にヒット<br>
+            現在地に「-"テネルメント"」　→　完全一致で「テネルメント」以外が検索結果にヒット<br>
+            現在地に「テネルメント -"テネルメント"」　→　「テネルメント」が含まれる単語で完全一致の「テネルメント」以外がヒット。つまり、テネルメント城がヒットします。<br>
+            現在地に「プラインカルド城 中庭」　→　「プラインカルド城」と「中庭」の2つの単語が含まれる現在地が検索結果にヒット<br>
+            現在地に「プラインカルド城 北側/中庭」　→　「プラインカルド城」が含まれ、さらに「北側」か「中庭」の現在地が検索結果にヒット<br>
+            現在地に「-テネルメント -プラインカルド城」　→　「テネルメント」もしくは「プラインカルド」という単語が入った現在地を検索結果から除外</p></div></p>
+<%= search_form_for @search do |f| %>
+<table id="search_close" class="table table-striped table-bordered table-hover" style="display:none;" onclick="search_open(true);">
+
+  <tbody>
+  <tr><td colspan="2" style="cursor:pointer;">絞り込み検索<span style="font-size:80%">(クリックで開きます)</span></td></tr>
+  </tbody>
+</table>
+
+<table id="search_table" class="table table-striped table-bordered table-hover">
+
+  <tbody>
+  <tr><td colspan="2" style="cursor:pointer;" onclick="search_open(false);">絞り込み検索<span style="font-size:80%">(クリックで閉じます)</span></td></tr>
+  <tr><td><%= f.label :result_no_form, '更新回' %></td>
+    <td class="formNum"><%= text_field_tag :result_no_form, @result_no_form %></td></tr>
+  <tr><td><%= f.label :e_no_form, 'Eno' %></td>
+    <td class="formNum"><%= text_field_tag :e_no_form, @e_no_form %></td></tr>
+  <tr><td><%= f.label :p_name_form, 'キャラクター名' %></td>
+    <td class="formText"><%= text_field_tag :p_name_form, @p_name_form %></td></tr>
+  <tr><td></td><td><%= check_box_tag :show_main, @show_main, @show_main %><%= f.label_tag :show_main, 'メインキャラ' %>　<%= check_box_tag :show_sub, @show_sub, @show_sub %><%= f.label_tag :show_sub, 'サブキャラ' %></td></tr>
+  <tr><td><%= f.label :result_no_form, 'Result no' %></td>
+    <td class="formNum"><%= text_field_tag :result_no_form, @result_no_form %></td></tr>
+  <tr><td><%= f.label :generate_no_form, 'Generate no' %></td>
+    <td class="formNum"><%= text_field_tag :generate_no_form, @generate_no_form %></td></tr>
+  <tr><td><%= f.label :last_result_no_form, 'Last result no' %></td>
+    <td class="formNum"><%= text_field_tag :last_result_no_form, @last_result_no_form %></td></tr>
+  <tr><td><%= f.label :last_generate_no_form, 'Last generate no' %></td>
+    <td class="formNum"><%= text_field_tag :last_generate_no_form, @last_generate_no_form %></td></tr>
+  <tr><td><%= f.label :party_no_form, 'Party no' %></td>
+    <td class="formNum"><%= text_field_tag :party_no_form, @party_no_form %></td></tr>
+  <tr><td><%= f.label :e_no_form, 'E no' %></td>
+    <td class="formNum"><%= text_field_tag :e_no_form, @e_no_form %></td></tr>
+  <tr><td><%= f.label :result_i_no_form, 'Result i no' %></td>
+    <td class="formNum"><%= text_field_tag :result_i_no_form, @result_i_no_form %></td></tr>
+  <tr><td><%= f.label :source_i_no_form, 'Source i no' %></td>
+    <td class="formNum"><%= text_field_tag :source_i_no_form, @source_i_no_form %></td></tr>
+  <tr><td><%= f.label :main_material_i_no_form, 'Main material i no' %></td>
+    <td class="formNum"><%= text_field_tag :main_material_i_no_form, @main_material_i_no_form %></td></tr>
+  <tr><td><%= f.label :sub_material_1_i_no_form, 'Sub material 1 i no' %></td>
+    <td class="formNum"><%= text_field_tag :sub_material_1_i_no_form, @sub_material_1_i_no_form %></td></tr>
+  <tr><td><%= f.label :sub_material_2_i_no_form, 'Sub material 2 i no' %></td>
+    <td class="formNum"><%= text_field_tag :sub_material_2_i_no_form, @sub_material_2_i_no_form %></td></tr>
+  <tr><td><%= f.label :sub_material_3_i_no_form, 'Sub material 3 i no' %></td>
+    <td class="formNum"><%= text_field_tag :sub_material_3_i_no_form, @sub_material_3_i_no_form %></td></tr>
+  <tr><td><%= f.label :sub_material_4_i_no_form, 'Sub material 4 i no' %></td>
+    <td class="formNum"><%= text_field_tag :sub_material_4_i_no_form, @sub_material_4_i_no_form %></td></tr>
+  <tr><td><%= f.label :main_material_name_id_form, 'Main material name' %></td>
+    <td class="formNum"><%= text_field_tag :main_material_name_id_form, @main_material_name_id_form %></td></tr>
+  <tr><td><%= f.label :sub_material_1_name_id_form, 'Sub material 1 name' %></td>
+    <td class="formNum"><%= text_field_tag :sub_material_1_name_id_form, @sub_material_1_name_id_form %></td></tr>
+  <tr><td><%= f.label :sub_material_2_name_id_form, 'Sub material 2 name' %></td>
+    <td class="formNum"><%= text_field_tag :sub_material_2_name_id_form, @sub_material_2_name_id_form %></td></tr>
+  <tr><td><%= f.label :sub_material_3_name_id_form, 'Sub material 3 name' %></td>
+    <td class="formNum"><%= text_field_tag :sub_material_3_name_id_form, @sub_material_3_name_id_form %></td></tr>
+  <tr><td><%= f.label :sub_material_4_name_id_form, 'Sub material 4 name' %></td>
+    <td class="formNum"><%= text_field_tag :sub_material_4_name_id_form, @sub_material_4_name_id_form %></td></tr>
+  <tr><td></td><td>
+    <%= f.submit '検索する' %>
+    </td></tr>
+</tbody>
+</table>
+ <% end %>
+   </div>
+  </div>
+</div>
+<%= paginate(@smiths) %><br>
+ヒット数：<%= @count %>件<br><br>
+
+<div class="bs-docs-section">
+  <div class="row">
+    <div class="col-lg-12">
+<table class="table table-striped table-bordered table-hover">
+  <thead>
+    <tr>
+      <th><%= sort_link(@search, :result_no,'更新回', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :e_no,'キャラクター(Eno)', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :result_no, 'Result no', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :generate_no, 'Generate no', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :last_result_no, 'Last result no', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :last_generate_no, 'Last generate no', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :party_no, 'Party no', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :e_no, 'E no', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :result_i_no, 'Result i no', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :source_i_no, 'Source i no', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :main_material_i_no, 'Main material i no', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :sub_material_1_i_no, 'Sub material 1 i no', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :sub_material_2_i_no, 'Sub material 2 i no', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :sub_material_3_i_no, 'Sub material 3 i no', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :sub_material_4_i_no, 'Sub material 4 i no', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :main_material_name_id, 'Main material name', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :sub_material_1_name_id, 'Sub material 1 name', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :sub_material_2_name_id, 'Sub material 2 name', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :sub_material_3_name_id, 'Sub material 3 name', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :sub_material_4_name_id, 'Sub material 4 name', default_order: :desc) %></th>
+      <th colspan="1">結果リンク</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @smiths.each do |smith| %>
+      <tr>
+        <td><%= smith.result_no %></td>
+        <td><%= e_no_f_no = sprintf("%d",smith.e_no)
+            if smith.sub_no > 0 then
+                e_no_f_no += ", " + sprintf("%d",smith.sub_no)
+            end
+            smith.p_name.name.html_safe + "(" + e_no_f_no + ")" %></td>
+        <td><%= smith.result_no %></td>
+        <td><%= smith.generate_no %></td>
+        <td><%= smith.last_result_no %></td>
+        <td><%= smith.last_generate_no %></td>
+        <td><%= smith.party_no %></td>
+        <td><%= smith.e_no %></td>
+        <td><%= smith.result_i_no %></td>
+        <td><%= smith.source_i_no %></td>
+        <td><%= smith.main_material_i_no %></td>
+        <td><%= smith.sub_material_1_i_no %></td>
+        <td><%= smith.sub_material_2_i_no %></td>
+        <td><%= smith.sub_material_3_i_no %></td>
+        <td><%= smith.sub_material_4_i_no %></td>
+        <td><%= smith.main_material_name_id %></td>
+        <td><%= smith.sub_material_1_name_id %></td>
+        <td><%= smith.sub_material_2_name_id %></td>
+        <td><%= smith.sub_material_3_name_id %></td>
+        <td><%= smith.sub_material_4_name_id %></td>
+        <td><%= file_name = sprintf("%d",smith.e_no)
+            if smith.sub_no > 0 then
+                file_name += "_" + sprintf("%d",smith.sub_no)
+            end
+            link_to " 結果", "http://csyuki.sakura.ne.jp/cgi-bin/prism/result/status"+file_name+".html", :target => "_blank" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+    </div>
+  </div>
+</div>
+<%= paginate(@smiths) %>

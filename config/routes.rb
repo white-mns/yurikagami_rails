@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :smiths
   resources :new_places
   resources :current_places
   resources :place_names

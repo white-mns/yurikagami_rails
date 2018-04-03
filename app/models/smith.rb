@@ -1,0 +1,2 @@
+class Smith < ApplicationRecord
+end

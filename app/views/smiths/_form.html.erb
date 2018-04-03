@@ -1,0 +1,107 @@
+<%= form_with(model: smith, local: true) do |form| %>
+  <% if smith.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(smith.errors.count, "error") %> prohibited this smith from being saved:</h2>
+
+      <ul>
+      <% smith.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :result_no %>
+    <%= form.number_field :result_no, id: :smith_result_no %>
+  </div>
+
+  <div class="field">
+    <%= form.label :generate_no %>
+    <%= form.number_field :generate_no, id: :smith_generate_no %>
+  </div>
+
+  <div class="field">
+    <%= form.label :last_result_no %>
+    <%= form.number_field :last_result_no, id: :smith_last_result_no %>
+  </div>
+
+  <div class="field">
+    <%= form.label :last_generate_no %>
+    <%= form.number_field :last_generate_no, id: :smith_last_generate_no %>
+  </div>
+
+  <div class="field">
+    <%= form.label :party_no %>
+    <%= form.number_field :party_no, id: :smith_party_no %>
+  </div>
+
+  <div class="field">
+    <%= form.label :e_no %>
+    <%= form.number_field :e_no, id: :smith_e_no %>
+  </div>
+
+  <div class="field">
+    <%= form.label :result_i_no %>
+    <%= form.number_field :result_i_no, id: :smith_result_i_no %>
+  </div>
+
+  <div class="field">
+    <%= form.label :source_i_no %>
+    <%= form.number_field :source_i_no, id: :smith_source_i_no %>
+  </div>
+
+  <div class="field">
+    <%= form.label :main_material_i_no %>
+    <%= form.number_field :main_material_i_no, id: :smith_main_material_i_no %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sub_material_1_i_no %>
+    <%= form.number_field :sub_material_1_i_no, id: :smith_sub_material_1_i_no %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sub_material_2_i_no %>
+    <%= form.number_field :sub_material_2_i_no, id: :smith_sub_material_2_i_no %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sub_material_3_i_no %>
+    <%= form.number_field :sub_material_3_i_no, id: :smith_sub_material_3_i_no %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sub_material_4_i_no %>
+    <%= form.number_field :sub_material_4_i_no, id: :smith_sub_material_4_i_no %>
+  </div>
+
+  <div class="field">
+    <%= form.label :main_material_name_id %>
+    <%= form.number_field :main_material_name_id, id: :smith_main_material_name_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sub_material_1_name_id %>
+    <%= form.number_field :sub_material_1_name_id, id: :smith_sub_material_1_name_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sub_material_2_name_id %>
+    <%= form.number_field :sub_material_2_name_id, id: :smith_sub_material_2_name_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sub_material_3_name_id %>
+    <%= form.number_field :sub_material_3_name_id, id: :smith_sub_material_3_name_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sub_material_4_name_id %>
+    <%= form.number_field :sub_material_4_name_id, id: :smith_sub_material_4_name_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
