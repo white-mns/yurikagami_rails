@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180403022418) do
+ActiveRecord::Schema.define(version: 20180403024242) do
 
   create_table "current_places", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "result_no"
@@ -268,6 +268,7 @@ ActiveRecord::Schema.define(version: 20180403022418) do
     t.integer "last_generate_no"
     t.integer "party_no"
     t.integer "e_no"
+    t.integer "sub_no"
     t.integer "result_i_no"
     t.integer "source_i_no"
     t.integer "main_material_i_no"
@@ -282,7 +283,7 @@ ActiveRecord::Schema.define(version: 20180403022418) do
     t.integer "sub_material_4_name_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["e_no", "result_no", "generate_no"], name: "unique_eno"
+    t.index ["e_no", "result_no", "sub_no", "generate_no"], name: "unique_eno"
     t.index ["last_result_no", "last_generate_no"], name: "last_num"
     t.index ["main_material_i_no"], name: "index_smiths_on_main_material_i_no"
     t.index ["main_material_name_id"], name: "index_smiths_on_main_material_name_id"

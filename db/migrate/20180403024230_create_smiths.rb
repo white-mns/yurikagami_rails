@@ -7,6 +7,7 @@ class CreateSmiths < ActiveRecord::Migration[5.1]
       t.integer :last_generate_no
       t.integer :party_no
       t.integer :e_no
+      t.integer :sub_no
       t.integer :result_i_no
       t.integer :source_i_no
       t.integer :main_material_i_no

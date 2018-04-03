@@ -23,6 +23,7 @@ class SmithsController < ApplicationController
         reference_number_assign(params, "last_generate_no", "last_generate_no_form")
         reference_number_assign(params, "party_no", "party_no_form")
         reference_number_assign(params, "e_no", "e_no_form")
+        reference_number_assign(params, "sub_no", "sub_no_form")
         reference_number_assign(params, "result_i_no", "result_i_no_form")
         reference_number_assign(params, "source_i_no", "source_i_no_form")
         reference_number_assign(params, "main_material_i_no", "main_material_i_no_form")
@@ -43,6 +44,7 @@ class SmithsController < ApplicationController
         @last_generate_no_form = params["last_generate_no_form"]
         @party_no_form = params["party_no_form"]
         @e_no_form = params["e_no_form"]
+        @sub_no_form = params["sub_no_form"]
         @result_i_no_form = params["result_i_no_form"]
         @source_i_no_form = params["source_i_no_form"]
         @main_material_i_no_form = params["main_material_i_no_form"]
@@ -108,6 +110,6 @@ class SmithsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def smith_params
-      params.require(:smith).permit(:result_no, :generate_no, :last_result_no, :last_generate_no, :party_no, :e_no, :result_i_no, :source_i_no, :main_material_i_no, :sub_material_1_i_no, :sub_material_2_i_no, :sub_material_3_i_no, :sub_material_4_i_no, :main_material_name_id, :sub_material_1_name_id, :sub_material_2_name_id, :sub_material_3_name_id, :sub_material_4_name_id)
+      params.require(:smith).permit(:result_no, :generate_no, :last_result_no, :last_generate_no, :party_no, :e_no, :sub_no, :result_i_no, :source_i_no, :main_material_i_no, :sub_material_1_i_no, :sub_material_2_i_no, :sub_material_3_i_no, :sub_material_4_i_no, :main_material_name_id, :sub_material_1_name_id, :sub_material_2_name_id, :sub_material_3_name_id, :sub_material_4_name_id)
     end
 end

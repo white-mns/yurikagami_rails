@@ -1,7 +1,7 @@
 class AddIndexToSmith < ActiveRecord::Migration[5.1]
   def change
-    add_index :smiths, [:e_no, :result_no, :generate_no],    :unique => false, :name => 'unique_eno'
-    add_index :smiths, [:last_result_no, :last_generate_no], :unique => false, :name => 'last_num'
+    add_index :smiths, [:e_no, :result_no, :sub_no, :generate_no], :unique => false, :name => 'unique_eno'
+    add_index :smiths, [:last_result_no, :last_generate_no],       :unique => false, :name => 'last_num'
     add_index :smiths, :party_no
     add_index :smiths, :result_i_no
     add_index :smiths, :source_i_no

@@ -53,6 +53,8 @@
     <td class="formNum"><%= text_field_tag :party_no_form, @party_no_form %></td></tr>
   <tr><td><%= f.label :e_no_form, 'E no' %></td>
     <td class="formNum"><%= text_field_tag :e_no_form, @e_no_form %></td></tr>
+  <tr><td><%= f.label :sub_no_form, 'Sub no' %></td>
+    <td class="formNum"><%= text_field_tag :sub_no_form, @sub_no_form %></td></tr>
   <tr><td><%= f.label :result_i_no_form, 'Result i no' %></td>
     <td class="formNum"><%= text_field_tag :result_i_no_form, @result_i_no_form %></td></tr>
   <tr><td><%= f.label :source_i_no_form, 'Source i no' %></td>
@@ -103,6 +105,7 @@
       <th><%= sort_link(@search, :last_generate_no, 'Last generate no', default_order: :desc) %></th>
       <th><%= sort_link(@search, :party_no, 'Party no', default_order: :desc) %></th>
       <th><%= sort_link(@search, :e_no, 'E no', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :sub_no, 'Sub no', default_order: :desc) %></th>
       <th><%= sort_link(@search, :result_i_no, 'Result i no', default_order: :desc) %></th>
       <th><%= sort_link(@search, :source_i_no, 'Source i no', default_order: :desc) %></th>
       <th><%= sort_link(@search, :main_material_i_no, 'Main material i no', default_order: :desc) %></th>
@@ -134,6 +137,7 @@
         <td><%= smith.last_generate_no %></td>
         <td><%= smith.party_no %></td>
         <td><%= smith.e_no %></td>
+        <td><%= smith.sub_no %></td>
         <td><%= smith.result_i_no %></td>
         <td><%= smith.source_i_no %></td>
         <td><%= smith.main_material_i_no %></td>
