@@ -34,27 +34,26 @@
 <table id="search_table" class="table table-striped table-bordered table-hover">
 
   <tbody>
-  <tr><td colspan="2" style="cursor:pointer;" onclick="search_open(false);">絞り込み検索<span style="font-size:80%">(クリックで閉じます)</span></td></tr>
+  <tr><td colspan="4" style="cursor:pointer;" onclick="search_open(false);">絞り込み検索<span style="font-size:80%">(クリックで閉じます)</span></td></tr>
   <tr><td><%= f.label :result_no_form, '更新回' %></td>
-    <td class="formNum"><%= text_field_tag :result_no_form, @result_no_form %></td></tr>
+    <td colspan="3" class="formNum"><%= text_field_tag :result_no_form, @result_no_form %></td></tr>
   <tr><td><%= f.label :e_no_form, 'Eno' %></td>
-    <td class="formNum"><%= text_field_tag :e_no_form, @e_no_form %></td></tr>
-  <tr><td><%= f.label :p_name_form, 'キャラクター名' %></td>
+    <td class="formNum"><%= text_field_tag :e_no_form, @e_no_form %></td>
+  <td><%= f.label :p_name_form, 'キャラクター名' %></td>
     <td class="formText"><%= text_field_tag :p_name_form, @p_name_form %></td></tr>
-  <tr><td></td><td><%= check_box_tag :show_main, @show_main, @show_main %><%= f.label_tag :show_main, 'メインキャラ' %>　<%= check_box_tag :show_sub, @show_sub, @show_sub %><%= f.label_tag :show_sub, 'サブキャラ' %></td></tr>
   <tr><td><%= f.label :party_no_form, 'パーティ番号' %></td>
-    <td class="formNum"><%= text_field_tag :party_no_form, @party_no_form %></td></tr>
-  <td><%= f.label :kind_form, '作成装備の種類' %></td>
-    <td class="formText"><%= text_field_tag :result_kind_form, @result_kind_form %></td></tr>
+    <td colspan="3" class="formNum"><%= text_field_tag :party_no_form, @party_no_form %></td></tr>
+  <tr><td><%= f.label :kind_form, '作成装備の種類' %></td>
+    <td class="formText"><%= text_field_tag :result_kind_form, @result_kind_form %></td>
   <td><%= f.label :kind_form, '参考装備の種類' %></td>
     <td class="formText"><%= text_field_tag :source_kind_form, @source_kind_form %></td></tr>
-  <td><%= f.label :ability_form, '作成装備の能力' %></td>
-    <td class="formText"><%= text_field_tag :result_ability_form, @result_ability_form %></td></tr>
+  <tr><td><%= f.label :ability_form, '作成装備の能力' %></td>
+    <td colspan="3" class="formText"><%= text_field_tag :result_ability_form, @result_ability_form %></td></tr>
   <tr><td><%= f.label :main_material_name_id_form, 'メイン素材名' %></td>
-    <td class="formText"><%= text_field_tag :main_material_name_form, @main_material_name_form %></td></tr>
-  <tr><td><%= f.label :sub_material_1_name_id_form, 'サブ素材名' %></td>
+    <td class="formText"><%= text_field_tag :main_material_name_form, @main_material_name_form %></td>
+  <td><%= f.label :sub_material_1_name_id_form, 'サブ素材名' %></td>
     <td class="formText"><%= text_field_tag :sub_material_name_form, @sub_material_name_form %></td></tr>
-  <tr><td></td><td>
+  <tr><td></td><td colspan="3">
     <%= f.submit '検索する' %>
     </td></tr>
 </tbody>
