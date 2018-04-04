@@ -84,7 +84,7 @@
         <td><%= party_info.party_no %></td>
         <td><%= party_info.name %></td>
         <td><% party_info.party_members.each do |party_member| %>
-            <%= party_member.p_name.name.html_safe + "(" + sprintf("%d",party_member.e_no) + ")" %><br>
+            <%= party_member.p_name.name.html_safe + "(" + sprintf("%d",party_member.e_no) + ")" if party_member.p_name %><br>
             <% end %></td>
         <td><%= party_info.member_num %></td>
         <td><%= party_info.battler_num %></td>

@@ -84,7 +84,7 @@
         <td><%= current_place.party_no %></td>
         <td><% if current_place.party_info then 
                  current_place.party_info.party_members.each do |party_member| %>
-                   <%= party_member.p_name.name.html_safe + "(" + sprintf("%d",party_member.e_no) + ")" %><br>
+                   <%= party_member.p_name.name.html_safe + "(" + sprintf("%d",party_member.e_no) + ")" if party_member.p_name %><br>
             <%   end
                end %></td>
         <td><%= current_place.place_name.name if current_place.place_name %></td>
