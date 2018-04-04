@@ -106,14 +106,14 @@
         <td rowspan="2"><%= smith.party_no %></td>
         <td>作成</td>
         <td><%= smith.result_i_no %></td>
-        <td><%= smith.result.name.html_safe %></td>
-        <td><%= smith.result.kind_name.name %></td>
-        <td><%= smith.result.slash %></td>
-        <td><%= smith.result.charge %></td>
-        <td><%= smith.result.magic %></td>
-        <td><%= smith.result.guard %></td>
-        <td><%= smith.result.protect %></td>
-        <td><%= smith.result.ability_name.name %></td>
+        <td><%= smith.result.name.html_safe if smith.result %></td>
+        <td><%= smith.result.kind_name.name if smith.result && smith.result.kind_name %></td>
+        <td><%= smith.result.slash  if smith.result %></td>
+        <td><%= smith.result.charge if smith.result %></td>
+        <td><%= smith.result.magic if smith.result %></td>
+        <td><%= smith.result.guard if smith.result %></td>
+        <td><%= smith.result.protect if smith.result %></td>
+        <td><%= smith.result.ability_name.name if smith.result && smith.result.ability_name %></td>
         <td style="border-left: 0.2em solid #ccc !important;"></td>
         <td><%= smith.main_material_name.name + "(INo." + sprintf("%d", smith.main_material_i_no) + ")" if smith.main_material_name %></td>
         <td><%= smith.sub_material_1_name.name + "(INo." + sprintf("%d", smith.sub_material_1_i_no) + ")" if smith.sub_material_1_name %></td>
@@ -128,14 +128,14 @@
       <tr>
         <td>参考</td>
         <td><%= smith.source_i_no %></td>
-        <td><%= smith.source.name.html_safe %></td>
-        <td><%= smith.source.kind_name.name %></td>
-        <td><%= smith.source.slash %></td>
-        <td><%= smith.source.charge %></td>
-        <td><%= smith.source.magic %></td>
-        <td><%= smith.source.guard %></td>
-        <td><%= smith.source.protect %></td>
-        <td><%= smith.source.ability_name.name %></td>
+        <td><%= smith.source.name.html_safe if smith.source %></td>
+        <td><%= smith.source.kind_name.name if smith.source && smith.source.kind_name %></td>
+        <td><%= smith.source.slash if smith.source %></td>
+        <td><%= smith.source.charge if smith.source %></td>
+        <td><%= smith.source.magic if smith.source %></td>
+        <td><%= smith.source.guard if smith.source %></td>
+        <td><%= smith.source.protect if smith.source %></td>
+        <td><%= smith.source.ability_name.name if smith.source && smith.source.ability_name %></td>
         <td style="border-left: 0.2em solid #ccc !important;">価値</td>
         <td><%= sprintf("%d", smith.main_material.prize) if smith.main_material %></td>
         <td><%= sprintf("%d", smith.sub_material_1.prize) if smith.sub_material_1 %></td>
