@@ -77,13 +77,13 @@
       <th></th>
       <th><%= sort_link(@search, :result_i_no, 'INo', default_order: :desc) %></th>
       <th><%= sort_link(@search, :result_name, '名前', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :kind, '種類', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :slash, '斬撃', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :charge, '突撃', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :magic, '魔力', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :guard, '防御', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :protect, '守護', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :ability, '能力', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :result_kind, '種類', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :result_slash, '斬撃', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :result_charge, '突撃', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :result_magic, '魔力', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :result_guard, '防御', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :result_protect, '守護', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :result_ability, '能力', default_order: :desc) %></th>
       <th></th>
       <th><%= sort_link(@search, :main_material_name_id, 'メイン素材', default_order: :desc) %></th>
       <th><%= sort_link(@search, :sub_material_1_name_id, 'サブ素材1', default_order: :desc) %></th>
@@ -115,11 +115,11 @@
         <td><%= smith.result.protect if smith.result %></td>
         <td><%= smith.result.ability_name.name if smith.result && smith.result.ability_name %></td>
         <td style="border-left: 0.2em solid #ccc !important;"></td>
-        <td><%= smith.main_material_name.name + "(INo." + sprintf("%d", smith.main_material_i_no) + ")" if smith.main_material_name %></td>
-        <td><%= smith.sub_material_1_name.name + "(INo." + sprintf("%d", smith.sub_material_1_i_no) + ")" if smith.sub_material_1_name %></td>
-        <td><%= smith.sub_material_2_name.name + "(INo." + sprintf("%d", smith.sub_material_2_i_no) + ")" if smith.sub_material_2_name %></td>
-        <td><%= smith.sub_material_3_name.name + "(INo." + sprintf("%d", smith.sub_material_3_i_no) + ")" if smith.sub_material_3_name %></td>
-        <td><%= smith.sub_material_4_name.name + "(INo." + sprintf("%d", smith.sub_material_4_i_no) + ")" if smith.sub_material_4_name %></td>
+        <td><%= smith.main_material_name.name + "(INo." + sprintf("%d", smith.main_material_i_no) + ")" if smith.main_material_i_no > 0 && smith.main_material_name %></td>
+        <td><%= smith.sub_material_1_name.name + "(INo." + sprintf("%d", smith.sub_material_1_i_no) + ")" if smith.sub_material_1_i_no > 0 && smith.sub_material_1_name %></td>
+        <td><%= smith.sub_material_2_name.name + "(INo." + sprintf("%d", smith.sub_material_2_i_no) + ")" if smith.sub_material_2_i_no > 0 && smith.sub_material_2_name %></td>
+        <td><%= smith.sub_material_3_name.name + "(INo." + sprintf("%d", smith.sub_material_3_i_no) + ")" if smith.sub_material_3_i_no > 0 && smith.sub_material_3_name %></td>
+        <td><%= smith.sub_material_4_name.name + "(INo." + sprintf("%d", smith.sub_material_4_i_no) + ")" if smith.sub_material_4_i_no > 0 && smith.sub_material_4_name %></td>
         <td rowspan="2"><%= file_name = sprintf("%d",smith.e_no)
             link_to " キャラ結果", "http://csyuki.sakura.ne.jp/cgi-bin/prism/result/status"+file_name+".html", :target => "_blank" %></td>
         <td rowspan="2"><%= file_name = sprintf("%d",smith.party_no)
