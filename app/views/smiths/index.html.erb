@@ -3,7 +3,8 @@
 <div class="bs-docs-section">
   <div class="row">
     <div class="col-md-12">
-        <p>作成装備、参考装備のアイテム番号は、アイテム名をもとに割り出した推測のものです。同名の別の装備が誤判定されることがあります。</p>
+        <p>作成装備、参考装備のアイテム番号は、アイテム名をもとに割り出した推測のものです。同名の別の装備が誤判定されることがあります。<br>
+        また、作成直後に別のキャラに送品した場合、作成結果は「推測不可」と表示します。</p>
         <p class="formNum">テキストフォームの隣に赤い破線がある項目は数値検索です。<br>
         「/」区切りでOR、「100~」や「100~200」のように「~」をつけて範囲指定となります。<br>
         OR指定と範囲指定を同時に行うことはできません。</p>
@@ -106,7 +107,9 @@
         <td rowspan="2"><%= smith.party_no %></td>
         <td>作成</td>
         <td><%= smith.result_i_no %></td>
-        <td><%= smith.result.name.html_safe if smith.result %></td>
+        <td><%= smith.result.name.html_safe if smith.result %>
+            <%= "推測不可" if smith.result_i_no == 0 %>
+            <%= "作成失敗" if smith.result_i_no == -1 %></td>
         <td><%= smith.result.kind_name.name if smith.result && smith.result.kind_name %></td>
         <td><%= smith.result.slash  if smith.result %></td>
         <td><%= smith.result.charge if smith.result %></td>
@@ -128,14 +131,16 @@
       <tr>
         <td>参考</td>
         <td><%= smith.source_i_no %></td>
-        <td><%= smith.source.name.html_safe if smith.source %></td>
-        <td><%= smith.source.kind_name.name if smith.source && smith.source.kind_name %></td>
-        <td><%= smith.source.slash if smith.source %></td>
-        <td><%= smith.source.charge if smith.source %></td>
-        <td><%= smith.source.magic if smith.source %></td>
-        <td><%= smith.source.guard if smith.source %></td>
-        <td><%= smith.source.protect if smith.source %></td>
-        <td><%= smith.source.ability_name.name if smith.source && smith.source.ability_name %></td>
+        <% source = smith.source ? smith.source : smith.source_last %>
+        <td><%= source.name.html_safe if source %>
+            <%= "推測不可" if smith.source_i_no == 0 %></td>
+        <td><%= source.kind_name.name if source && source.kind_name %></td>
+        <td><%= source.slash   if source %></td>
+        <td><%= source.charge  if source %></td>
+        <td><%= source.magic   if source %></td>
+        <td><%= source.guard   if source %></td>
+        <td><%= source.protect if source %></td>
+        <td><%= source.ability_name.name if source && source.ability_name %></td>
         <td style="border-left: 0.2em solid #ccc !important;">価値</td>
         <td><%= sprintf("%d", smith.main_material.prize) if smith.main_material %></td>
         <td><%= sprintf("%d", smith.sub_material_1.prize) if smith.sub_material_1 %></td>

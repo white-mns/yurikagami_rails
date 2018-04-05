@@ -5,8 +5,8 @@ class SmithsController < ApplicationController
   # GET /smiths
   def index
     param_set
-    @count	= Smith.includes(:p_name, :main_material_name, :sub_material_1_name, :sub_material_2_name, :sub_material_3_name, :sub_material_4_name, :main_material, :sub_material_1, :sub_material_2, :sub_material_3, :sub_material_4, :result, source: [:kind_name, :ability_name]).search(params[:q]).result.count()
-    @search	= Smith.includes(:p_name, :main_material_name, :sub_material_1_name, :sub_material_2_name, :sub_material_3_name, :sub_material_4_name, :main_material, :sub_material_1, :sub_material_2, :sub_material_3, :sub_material_4, :result, source: [:kind_name, :ability_name]).page(params[:page]).search(params[:q])
+    @count	= Smith.includes(:p_name, :main_material_name, :sub_material_1_name, :sub_material_2_name, :sub_material_3_name, :sub_material_4_name, :main_material, :sub_material_1, :sub_material_2, :sub_material_3, :sub_material_4, :result, :source_last, source: [:kind_name, :ability_name]).search(params[:q]).result.count()
+    @search	= Smith.includes(:p_name, :main_material_name, :sub_material_1_name, :sub_material_2_name, :sub_material_3_name, :sub_material_4_name, :main_material, :sub_material_1, :sub_material_2, :sub_material_3, :sub_material_4, :result, :source_last, source: [:kind_name, :ability_name]).page(params[:page]).search(params[:q])
     @search.sorts = 'id asc' if @search.sorts.empty?
     @smiths	= @search.result.per(50)
   end
