@@ -19,7 +19,7 @@ Rails:4.2.10
 ・Railsの使い方を調べてなんやかんやして自分のRailsアプリが動くようにします。  
 ・このソースコードをダウンロードします。  
 
-    git clone git://github.com/white-mns/yojouhan_rails.git
+    git clone git://github.com/white-mns/yurikagami_rails.git
 
 ・動かします。  
 
