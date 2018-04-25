@@ -1,0 +1,2 @@
+module NewEnemiesHelper
+end

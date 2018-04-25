@@ -1,0 +1,32 @@
+<%= form_with(model: new_enemy, local: true) do |form| %>
+  <% if new_enemy.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(new_enemy.errors.count, "error") %> prohibited this new_enemy from being saved:</h2>
+
+      <ul>
+      <% new_enemy.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :result_no %>
+    <%= form.number_field :result_no, id: :new_enemy_result_no %>
+  </div>
+
+  <div class="field">
+    <%= form.label :generate_no %>
+    <%= form.number_field :generate_no, id: :new_enemy_generate_no %>
+  </div>
+
+  <div class="field">
+    <%= form.label :enemy %>
+    <%= form.number_field :enemy, id: :new_enemy_enemy %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

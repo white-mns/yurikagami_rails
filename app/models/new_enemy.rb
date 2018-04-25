@@ -1,0 +1,2 @@
+class NewEnemy < ApplicationRecord
+end
