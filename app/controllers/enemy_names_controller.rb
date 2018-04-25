@@ -5,29 +5,20 @@ class EnemyNamesController < ApplicationController
   # GET /enemy_names
   def index
     param_set
-    @count	= EnemyName.includes([:p_name]).search(params[:q]).result.count()
-    @search	= EnemyName.includes([:p_name]).page(params[:page]).search(params[:q])
+    @count	= EnemyName.search(params[:q]).result.count()
+    @search	= EnemyName.page(params[:page]).search(params[:q])
     @search.sorts = 'id asc' if @search.sorts.empty?
     @enemy_names	= @search.result.per(50)
   end
 
   def param_set
-    @last_result = Name.maximum('result_no')
-    params["result_no_form"] = params["result_no_form"] ? params["result_no_form"] : sprintf('%d',@last_result)
     params[:q]  = params[:q] ? params[:q] : {}
     
-    reference_text_assign(params, "p_name_name", "p_name_form")
-        reference_number_assign(params, "enemy_id", "enemy_id_form")
-        reference_number_assign(params, "name", "name_form")
-        
-    @p_name_form = params["p_name_form"]
-        @enemy_id_form = params["enemy_id_form"]
-        @name_form = params["name_form"]
-        
-    show_sub_hash =  {"show_main"=> @show_main,"show_sub" => @show_sub}
-    sub_no_set(params, show_sub_hash)
-    @show_main = show_sub_hash["show_main"]
-    @show_sub = show_sub_hash["show_sub"]
+    reference_number_assign(params, "enemy_id", "enemy_id_form")
+    reference_text_assign(params, "name", "name_form")
+    
+    @enemy_id_form = params["enemy_id_form"]
+    @name_form = params["name_form"]
   end
   # GET /enemy_names/1
   #def show
