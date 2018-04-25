@@ -1,0 +1,2 @@
+module EnemyNamesHelper
+end
