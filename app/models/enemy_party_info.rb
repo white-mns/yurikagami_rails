@@ -1,0 +1,2 @@
+class EnemyPartyInfo < ApplicationRecord
+end
