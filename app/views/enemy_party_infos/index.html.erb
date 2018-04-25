@@ -48,6 +48,8 @@
     <td class="formNum"><%= text_field_tag :enemy_num_form, @enemy_num_form %></td></tr>
   <tr><td><%= f.label :enemy_form, '敵名' %></td>
     <td colspan="3" class="formText"><%= text_field_tag :enemy_form, @enemy_form %></td></tr>
+  <tr><td><%= f.label :place_form, '現在地' %></td>
+    <td colspan="3" class="formText"><%= text_field_tag :place_form, @place_form %></td></tr>
   <tr><td></td><td colspan="3">
     <%= f.submit '検索する' %>
     </td></tr>
@@ -68,10 +70,11 @@
     <tr>
       <th><%= sort_link(@search, :result_no,'更新回', default_order: :desc) %></th>
       <th><%= sort_link(@search, :party_no, 'Pno', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :party_info_party_members_e_no,'キャラクター(Eno)', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :party_info_battler_num, '参戦', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :current_place_party_info_party_members_e_no,'キャラクター(Eno)', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :current_place_party_info_battler_num, '参戦', default_order: :desc) %></th>
       <th><%= sort_link(@search, :enemy_num, '敵数', default_order: :desc) %></th>
       <th><%= sort_link(@search, :enemy_members_enemy_name_name, '敵名', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :current_place_place_name_name, '現在地', default_order: :desc) %></th>
       <th colspan="1">結果リンク</th>
     </tr>
   </thead>
@@ -81,18 +84,19 @@
       <tr>
         <td><%= enemy_party_info.result_no %></td>
         <td><%= enemy_party_info.party_no %></td>
-        <td><% if enemy_party_info.party_info then 
-                 enemy_party_info.party_info.party_members.each do |party_member| %>
+        <td><% if enemy_party_info.current_place.party_info then 
+                 enemy_party_info.current_place.party_info.party_members.each do |party_member| %>
                    <%= party_member.p_name.name.html_safe + "(" + sprintf("%d",party_member.e_no) + ")" if party_member.p_name %><br>
             <%   end
                end %></td>
-        <td><%= enemy_party_info.party_info.battler_num if enemy_party_info.party_info %></td>
+        <td><%= enemy_party_info.current_place.party_info.battler_num if enemy_party_info.current_place.party_info %></td>
         <td><%= enemy_party_info.enemy_num %></td>
         <td><% if enemy_party_info.enemy_members then 
                  enemy_party_info.enemy_members.each do |enemy_member| %>
                    <%= enemy_member.enemy_name.name + " " + sprintf("%s", enemy_member.suffix) if enemy_member.enemy_name %><br>
             <%   end
                end %></td>
+        <td><%= enemy_party_info.current_place.place_name.name if enemy_party_info.current_place.place_name %></td>
         <td><%= file_name = sprintf("%d",enemy_party_info.party_no)
             link_to " 結果", "http://csyuki.sakura.ne.jp/cgi-bin/prism/result/result"+file_name+".html", :target => "_blank" %></td>
       </tr>
