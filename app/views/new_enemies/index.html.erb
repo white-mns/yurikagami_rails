@@ -66,8 +66,8 @@
       <tr>
         <td><%= new_enemy.result_no %></td>
         <td><%= result_num = sprintf("%d", new_enemy.result_no)
-                enemy_name = new_enemy.enemy_name.name
-                link_to new_enemy.enemy_name.name, enemy_party_infos_path + "?result_no_form=" + result_num + "&enemy_form=\"" + enemy_name + "\"" %></td>
+                enemy_name = new_enemy.enemy_name ? new_enemy.enemy_name.name : ""
+                link_to enemy_name, enemy_party_infos_path + "?result_no_form=" + result_num + "&enemy_form=\"" + enemy_name + "\"" %></td>
       </tr>
     <% end %>
   </tbody>
