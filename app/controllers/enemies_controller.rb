@@ -19,7 +19,7 @@ class EnemiesController < ApplicationController
     reference_number_assign(params, "result_no", "result_no_form")
     reference_number_assign(params, "generate_no", "generate_no_form")
     reference_number_assign(params, "party_no", "party_no_form")
-    reference_text_assign(params, "enemy", "enemy_form")
+    reference_text_assign(params, "enemy_name_name", "enemy_form")
     reference_text_assign(params, "suffix", "suffix_form")
     
     @result_no_form = params["result_no_form"]
