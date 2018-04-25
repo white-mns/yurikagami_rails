@@ -21,7 +21,7 @@
 	    <ul>
           <li><%= link_to "パーティ情報一覧", party_infos_path %></li>
           <li><%= link_to "現在地一覧", current_places_path %></li>
-          <li><%= link_to "敵情報一覧", enemy_party_infos_path %></li>
+          <li><%= link_to "出現敵一覧", enemy_party_infos_path %></li>
           <li><%= link_to "装備作成一覧", smiths_path %></li>
         </ul>
         <li>新出データ</li>
@@ -36,6 +36,11 @@
     <div class="well well-sm">
       <h2>更新履歴</h2>
       <ul>
+        <li>2018/4/25</li>
+        <ul>
+          <li><%= link_to "出現敵一覧", enemy_party_infos_path %>を公開</li>
+          <li><%= link_to "新出敵一覧", new_enemies_path %>を公開</li>
+        </ul>
         <li>2018/4/14</li>
         <ul>
           <li><%= link_to "プロフィール一覧", profiles_path %>の通り名と肩書が逆になっていた不具合</li>
