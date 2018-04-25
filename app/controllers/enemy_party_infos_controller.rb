@@ -5,8 +5,8 @@ class EnemyPartyInfosController < ApplicationController
   # GET /enemy_party_infos
   def index
     param_set
-    @count	= EnemyPartyInfo.includes([:p_name]).search(params[:q]).result.count()
-    @search	= EnemyPartyInfo.includes([:p_name]).page(params[:page]).search(params[:q])
+    @count	= EnemyPartyInfo.includes(enemy_members: :enemy_name, party_info: [party_members: :p_name]).group(:party_no).search(params[:q]).result.count().keys().size
+    @search	= EnemyPartyInfo.includes(enemy_members: :enemy_name, party_info: [party_members: :p_name]).group(:party_no).page(params[:page]).search(params[:q])
     @search.sorts = 'id asc' if @search.sorts.empty?
     @enemy_party_infos	= @search.result.per(50)
   end
@@ -16,17 +16,23 @@ class EnemyPartyInfosController < ApplicationController
     params["result_no_form"] = params["result_no_form"] ? params["result_no_form"] : sprintf('%d',@last_result)
     params[:q]  = params[:q] ? params[:q] : {}
     
-    reference_text_assign(params, "p_name_name", "p_name_form")
-        reference_number_assign(params, "result_no", "result_no_form")
-        reference_number_assign(params, "generate_no", "generate_no_form")
-        reference_number_assign(params, "party_no", "party_no_form")
-        reference_number_assign(params, "enemy_num", "enemy_num_form")
-        
+    reference_number_assign(params, "result_no", "result_no_form")
+    reference_number_assign(params, "generate_no", "generate_no_form")
+    reference_number_assign(params, "party_no", "party_no_form")
+    reference_number_assign(params, "enemy_num", "enemy_num_form")
+    reference_text_assign(params, "party_info_party_members_p_name_name", "p_name_form")
+    reference_number_assign(params, "party_info_party_members_e_no", "e_no_form")
+    reference_number_assign(params, "party_info_battler_num", "battler_num_form")
+    reference_text_assign(params, "enemy_members_enemy_name_name", "enemy_form")
+    
+    @result_no_form = params["result_no_form"]
+    @generate_no_form = params["generate_no_form"]
+    @party_no_form = params["party_no_form"]
+    @enemy_num_form = params["enemy_num_form"]
     @p_name_form = params["p_name_form"]
-        @result_no_form = params["result_no_form"]
-        @generate_no_form = params["generate_no_form"]
-        @party_no_form = params["party_no_form"]
-        @enemy_num_form = params["enemy_num_form"]
+    @e_no_form = params["e_no_form"]
+    @enemy_form = params["enemy_form"]
+    @battler_num_form = params["battler_num_form"]
         
     show_sub_hash =  {"show_main"=> @show_main,"show_sub" => @show_sub}
     sub_no_set(params, show_sub_hash)
