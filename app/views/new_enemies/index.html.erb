@@ -1,4 +1,4 @@
-<h1>Listing new_enemies</h1>
+<h1>新出敵一覧</h1>
 
 <div class="bs-docs-section">
   <div class="row">
@@ -36,17 +36,8 @@
   <tr><td colspan="2" style="cursor:pointer;" onclick="search_open(false);">絞り込み検索<span style="font-size:80%">(クリックで閉じます)</span></td></tr>
   <tr><td><%= f.label :result_no_form, '更新回' %></td>
     <td class="formNum"><%= text_field_tag :result_no_form, @result_no_form %></td></tr>
-  <tr><td><%= f.label :e_no_form, 'Eno' %></td>
-    <td class="formNum"><%= text_field_tag :e_no_form, @e_no_form %></td></tr>
-  <tr><td><%= f.label :p_name_form, 'キャラクター名' %></td>
-    <td class="formText"><%= text_field_tag :p_name_form, @p_name_form %></td></tr>
-  <tr><td></td><td><%= check_box_tag :show_main, @show_main, @show_main %><%= f.label_tag :show_main, 'メインキャラ' %>　<%= check_box_tag :show_sub, @show_sub, @show_sub %><%= f.label_tag :show_sub, 'サブキャラ' %></td></tr>
-  <tr><td><%= f.label :result_no_form, 'Result no' %></td>
-    <td class="formNum"><%= text_field_tag :result_no_form, @result_no_form %></td></tr>
-  <tr><td><%= f.label :generate_no_form, 'Generate no' %></td>
-    <td class="formNum"><%= text_field_tag :generate_no_form, @generate_no_form %></td></tr>
-  <tr><td><%= f.label :enemy_form, 'Enemy' %></td>
-    <td class="formNum"><%= text_field_tag :enemy_form, @enemy_form %></td></tr>
+  <tr><td><%= f.label :enemy_form, '敵名' %></td>
+    <td class="formText"><%= text_field_tag :enemy_form, @enemy_form %></td></tr>
   <tr><td></td><td>
     <%= f.submit '検索する' %>
     </td></tr>
@@ -66,11 +57,7 @@
   <thead>
     <tr>
       <th><%= sort_link(@search, :result_no,'更新回', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :e_no,'キャラクター(Eno)', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :result_no, 'Result no', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :generate_no, 'Generate no', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :enemy, 'Enemy', default_order: :desc) %></th>
-      <th colspan="1">結果リンク</th>
+      <th><%= sort_link(@search, :enemy_name_name, '敵名', default_order: :desc) %></th>
     </tr>
   </thead>
 
@@ -78,19 +65,9 @@
     <% @new_enemies.each do |new_enemy| %>
       <tr>
         <td><%= new_enemy.result_no %></td>
-        <td><%= e_no_f_no = sprintf("%d",new_enemy.e_no)
-            if new_enemy.sub_no > 0 then
-                e_no_f_no += ", " + sprintf("%d",new_enemy.sub_no)
-            end
-            new_enemy.p_name.name.html_safe + "(" + e_no_f_no + ")" %></td>
-        <td><%= new_enemy.result_no %></td>
-        <td><%= new_enemy.generate_no %></td>
-        <td><%= new_enemy.enemy %></td>
-        <td><%= file_name = sprintf("%d",new_enemy.e_no)
-            if new_enemy.sub_no > 0 then
-                file_name += "_" + sprintf("%d",new_enemy.sub_no)
-            end
-            link_to " 結果", "http://csyuki.sakura.ne.jp/cgi-bin/prism/result/status"+file_name+".html", :target => "_blank" %></td>
+        <td><%= result_num = sprintf("%d", new_enemy.result_no)
+                enemy_name = new_enemy.enemy_name.name
+                link_to new_enemy.enemy_name.name, enemy_party_infos_path + "?result_no_form=" + result_num + "&enemy_form=\"" + enemy_name + "\"" %></td>
       </tr>
     <% end %>
   </tbody>
