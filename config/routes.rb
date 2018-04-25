@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :enemies
   resources :enemy_names
   resources :smiths
   resources :new_places
