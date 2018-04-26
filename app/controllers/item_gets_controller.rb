@@ -5,8 +5,8 @@ class ItemGetsController < ApplicationController
   # GET /item_gets
   def index
     param_set
-    @count	= ItemGet.includes([:p_name, :enemy_name]).search(params[:q]).result.count()
-    @search	= ItemGet.includes([:p_name, :enemy_name]).page(params[:page]).search(params[:q])
+    @count	= ItemGet.includes([:p_name, :enemy_name, :item_data, current_place: :place_name]).search(params[:q]).result.count()
+    @search	= ItemGet.includes([:p_name, :enemy_name, :item_data, current_place: :place_name]).page(params[:page]).search(params[:q])
     @search.sorts = 'id asc' if @search.sorts.empty?
     @item_gets	= @search.result.per(50)
   end
@@ -25,6 +25,8 @@ class ItemGetsController < ApplicationController
     reference_text_assign(params, "enemy_name_name", "enemy_form")
     reference_text_assign(params, "item", "item_form")
     reference_number_assign(params, "is_pk", "is_pk_form")
+    reference_number_assign(params, "item_data_prize", "prize_form")
+    reference_text_assign(params, "current_place_place_name_name", "place_form")
         
     @p_name_form = params["p_name_form"]
     @result_no_form = params["result_no_form"]
@@ -35,6 +37,8 @@ class ItemGetsController < ApplicationController
     @enemy_form = params["enemy_form"]
     @item_form = params["item_form"]
     @is_pk_form = params["is_pk_form"]
+    @prize_form = params["prize_form"]
+    @place_form = params["place_form"]
         
     show_sub_hash =  {"show_main"=> @show_main,"show_sub" => @show_sub}
     sub_no_set(params, show_sub_hash)

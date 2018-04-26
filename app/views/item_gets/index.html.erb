@@ -3,6 +3,9 @@
 <div class="bs-docs-section">
   <div class="row">
     <div class="col-md-12">
+        <p>アイテムの価値は、アイテム名をもとに割り出した推測のものです。<br>
+        別のキャラからドロップアイテムと同名のアイテムを送品されていた場合、間違った価値が表示されることがあります。<br>
+        また、新規にアイテム枠に入ったものだけ判定しているため、入れ替わりで同じ番号に同じアイテムが入ると「推測不可」と表示されます。</p>
         <p class="formNum">テキストフォームの隣に赤い破線がある項目は数値検索です。<br>
         「/」区切りでOR、「100~」や「100~200」のように「~」をつけて範囲指定となります。<br>
         OR指定と範囲指定を同時に行うことはできません。</p>
@@ -43,9 +46,13 @@
   <tr><td><%= f.label :party_no_form, 'パーティ番号' %></td>
     <td colspan="3" class="formNum"><%= text_field_tag :party_no_form, @party_no_form %></td></tr>
   <tr><td><%= f.label :enemy_form, '敵名' %></td>
-    <td class="formText"><%= text_field_tag :enemy_form, @enemy_form %></td>
-  <td><%= f.label :item_form, 'アイテム名' %></td>
-    <td class="formText"><%= text_field_tag :item_form, @item_form %></td></tr>
+    <td colspan="3" class="formText"><%= text_field_tag :enemy_form, @enemy_form %></td></tr>
+  <tr><td><%= f.label :item_form, 'アイテム名' %></td>
+    <td class="formText"><%= text_field_tag :item_form, @item_form %></td>
+  <td><%= f.label :prize_form, '価値 (推測)' %></td>
+    <td class="formNum"><%= text_field_tag :prize_form, @prize_form %></td>
+  <tr><td><%= f.label :place_form, '現在地' %></td>
+    <td colspan="3" class="formText"><%= text_field_tag :place_form, @place_form %></td></tr>
   <tr><td><%= f.label :is_pk_form, '戦闘種別' %></td><td colspan="3"><%= check_box_tag :no_pk, @no_pk, @no_pk %><%= f.label_tag :no_pk, '通常戦' %>　<%= check_box_tag :is_pk, @is_pk, @is_pk %><%= f.label_tag :is_pk, 'PK戦' %></td></tr>
   <tr><td></td><td colspan="3">
     <%= f.submit '検索する' %>
@@ -70,6 +77,8 @@
       <th><%= sort_link(@search, :party_no, 'Pno', default_order: :desc) %></th>
       <th><%= sort_link(@search, :enemy, '敵名', default_order: :desc) %></th>
       <th><%= sort_link(@search, :item, 'アイテム', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :item_data_prize, '価値', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :current_place_place_name_name, '現在地', default_order: :desc) %></th>
       <th><%= sort_link(@search, :is_pk, '戦闘種別', default_order: :desc) %></th>
       <th colspan="2">結果リンク</th>
     </tr>
@@ -87,6 +96,8 @@
         <td><%= item_get.party_no %></td>
         <td><%= item_get.enemy_name.name if item_get.enemy_name %></td>
         <td><%= item_get.item %></td>
+        <td><%= if item_get.item_data then sprintf("%d", item_get.item_data.prize) else "推測不可" end %></td>
+        <td><%= item_get.current_place.place_name.name if item_get.current_place.place_name %></td>
         <td><%= "PK" if item_get.is_pk == 1%></td>
         <td><%= file_name = sprintf("%d",item_get.e_no)
             if item_get.sub_no > 0 then
