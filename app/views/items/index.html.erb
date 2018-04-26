@@ -68,8 +68,6 @@
   <td><%= f.label :ability_form, '能力' %></td>
     <td class="formText"><%= text_field_tag :ability_form, @ability_form %></td></tr>
   <tr><td></td><td colspan="3"><%= check_box_tag :is_equiped, @is_equiped, @is_equiped %><%= f.label_tag :is_equiped, '装備中' %>　<%= check_box_tag :no_equiped, @no_equiped, @no_equiped %><%= f.label_tag :no_equiped, '未装備' %></td></tr>
-  <tr><td><%= f.label :equip_form, '装備' %></td>
-    <td colspan="3" class="formNum"><%= text_field_tag :equip_form, @equip_form %></td></tr>
   <tr><td></td><td colspan="3">
     <%= f.submit '検索する' %>
     </td></tr>
