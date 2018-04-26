@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :item_gets
   resources :new_enemies
   resources :enemy_party_infos
   resources :enemies

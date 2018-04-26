@@ -1,0 +1,2 @@
+class ItemGet < ApplicationRecord
+end
