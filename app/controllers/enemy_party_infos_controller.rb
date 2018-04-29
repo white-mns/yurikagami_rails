@@ -35,6 +35,10 @@ class EnemyPartyInfosController < ApplicationController
     @enemy_form = params["enemy_form"]
     @battler_num_form = params["battler_num_form"]
     @place_form = params["place_form"]
+    @money_form = params["money_form"]
+    @sundries_form = params["sundries_form"]
+    @exp_form = params["exp_form"]
+    @is_pk_form = params["is_pk_form"]
         
     show_sub_hash =  {"show_main"=> @show_main,"show_sub" => @show_sub}
     sub_no_set(params, show_sub_hash)

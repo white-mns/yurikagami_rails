@@ -5,8 +5,8 @@ class BattleResultsController < ApplicationController
   # GET /battle_results
   def index
     param_set
-    @count	= BattleResult.search(params[:q]).result.count()
-    @search	= BattleResult.page(params[:page]).search(params[:q])
+    @count	= BattleResult.includes(:income, enemy_party_info: [enemy_members: :enemy_name, current_place: [:place_name, party_info: [party_members: :p_name]]]).group(:party_no).search(params[:q]).result.count().keys().size()
+    @search	= BattleResult.includes(:income, enemy_party_info: [enemy_members: :enemy_name, current_place: [:place_name, party_info: [party_members: :p_name]]]).group(:party_no).page(params[:page]).search(params[:q])
     @search.sorts = 'id asc' if @search.sorts.empty?
     @battle_results	= @search.result.per(50)
   end
@@ -21,12 +21,32 @@ class BattleResultsController < ApplicationController
     reference_number_assign(params, "generate_no", "generate_no_form")
     reference_number_assign(params, "party_no", "party_no_form")
     reference_number_assign(params, "battle_result", "battle_result_form")
+    reference_number_assign(params, "enemy_party_info_enemy_num", "enemy_num_form")
+    reference_text_assign(params, "enemy_party_info_current_place_party_info_party_members_p_name_name", "p_name_form")
+    reference_number_assign(params, "enemy_party_info_current_place_party_info_party_members_e_no", "e_no_form")
+    reference_number_assign(params, "enemy_party_info_current_place_party_info_battler_num", "battler_num_form")
+    reference_text_assign(params, "enemy_party_info_current_place_place_name_name", "place_form")
+    reference_text_assign(params, "enemy_party_info_enemy_members_enemy_name_name", "enemy_form")
+    reference_number_assign(params, "income_money", "money_form")
+    reference_number_assign(params, "income_sundries", "sundries_form")
+    reference_number_assign(params, "income_exp", "exp_form")
+    reference_number_assign(params, "income_is_pk", "is_pk_form")
         
     @p_name_form = params["p_name_form"]
     @result_no_form = params["result_no_form"]
     @generate_no_form = params["generate_no_form"]
     @party_no_form = params["party_no_form"]
     @battle_result_form = params["battle_result_form"]
+    @enemy_num_form = params["enemy_num_form"]
+    @p_name_form = params["p_name_form"]
+    @e_no_form = params["e_no_form"]
+    @enemy_form = params["enemy_form"]
+    @battler_num_form = params["battler_num_form"]
+    @place_form = params["place_form"]
+    @sub_no_form = params["sub_no_form"]
+    @money_form = params["money_form"]
+    @sundries_form = params["sundries_form"]
+    @exp_form = params["exp_form"]
         
     show_sub_hash =  {"show_main"=> @show_main,"show_sub" => @show_sub}
     sub_no_set(params, show_sub_hash)
@@ -39,13 +59,28 @@ class BattleResultsController < ApplicationController
     if params["is_lose"] == "on" then params[:q]["battle_result_eq_any"].push(-1) end
     
     @is_lose = params["is_lose"]
-    @is_draw  = params["is_draw"]
+    @is_draw = params["is_draw"]
     @is_win  = params["is_win"]
 
     if params[:q]["battle_result_eq_any"].size == 0 then 
         @is_lose = "on"
         @is_draw = "on"
         @is_win  = "on"
+    end
+
+    params[:q]["income_is_pk_eq_any"] = []
+    if params["is_enemy"] == "on" then params[:q]["income_is_pk_eq_any"].push(0) end
+    if params["is_practice"] == "on" then params[:q]["income_is_pk_eq_any"].push(1) end
+    if params["is_pk"] == "on" then params[:q]["income_is_pk_eq_any"].push(2) end
+    
+    @is_pk = params["is_pk"]
+    @is_enemy  = params["is_enemy"]
+    @is_practice  = params["is_practice"]
+
+    if params[:q]["income_is_pk_eq_any"].size == 0 then 
+        @is_pk        = "on"
+        @is_enemy     = "on"
+        @is_practice  = "on"
     end
   end
   # GET /battle_results/1
