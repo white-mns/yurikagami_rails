@@ -97,14 +97,14 @@
       <tr>
         <td><%= battle_result.result_no %></td>
         <td><%= battle_result.party_no %></td>
-        <td><% if battle_result.enemy_party_info.current_place.party_info then 
+        <td><% if battle_result.enemy_party_info && battle_result.enemy_party_info.current_place && battle_result.enemy_party_info.current_place.party_info then 
                  battle_result.enemy_party_info.current_place.party_info.party_members.each do |party_member| %>
                    <%= party_member.p_name.name.html_safe + "(" + sprintf("%d",party_member.e_no) + ")" if party_member.p_name %><br>
             <%   end
                end %></td>
-        <td><%= battle_result.enemy_party_info.current_place.party_info.battler_num if battle_result.enemy_party_info.current_place.party_info %></td>
-        <td><%= battle_result.enemy_party_info.enemy_num %></td>
-        <td><% if battle_result.enemy_party_info.enemy_members then 
+        <td><%= battle_result.enemy_party_info.current_place.party_info.battler_num if battle_result.enemy_party_info && battle_result.enemy_party_info.current_place.party_info %></td>
+        <td><%= battle_result.enemy_party_info.enemy_num if battle_result.enemy_party_info %></td>
+        <td><% if battle_result.enemy_party_info && battle_result.enemy_party_info.enemy_members then 
                  battle_result.enemy_party_info.enemy_members.each do |enemy_member| %>
                    <%= enemy_member.enemy_name.name + " " + sprintf("%s", enemy_member.suffix) if enemy_member.enemy_name %><br>
             <%   end
@@ -112,7 +112,7 @@
         <td><%= battle_result.income.money if battle_result.income %></td>
         <td><%= battle_result.income.sundries if battle_result.income%></td>
         <td><%= battle_result.income.exp if battle_result.income%></td>
-        <td><%= battle_result.enemy_party_info.current_place.place_name.name if battle_result.enemy_party_info.current_place.place_name %></td>
+        <td><%= battle_result.enemy_party_info.current_place.place_name.name if battle_result.enemy_party_info && battle_result.enemy_party_info.current_place.place_name %></td>
         <td><%= "通常" if battle_result.income && battle_result.income.is_pk == 0 %><%= "練習" if battle_result.income && battle_result.income.is_pk == 1 %><%= "PK" if battle_result.income && battle_result.income.is_pk == 2 %></td>
         <td><%= "勝利" if battle_result.battle_result == 1 %><%= "引分" if battle_result.battle_result == 0 %><%= "敗北" if battle_result.battle_result == -1 %></td>
         <td><%= file_name = sprintf("%d",battle_result.party_no)
