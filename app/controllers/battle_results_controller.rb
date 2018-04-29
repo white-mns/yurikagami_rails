@@ -5,8 +5,8 @@ class BattleResultsController < ApplicationController
   # GET /battle_results
   def index
     param_set
-    @count	= BattleResult.includes([:p_name]).search(params[:q]).result.count()
-    @search	= BattleResult.includes([:p_name]).page(params[:page]).search(params[:q])
+    @count	= BattleResult.search(params[:q]).result.count()
+    @search	= BattleResult.page(params[:page]).search(params[:q])
     @search.sorts = 'id asc' if @search.sorts.empty?
     @battle_results	= @search.result.per(50)
   end
@@ -17,21 +17,36 @@ class BattleResultsController < ApplicationController
     params[:q]  = params[:q] ? params[:q] : {}
     
     reference_text_assign(params, "p_name_name", "p_name_form")
-        reference_number_assign(params, "result_no", "result_no_form")
-        reference_number_assign(params, "generate_no", "generate_no_form")
-        reference_number_assign(params, "party_no", "party_no_form")
-        reference_number_assign(params, "battle_result", "battle_result_form")
+    reference_number_assign(params, "result_no", "result_no_form")
+    reference_number_assign(params, "generate_no", "generate_no_form")
+    reference_number_assign(params, "party_no", "party_no_form")
+    reference_number_assign(params, "battle_result", "battle_result_form")
         
     @p_name_form = params["p_name_form"]
-        @result_no_form = params["result_no_form"]
-        @generate_no_form = params["generate_no_form"]
-        @party_no_form = params["party_no_form"]
-        @battle_result_form = params["battle_result_form"]
+    @result_no_form = params["result_no_form"]
+    @generate_no_form = params["generate_no_form"]
+    @party_no_form = params["party_no_form"]
+    @battle_result_form = params["battle_result_form"]
         
     show_sub_hash =  {"show_main"=> @show_main,"show_sub" => @show_sub}
     sub_no_set(params, show_sub_hash)
     @show_main = show_sub_hash["show_main"]
     @show_sub = show_sub_hash["show_sub"]
+
+    params[:q]["battle_result_eq_any"] = []
+    if params["is_draw"] == "on" then params[:q]["battle_result_eq_any"].push(0) end
+    if params["is_win"] == "on" then params[:q]["battle_result_eq_any"].push(1) end
+    if params["is_lose"] == "on" then params[:q]["battle_result_eq_any"].push(-1) end
+    
+    @is_lose = params["is_lose"]
+    @is_draw  = params["is_draw"]
+    @is_win  = params["is_win"]
+
+    if params[:q]["battle_result_eq_any"].size == 0 then 
+        @is_lose = "on"
+        @is_draw = "on"
+        @is_win  = "on"
+    end
   end
   # GET /battle_results/1
   #def show

@@ -1,4 +1,4 @@
-<h1>Listing battle_results</h1>
+<h1>戦闘勝敗一覧</h1>
 
 <div class="bs-docs-section">
   <div class="row">
@@ -33,23 +33,17 @@
 <table id="search_table" class="table table-striped table-bordered table-hover">
 
   <tbody>
-  <tr><td colspan="2" style="cursor:pointer;" onclick="search_open(false);">絞り込み検索<span style="font-size:80%">(クリックで閉じます)</span></td></tr>
+  <tr><td colspan="4" style="cursor:pointer;" onclick="search_open(false);">絞り込み検索<span style="font-size:80%">(クリックで閉じます)</span></td></tr>
   <tr><td><%= f.label :result_no_form, '更新回' %></td>
-    <td class="formNum"><%= text_field_tag :result_no_form, @result_no_form %></td></tr>
+    <td colspan="3" class="formNum"><%= text_field_tag :result_no_form, @result_no_form %></td></tr>
   <tr><td><%= f.label :e_no_form, 'Eno' %></td>
-    <td class="formNum"><%= text_field_tag :e_no_form, @e_no_form %></td></tr>
-  <tr><td><%= f.label :p_name_form, 'キャラクター名' %></td>
+    <td class="formNum"><%= text_field_tag :e_no_form, @e_no_form %></td>
+  <td><%= f.label :p_name_form, 'キャラクター名' %></td>
     <td class="formText"><%= text_field_tag :p_name_form, @p_name_form %></td></tr>
-  <tr><td></td><td><%= check_box_tag :show_main, @show_main, @show_main %><%= f.label_tag :show_main, 'メインキャラ' %>　<%= check_box_tag :show_sub, @show_sub, @show_sub %><%= f.label_tag :show_sub, 'サブキャラ' %></td></tr>
-  <tr><td><%= f.label :result_no_form, 'Result no' %></td>
-    <td class="formNum"><%= text_field_tag :result_no_form, @result_no_form %></td></tr>
-  <tr><td><%= f.label :generate_no_form, 'Generate no' %></td>
-    <td class="formNum"><%= text_field_tag :generate_no_form, @generate_no_form %></td></tr>
-  <tr><td><%= f.label :party_no_form, 'Party no' %></td>
-    <td class="formNum"><%= text_field_tag :party_no_form, @party_no_form %></td></tr>
-  <tr><td><%= f.label :battle_result_form, 'Battle result' %></td>
-    <td class="formNum"><%= text_field_tag :battle_result_form, @battle_result_form %></td></tr>
-  <tr><td></td><td>
+  <tr><td><%= f.label :party_no_form, 'パーティ番号' %></td>
+    <td colspan="3" class="formNum"><%= text_field_tag :party_no_form, @party_no_form %></td></tr>
+  <tr><td><%= f.label :battle_result_form, '戦闘結果' %></td><td colspan="3"><%= check_box_tag :is_win, @is_win, @is_win %><%= f.label_tag :is_win, '勝利' %>　<%= check_box_tag :is_draw, @is_draw, @is_draw %><%= f.label_tag :is_draw, '引き分け' %>　<%= check_box_tag :is_lose, @is_lose, @is_lose %><%= f.label_tag :is_lose, '敗北' %></td></tr>
+  <tr><td></td><td colspan="3">
     <%= f.submit '検索する' %>
     </td></tr>
 </tbody>
@@ -68,11 +62,8 @@
   <thead>
     <tr>
       <th><%= sort_link(@search, :result_no,'更新回', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :e_no,'キャラクター(Eno)', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :result_no, 'Result no', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :generate_no, 'Generate no', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :party_no, 'Party no', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :battle_result, 'Battle result', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :party_no, 'Pno', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :battle_result, '結果', default_order: :desc) %></th>
       <th colspan="1">結果リンク</th>
     </tr>
   </thead>
@@ -81,20 +72,10 @@
     <% @battle_results.each do |battle_result| %>
       <tr>
         <td><%= battle_result.result_no %></td>
-        <td><%= e_no_f_no = sprintf("%d",battle_result.e_no)
-            if battle_result.sub_no > 0 then
-                e_no_f_no += ", " + sprintf("%d",battle_result.sub_no)
-            end
-            battle_result.p_name.name.html_safe + "(" + e_no_f_no + ")" %></td>
-        <td><%= battle_result.result_no %></td>
-        <td><%= battle_result.generate_no %></td>
         <td><%= battle_result.party_no %></td>
-        <td><%= battle_result.battle_result %></td>
-        <td><%= file_name = sprintf("%d",battle_result.e_no)
-            if battle_result.sub_no > 0 then
-                file_name += "_" + sprintf("%d",battle_result.sub_no)
-            end
-            link_to " 結果", "http://csyuki.sakura.ne.jp/cgi-bin/prism/result/status"+file_name+".html", :target => "_blank" %></td>
+        <td><%= "勝利" if battle_result.battle_result == 1 %><%= "引分" if battle_result.battle_result == 0 %><%= "敗北" if battle_result.battle_result == -1 %></td>
+        <td><%= file_name = sprintf("%d",battle_result.party_no)
+            link_to " 戦闘結果", "http://csyuki.sakura.ne.jp/cgi-bin/prism/result/result"+file_name+".html", :target => "_blank" %></td>
       </tr>
     <% end %>
   </tbody>
