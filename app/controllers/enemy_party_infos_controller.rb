@@ -5,8 +5,8 @@ class EnemyPartyInfosController < ApplicationController
   # GET /enemy_party_infos
   def index
     param_set
-    @count	= EnemyPartyInfo.includes(enemy_members: :enemy_name, current_place: [:place_name, party_info: [party_members: :p_name]]).group(:party_no).search(params[:q]).result.count().keys().size
-    @search	= EnemyPartyInfo.includes(enemy_members: :enemy_name, current_place: [:place_name, party_info: [party_members: :p_name]]).group(:party_no).page(params[:page]).search(params[:q])
+    @count	= EnemyPartyInfo.includes(enemy_members: :enemy_name, current_place: [:place_name, party_info: [party_members: :p_name]]).group(:party_no, :result_no).search(params[:q]).result.count().keys().size
+    @search	= EnemyPartyInfo.includes(enemy_members: :enemy_name, current_place: [:place_name, party_info: [party_members: :p_name]]).group(:party_no, :result_no).page(params[:page]).search(params[:q])
     @search.sorts = 'id asc' if @search.sorts.empty?
     @enemy_party_infos	= @search.result.per(50)
   end

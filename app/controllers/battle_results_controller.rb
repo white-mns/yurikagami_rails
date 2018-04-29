@@ -5,8 +5,8 @@ class BattleResultsController < ApplicationController
   # GET /battle_results
   def index
     param_set
-    @count	= BattleResult.includes(:income, enemy_party_info: [enemy_members: :enemy_name, current_place: [:place_name, party_info: [party_members: :p_name]]]).group(:party_no).search(params[:q]).result.count().keys().size()
-    @search	= BattleResult.includes(:income, enemy_party_info: [enemy_members: :enemy_name, current_place: [:place_name, party_info: [party_members: :p_name]]]).group(:party_no).page(params[:page]).search(params[:q])
+    @count	= BattleResult.includes(:income, enemy_party_info: [enemy_members: :enemy_name, current_place: [:place_name, party_info: [party_members: :p_name]]]).group(:party_no, :result_no).search(params[:q]).result.count().keys().size()
+    @search	= BattleResult.includes(:income, enemy_party_info: [enemy_members: :enemy_name, current_place: [:place_name, party_info: [party_members: :p_name]]]).group(:party_no, :result_no).page(params[:page]).search(params[:q])
     @search.sorts = 'id asc' if @search.sorts.empty?
     @battle_results	= @search.result.per(50)
   end
@@ -57,15 +57,22 @@ class BattleResultsController < ApplicationController
     if params["is_draw"] == "on" then params[:q]["battle_result_eq_any"].push(0) end
     if params["is_win"] == "on" then params[:q]["battle_result_eq_any"].push(1) end
     if params["is_lose"] == "on" then params[:q]["battle_result_eq_any"].push(-1) end
+    if params["is_unknown"] == "on" then params[:q]["battle_result_eq_any"].push(-2) end
     
     @is_lose = params["is_lose"]
     @is_draw = params["is_draw"]
     @is_win  = params["is_win"]
+    @is_unknown  = params["is_unknown"]
 
     if params[:q]["battle_result_eq_any"].size == 0 then 
         @is_lose = "on"
         @is_draw = "on"
         @is_win  = "on"
+        @is_unknown  = "on"
+    end
+
+    if @is_lose == "on" && @is_draw == "on" && @is_win == "on" then
+        @is_unknown  = "on"
     end
 
     params[:q]["income_is_pk_eq_any"] = []
@@ -78,9 +85,9 @@ class BattleResultsController < ApplicationController
     @is_practice  = params["is_practice"]
 
     if params[:q]["income_is_pk_eq_any"].size == 0 then 
-        @is_pk        = "on"
-        @is_enemy     = "on"
-        @is_practice  = "on"
+        @is_pk       = "on"
+        @is_enemy    = "on"
+        @is_practice = "on"
     end
   end
   # GET /battle_results/1
