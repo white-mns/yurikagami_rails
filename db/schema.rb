@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180426092924) do
+ActiveRecord::Schema.define(version: 20180429031956) do
 
   create_table "current_places", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "result_no"
@@ -89,6 +89,26 @@ ActiveRecord::Schema.define(version: 20180426092924) do
     t.index ["event"], name: "index_events_on_event"
     t.index ["flag"], name: "index_events_on_flag"
     t.index ["text"], name: "index_events_on_text"
+  end
+
+  create_table "incomes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "result_no"
+    t.integer "generate_no"
+    t.integer "party_no"
+    t.integer "e_no"
+    t.integer "sub_no"
+    t.integer "money"
+    t.integer "sundries"
+    t.integer "exp"
+    t.integer "is_pk"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["e_no", "result_no", "sub_no", "generate_no"], name: "unique_eno"
+    t.index ["exp"], name: "index_incomes_on_exp"
+    t.index ["is_pk"], name: "index_incomes_on_is_pk"
+    t.index ["money"], name: "index_incomes_on_money"
+    t.index ["party_no"], name: "index_incomes_on_party_no"
+    t.index ["sundries"], name: "index_incomes_on_sundries"
   end
 
   create_table "item_gets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

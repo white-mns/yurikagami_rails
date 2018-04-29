@@ -1,0 +1,62 @@
+<%= form_with(model: income, local: true) do |form| %>
+  <% if income.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(income.errors.count, "error") %> prohibited this income from being saved:</h2>
+
+      <ul>
+      <% income.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :result_no %>
+    <%= form.number_field :result_no, id: :income_result_no %>
+  </div>
+
+  <div class="field">
+    <%= form.label :generate_no %>
+    <%= form.number_field :generate_no, id: :income_generate_no %>
+  </div>
+
+  <div class="field">
+    <%= form.label :party_no %>
+    <%= form.number_field :party_no, id: :income_party_no %>
+  </div>
+
+  <div class="field">
+    <%= form.label :e_no %>
+    <%= form.number_field :e_no, id: :income_e_no %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sub_no %>
+    <%= form.number_field :sub_no, id: :income_sub_no %>
+  </div>
+
+  <div class="field">
+    <%= form.label :money %>
+    <%= form.number_field :money, id: :income_money %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sundries %>
+    <%= form.number_field :sundries, id: :income_sundries %>
+  </div>
+
+  <div class="field">
+    <%= form.label :exp %>
+    <%= form.number_field :exp, id: :income_exp %>
+  </div>
+
+  <div class="field">
+    <%= form.label :is_pk %>
+    <%= form.number_field :is_pk, id: :income_is_pk %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

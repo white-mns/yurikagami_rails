@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Result no:</strong>
+  <%= @income.result_no %>
+</p>
+
+<p>
+  <strong>Generate no:</strong>
+  <%= @income.generate_no %>
+</p>
+
+<p>
+  <strong>Party no:</strong>
+  <%= @income.party_no %>
+</p>
+
+<p>
+  <strong>E no:</strong>
+  <%= @income.e_no %>
+</p>
+
+<p>
+  <strong>Sub no:</strong>
+  <%= @income.sub_no %>
+</p>
+
+<p>
+  <strong>Money:</strong>
+  <%= @income.money %>
+</p>
+
+<p>
+  <strong>Sundries:</strong>
+  <%= @income.sundries %>
+</p>
+
+<p>
+  <strong>Exp:</strong>
+  <%= @income.exp %>
+</p>
+
+<p>
+  <strong>Is pk:</strong>
+  <%= @income.is_pk %>
+</p>
+
+<%= link_to 'Edit', edit_income_path(@income) %> |
+<%= link_to 'Back', incomes_path %>

@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  result_no: 1
+  generate_no: 1
+  party_no: 1
+  e_no: 1
+  sub_no: 1
+  money: 1
+  sundries: 1
+  exp: 1
+  is_pk: 1
+
+two:
+  result_no: 1
+  generate_no: 1
+  party_no: 1
+  e_no: 1
+  sub_no: 1
+  money: 1
+  sundries: 1
+  exp: 1
+  is_pk: 1
