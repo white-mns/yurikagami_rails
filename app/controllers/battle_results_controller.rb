@@ -25,6 +25,7 @@ class BattleResultsController < ApplicationController
     reference_text_assign(params, "enemy_party_info_current_place_party_info_party_members_p_name_name", "p_name_form")
     reference_number_assign(params, "enemy_party_info_current_place_party_info_party_members_e_no", "e_no_form")
     reference_number_assign(params, "enemy_party_info_current_place_party_info_battler_num", "battler_num_form")
+    reference_number_assign(params, "enemy_party_info_current_place_party_info_sook_num", "sook_num_form")
     reference_text_assign(params, "enemy_party_info_current_place_place_name_name", "place_form")
     reference_text_assign(params, "enemy_party_info_enemy_members_enemy_name_name", "enemy_form")
     reference_number_assign(params, "income_money", "money_form")
@@ -42,6 +43,7 @@ class BattleResultsController < ApplicationController
     @e_no_form = params["e_no_form"]
     @enemy_form = params["enemy_form"]
     @battler_num_form = params["battler_num_form"]
+    @sook_num_form = params["sook_num_form"]
     @place_form = params["place_form"]
     @sub_no_form = params["sub_no_form"]
     @money_form = params["money_form"]

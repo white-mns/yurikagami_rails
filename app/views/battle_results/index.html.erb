@@ -3,6 +3,7 @@
 <div class="bs-docs-section">
   <div class="row">
     <div class="col-md-12">
+        <p>参戦人数、参戦臆病者人数において、ボスフラグのあるキャラクターは二人分でカウントしています。</p>
         <p class="formNum">テキストフォームの隣に赤い破線がある項目は数値検索です。<br>
         「/」区切りでOR、「100~」や「100~200」のように「~」をつけて範囲指定となります。<br>
         OR指定と範囲指定を同時に行うことはできません。</p>
@@ -44,9 +45,11 @@
     <td class="formText"><%= text_field_tag :p_name_form, @p_name_form %></td></tr>
   <tr><td><%= f.label :battler_num_form, '参戦人数' %></td>
     <td class="formNum"><%= text_field_tag :battler_num_form, @battler_num_form %></td>
-  <td><%= f.label :enemy_num_form, '敵数' %></td>
-    <td class="formNum"><%= text_field_tag :enemy_num_form, @enemy_num_form %></td></tr>
-  <tr><td><%= f.label :enemy_form, '敵名' %></td>
+  <td><%= f.label :battler_num_form, '臆病者人数' %></td>
+    <td colspan="3" class="formNum"><%= text_field_tag :sook_num_form, @sook_num_form %></td></tr>
+  <tr><td><%= f.label :enemy_num_form, '敵数' %></td>
+    <td class="formNum"><%= text_field_tag :enemy_num_form, @enemy_num_form %></td>
+  <td><%= f.label :enemy_form, '敵名' %></td>
     <td colspan="3" class="formText"><%= text_field_tag :enemy_form, @enemy_form %></td></tr>
   <tr><td><%= f.label :money_form, '金' %></td>
     <td class="formNum"><%= text_field_tag :money_form, @money_form %></td>
@@ -80,6 +83,7 @@
       <th><%= sort_link(@search, :party_no, 'Pno', default_order: :desc) %></th>
       <th><%= sort_link(@search, :enemy_party_info_current_place_party_info_party_members_e_no,'キャラクター(Eno)', default_order: :desc) %></th>
       <th><%= sort_link(@search, :enemy_party_info_current_place_party_info_battler_num, '参戦', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :enemy_party_info_current_place_party_info_sook_num, '臆病', default_order: :desc) %></th>
       <th><%= sort_link(@search, :enemy_party_info_enemy_num, '敵数', default_order: :desc) %></th>
       <th><%= sort_link(@search, :enemy_party_info_enemy_members_enemy_name_name, '敵名', default_order: :desc) %></th>
       <th><%= sort_link(@search, :income_money, '金', default_order: :desc) %></th>
@@ -103,6 +107,7 @@
             <%   end
                end %></td>
         <td><%= battle_result.enemy_party_info.current_place.party_info.battler_num if battle_result.enemy_party_info && battle_result.enemy_party_info.current_place && battle_result.enemy_party_info.current_place.party_info %></td>
+        <td><%= battle_result.enemy_party_info.current_place.party_info.sook_num if battle_result.enemy_party_info && battle_result.enemy_party_info.current_place && battle_result.enemy_party_info.current_place.party_info %></td>
         <td><%= battle_result.enemy_party_info.enemy_num if battle_result.enemy_party_info %></td>
         <td><% if battle_result.enemy_party_info && battle_result.enemy_party_info.enemy_members then 
                  battle_result.enemy_party_info.enemy_members.each do |enemy_member| %>
