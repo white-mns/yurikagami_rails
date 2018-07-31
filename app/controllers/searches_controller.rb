@@ -6,12 +6,22 @@ class SearchesController < ApplicationController
   def index
     param_set
     @count	= Search.includes(:p_name, :status, :item).search(params[:q]).result.count()
-    @values	   = Search.includes(:p_name, :status, :item).where("value > -90000").group(:result_no,:e_no,:sub_no).search(params[:q]).result.sum(:value).values.sort
+    @values	= Search.includes(:p_name, :status, :item).where("value > -90000").group(:result_no,:e_no,:sub_no).search(params[:q]).result.sum(:value).values.sort
     @search	= Search.includes(:p_name, :status, :item).page(params[:page]).search(params[:q])
     @search.sorts = 'id asc' if @search.sorts.empty?
     @searches	= @search.result.per(50)
   end
 
+  def graph
+    param_set
+    @count	= Search.includes(:p_name, :status, :item).search(params[:q]).result.count()
+    @values	      = Search.includes(:p_name, :status, :item).where("value > -90000").group(:result_no,:e_no,:sub_no).search(params[:q]).result.sum(:value).values.sort
+    @graph_values = Search.includes(:p_name, :status, :item).where("value > -90000").group(:result_no,:e_no,:sub_no).search(params[:q]).result.maximum(:value).values.sort
+    @search	= Search.includes(:p_name, :status, :item).page(params[:page]).search(params[:q])
+    @search.sorts = 'id asc' if @search.sorts.empty?
+    @searches	= @search.result.per(50)
+  end
+  
   def param_set
     @last_result = Name.maximum('result_no')
     params["result_no_form"] = params["result_no_form"] ? params["result_no_form"] : sprintf('%d',@last_result)

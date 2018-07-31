@@ -25,6 +25,8 @@ Rails.application.routes.draw do
   resources :profiles
   resources :proper_names
   resources :names
+  
+  get "search/graph", 	    :to => "searches#graph",	    :as => 'search_graph' 
   get 'top_page/index'
   root 'top_page#index'
 
