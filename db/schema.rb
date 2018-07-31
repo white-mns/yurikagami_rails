@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180429055829) do
+ActiveRecord::Schema.define(version: 20180731033937) do
 
   create_table "battle_results", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "result_no"
@@ -311,6 +311,27 @@ ActiveRecord::Schema.define(version: 20180429055829) do
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_proper_names_on_name"
     t.index ["proper_id"], name: "index_proper_names_on_proper_id"
+  end
+
+  create_table "searches", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "result_no"
+    t.integer "generate_no"
+    t.integer "last_result_no"
+    t.integer "last_generate_no"
+    t.integer "e_no"
+    t.integer "sub_no"
+    t.integer "main_no"
+    t.integer "i_no"
+    t.string "i_name"
+    t.integer "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["e_no", "result_no", "sub_no", "generate_no"], name: "unique_eno"
+    t.index ["i_name"], name: "index_searches_on_i_name"
+    t.index ["i_no"], name: "index_searches_on_i_no"
+    t.index ["last_result_no", "last_generate_no"], name: "last_num"
+    t.index ["main_no"], name: "index_searches_on_main_no"
+    t.index ["value"], name: "index_searches_on_value"
   end
 
   create_table "skill_data", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
