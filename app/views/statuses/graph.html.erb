@@ -97,26 +97,25 @@
 ヒット数：<%= @count %>件<br><br>
 
 
-<% job_name = Hash[*JobName.pluck(:job_id, :name).flatten] %><br>
 <h3>・戦型1</h3>
-<%= column_chart @statuses.pluck(:job1).inject(Hash.new(0)){|hash, a| hash[job_name[a]] += 1 ; hash}.sort_by{ |k, v| v}, xtitle: "戦型1", ytitle:"人数" %>
+<%= column_chart @statuses.to_job_graph(:job1), xtitle: "戦型1", ytitle:"人数" %>
 <h3>・戦型2</h3>
-<%= column_chart @statuses.pluck(:job2).inject(Hash.new(0)){|hash, a| hash[job_name[a]] += 1 ; hash}.sort_by{ |k, v| v}, xtitle: "戦型2", ytitle:"人数" %>
+<%= column_chart @statuses.to_job_graph(:job2), xtitle: "戦型2", ytitle:"人数" %>
 <h3>・LV</h3>
 <%= column_chart @statuses.pluck(:lv).inject(Hash.new(0)){|hash, a| hash[a] += 1 ; hash}.sort, xtitle: "Lv", ytitle:"人数" %>
 <h3>・HP</h3>
-<%= range=1000; f_length=5; column_chart @statuses.pluck(:hp).inject(Hash.new(0)){|hash, a| floor= (a/range).to_i()*range; hash[floor.to_s.rjust(f_length) + "～" + (floor+range).to_s.rjust(f_length)] += 1 ; hash}.sort, xtitle: "HP", ytitle:"人数" %>
+<%= column_chart @statuses.to_range_graph(:hp,1000,5), xtitle: "HP", ytitle:"人数" %>
 <h3>・MP</h3>
-<%= range=100;  f_length=5; column_chart @statuses.pluck(:mp).inject(Hash.new(0)){|hash, a| floor= (a/range).to_i()*range; hash[floor.to_s.rjust(f_length) + "～" + (floor+range).to_s.rjust(f_length)] += 1 ; hash}.sort, xtitle: "MP", ytitle:"人数" %>
+<%= column_chart @statuses.to_range_graph(:mp,100,5), xtitle: "MP", ytitle:"人数" %>
 <h3>・腕力</h3>
-<%= range=50;   f_length=5; column_chart @statuses.pluck(:str).inject(Hash.new(0)){|hash, a| floor= (a/range).to_i()*range; hash[floor.to_s.rjust(f_length) + "～" + (floor+range).to_s.rjust(f_length)] += 1 ; hash}.sort, xtitle: "腕力", ytitle:"人数" %>
+<%= column_chart @statuses.to_range_graph(:str,50,5), xtitle: "腕力", ytitle:"人数" %>
 <h3>・魔力</h3>
-<%= range=50;   f_length=5; column_chart @statuses.pluck(:int).inject(Hash.new(0)){|hash, a| floor= (a/range).to_i()*range; hash[floor.to_s.rjust(f_length) + "～" + (floor+range).to_s.rjust(f_length)] += 1 ; hash}.sort, xtitle: "魔力", ytitle:"人数" %>
+<%= column_chart @statuses.to_range_graph(:int,50,5), xtitle: "魔力", ytitle:"人数" %>
 <h3>・器用</h3>
-<%= range=50;   f_length=5; column_chart @statuses.pluck(:tec).inject(Hash.new(0)){|hash, a| floor= (a/range).to_i()*range; hash[floor.to_s.rjust(f_length) + "～" + (floor+range).to_s.rjust(f_length)] += 1 ; hash}.sort, xtitle: "器用", ytitle:"人数" %>
+<%= column_chart @statuses.to_range_graph(:tec,50,5), xtitle: "器用", ytitle:"人数" %>
 <h3>・反応</h3>
-<%= range=50;   f_length=5; column_chart @statuses.pluck(:agi).inject(Hash.new(0)){|hash, a| floor= (a/range).to_i()*range; hash[floor.to_s.rjust(f_length) + "～" + (floor+range).to_s.rjust(f_length)] += 1 ; hash}.sort, xtitle: "反応", ytitle:"人数" %>
+<%= column_chart @statuses.to_range_graph(:agi,50,5), xtitle: "反応", ytitle:"人数" %>
 <h3>・守護</h3>
-<%= range=50;   f_length=5; column_chart @statuses.pluck(:def).inject(Hash.new(0)){|hash, a| floor= (a/range).to_i()*range; hash[floor.to_s.rjust(f_length) + "～" + (floor+range).to_s.rjust(f_length)] += 1 ; hash}.sort, xtitle: "守護", ytitle:"人数" %>
+<%= column_chart @statuses.to_range_graph(:def,50,5), xtitle: "守護", ytitle:"人数" %>
 <h3>・熟練</h3>
-<%= range=50;   f_length=5; column_chart @statuses.pluck(:skill).inject(Hash.new(0)){|hash, a| floor= (a/range).to_i()*range; hash[floor.to_s.rjust(f_length) + "～" + (floor+range).to_s.rjust(f_length)] += 1 ; hash}.sort, xtitle: "熟練", ytitle:"人数" %>
+<%= column_chart @statuses.to_range_graph(:skill,50,5), xtitle: "熟練", ytitle:"人数" %>
