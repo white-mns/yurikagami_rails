@@ -113,18 +113,18 @@
 <h3>・LV</h3>
 <%= column_chart @statuses.pluck(:lv).inject(Hash.new(0)){|hash, a| hash[a] += 1 ; hash}.sort, xtitle: "Lv", ytitle:"人数" %>
 <h3>・HP</h3>
-<%= column_chart @statuses.to_range_graph(:hp,1000,5), xtitle: "HP", ytitle:"人数" %>
+<%= column_chart @statuses.to_range_graph(:hp), xtitle: "HP", ytitle:"人数" %>
 <h3>・MP</h3>
-<%= column_chart @statuses.to_range_graph(:mp,100,5), xtitle: "MP", ytitle:"人数" %>
+<%= column_chart @statuses.to_range_graph(:mp), xtitle: "MP", ytitle:"人数" %>
 <h3>・腕力</h3>
-<%= column_chart @statuses.to_range_graph(:str,50,5), xtitle: "腕力", ytitle:"人数" %>
+<%= column_chart @statuses.to_range_graph(:str), xtitle: "腕力", ytitle:"人数" %>
 <h3>・魔力</h3>
-<%= column_chart @statuses.to_range_graph(:int,50,5), xtitle: "魔力", ytitle:"人数" %>
+<%= column_chart @statuses.to_range_graph(:int), xtitle: "魔力", ytitle:"人数" %>
 <h3>・器用</h3>
-<%= column_chart @statuses.to_range_graph(:tec,50,5), xtitle: "器用", ytitle:"人数" %>
+<%= column_chart @statuses.to_range_graph(:tec), xtitle: "器用", ytitle:"人数" %>
 <h3>・反応</h3>
-<%= column_chart @statuses.to_range_graph(:agi,50,5), xtitle: "反応", ytitle:"人数" %>
+<%= column_chart @statuses.to_range_graph(:agi), xtitle: "反応", ytitle:"人数" %>
 <h3>・守護</h3>
-<%= column_chart @statuses.to_range_graph(:def,50,5), xtitle: "守護", ytitle:"人数" %>
+<%= column_chart @statuses.to_range_graph(:def), xtitle: "守護", ytitle:"人数" %>
 <h3>・熟練</h3>
-<%= column_chart @statuses.to_range_graph(:skill,50,5), xtitle: "熟練", ytitle:"人数" %>
+<%= column_chart @statuses.to_range_graph(:skill), xtitle: "熟練", ytitle:"人数" %>
