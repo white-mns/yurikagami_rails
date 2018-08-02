@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   resources :names
   
   get "search/graph", 	    :to => "searches#graph",	    :as => 'search_graph' 
+  get "status/graph", 	    :to => "statuses#graph",	    :as => 'status_graph' 
   get 'top_page/index'
   root 'top_page#index'
 

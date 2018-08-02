@@ -11,6 +11,15 @@ class StatusesController < ApplicationController
     @statuses	= @search.result.per(50)
   end
 
+  # GET /statuses
+  def graph
+    param_set
+    @count	= Status.includes([:p_name, :tribe_name, :job1_name, :job2_name]).search(params[:q]).result.count()
+    @search = Status.includes([:p_name, :tribe_name, :job1_name, :job2_name]).search(params[:q])
+    @search.sorts = 'id asc' if @search.sorts.empty?
+    @statuses	= @search.result
+  end
+
   def param_set
     @last_result = Name.maximum('result_no')
     params["result_no_form"] = params["result_no_form"] ? params["result_no_form"] : sprintf('%d',@last_result)
