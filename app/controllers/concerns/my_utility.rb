@@ -8,13 +8,6 @@ module MyUtility
     texts = (param_adr[param_key].match(/ /)) ? param_adr[param_key].split(" ") : [param_adr[param_key].dup]
 
     if texts.is_a?(Array) then
-        suffixes = ["_cont_all", "_cont_any", "_not_cont_all", "_eq_all", "_eq_any","_not_eq_all"]
-        for suffix in suffixes do
-            if !param_adr[:q][data_name + suffix].is_a?(Array) then
-                param_adr[:q][data_name + suffix] = Array.new
-            end
-        end
-
         for text in texts do
             if (text && text.match("/")) then
                 texts_or = text.split("/")
@@ -27,6 +20,10 @@ module MyUtility
         end
     end
   end
+  
+  def reference_text_assign(param_adr, data_name, param_key)
+    reference_word_assign(param_adr, data_name, param_key, "cont")
+  end
 
   # 文字列の除外と完全一致を判定し、Ransackが参照する配列に割り当てる
   def reference_word_set(param_adr, data_name, text, match_suffix, operator_suffix)
@@ -36,6 +33,8 @@ module MyUtility
           text.slice!(0,1)
           not_suffix = "not_"
           operator_suffix = "all"
+          operator_suffix = "all"
+          data_name = data_name.gsub(/_or_/, "_and_")
       end
       
       if(text[0] == "\"" && text[-1] == "\"") then
@@ -45,13 +44,8 @@ module MyUtility
           match_suffix = "eq"
       end
       
-      param_adr[:q][data_name + "_" + not_suffix + match_suffix + "_" + operator_suffix].push(text)
+      param_push(param_adr, data_name + "_" + not_suffix + match_suffix + "_" + operator_suffix, text)
 
-  end
-  
-  # 文字列の文字列を分割し、部分一致の条件でRansackが参照する配列に割り当てる
-  def reference_text_assign(param_adr, data_name, param_key)
-    reference_word_assign(param_adr, data_name, param_key, "cont")
   end
 
   # 数値の文字列を分割し、Ransackが参照する配列に割り当てる
@@ -63,13 +57,6 @@ module MyUtility
     texts = (param_adr[param_key].match("/")) ? param_adr[param_key].split("/") : [param_adr[param_key].dup]
 
     if texts.is_a?(Array) then
-        suffixes = ["_lteq_any", "_gteq_any", "_eq_any"]
-        for suffix in suffixes do
-            if !param_adr[:q][data_name + suffix].is_a?(Array) then
-                param_adr[:q][data_name + suffix] = Array.new
-            end
-        end
-
         for text in texts do
             if (text && text.match(/([\-\.\d]+)~([\-\.\d]+)/)) then
                 text_match = text.match(/([\-\.\d]+)~([\-\.\d]+)/)
@@ -95,15 +82,19 @@ module MyUtility
           match_suffix = "gteq"
       end
       
-      if(text[0] == "!") then
-          # マイナス符号への置換
-          text.sub!(/!/, '-')
-      end
-      
-      param_adr[:q][data_name + "_" + match_suffix + "_any"].push(text)
+      param_push(param_adr, data_name + "_" + match_suffix + "_any", text)
 
   end
-  
+ 
+  # Ransackの検索用パラメータに追加。配列がない場合は作成する 
+  def param_push(param_adr, ransack_param, text)
+      if !param_adr[:q][ransack_param].is_a?(Array) then
+          param_adr[:q][ransack_param] = Array.new
+      end
+
+      param_adr[:q][ransack_param].push(text)
+  end
+
   # メインキャラ、サブキャラの指定情報の割当
   def sub_no_set(param_adr, show_param_adr)
     show_param_adr["show_main"] = param_adr["show_main"]
