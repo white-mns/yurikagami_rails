@@ -1,4 +1,4 @@
-<h1>Listing smith_displays</h1>
+<h1>装備作成性能発揮率一覧元データ</h1>
 
 <div class="bs-docs-section">
   <div class="row">
@@ -41,21 +41,13 @@
   <tr><td><%= f.label :p_name_form, 'キャラクター名' %></td>
     <td class="formText"><%= text_field_tag :p_name_form, @p_name_form %></td></tr>
   <tr><td></td><td><%= check_box_tag :show_main, @show_main, @show_main %><%= f.label_tag :show_main, 'メインキャラ' %>　<%= check_box_tag :show_sub, @show_sub, @show_sub %><%= f.label_tag :show_sub, 'サブキャラ' %></td></tr>
-  <tr><td><%= f.label :result_no_form, 'Result no' %></td>
-    <td class="formNum"><%= text_field_tag :result_no_form, @result_no_form %></td></tr>
-  <tr><td><%= f.label :generate_no_form, 'Generate no' %></td>
-    <td class="formNum"><%= text_field_tag :generate_no_form, @generate_no_form %></td></tr>
   <tr><td><%= f.label :party_no_form, 'Party no' %></td>
     <td class="formNum"><%= text_field_tag :party_no_form, @party_no_form %></td></tr>
-  <tr><td><%= f.label :e_no_form, 'E no' %></td>
-    <td class="formNum"><%= text_field_tag :e_no_form, @e_no_form %></td></tr>
-  <tr><td><%= f.label :sub_no_form, 'Sub no' %></td>
-    <td class="formNum"><%= text_field_tag :sub_no_form, @sub_no_form %></td></tr>
-  <tr><td><%= f.label :total_price_form, 'Total price' %></td>
+  <tr><td><%= f.label :total_price_form, '合計素材価値' %></td>
     <td class="formNum"><%= text_field_tag :total_price_form, @total_price_form %></td></tr>
-  <tr><td><%= f.label :price_rate_form, 'Price rate' %></td>
+  <tr><td><%= f.label :price_rate_form, '価値割合' %></td>
     <td class="formNum"><%= text_field_tag :price_rate_form, @price_rate_form %></td></tr>
-  <tr><td><%= f.label :display_rate_form, 'Display rate' %></td>
+  <tr><td><%= f.label :display_rate_form, '性能発揮率' %></td>
     <td class="formNum"><%= text_field_tag :display_rate_form, @display_rate_form %></td></tr>
   <tr><td></td><td>
     <%= f.submit '検索する' %>
@@ -77,14 +69,10 @@
     <tr>
       <th><%= sort_link(@search, :result_no,'更新回', default_order: :desc) %></th>
       <th><%= sort_link(@search, :e_no,'キャラクター(Eno)', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :result_no, 'Result no', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :generate_no, 'Generate no', default_order: :desc) %></th>
       <th><%= sort_link(@search, :party_no, 'Party no', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :e_no, 'E no', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :sub_no, 'Sub no', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :total_price, 'Total price', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :price_rate, 'Price rate', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :display_rate, 'Display rate', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :total_price, '素材価値', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :price_rate, '価値割合', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :display_rate, '発揮率', default_order: :desc) %></th>
       <th colspan="1">結果リンク</th>
     </tr>
   </thead>
@@ -98,14 +86,10 @@
                 e_no_f_no += ", " + sprintf("%d",smith_display.sub_no)
             end
             smith_display.p_name.name.html_safe + "(" + e_no_f_no + ")" %></td>
-        <td><%= smith_display.result_no %></td>
-        <td><%= smith_display.generate_no %></td>
         <td><%= smith_display.party_no %></td>
-        <td><%= smith_display.e_no %></td>
-        <td><%= smith_display.sub_no %></td>
         <td><%= smith_display.total_price %></td>
         <td><%= smith_display.price_rate %></td>
-        <td><%= smith_display.display_rate %></td>
+        <td><%= (smith_display.display_rate * 100).to_i %>%</td>
         <td><%= file_name = sprintf("%d",smith_display.e_no)
             if smith_display.sub_no > 0 then
                 file_name += "_" + sprintf("%d",smith_display.sub_no)

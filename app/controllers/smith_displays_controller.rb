@@ -5,8 +5,8 @@ class SmithDisplaysController < ApplicationController
   # GET /smith_displays
   def index
     param_set
-    @count	= SmithDisplay.includes([:p_name]).search(params[:q]).result.count()
-    @search	= SmithDisplay.includes([:p_name]).page(params[:page]).search(params[:q])
+    @count	= SmithDisplay.includes(:p_name).search(params[:q]).result.count()
+    @search	= SmithDisplay.includes(:p_name).page(params[:page]).search(params[:q])
     @search.sorts = 'id asc' if @search.sorts.empty?
     @smith_displays	= @search.result.per(50)
   end
@@ -17,29 +17,24 @@ class SmithDisplaysController < ApplicationController
     params[:q]  = params[:q] ? params[:q] : {}
     
     reference_text_assign(params, "p_name_name", "p_name_form")
-        reference_number_assign(params, "result_no", "result_no_form")
-        reference_number_assign(params, "generate_no", "generate_no_form")
-        reference_number_assign(params, "party_no", "party_no_form")
-        reference_number_assign(params, "e_no", "e_no_form")
-        reference_number_assign(params, "sub_no", "sub_no_form")
-        reference_number_assign(params, "total_price", "total_price_form")
-        reference_number_assign(params, "price_rate", "price_rate_form")
-        reference_number_assign(params, "display_rate", "display_rate_form")
+    reference_number_assign(params, "result_no", "result_no_form")
+    reference_number_assign(params, "generate_no", "generate_no_form")
+    reference_number_assign(params, "party_no", "party_no_form")
+    reference_number_assign(params, "e_no", "e_no_form")
+    reference_number_assign(params, "sub_no", "sub_no_form")
+    reference_number_assign(params, "total_price", "total_price_form")
+    reference_number_assign(params, "price_rate", "price_rate_form")
+    reference_number_assign(params, "display_rate", "display_rate_form")
         
     @p_name_form = params["p_name_form"]
-        @result_no_form = params["result_no_form"]
-        @generate_no_form = params["generate_no_form"]
-        @party_no_form = params["party_no_form"]
-        @e_no_form = params["e_no_form"]
-        @sub_no_form = params["sub_no_form"]
-        @total_price_form = params["total_price_form"]
-        @price_rate_form = params["price_rate_form"]
-        @display_rate_form = params["display_rate_form"]
-        
-    show_sub_hash =  {"show_main"=> @show_main,"show_sub" => @show_sub}
-    sub_no_set(params, show_sub_hash)
-    @show_main = show_sub_hash["show_main"]
-    @show_sub = show_sub_hash["show_sub"]
+    @result_no_form = params["result_no_form"]
+    @generate_no_form = params["generate_no_form"]
+    @party_no_form = params["party_no_form"]
+    @e_no_form = params["e_no_form"]
+    @sub_no_form = params["sub_no_form"]
+    @total_price_form = params["total_price_form"]
+    @price_rate_form = params["price_rate_form"]
+    @display_rate_form = params["display_rate_form"]
   end
   # GET /smith_displays/1
   #def show
