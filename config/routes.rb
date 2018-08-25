@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :material_prices
   resources :searches
   resources :battle_results
   resources :incomes

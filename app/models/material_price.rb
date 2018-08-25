@@ -1,0 +1,2 @@
+class MaterialPrice < ApplicationRecord
+end

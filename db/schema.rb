@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180731033937) do
+ActiveRecord::Schema.define(version: 20180825143242) do
 
   create_table "battle_results", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "result_no"
@@ -202,6 +202,19 @@ ActiveRecord::Schema.define(version: 20180731033937) do
     t.index ["skill_id"], name: "index_learnable_skills_on_skill_id"
     t.index ["skill_no"], name: "index_learnable_skills_on_skill_no"
     t.index ["sp"], name: "index_learnable_skills_on_sp"
+  end
+
+  create_table "material_prices", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name"
+    t.integer "price"
+    t.integer "performance"
+    t.integer "is_sub"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["is_sub"], name: "index_material_prices_on_is_sub"
+    t.index ["name"], name: "index_material_prices_on_name"
+    t.index ["performance"], name: "index_material_prices_on_performance"
+    t.index ["price"], name: "index_material_prices_on_price"
   end
 
   create_table "names", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
