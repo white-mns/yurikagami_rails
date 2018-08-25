@@ -85,6 +85,7 @@
       <th><%= sort_link(@search, :result_guard, '防御', default_order: :desc) %></th>
       <th><%= sort_link(@search, :result_protect, '守護', default_order: :desc) %></th>
       <th><%= sort_link(@search, :result_ability, '能力', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :result_prize, '価値', default_order: :desc) %></th>
       <th></th>
       <th><%= sort_link(@search, :main_material_name_id, 'メイン素材', default_order: :desc) %></th>
       <th><%= sort_link(@search, :sub_material_1_name_id, 'サブ素材1', default_order: :desc) %></th>
@@ -117,6 +118,7 @@
         <td><%= smith.result.guard if smith.result %></td>
         <td><%= smith.result.protect if smith.result %></td>
         <td><%= smith.result.ability_name.name if smith.result && smith.result.ability_name %></td>
+        <td><%= smith.result.prize if smith.result %></td>
         <td style="border-left: 0.2em solid #ccc !important;"></td>
         <td><%= smith.main_material_name.name + "(INo." + sprintf("%d", smith.main_material_i_no) + ")" if smith.main_material_i_no > 0 && smith.main_material_name %></td>
         <td><%= smith.sub_material_1_name.name + "(INo." + sprintf("%d", smith.sub_material_1_i_no) + ")" if smith.sub_material_1_i_no > 0 && smith.sub_material_1_name %></td>
@@ -141,6 +143,7 @@
         <td><%= source.guard   if source %></td>
         <td><%= source.protect if source %></td>
         <td><%= source.ability_name.name if source && source.ability_name %></td>
+        <td style="color:#ddd;"><%= source.prize if source %></td>
         <td style="border-left: 0.2em solid #ccc !important;">価値</td>
         <td><%= sprintf("%d", smith.main_material.prize) if smith.main_material %></td>
         <td><%= sprintf("%d", smith.sub_material_1.prize) if smith.sub_material_1 %></td>
