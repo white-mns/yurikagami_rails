@@ -34,20 +34,13 @@
 
   <tbody>
   <tr><td colspan="2" style="cursor:pointer;" onclick="search_open(false);">絞り込み検索<span style="font-size:80%">(クリックで閉じます)</span></td></tr>
-  <tr><td><%= f.label :result_no_form, '更新回' %></td>
-    <td class="formNum"><%= text_field_tag :result_no_form, @result_no_form %></td></tr>
-  <tr><td><%= f.label :e_no_form, 'Eno' %></td>
-    <td class="formNum"><%= text_field_tag :e_no_form, @e_no_form %></td></tr>
-  <tr><td><%= f.label :p_name_form, 'キャラクター名' %></td>
-    <td class="formText"><%= text_field_tag :p_name_form, @p_name_form %></td></tr>
-  <tr><td></td><td><%= check_box_tag :show_main, @show_main, @show_main %><%= f.label_tag :show_main, 'メインキャラ' %>　<%= check_box_tag :show_sub, @show_sub, @show_sub %><%= f.label_tag :show_sub, 'サブキャラ' %></td></tr>
-  <tr><td><%= f.label :name_form, 'Name' %></td>
-    <td class="formNum"><%= text_field_tag :name_form, @name_form %></td></tr>
-  <tr><td><%= f.label :price_form, 'Price' %></td>
+  <tr><td><%= f.label :name_form, '名前' %></td>
+    <td class="formText"><%= text_field_tag :name_form, @name_form %></td></tr>
+  <tr><td><%= f.label :price_form, '価値' %></td>
     <td class="formNum"><%= text_field_tag :price_form, @price_form %></td></tr>
-  <tr><td><%= f.label :performance_form, 'Performance' %></td>
+  <tr><td><%= f.label :performance_form, '性能' %></td>
     <td class="formNum"><%= text_field_tag :performance_form, @performance_form %></td></tr>
-  <tr><td><%= f.label :is_sub_form, 'Is sub' %></td>
+  <tr><td><%= f.label :is_sub_form, 'サブ素材' %></td>
     <td class="formNum"><%= text_field_tag :is_sub_form, @is_sub_form %></td></tr>
   <tr><td></td><td>
     <%= f.submit '検索する' %>
@@ -67,34 +60,20 @@
 <table class="table table-striped table-bordered table-hover">
   <thead>
     <tr>
-      <th><%= sort_link(@search, :result_no,'更新回', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :e_no,'キャラクター(Eno)', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :name, 'Name', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :price, 'Price', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :performance, 'Performance', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :is_sub, 'Is sub', default_order: :desc) %></th>
-      <th colspan="1">結果リンク</th>
+      <th><%= sort_link(@search, :name, '名前', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :price, '価値', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :performance, '性能', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :is_sub, 'サブ素材', default_order: :desc) %></th>
     </tr>
   </thead>
 
   <tbody>
     <% @material_prices.each do |material_price| %>
       <tr>
-        <td><%= material_price.result_no %></td>
-        <td><%= e_no_f_no = sprintf("%d",material_price.e_no)
-            if material_price.sub_no > 0 then
-                e_no_f_no += ", " + sprintf("%d",material_price.sub_no)
-            end
-            material_price.p_name.name.html_safe + "(" + e_no_f_no + ")" %></td>
         <td><%= material_price.name %></td>
         <td><%= material_price.price %></td>
         <td><%= material_price.performance %></td>
         <td><%= material_price.is_sub %></td>
-        <td><%= file_name = sprintf("%d",material_price.e_no)
-            if material_price.sub_no > 0 then
-                file_name += "_" + sprintf("%d",material_price.sub_no)
-            end
-            link_to " 結果", "http://csyuki.sakura.ne.jp/cgi-bin/prism/result/status"+file_name+".html", :target => "_blank" %></td>
       </tr>
     <% end %>
   </tbody>
