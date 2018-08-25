@@ -1,0 +1,2 @@
+module SmithDisplaysHelper
+end

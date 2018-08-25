@@ -1,0 +1,2 @@
+class SmithDisplay < ApplicationRecord
+end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180825143242) do
+ActiveRecord::Schema.define(version: 20180825152252) do
 
   create_table "battle_results", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "result_no"
@@ -385,6 +385,24 @@ ActiveRecord::Schema.define(version: 20180825143242) do
     t.index ["e_no", "result_no", "sub_no", "generate_no"], name: "unique_eno"
     t.index ["skill_id"], name: "index_skills_on_skill_id"
     t.index ["skill_no"], name: "index_skills_on_skill_no"
+  end
+
+  create_table "smith_displays", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "result_no"
+    t.integer "generate_no"
+    t.integer "party_no"
+    t.integer "e_no"
+    t.integer "sub_no"
+    t.integer "total_price"
+    t.float "price_rate", limit: 24
+    t.float "display_rate", limit: 24
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["display_rate"], name: "index_smith_displays_on_display_rate"
+    t.index ["e_no", "result_no", "sub_no", "generate_no"], name: "unique_eno"
+    t.index ["party_no"], name: "index_smith_displays_on_party_no"
+    t.index ["price_rate"], name: "index_smith_displays_on_price_rate"
+    t.index ["total_price"], name: "index_smith_displays_on_total_price"
   end
 
   create_table "smiths", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
