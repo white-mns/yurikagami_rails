@@ -5,8 +5,16 @@ class SmithsController < ApplicationController
   # GET /smiths
   def index
     param_set
-    @count	= Smith.includes(:p_name, :main_material_name, :sub_material_1_name, :sub_material_2_name, :sub_material_3_name, :sub_material_4_name, :main_material, :sub_material_1, :sub_material_2, :sub_material_3, :sub_material_4, :result, :source_last, source: [:kind_name, :ability_name]).search(params[:q]).result.count()
-    @search	= Smith.includes(:p_name, :main_material_name, :sub_material_1_name, :sub_material_2_name, :sub_material_3_name, :sub_material_4_name, :main_material, :sub_material_1, :sub_material_2, :sub_material_3, :sub_material_4, :result, :source_last, source: [:kind_name, :ability_name]).page(params[:page]).search(params[:q])
+    @count	= Smith.includes(:p_name, :smith_display, :main_material_name, :sub_material_1_name, :sub_material_2_name, :sub_material_3_name, :sub_material_4_name, :main_material, :sub_material_1, :sub_material_2, :sub_material_3, :sub_material_4, [result: [:kind_name, :ability_name]], [source_last: [:kind_name, :ability_name]], [source: [:kind_name, :ability_name]]).search(params[:q]).result.count()
+    @search	= Smith.includes(:p_name, :smith_display, :main_material_name, :sub_material_1_name, :sub_material_2_name, :sub_material_3_name, :sub_material_4_name, :main_material, :sub_material_1, :sub_material_2, :sub_material_3, :sub_material_4, [result: [:kind_name, :ability_name]], [source_last: [:kind_name, :ability_name]], [source: [:kind_name, :ability_name]]).page(params[:page]).search(params[:q])
+    @search.sorts = 'id asc' if @search.sorts.empty?
+    @smiths	= @search.result.per(50)
+  end
+
+  def display
+    param_set
+    @count	= Smith.includes(:p_name, :status, :smith_display, :main_material_name, :sub_material_1_name, :sub_material_2_name, :sub_material_3_name, :sub_material_4_name, [main_material: :original_price], [sub_material_1: :original_price], [sub_material_2: :original_price], [sub_material_3: :original_price], [sub_material_4: :original_price], [result: [:kind_name, :ability_name]], [source_last: [:kind_name, :ability_name]], [source: [:kind_name, :ability_name]]).search(params[:q]).result.count()
+    @search	= Smith.includes(:p_name, :status, :smith_display, :main_material_name, :sub_material_1_name, :sub_material_2_name, :sub_material_3_name, :sub_material_4_name, [main_material: :original_price], [sub_material_1: :original_price], [sub_material_2: :original_price], [sub_material_3: :original_price], [sub_material_4: :original_price], [result: [:kind_name, :ability_name]], [source_last: [:kind_name, :ability_name]], [source: [:kind_name, :ability_name]]).page(params[:page]).search(params[:q])
     @search.sorts = 'id asc' if @search.sorts.empty?
     @smiths	= @search.result.per(50)
   end
@@ -29,6 +37,9 @@ class SmithsController < ApplicationController
     reference_text_assign(params, "result_kind_name_name", "result_kind_form")
     reference_text_assign(params, "source_kind_name_name", "source_kind_form")
     reference_text_assign(params, "result_ability_name_name", "result_ability_form")
+    reference_number_assign(params, "smith_display_total_price", "total_price_form")
+    reference_number_assign(params, "smith_display_price_rate", "price_rate_form")
+    reference_number_assign(params, "smith_display_display_rate", "display_rate_form")
         
     @p_name_form = params["p_name_form"]
     @result_no_form = params["result_no_form"]
@@ -43,6 +54,9 @@ class SmithsController < ApplicationController
     @result_kind_form = params["result_kind_form"]
     @source_kind_form = params["source_kind_form"]
     @result_ability_form = params["result_ability_form"]
+    @total_price_form = params["total_price_form"]
+    @price_rate_form = params["price_rate_form"]
+    @display_rate_form = params["display_rate_form"]
         
   end
   # GET /smiths/1

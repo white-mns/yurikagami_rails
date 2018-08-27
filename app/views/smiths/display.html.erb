@@ -1,14 +1,13 @@
-<h1>装備作成一覧</h1>
+<h1>装備作成一覧 | 作成直後価値減衰率</h1>
 
 <div class="col-md-12">
     <div class="bs-component">
       <ul class="breadcrumb" style="margin-bottom: 5px;">
-        <li>装備作成一覧</li>
-        <li><%= link_to "装備作成一覧 | 作成直後価値減衰率", smith_display_rates_path %></li>
+        <li><%= link_to "装備作成一覧", smiths_path %></li>
+        <li>装備作成一覧 | 作成直後価値減衰率</li>
       </ul>
   </div>
 </div><br><br><br>
-
 <div class="bs-docs-section">
   <div class="row">
     <div class="col-md-12">
@@ -37,7 +36,7 @@
         基本減衰率：(1/2)*(5/6)=0.41666...<br>
         基本減衰率に対する割合：価値減衰率 / 0.41666...（切り捨て処理の影響から、99.8%以上は100%として表示）<br>
         詳細は<%= link_to "同じ素材・異なる作成者での装備作成まとめ | START!!", "https://tkg.mn-s.net/start/?p=878" %></p>
-<%= search_form_for @search do |f| %>
+<%= search_form_for @search, url: smith_display_rates_path do |f| %>
 <table id="search_close" class="table table-striped table-bordered table-hover" style="display:none;" onclick="search_open(true);">
 
   <tbody>
@@ -67,8 +66,14 @@
     <td class="formText"><%= text_field_tag :main_material_name_form, @main_material_name_form %></td>
   <td><%= f.label :sub_material_1_name_id_form, 'サブ素材名' %></td>
     <td class="formText"><%= text_field_tag :sub_material_name_form, @sub_material_name_form %></td></tr>
-  <tr><td><%= f.label :display_rate_form, '基本減衰率に対する割合(0～1)' %></td>
-    <td colspan="3" class="formNum"><%= text_field_tag :display_rate_form, @display_rate_form %></td></tr>
+  <tr><td><%= f.label :kind_form, '作成装備の価値' %></td>
+    <td class="formText"><%= text_field_tag :result_kind_form, @result_kind_form %></td>
+  <td><%= f.label :total_price_form, '合計素材価値' %></td>
+    <td class="formNum"><%= text_field_tag :total_price_form, @total_price_form %></td></tr>
+  <tr><td><%= f.label :price_rate_form, '価値減衰率' %></td>
+    <td class="formNum"><%= text_field_tag :price_rate_form, @price_rate_form %></td>
+  <td><%= f.label :display_rate_form, '基本減衰率に対する割合(0～1)' %></td>
+    <td class="formNum"><%= text_field_tag :display_rate_form, @display_rate_form %></td></tr>
   <tr><td></td><td colspan="3">
     <%= f.submit '検索する' %>
     </td></tr>
@@ -90,18 +95,22 @@
       <th><%= sort_link(@search, :result_no,'更新回', default_order: :desc) %></th>
       <th><%= sort_link(@search, :e_no,'キャラクター(Eno)', default_order: :desc) %></th>
       <th><%= sort_link(@search, :party_no, 'パーティ', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :status_lv, 'Lv', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :status_str, '腕力', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :status_int, '魔力', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :status_tec, '器用', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :status_agi, '反応', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :status_def, '守護', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :status_skill, '熟練', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :smith_display_total_price, '素材合計', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :smith_display_price_rate, '価値割合', default_order: :desc) %></th>
+      <th><%= sort_link(@search, :smith_display_display_rate, '基本減衰率に対する割合', default_order: :desc) %></th>
       <th></th>
+      <th><%= sort_link(@search, :result_prize, '価値', default_order: :desc) %></th>
       <th><%= sort_link(@search, :result_i_no, 'INo', default_order: :desc) %></th>
       <th><%= sort_link(@search, :result_name, '名前', default_order: :desc) %></th>
       <th><%= sort_link(@search, :result_kind, '種類', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :result_slash, '斬撃', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :result_charge, '突撃', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :result_magic, '魔力', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :result_guard, '防御', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :result_protect, '守護', default_order: :desc) %></th>
       <th><%= sort_link(@search, :result_ability, '能力', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :result_prize, '価値', default_order: :desc) %></th>
-      <th><%= sort_link(@search, :smith_display_display_rate, '基本減衰率に対する割合', default_order: :desc) %></th>
       <th></th>
       <th><%= sort_link(@search, :main_material_name_id, 'メイン素材', default_order: :desc) %></th>
       <th><%= sort_link(@search, :sub_material_1_name_id, 'サブ素材1', default_order: :desc) %></th>
@@ -122,26 +131,30 @@
             end
             smith.p_name.name.html_safe + "(" + e_no_f_no + ")" %></td>
         <td rowspan="2"><%= smith.party_no %></td>
-        <td>作成</td>
-        <td><%= smith.result_i_no %></td>
-        <td><%= smith.result.name.html_safe if smith.result %>
-            <%= "推測不可" if smith.result_i_no == 0 %>
-            <%= "作成失敗" if smith.result_i_no == -1 %></td>
-        <td><%= smith.result.kind_name.name if smith.result && smith.result.kind_name %></td>
-        <td><%= smith.result.slash  if smith.result %></td>
-        <td><%= smith.result.charge if smith.result %></td>
-        <td><%= smith.result.magic if smith.result %></td>
-        <td><%= smith.result.guard if smith.result %></td>
-        <td><%= smith.result.protect if smith.result %></td>
-        <td><%= smith.result.ability_name.name if smith.result && smith.result.ability_name %></td>
-        <td><%= smith.result.prize if smith.result %></td>
-        <td><%= if smith.smith_display then
+        <td rowspan="2" style="border-left: 0.2em solid #ccc !important;"><%= smith.status.lv  if smith.status %></td>
+        <td rowspan="2" style="border-left: 0.2em solid #ccc !important;"><%= smith.status.str if smith.status %></td>
+        <td rowspan="2"><%= smith.status.int if smith.status %></td>
+        <td rowspan="2"><%= smith.status.tec if smith.status %></td>
+        <td rowspan="2"><%= smith.status.agi if smith.status %></td>
+        <td rowspan="2"><%= smith.status.def if smith.status %></td>
+        <td rowspan="2"><%= smith.status.skill if smith.status %></td>
+        <td rowspan="2" style="border-left: 0.2em solid #ccc !important;"><%= smith.smith_display.total_price if smith.smith_display %></td>
+        <td rowspan="2"><%= smith.smith_display.price_rate.floor(4) if smith.smith_display %></td>
+        <td rowspan="2"><%= if smith.smith_display then
                                 if smith.smith_display.display_rate < 0.998 then
                                     (smith.smith_display.display_rate * 100).floor(2)
                                 else
                                     100
                                 end
                             end %>%</td>
+        <td>作成</td>
+        <td><%= smith.result.prize if smith.result %></td>
+        <td><%= smith.result_i_no %></td>
+        <td><%= smith.result.name.html_safe if smith.result %>
+            <%= "推測不可" if smith.result_i_no == 0 %>
+            <%= "作成失敗" if smith.result_i_no == -1 %></td>
+        <td><%= smith.result.kind_name.name if smith.result && smith.result.kind_name %></td>
+        <td><%= smith.result.ability_name.name if smith.result && smith.result.ability_name %></td>
         <td style="border-left: 0.2em solid #ccc !important;"></td>
         <td><%= smith.main_material_name.name + "(INo." + sprintf("%d", smith.main_material_i_no) + ")" if smith.main_material_i_no > 0 && smith.main_material_name %></td>
         <td><%= smith.sub_material_1_name.name + "(INo." + sprintf("%d", smith.sub_material_1_i_no) + ")" if smith.sub_material_1_i_no > 0 && smith.sub_material_1_name %></td>
@@ -155,25 +168,19 @@
       </tr>
       <tr>
         <td>参考</td>
-        <td><%= smith.source_i_no %></td>
         <% source = smith.source ? smith.source : smith.source_last %>
+        <td style="color:#ddd;"><%= source.prize if source %></td>
+        <td><%= smith.source_i_no %></td>
         <td><%= source.name.html_safe if source %>
             <%= "推測不可" if smith.source_i_no == 0 %></td>
         <td><%= source.kind_name.name if source && source.kind_name %></td>
-        <td><%= source.slash   if source %></td>
-        <td><%= source.charge  if source %></td>
-        <td><%= source.magic   if source %></td>
-        <td><%= source.guard   if source %></td>
-        <td><%= source.protect if source %></td>
         <td><%= source.ability_name.name if source && source.ability_name %></td>
-        <td style="color:#ddd;"><%= source.prize if source %></td>
-        <td></td>
-        <td style="border-left: 0.2em solid #ccc !important;">価値</td>
-        <td><%= sprintf("%d", smith.main_material.prize) if smith.main_material %></td>
-        <td><%= sprintf("%d", smith.sub_material_1.prize) if smith.sub_material_1 %></td>
-        <td><%= sprintf("%d", smith.sub_material_2.prize) if smith.sub_material_2 %></td>
-        <td><%= sprintf("%d", smith.sub_material_3.prize) if smith.sub_material_3 %></td>
-        <td><%= sprintf("%d", smith.sub_material_4.prize) if smith.sub_material_4 %></td>
+        <td style="border-left: 0.2em solid #ccc !important;">販売価値</td>
+        <td><%= sprintf("%d", smith.main_material.original_price.price) if smith.main_material.original_price && smith.main_material.original_price %></td>
+        <td><%= sprintf("%d", smith.sub_material_1.original_price.price) if smith.sub_material_1 && smith.sub_material_1.original_price%></td>
+        <td><%= sprintf("%d", smith.sub_material_2.original_price.price) if smith.sub_material_2 && smith.sub_material_2.original_price%></td>
+        <td><%= sprintf("%d", smith.sub_material_3.original_price.price) if smith.sub_material_3 && smith.sub_material_3.original_price%></td>
+        <td><%= sprintf("%d", smith.sub_material_4.original_price.price) if smith.sub_material_4 && smith.sub_material_4.original_price%></td>
       </tr>
       <tr>
       </tr>

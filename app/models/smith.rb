@@ -13,4 +13,6 @@ class Smith < ApplicationRecord
 	belongs_to :sub_material_2_name, :foreign_key => :sub_material_2_name_id,:primary_key => :proper_id, :class_name => 'ProperName'
 	belongs_to :sub_material_3_name, :foreign_key => :sub_material_3_name_id,:primary_key => :proper_id, :class_name => 'ProperName'
 	belongs_to :sub_material_4_name, :foreign_key => :sub_material_4_name_id,:primary_key => :proper_id, :class_name => 'ProperName'
+	belongs_to :status,	        :foreign_key => [:e_no, :result_no, :sub_no, :generate_no], :primary_key => [:e_no, :result_no, :sub_no, :generate_no], :class_name => 'Status'
+	belongs_to :smith_display,	:foreign_key => [:e_no, :result_no, :sub_no, :generate_no], :primary_key => [:e_no, :result_no, :sub_no, :generate_no], :class_name => 'SmithDisplay'
 end
