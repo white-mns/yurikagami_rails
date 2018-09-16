@@ -33,7 +33,6 @@ module MyUtility
           text.slice!(0,1)
           not_suffix = "not_"
           operator_suffix = "all"
-          operator_suffix = "all"
           data_name = data_name.gsub(/_or_/, "_and_")
       end
       
