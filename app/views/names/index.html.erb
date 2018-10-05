@@ -1,4 +1,4 @@
-<h1>名前一覧</h1>
+<h1>キャラクター名一覧</h1>
 
 <div class="bs-docs-section">
   <div class="row">
@@ -62,7 +62,7 @@
     <tr>
       <th><%= sort_link(@search, :result_no,'更新回', default_order: :desc) %></th>
       <th><%= sort_link(@search, :e_no,'キャラクター(Eno, Fno)', default_order: :desc) %></th>
-      <th colspan="1">結果リンク</th>
+      <th colspan="2">結果リンク</th>
     </tr>
   </thead>
 
@@ -70,16 +70,9 @@
     <% @names.each do |name| %>
       <tr>
         <td><%= name.result_no %></td>
-        <td><%= e_no_f_no = sprintf("%d",name.e_no)
-            if name.sub_no > 0 then
-                e_no_f_no += ", " + sprintf("%d",name.sub_no)
-            end
-            name.name.html_safe + "(" + e_no_f_no + ")" %></td>
-        <td><%= file_name = sprintf("%d",name.e_no)
-            if name.sub_no > 0 then
-                file_name += "_" + sprintf("%d",name.sub_no)
-            end
-            link_to " 結果", "http://csyuki.sakura.ne.jp/cgi-bin/prism/result/status"+file_name+".html", :target => "_blank" %></td>
+        <td><%= p_name_text(name.e_no, name.sub_no, name) %></td>
+        <td><%= character_link(name.e_no, name.sub_no)%></td>
+        <td><%= character_old_link(@last_result, name.e_no, name.sub_no, name.result_no)%></td>
       </tr>
     <% end %>
   </tbody>

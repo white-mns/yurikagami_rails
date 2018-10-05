@@ -73,7 +73,7 @@
       <th><%= sort_link(@search, :total_price, '素材価値', default_order: :desc) %></th>
       <th><%= sort_link(@search, :price_rate, '価値割合', default_order: :desc) %></th>
       <th><%= sort_link(@search, :display_rate, '発揮率', default_order: :desc) %></th>
-      <th colspan="1">結果リンク</th>
+      <th colspan="2">結果リンク</th>
     </tr>
   </thead>
 
@@ -81,20 +81,13 @@
     <% @smith_displays.each do |smith_display| %>
       <tr>
         <td><%= smith_display.result_no %></td>
-        <td><%= e_no_f_no = sprintf("%d",smith_display.e_no)
-            if smith_display.sub_no > 0 then
-                e_no_f_no += ", " + sprintf("%d",smith_display.sub_no)
-            end
-            smith_display.p_name.name.html_safe + "(" + e_no_f_no + ")" %></td>
+        <td><%= p_name_text(smith_display.e_no, smith_display.sub_no, smith_display.p_name) %></td>
         <td><%= smith_display.party_no %></td>
         <td><%= smith_display.total_price %></td>
         <td><%= smith_display.price_rate %></td>
         <td><%= (smith_display.display_rate * 100).to_i %>%</td>
-        <td><%= file_name = sprintf("%d",smith_display.e_no)
-            if smith_display.sub_no > 0 then
-                file_name += "_" + sprintf("%d",smith_display.sub_no)
-            end
-            link_to " 結果", "http://csyuki.sakura.ne.jp/cgi-bin/prism/result/status"+file_name+".html", :target => "_blank" %></td>
+        <td><%= character_link(smith_display.e_no, smith_display.sub_no)%></td>
+        <td><%= character_old_link(@last_result, smith_display.e_no, smith_display.sub_no, smith_display.result_no)%></td>
       </tr>
     <% end %>
   </tbody>

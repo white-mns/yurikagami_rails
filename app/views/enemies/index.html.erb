@@ -64,7 +64,7 @@
       <th><%= sort_link(@search, :party_no, 'Pno', default_order: :desc) %></th>
       <th><%= sort_link(@search, :enemy, '敵名', default_order: :desc) %></th>
       <th><%= sort_link(@search, :suffix, '添字', default_order: :desc) %></th>
-      <th colspan="1">結果リンク</th>
+      <th colspan="2">結果リンク</th>
     </tr>
   </thead>
 
@@ -75,8 +75,8 @@
         <td><%= enemy.party_no %></td>
         <td><%= enemy.enemy_name.name %></td>
         <td><%= enemy.suffix %></td>
-        <td><%= file_name = sprintf("%d",enemy.party_no)
-            link_to " 結果", "http://csyuki.sakura.ne.jp/cgi-bin/prism/result/result"+file_name+".html", :target => "_blank" %></td>
+        <td><%= battle_link(enemy.party_no)%></td>
+        <td><%= battle_old_link(@last_result, enemy.party_no, enemy.result_no)%></td>
       </tr>
     <% end %>
   </tbody>

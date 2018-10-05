@@ -117,7 +117,7 @@
       <th><%= sort_link(@search, :sub_material_2_name_id, 'サブ素材2', default_order: :desc) %></th>
       <th><%= sort_link(@search, :sub_material_3_name_id, 'サブ素材3', default_order: :desc) %></th>
       <th><%= sort_link(@search, :sub_material_4_name_id, 'サブ素材4', default_order: :desc) %></th>
-      <th colspan="2">結果リンク</th>
+      <th colspan="4">結果リンク</th>
     </tr>
   </thead>
 
@@ -125,11 +125,7 @@
     <% @smiths.each do |smith| %>
       <tr>
         <td rowspan="2"><%= smith.result_no %></td>
-        <td rowspan="2"><%= e_no_f_no = sprintf("%d",smith.e_no)
-            if smith.sub_no > 0 then
-                e_no_f_no += ", " + sprintf("%d",smith.sub_no)
-            end
-            smith.p_name.name.html_safe + "(" + e_no_f_no + ")" %></td>
+        <td rowspan="2"><%= p_name_text(smith.e_no, smith.sub_no, smith.p_name) %></td>
         <td rowspan="2"><%= smith.party_no %></td>
         <td rowspan="2" style="border-left: 0.2em solid #ccc !important;"><%= smith.status.lv  if smith.status %></td>
         <td rowspan="2" style="border-left: 0.2em solid #ccc !important;"><%= smith.status.str if smith.status %></td>
@@ -161,10 +157,10 @@
         <td><%= smith.sub_material_2_name.name + "(INo." + sprintf("%d", smith.sub_material_2_i_no) + ")" if smith.sub_material_2_i_no > 0 && smith.sub_material_2_name %></td>
         <td><%= smith.sub_material_3_name.name + "(INo." + sprintf("%d", smith.sub_material_3_i_no) + ")" if smith.sub_material_3_i_no > 0 && smith.sub_material_3_name %></td>
         <td><%= smith.sub_material_4_name.name + "(INo." + sprintf("%d", smith.sub_material_4_i_no) + ")" if smith.sub_material_4_i_no > 0 && smith.sub_material_4_name %></td>
-        <td rowspan="2"><%= file_name = sprintf("%d",smith.e_no)
-            link_to " キャラ結果", "http://csyuki.sakura.ne.jp/cgi-bin/prism/result/status"+file_name+".html", :target => "_blank" %></td>
-        <td rowspan="2"><%= file_name = sprintf("%d",smith.party_no)
-            link_to " 戦闘結果", "http://csyuki.sakura.ne.jp/cgi-bin/prism/result/result"+file_name+".html", :target => "_blank" %></td>
+        <td rowspan="2"><%= character_link(smith.e_no, smith.sub_no)%></td>
+        <td rowspan="2"><%= character_old_link(@last_result, smith.e_no, smith.sub_no, smith.result_no)%></td>
+        <td rowspan="2"><%= battle_link(smith.party_no)%></td>
+        <td rowspan="2"><%= battle_old_link(@last_result, smith.party_no, smith.result_no)%></td>
       </tr>
       <tr>
         <td>参考</td>

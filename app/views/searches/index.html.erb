@@ -87,7 +87,7 @@
       <th><%= sort_link(@search, :status_money, '所持金', default_order: :desc) %></th>
       <th><%= sort_link(@search, :item_name, 'アイテム名', default_order: :desc) %></th>
       <th><%= sort_link(@search, :value, '収入', default_order: :desc) %></th>
-      <th colspan="1">結果リンク</th>
+      <th colspan="2">結果リンク</th>
     </tr>
   </thead>
 
@@ -95,19 +95,12 @@
     <% @searches.each do |search| %>
       <tr>
         <td><%= search.result_no %></td>
-        <td><%= e_no_f_no = sprintf("%d",search.e_no)
-            if search.sub_no > 0 then
-                e_no_f_no += ", " + sprintf("%d",search.sub_no)
-            end
-            search.p_name.name.html_safe + "(" + e_no_f_no + ")" if search.p_name %></td>
+        <td><%= p_name_text(search.e_no, search.sub_no, search.p_name) %></td>
         <td><%= search.status.money %></td>
         <td><%= if search.item then search.item.name else search.i_name end %></td>
         <td><%= if search.value > -90000 then search.value else "取得不可" end %></td>
-        <td><%= file_name = sprintf("%d",search.e_no)
-            if search.sub_no > 0 then
-                file_name += "_" + sprintf("%d",search.sub_no)
-            end
-            link_to " 結果", "http://csyuki.sakura.ne.jp/cgi-bin/prism/result/status"+file_name+".html", :target => "_blank" %></td>
+        <td><%= character_link(search.e_no, search.sub_no)%></td>
+        <td><%= character_old_link(@last_result, search.e_no, search.sub_no, search.result_no)%></td>
       </tr>
     <% end %>
   </tbody>

@@ -67,7 +67,7 @@
       <th><%= sort_link(@search, :e_no,'キャラクター(Eno)', default_order: :desc) %></th>
       <th><%= sort_link(@search, :skill_no, '技番', default_order: :desc) %></th>
       <th><%= sort_link(@search, :skill_id, 'スキル名', default_order: :desc) %></th>
-      <th colspan="1">結果リンク</th>
+      <th colspan="2">結果リンク</th>
     </tr>
   </thead>
 
@@ -75,18 +75,11 @@
     <% @skills.each do |skill| %>
       <tr>
         <td><%= skill.result_no %></td>
-        <td><%= e_no_f_no = sprintf("%d",skill.e_no)
-            if skill.sub_no > 0 then
-                e_no_f_no += ", " + sprintf("%d",skill.sub_no)
-            end
-            skill.p_name.name.html_safe + "(" + e_no_f_no + ")" %></td>
+        <td><%= p_name_text(skill.e_no, skill.sub_no, skill.p_name) %></td>
         <td><%= skill.skill_no %></td>
         <td><%= skill.skill_data.name if skill.skill_data %></td>
-        <td><%= file_name = sprintf("%d",skill.e_no)
-            if skill.sub_no > 0 then
-                file_name += "_" + sprintf("%d",skill.sub_no)
-            end
-            link_to " 結果", "http://csyuki.sakura.ne.jp/cgi-bin/prism/result/status"+file_name+".html", :target => "_blank" %></td>
+        <td><%= character_link(skill.e_no, skill.sub_no)%></td>
+        <td><%= character_old_link(@last_result, skill.e_no, skill.sub_no, skill.result_no)%></td>
       </tr>
     <% end %>
   </tbody>

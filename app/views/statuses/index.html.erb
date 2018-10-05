@@ -144,11 +144,7 @@
     <% @statuses.each do |status| %>
       <tr>
         <td><%= status.result_no %></td>
-        <td><%= e_no_f_no = sprintf("%d",status.e_no)
-            if status.sub_no > 0 then
-                e_no_f_no += ", " + sprintf("%d",status.sub_no)
-            end
-            status.p_name.name.html_safe + "(" + e_no_f_no + ")" %></td>
+        <td><%= p_name_text(status.e_no, status.sub_no, status.p_name) %></td>
         <td><%= status.lv %></td>
         <td><%= status.exp %></td>
         <td><%= status.mexp %></td>
@@ -171,11 +167,8 @@
         <td><%= status.tribe_name.name %></td>
         <td><%= status.money %></td>
         <td><%= status.sundries %></td>
-        <td><%= file_name = sprintf("%d",status.e_no)
-            if status.sub_no > 0 then
-                file_name += "_" + sprintf("%d",status.sub_no)
-            end
-            link_to " 結果", "http://csyuki.sakura.ne.jp/cgi-bin/prism/result/status"+file_name+".html", :target => "_blank" %></td>
+        <td><%= character_link(status.e_no, status.sub_no)%></td>
+        <td><%= character_old_link(@last_result, status.e_no, status.sub_no, status.result_no)%></td>
       </tr>
     <% end %>
   </tbody>

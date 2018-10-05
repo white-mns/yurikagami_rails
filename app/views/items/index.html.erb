@@ -103,7 +103,7 @@
       <th><%= sort_link(@search, :prize, '価値', default_order: :desc) %></th>
       <th><%= sort_link(@search, :ability, '能力', default_order: :desc) %></th>
       <th><%= sort_link(@search, :equip, '装備', default_order: :desc) %></th>
-      <th colspan="1">結果リンク</th>
+      <th colspan="2">結果リンク</th>
     </tr>
   </thead>
 
@@ -111,11 +111,7 @@
     <% @items.each do |item| %>
       <tr>
         <td><%= item.result_no %></td>
-        <td><%= e_no_f_no = sprintf("%d",item.e_no)
-            if item.sub_no > 0 then
-                e_no_f_no += ", " + sprintf("%d",item.sub_no)
-            end
-            item.p_name.name.html_safe + "(" + e_no_f_no + ")" %></td>
+        <td><%= p_name_text(item.e_no, item.sub_no, item.p_name) %></td>
         <td><%= item.item_no %></td>
         <td><%= item.name.html_safe %></td>
         <td><%= item.kind_name.name %></td>
@@ -131,11 +127,8 @@
         <td><%= item.prize %></td>
         <td><%= item.ability_name.name %></td>
         <td><%= "装備" if item.equip == 1 %></td>
-        <td><%= file_name = sprintf("%d",item.e_no)
-            if item.sub_no > 0 then
-                file_name += "_" + sprintf("%d",item.sub_no)
-            end
-            link_to " 結果", "http://csyuki.sakura.ne.jp/cgi-bin/prism/result/status"+file_name+".html", :target => "_blank" %></td>
+        <td><%= character_link(item.e_no, item.sub_no)%></td>
+        <td><%= character_old_link(@last_result, item.e_no, item.sub_no, item.result_no)%></td>
       </tr>
     <% end %>
   </tbody>

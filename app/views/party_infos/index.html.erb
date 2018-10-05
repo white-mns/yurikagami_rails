@@ -73,7 +73,7 @@
       <th><%= sort_link(@search, :party_members_e_no, 'メンバー', default_order: :desc) %></th>
       <th><%= sort_link(@search, :member_num, '人数', default_order: :desc) %></th>
       <th><%= sort_link(@search, :battler_num, '参戦', default_order: :desc) %></th>
-      <th colspan="1">結果リンク</th>
+      <th colspan="2">結果リンク</th>
     </tr>
   </thead>
 
@@ -84,12 +84,12 @@
         <td><%= party_info.party_no %></td>
         <td><%= party_info.name %></td>
         <td><% party_info.party_members.each do |party_member| %>
-            <%= party_member.p_name.name.html_safe + "(" + sprintf("%d",party_member.e_no) + ")" if party_member.p_name %><br>
+            <%= p_name_text(party_member.e_no, party_member.sub_no, party_member.p_name) %><br>
             <% end %></td>
         <td><%= party_info.member_num %></td>
         <td><%= party_info.battler_num %></td>
-        <td><%= file_name = sprintf("%d",party_info.party_no)
-            link_to " 結果", "http://csyuki.sakura.ne.jp/cgi-bin/prism/result/result"+file_name+".html", :target => "_blank" %></td>
+        <td><%= battle_link(party_info.party_no)%></td>
+        <td><%= battle_old_link(@last_result, party_info.party_no, party_info.result_no)%></td>
       </tr>
     <% end %>
   </tbody>

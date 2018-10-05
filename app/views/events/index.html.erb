@@ -69,7 +69,7 @@
       <th><%= sort_link(@search, :event, 'イベント名', default_order: :desc) %></th>
       <th><%= sort_link(@search, :flag, '状況', default_order: :desc) %></th>
       <th><%= sort_link(@search, :text, '説明', default_order: :desc) %></th>
-      <th colspan="1">結果リンク</th>
+      <th colspan="2">結果リンク</th>
     </tr>
   </thead>
 
@@ -77,19 +77,12 @@
     <% @events.each do |event| %>
       <tr>
         <td><%= event.result_no %></td>
-        <td><%= e_no_f_no = sprintf("%d",event.e_no)
-            if event.sub_no > 0 then
-                e_no_f_no += ", " + sprintf("%d",event.sub_no)
-            end
-            event.p_name.name.html_safe + "(" + e_no_f_no + ")" %></td>
+        <td><%= p_name_text(event.e_no, event.sub_no, event.p_name) %></td>
         <td><%= event.event_name.name %></td>
         <td><%= event.flag_name.name %></td>
         <td><%= event.text_name.name %></td>
-        <td><%= file_name = sprintf("%d",event.e_no)
-            if event.sub_no > 0 then
-                file_name += "_" + sprintf("%d",event.sub_no)
-            end
-            link_to " 結果", "http://csyuki.sakura.ne.jp/cgi-bin/prism/result/status"+file_name+".html", :target => "_blank" %></td>
+        <td><%= character_link(event.e_no, event.sub_no)%></td>
+        <td><%= character_old_link(@last_result, event.e_no, event.sub_no, event.result_no)%></td>
       </tr>
     <% end %>
   </tbody>

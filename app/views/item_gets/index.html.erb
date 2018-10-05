@@ -80,7 +80,7 @@
       <th><%= sort_link(@search, :item_data_prize, '価値', default_order: :desc) %></th>
       <th><%= sort_link(@search, :current_place_place_name_name, '現在地', default_order: :desc) %></th>
       <th><%= sort_link(@search, :is_pk, '戦闘種別', default_order: :desc) %></th>
-      <th colspan="2">結果リンク</th>
+      <th colspan="4">結果リンク</th>
     </tr>
   </thead>
 
@@ -88,24 +88,17 @@
     <% @item_gets.each do |item_get| %>
       <tr>
         <td><%= item_get.result_no %></td>
-        <td><%= e_no_f_no = sprintf("%d",item_get.e_no)
-            if item_get.sub_no > 0 then
-                e_no_f_no += ", " + sprintf("%d",item_get.sub_no)
-            end
-            item_get.p_name.name.html_safe + "(" + e_no_f_no + ")" if item_get.p_name %></td>
+        <td><%= p_name_text(item_get.e_no, item_get.sub_no, item_get.p_name) %></td>
         <td><%= item_get.party_no %></td>
         <td><%= item_get.enemy_name.name if item_get.enemy_name %></td>
         <td><%= item_get.item %></td>
         <td><%= if item_get.item_data then sprintf("%d", item_get.item_data.prize) else "推測不可" end %></td>
         <td><%= item_get.current_place.place_name.name if item_get.current_place.place_name %></td>
         <td><%= "PK" if item_get.is_pk == 1%></td>
-        <td><%= file_name = sprintf("%d",item_get.e_no)
-            if item_get.sub_no > 0 then
-                file_name += "_" + sprintf("%d",item_get.sub_no)
-            end
-            link_to " キャラ結果", "http://csyuki.sakura.ne.jp/cgi-bin/prism/result/status"+file_name+".html", :target => "_blank" %></td>
-        <td><%= file_name = sprintf("%d",item_get.party_no)
-            link_to " 戦闘結果", "http://csyuki.sakura.ne.jp/cgi-bin/prism/result/result"+file_name+".html", :target => "_blank" %></td>
+        <td><%= character_link(item_get.e_no, item_get.sub_no)%></td>
+        <td><%= character_old_link(@last_result, item_get.e_no, item_get.sub_no, item_get.result_no)%></td>
+        <td><%= battle_link(item_get.party_no)%></td>
+        <td><%= battle_old_link(@last_result, item_get.party_no, item_get.result_no)%></td>
       </tr>
     <% end %>
   </tbody>

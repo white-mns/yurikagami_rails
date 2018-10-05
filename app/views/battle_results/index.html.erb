@@ -92,7 +92,7 @@
       <th><%= sort_link(@search, :enemy_party_info_current_place_place_name_name, '現在地', default_order: :desc) %></th>
       <th><%= sort_link(@search, :income_is_pk, '戦闘種別', default_order: :desc) %></th>
       <th><%= sort_link(@search, :battle_result, '結果', default_order: :desc) %></th>
-      <th colspan="1">結果リンク</th>
+      <th colspan="2">結果リンク</th>
     </tr>
   </thead>
 
@@ -103,7 +103,7 @@
         <td><%= battle_result.party_no %></td>
         <td><% if battle_result.enemy_party_info && battle_result.enemy_party_info.current_place && battle_result.enemy_party_info.current_place.party_info then 
                  battle_result.enemy_party_info.current_place.party_info.party_members.each do |party_member| %>
-                   <%= party_member.p_name.name.html_safe + "(" + sprintf("%d",party_member.e_no) + ")" if party_member.p_name %><br>
+                   <%= p_name_text(party_member.e_no, party_member.sub_no, party_member.p_name) %><br>
             <%   end
                end %></td>
         <td><%= battle_result.enemy_party_info.current_place.party_info.battler_num if battle_result.enemy_party_info && battle_result.enemy_party_info.current_place && battle_result.enemy_party_info.current_place.party_info %></td>
@@ -120,8 +120,9 @@
         <td><%= battle_result.enemy_party_info.current_place.place_name.name if battle_result.enemy_party_info && battle_result.enemy_party_info.current_place && battle_result.enemy_party_info.current_place.place_name %></td>
         <td><%= "通常" if battle_result.income && battle_result.income.is_pk == 0 %><%= "練習" if battle_result.income && battle_result.income.is_pk == 1 %><%= "PK" if battle_result.income && battle_result.income.is_pk == 2 %></td>
         <td><%= "勝利" if battle_result.battle_result == 1 %><%= "引分" if battle_result.battle_result == 0 %><%= "敗北" if battle_result.battle_result == -1 %></td>
-        <td><%= file_name = sprintf("%d",battle_result.party_no)
-            link_to " 戦闘結果", "http://csyuki.sakura.ne.jp/cgi-bin/prism/result/result"+file_name+".html", :target => "_blank" %></td>
+        <td><%= battle_link(battle_result.party_no)%></td>
+        <td><%= battle_old_link(@last_result, battle_result.party_no, battle_result.result_no)%></td>
+      </tr>
       </tr>
     <% end %>
   </tbody>

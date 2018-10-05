@@ -73,7 +73,7 @@
       <th><%= sort_link(@search, :place, '地名', default_order: :desc) %></th>
       <th><%= sort_link(@search, :shop, '店', default_order: :desc) %></th>
       <th><%= sort_link(@search, :inn, '宿', default_order: :desc) %></th>
-      <th colspan="1">結果リンク</th>
+      <th colspan="2">結果リンク</th>
     </tr>
   </thead>
 
@@ -84,14 +84,14 @@
         <td><%= current_place.party_no %></td>
         <td><% if current_place.party_info then 
                  current_place.party_info.party_members.each do |party_member| %>
-                   <%= party_member.p_name.name.html_safe + "(" + sprintf("%d",party_member.e_no) + ")" if party_member.p_name %><br>
+                   <%= p_name_text(party_member.e_no, party_member.sub_no, party_member.p_name) %><br>
             <%   end
                end %></td>
         <td><%= current_place.place_name.name if current_place.place_name %></td>
         <td><%= link_to " ○" + "(" + sprintf("%d", current_place.shop) + ")", "http://csyuki.sakura.ne.jp/cgi-bin/prism/result/shop"+sprintf("%d", current_place.shop)+".html", :target => "_blank" if current_place.shop > 0 %></td>
         <td><%= "○" if current_place.inn > 0 %></td>
-        <td><%= file_name = sprintf("%d",current_place.party_no)
-            link_to " 結果", "http://csyuki.sakura.ne.jp/cgi-bin/prism/result/result"+file_name+".html", :target => "_blank" %></td>
+        <td><%= battle_link(current_place.party_no)%></td>
+        <td><%= battle_old_link(@last_result, current_place.party_no, current_place.result_no)%></td>
       </tr>
     <% end %>
   </tbody>

@@ -82,7 +82,7 @@
       <th><%= sort_link(@search, :age, '年齢', default_order: :desc) %></th>
       <th><%= sort_link(@search, :height, '身長', default_order: :desc) %></th>
       <th><%= sort_link(@search, :weight, '体重', default_order: :desc) %></th>
-      <th colspan="1">結果リンク</th>
+      <th colspan="2">結果リンク</th>
     </tr>
   </thead>
 
@@ -90,11 +90,7 @@
     <% @profiles.each do |profile| %>
       <tr>
         <td><%= profile.result_no %></td>
-        <td><%= e_no_f_no = sprintf("%d",profile.e_no)
-            if profile.sub_no > 0 then
-                e_no_f_no += ", " + sprintf("%d",profile.sub_no)
-            end
-            profile.p_name.name.html_safe + "(" + e_no_f_no + ")" %></td>
+        <td><%= p_name_text(profile.e_no, profile.sub_no, profile.p_name) %></td>
         <td><%= profile.nickname %></td>
         <td><%= profile.title %></td>
         <td><%= profile.job %></td>
@@ -102,11 +98,8 @@
         <td><%= profile.age %></td>
         <td><%= profile.height %></td>
         <td><%= profile.weight %></td>
-        <td><%= file_name = sprintf("%d",profile.e_no)
-            if profile.sub_no > 0 then
-                file_name += "_" + sprintf("%d",profile.sub_no)
-            end
-            link_to " 結果", "http://csyuki.sakura.ne.jp/cgi-bin/prism/result/status"+file_name+".html", :target => "_blank" %></td>
+        <td><%= character_link(profile.e_no, profile.sub_no)%></td>
+        <td><%= character_old_link(@last_result, profile.e_no, profile.sub_no, profile.result_no)%></td>
       </tr>
     <% end %>
   </tbody>
