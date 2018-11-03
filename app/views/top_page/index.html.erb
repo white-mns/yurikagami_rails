@@ -1,6 +1,7 @@
 <h1>百合鏡4期データ小屋</h1>
 <p>このサイトでは<a href="http://csyuki.sakura.ne.jp/cgi-bin/prism/" target="_blank">百合鏡</a>の4期結果を解析して得られる情報を扱っていました。<br>
-4期運営終了に伴い、全結果から取得したデータを残しています。</p><br>
+4期運営終了に伴い、全結果から取得したデータを残しています。<br>
+第59回結果以外の過去結果へのリンクは弊サイト<%= link_to "データ小屋アーカイブス", "https://archives.teiki.org/yk/4/" %>に保存したものに置き換えています。</p><br>
 <p>第<%= @last_result %>回<%= "再" if @last_generate > 0 %><%= num = 2; text = ""; while num <= @last_generate do num += 1; text += "々" end; text %>更新結果まで反映済です。</p>
 
 <div class="well well-sm">
