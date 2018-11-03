@@ -16,6 +16,7 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require "jquery.cleanQuery"
+//= require chartkick
 //= require_tree .
 
 // 説明文の開閉処理
