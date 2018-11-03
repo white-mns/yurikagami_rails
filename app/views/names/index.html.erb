@@ -62,7 +62,7 @@
     <tr>
       <th><%= sort_link(@search, :result_no,'更新回', default_order: :desc) %></th>
       <th><%= sort_link(@search, :e_no,'キャラクター(Eno, Fno)', default_order: :desc) %></th>
-      <th colspan="2">結果リンク</th>
+      <th colspan="4">結果リンク</th>
     </tr>
   </thead>
 
@@ -73,6 +73,8 @@
         <td><%= p_name_text(name.e_no, name.sub_no, name) %></td>
         <td><%= character_link(name.e_no, name.sub_no)%></td>
         <td><%= character_old_link(@last_result, name.e_no, name.sub_no, name.result_no)%></td>
+        <td><%= battle_link(name.party.party_no) if name.party %></td>
+        <td><%= battle_old_link(@last_result, name.party.party_no, name.party.result_no) if name.party %></td>
       </tr>
     <% end %>
   </tbody>

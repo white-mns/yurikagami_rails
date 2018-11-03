@@ -5,8 +5,8 @@ class NamesController < ApplicationController
   # GET /names
   def index
     param_set
-    @count	= Name.search(params[:q]).result.count()
-    @search	= Name.page(params[:page]).search(params[:q])
+    @count	= Name.includes(:party).search(params[:q]).result.count()
+    @search	= Name.includes(:party).page(params[:page]).search(params[:q])
     @search.sorts = 'id asc' if @search.sorts.empty?
     @names	= @search.result.per(50)
   end
