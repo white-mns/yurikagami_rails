@@ -17,7 +17,7 @@ module ApplicationHelper
         if sub_no > 0 then
             file_name += "_" + sprintf("%d",sub_no)
         end
-        link_to " キャラ結果", "http://csyuki.sakura.ne.jp/cgi-bin/prism/result/status"+file_name+".html", :target => "_blank"
+        link_to " キャラ結果", "https://archives.teiki.org/yk/4/turn59/status"+file_name+".html", :target => "_blank"
     end
 
     def character_old_link(last_result_no, e_no, sub_no, result_no)
