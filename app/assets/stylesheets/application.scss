@@ -14,25 +14,30 @@
  *
  */
 
-$light:                             #444;
+$light:                             #f8f8f8;
 $white:                             #fff;
 $gray:                              #444 ;
 $gray-darker:                       #222 ;
 $gray-dark:                         #282828 ;
 $gray-light:                        #888 ;
 
-$link-color:                        #6df;
-$nav-hover-bg-color:                #555;
-$nav-active-bg-color:               #222;
-$navbar-light-color:                $white;
-$navbar-light-hover-color:          #4cf;
-$navbar-light-active-color:         $white;
+$hover-bg-color:                    #f8f8f8;
+
+$link-color:                        #07f;
+$nav-back-color:                    $hover-bg-color;
+$nav-hover-bg-color:                #ccc;
+$nav-active-bg-color:               #888;
+$navbar-light-color:                $gray-darker;
+$navbar-light-hover-color:          $gray-darker;
+$navbar-light-active-color:         $gray-darker;
 $navbar-light-toggler-border-color: transparent;
 $dropdown-link-hover-bg:            $link-color;
 $dropdown-link-active-bg:           $link-color;
 $table-border-color:                #888 ;
 $table-hover-bg:                    $gray;
-$nav-border-color:                  MediumSeaGreen;
+$nav-border-color:                  $gray-light;
+
+$card-bg:                           #fcfcfc;
 
 // Cyborgテーマからページネーションのカラーリングをコピー
 $pagination-color:                  #fff;
@@ -52,7 +57,7 @@ $pagination-disabled-color:         $gray-light;
 $pagination-disabled-bg:            $gray-darker;
 $pagination-disabled-border-color:  #888;
 
-@import "bootswatch/darkly/variables";
+@import "bootswatch/flatly/variables";
 @import "bootstrap";
 
 
