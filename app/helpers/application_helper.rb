@@ -19,8 +19,13 @@ module ApplicationHelper
         text
     end
 
-    def pc_name_text(e_no, pc_name)
-        e_no_text = "(" + sprintf("%d",e_no) + ")"
+    def pc_name_text(e_no, sub_no, pc_name)
+        e_no_f_no = sprintf("%d",e_no)
+        if sub_no > 0 then
+            e_no_f_no += ", " + sprintf("%d", sub_no)
+        end
+        e_no_text = "(" + e_no_f_no + ")"
+
         if pc_name then
             pc_name.name.html_safe + e_no_text
         else
