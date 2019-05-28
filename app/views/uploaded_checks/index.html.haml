@@ -1,4 +1,4 @@
-- @page_title = "一覧"
+- @page_title = "アップロード状態一覧"
 %h1= @page_title
 
 .card.desc
@@ -28,18 +28,6 @@
       %tr
         %td.indent
         - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "更新回", params_name: "result_no_form", placeholder: nil, colspan: 3)
-      %tr
-        %td.indent
-        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "Eno", params_name: "e_no_form", placeholder: "Number")
-      %tr
-        %td.indent
-        - td_form(f, @form_params, @placeholder, class_name: "formText", label: "キャラクター名", params_name: "pc_name_form", placeholder: "Name")
-      %tr
-        %td.indent
-        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "Result no", params_name: "result_no_form", placeholder: "Number")
-      %tr
-        %td.indent
-        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "Generate no", params_name: "generate_no_form", placeholder: "Number")
       %tr.sep
         %td.indent
         %td.indent= hidden_field_tag :is_form, 1
@@ -57,17 +45,10 @@
   %thead
     %tr
       %th= sort_link(@search, :result_no,"更新回", default_order: :desc)
-      %th= sort_link(@search, :e_no,"キャラクター(Eno)", default_order: :desc)
-      %th= sort_link(@search, :result_no, "Result no", default_order: :desc)
-      %th= sort_link(@search, :generate_no, "Generate no", default_order: :desc)
-      %th.sep{colspan: "2"} 結果リンク
+      %th= sort_link(@search, :generate_no, "再更新番号", default_order: :desc)
   %tbody
     - @uploaded_checks.each do |uploaded_check|
       %tr
         %td= uploaded_check.result_no
-        %td= pc_name_text(uploaded_check.e_no, uploaded_check.pc_name)
-        %td= uploaded_check.result_no
         %td= uploaded_check.generate_no
-        %td.sep= character_link(uploaded_check.e_no)
-        %td= character_old_link(@latest_result, uploaded_check.e_no, uploaded_check.result_no, uploaded_check.generate_no)
 = paginate(@uploaded_checks)

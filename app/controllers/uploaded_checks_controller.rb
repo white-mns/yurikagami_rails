@@ -6,8 +6,8 @@ class UploadedChecksController < ApplicationController
   def index
     placeholder_set
     param_set
-    @count	= UploadedCheck.notnil().includes(:pc_name).search(params[:q]).result.hit_count()
-    @search	= UploadedCheck.notnil().includes(:pc_name).page(params[:page]).search(params[:q])
+    @count	= UploadedCheck.search(params[:q]).result.hit_count()
+    @search	= UploadedCheck.page(params[:page]).search(params[:q])
     @search.sorts = "id asc" if @search.sorts.empty?
     @uploaded_checks	= @search.result.per(50)
   end
@@ -22,7 +22,6 @@ class UploadedChecksController < ApplicationController
         params["result_no_form"] ||= sprintf("%d",@latest_result)
     end
 
-    params_to_form(params, @form_params, column_name: "pc_name_name", params_name: "pc_name_form", type: "text")
     params_to_form(params, @form_params, column_name: "result_no", params_name: "result_no_form", type: "number")
     params_to_form(params, @form_params, column_name: "generate_no", params_name: "generate_no_form", type: "number")
   end
