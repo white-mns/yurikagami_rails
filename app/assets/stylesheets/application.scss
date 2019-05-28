@@ -33,29 +33,30 @@ $navbar-light-active-color:         $gray-darker;
 $navbar-light-toggler-border-color: transparent;
 $dropdown-link-hover-bg:            $link-color;
 $dropdown-link-active-bg:           $link-color;
-$table-border-color:                #888 ;
-$table-hover-bg:                    $gray;
+$table-border-color:                $gray-light;
+$table-hover-bg:                    #ddd;
 $nav-border-color:                  $gray-light;
 
 $card-bg:                           #fcfcfc;
 
-// Cyborgテーマからページネーションのカラーリングをコピー
-$pagination-color:                  #fff;
-$pagination-bg:                     $gray-darker;
-$pagination-border-color:           #888;
+//== Pagination
+
+$pagination-color:                  $link-color;
+$pagination-bg:                     #fff;
+$pagination-border-color:           $gray-light;
 $pagination-border-width:           0.05rem;
 
-$pagination-hover-color:            #fff;
-$pagination-hover-bg:               #2A9FD6;
-$pagination-hover-border-color:     transparent;
+$pagination-hover-color:            $link-color;
+$pagination-hover-bg:               $hover-bg-color;
+$pagination-hover-border-color:     $gray;
 
-$pagination-active-color:           #fff;
-$pagination-active-bg:              #2A9FD6;
-$pagination-active-border-color:    transparent;
+$pagination-active-color:           $link-color;
+$pagination-active-bg:              #ccc;
+$pagination-active-border-color:    $gray;
 
-$pagination-disabled-color:         $gray-light;
-$pagination-disabled-bg:            $gray-darker;
-$pagination-disabled-border-color:  #888;
+$pagination-disabled-color:         $gray-darker;
+$pagination-disabled-bg:            #fff;
+$pagination-disabled-border-color:  $gray;
 
 @import "bootswatch/flatly/variables";
 @import "bootstrap";
@@ -161,7 +162,7 @@ p.formNum {
 
 .example_select{
     background-color: #ddd;
-    border-left: 0.5em solid #282;
+    border-left: 0.5em solid #888;
     color: #222;
     padding: 0.5em 0.8em;
 }
@@ -191,38 +192,38 @@ table tbody:nth-child(1) span.act_desc{
 }
 
 table tbody:nth-child(1) td{
-    background-color: #666;
+    background-color: #ddd;
 }
 
 table tbody:nth-child(1) td:hover{
-    background-color: #444;
+    background-color: #bbb;
 }
 
 table tbody.tbody_toggle td{
-    background-color: #666;
+    background-color: #ddd;
     padding-left: 2em;
 }
 
 table tbody.tbody_toggle td:hover{
-    background-color: #444;
+    background-color: #bbb;
 }
 
 $submit-color: $gray;
 
 button.submit {
-    background-color: $submit-color;
-    border: 0.2rem solid #fff;
+    background-color: #fff;
+    border: 0.2rem solid $gray;
     box-shadow: 0 0.1rem 0.5rem rgba(0,0,0,0.2);
-    color: #fff;
+    color: $submit-color;
     font-weight: bold;
     padding: 0.5rem 0.8rem;
     transition: 0.2s linear;
 }
 
 button.submit:hover {
-    background-color: #fff;
+    background-color: $submit-color;
     border: 0.2rem solid $submit-color;
-    color: $submit-color;
+    color: #fff;
 }
 
 input[type=checkbox] {
