@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_31_125051) do
+ActiveRecord::Schema.define(version: 2019_05_31_132852) do
 
   create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
     t.integer "result_no"
@@ -113,6 +113,20 @@ ActiveRecord::Schema.define(version: 2019_05_31_125051) do
     t.index ["skill_id"], name: "index_skill_data_on_skill_id"
     t.index ["target_id"], name: "index_skill_data_on_target_id"
     t.index ["timing_id"], name: "index_skill_data_on_timing_id"
+  end
+
+  create_table "skills", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+    t.integer "result_no"
+    t.integer "generate_no"
+    t.integer "e_no"
+    t.integer "sub_no"
+    t.integer "skill_no"
+    t.integer "skill_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["result_no", "e_no", "sub_no", "generate_no"], name: "resultno_eno"
+    t.index ["skill_id"], name: "index_skills_on_skill_id"
+    t.index ["skill_no"], name: "index_skills_on_skill_no"
   end
 
   create_table "statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
