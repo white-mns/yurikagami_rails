@@ -1,0 +1,105 @@
+- @page_title = "技情報一覧"
+%h1= @page_title
+
+.card.desc
+  .card-header
+    - act_icon(true)
+    検索仕様
+    - act_desc(true)
+  .card-body
+    = render "layouts/base_desc"
+    %p
+      %span.example_select.example_toggle.pointer
+        - help_icon
+        入力例
+        - act_desc(false)
+    #example.closed
+      = render "layouts/input_desc"
+= search_form_for @search do |f|
+  %table.search_toggle.table.table-striped.table-bordered.table-hover
+    %tbody.pointer
+      %tr
+        %td{colspan: "5"}
+          - act_icon(true)
+          絞り込み検索
+          - act_desc(true)
+    %tbody
+      %tr
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "ID", params_name: "skill_id_form", placeholder: "Number", colspan: 3)
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "スキル名", params_name: "name_form", placeholder: "Skill", colspan: 3)
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "AT", params_name: "at_form")
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "CT", params_name: "ct_form")
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "発動タイミング", params_name: "timing_form", placeholder: "Timing")
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "MP", params_name: "mp_form")
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "対象", params_name: "target_form", placeholder: "Target")
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "射程", params_name: "range_form")
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, params_name: "equip_form", colspan: 3, label_td_class_name: "indent",
+                    checkboxes: [{label: "武器の射程", params_name: "equip_range", class_name: "after_space mobile_br"},
+                                 {label: "射程なし",   params_name: "no_range"}])
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "特性", params_name: "property_form", placeholder: "SkillProperty")
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "属性", params_name: "element_form", placeholder: "Element")
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "説明", params_name: "text_form", colspan: 3)
+      %tr.sep
+        %td.indent
+        %td.indent= hidden_field_tag :is_form, 1
+        %td{colspan: "3"}
+          - search_submit_button
+
+
+= paginate(@skill_data)
+%br
+ヒット数：#{ @count }件
+%br
+%br
+
+%table.table.table-striped.table-bordered.table-hover
+  %thead
+    %tr
+      %th= sort_link(@search, :skill_id, "ID", default_order: :desc)
+      %th= sort_link(@search, :name, "スキル名", default_order: :desc)
+      %th= sort_link(@search, :at, "AT", default_order: :desc)
+      %th= sort_link(@search, :ct, "CT", default_order: :desc)
+      %th= sort_link(@search, :timing_id, "発動", default_order: :desc)
+      %th= sort_link(@search, :mp, "MP", default_order: :desc)
+      %th= sort_link(@search, :target_id, "対象", default_order: :desc)
+      %th= sort_link(@search, :range, "射程", default_order: :desc)
+      %th= sort_link(@search, :property_id, "特性", default_order: :desc)
+      %th= sort_link(@search, :element_id, "属性", default_order: :desc)
+      %th= sort_link(@search, :text, "説明", default_order: :desc)
+  %tbody
+    - @skill_data.each do |skill_datum|
+      %tr
+        %td= skill_datum.skill_id
+        %td= skill_datum.name
+        %td= skill_datum.at
+        %td= skill_datum.ct
+        %td= skill_datum.timing.name if skill_datum.timing
+        %td= skill_datum.mp
+        %td= skill_datum.target.name if skill_datum.target
+        %td
+          - if skill_datum.range == -2
+            = "武"
+          - elsif skill_datum.range == -1
+            = "-"
+          - else
+            = skill_datum.range
+        %td= skill_datum.property.name if skill_datum.property
+        %td= skill_datum.element.name if skill_datum.element
+        %td= skill_datum.text
+= paginate(@skill_data)

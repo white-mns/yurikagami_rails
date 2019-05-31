@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_31_083612) do
+ActiveRecord::Schema.define(version: 2019_05_31_125051) do
 
   create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
     t.integer "result_no"
@@ -87,6 +87,32 @@ ActiveRecord::Schema.define(version: 2019_05_31_083612) do
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_proper_names_on_name"
     t.index ["proper_id"], name: "index_proper_names_on_proper_id"
+  end
+
+  create_table "skill_data", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+    t.integer "skill_id"
+    t.string "name"
+    t.integer "at"
+    t.integer "ct"
+    t.integer "timing_id"
+    t.integer "mp"
+    t.integer "target_id"
+    t.integer "range"
+    t.integer "property_id"
+    t.integer "element_id"
+    t.string "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["at"], name: "index_skill_data_on_at"
+    t.index ["ct"], name: "index_skill_data_on_ct"
+    t.index ["element_id"], name: "index_skill_data_on_element_id"
+    t.index ["mp"], name: "index_skill_data_on_mp"
+    t.index ["name"], name: "index_skill_data_on_name"
+    t.index ["property_id"], name: "index_skill_data_on_property_id"
+    t.index ["range"], name: "index_skill_data_on_range"
+    t.index ["skill_id"], name: "index_skill_data_on_skill_id"
+    t.index ["target_id"], name: "index_skill_data_on_target_id"
+    t.index ["timing_id"], name: "index_skill_data_on_timing_id"
   end
 
   create_table "statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
