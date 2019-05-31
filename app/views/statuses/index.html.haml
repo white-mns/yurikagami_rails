@@ -1,0 +1,158 @@
+- @page_title = "ステータス一覧"
+%h1= @page_title
+
+.card.desc
+  .card-header
+    - act_icon(true)
+    検索仕様
+    - act_desc(true)
+  .card-body
+    = render "layouts/base_desc"
+    %p
+      %span.example_select.example_toggle.pointer
+        - help_icon
+        入力例
+        - act_desc(false)
+    #example.closed
+      = render "layouts/input_desc"
+= search_form_for @search do |f|
+  %table.search_toggle.table.table-striped.table-bordered.table-hover
+    %tbody.pointer
+      %tr
+        %td{colspan: "5"}
+          - act_icon(true)
+          絞り込み検索
+          - act_desc(true)
+    %tbody
+      %tr
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "更新回", params_name: "result_no_form", placeholder: nil, colspan: 3)
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "Eno", params_name: "e_no_form", placeholder: "Number")
+        - td_form(f, @form_params, @placeholder, class_name: "formText", label: "キャラクター名", params_name: "pc_name_form", placeholder: "Name")
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, params_name: "is_sub_form", colspan: 3, label_td_class_name: "indent",
+                    checkboxes: [{label: "メインキャラ", params_name: "is_main", class_name: "after_space mobile_br"},
+                                 {label: "サブキャラ",   params_name: "is_sub"}])
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "Lv", params_name: "lv_form", colspan: 3)
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "Exp", params_name: "exp_form")
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "Mexp", params_name: "mexp_form")
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "戦型1", params_name: "job1_form", placeholder: "Job")
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "戦型2", params_name: "job2_form", placeholder: "Job")
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "HP", params_name: "hp_form")
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "MHP", params_name: "mhp_form")
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "HP割合", params_name: "hp_rate_form", colspan: 3)
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "MP", params_name: "mp_form")
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "MMP", params_name: "mmp_form")
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "MP割合", params_name: "mp_rate_form", colspan: 3)
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "SP", params_name: "sp_form", colspan: 3)
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "腕力", params_name: "str_form")
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "魔力", params_name: "int_form")
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "器用", params_name: "tec_form")
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "反応", params_name: "agi_form")
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "守護", params_name: "def_form")
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "熟練", params_name: "skill_form")
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "性格", params_name: "personality_form", placeholder: "Personality")
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "種族", params_name: "tribe_form", placeholder: "Tribe")
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "金", params_name: "money_form")
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "雑貨", params_name: "sundries_form")
+      %tr.sep
+        %td.indent
+        %td.indent= hidden_field_tag :is_form, 1
+        %td{colspan: "3"}
+          - search_submit_button
+
+
+= paginate(@statuses)
+%br
+ヒット数：#{ @count }件
+%br
+%br
+
+%table.table.table-striped.table-bordered.table-hover
+  %thead
+    %tr
+      %th= sort_link(@search, :result_no,"更新回", default_order: :desc)
+      %th= sort_link(@search, :e_no,"キャラクター(Eno)", default_order: :desc)
+      %th.sep= sort_link(@search, :lv, "Lv", default_order: :desc)
+      %th= sort_link(@search, :exp, "Exp", default_order: :desc)
+      %th= sort_link(@search, :mexp, "Mexp", default_order: :desc)
+      %th.sep= sort_link(@search, :job1_id, "戦型1", default_order: :desc)
+      %th= sort_link(@search, :job2_id, "戦型2", default_order: :desc)
+      %th.sep= sort_link(@search, :hp, "HP", default_order: :desc)
+      %th= sort_link(@search, :mhp, "MHP", default_order: :desc)
+      %th= sort_link(@search, :hp_rate, "HP割合", default_order: :desc)
+      %th= sort_link(@search, :mp, "MP", default_order: :desc)
+      %th= sort_link(@search, :mmp, "MMP", default_order: :desc)
+      %th= sort_link(@search, :mp_rate, "MP割合", default_order: :desc)
+      %th= sort_link(@search, :sp, "SP", default_order: :desc)
+      %th.sep= sort_link(@search, :str, "腕力", default_order: :desc)
+      %th= sort_link(@search, :int, "魔力", default_order: :desc)
+      %th= sort_link(@search, :tec, "器用", default_order: :desc)
+      %th= sort_link(@search, :agi, "反応", default_order: :desc)
+      %th= sort_link(@search, :def, "守護", default_order: :desc)
+      %th= sort_link(@search, :skill, "熟練", default_order: :desc)
+      %th.sep= sort_link(@search, :personality, "性格", default_order: :desc)
+      %th= sort_link(@search, :tribe_id, "種族", default_order: :desc)
+      %th.sep= sort_link(@search, :money, "金", default_order: :desc)
+      %th= sort_link(@search, :sundries, "雑貨", default_order: :desc)
+      %th.sep{colspan: "2"} 結果リンク
+  %tbody
+    - @statuses.each do |status|
+      %tr
+        %td= status.result_no
+        %td= pc_name_text(status.e_no, status.sub_no, status.pc_name)
+        %td.sep= status.lv
+        %td= status.exp
+        %td= status.mexp
+        %td.sep= status.job1.name if status.job1
+        %td= status.job2.name if status.job2
+        %td.sep= status.hp
+        %td= status.mhp
+        %td= status.hp_rate
+        %td= status.mp
+        %td= status.mmp
+        %td= status.mp_rate
+        %td= status.sp
+        %td.sep= status.str
+        %td= status.int
+        %td= status.tec
+        %td= status.agi
+        %td= status.def
+        %td= status.skill
+        %td.sep= status.personality.name if status.personality
+        %td= status.tribe.name if status.tribe
+        %td.sep= status.money
+        %td= status.sundries
+        %td.sep= character_link(status.e_no, status.sub_no)
+        %td= character_old_link(@latest_result, status.e_no, status.sub_no, status.result_no, status.generate_no)
+= paginate(@statuses)
