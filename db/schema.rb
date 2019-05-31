@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_31_132852) do
+ActiveRecord::Schema.define(version: 2019_05_31_143111) do
 
   create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
     t.integer "result_no"
@@ -49,6 +49,21 @@ ActiveRecord::Schema.define(version: 2019_05_31_132852) do
     t.index ["protect"], name: "index_items_on_protect"
     t.index ["result_no", "e_no", "sub_no", "generate_no"], name: "resultno_eno"
     t.index ["slash"], name: "index_items_on_slash"
+  end
+
+  create_table "learnable_skills", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+    t.integer "chara_type"
+    t.integer "job_id"
+    t.integer "skill_no"
+    t.integer "sp"
+    t.integer "skill_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chara_type"], name: "index_learnable_skills_on_chara_type"
+    t.index ["job_id"], name: "index_learnable_skills_on_job_id"
+    t.index ["skill_id"], name: "index_learnable_skills_on_skill_id"
+    t.index ["skill_no"], name: "index_learnable_skills_on_skill_no"
+    t.index ["sp"], name: "index_learnable_skills_on_sp"
   end
 
   create_table "names", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|

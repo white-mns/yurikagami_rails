@@ -30,7 +30,7 @@
         - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "ID", params_name: "skill_id_form", placeholder: "Number", colspan: 3)
       %tr
         %td.indent
-        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "スキル名", params_name: "name_form", placeholder: "Skill", colspan: 3)
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "技名", params_name: "name_form", placeholder: "Skill", colspan: 3)
       %tr
         %td.indent
         - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "AT", params_name: "at_form")
@@ -88,7 +88,11 @@
         %td= skill_datum.skill_id
         %td= skill_datum.name
         %td= skill_datum.at
-        %td= skill_datum.ct
+        %td
+          - if skill_datum.ct && skill_datum.ct >= 0
+            = skill_datum.ct
+          - elsif skill_datum.ct && skill_datum.ct == -2
+            多
         %td= skill_datum.timing.name if skill_datum.timing
         %td= skill_datum.mp
         %td= skill_datum.target.name if skill_datum.target

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :learnable_skills
   resources :skills
   resources :skill_data
   resources :items
