@@ -33,21 +33,30 @@ module ApplicationHelper
         end
     end
 
-    def character_link(e_no)
+    def character_link(e_no, sub_no)
         if e_no <= 0 then return end
 
         file_name = sprintf("%d",e_no)
-        link_to " 最終結果", "https://xxx.xxx/"+file_name+".html", :target => "_blank"
+        if sub_no > 0 then
+            file_name += "_" + sprintf("%d",sub_no)
+        end
+
+        link_to " キャラ結果", "http://csyuki.sakura.ne.jp/cgi-bin/prism/result/status"+file_name+".html", :target => "_blank"
     end
     
-    def character_old_link(latest_result_no, e_no, result_no, generate_no)
+    def character_old_link(latest_result_no, e_no, sub_no, result_no, generate_no)
         if e_no <= 0 then return end
         if result_no == latest_result_no then return end
 
         result_no_text = sprintf("%03d", result_no)
         generate_text  = generate_no > 0 ? "_" + sprintf("%d", generate_no) : ""
+
         file_name = sprintf("%d", e_no)
-        link_to " 結果", "https://xxx.xxx/"+result_no_text+generate_text+"/"+file_name+".html", :target => "_blank"
+        if sub_no > 0 then
+            file_name += "_" + sprintf("%d",sub_no)
+        end
+
+        link_to " キャラ過去結果", "https://archives.teiki.org/yk/5/turn"+result_no_text+generate_text+"/status"+file_name+".html", :target => "_blank"
     end
 
     def search_submit_button()
