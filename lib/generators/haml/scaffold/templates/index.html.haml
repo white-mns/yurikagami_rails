@@ -34,6 +34,11 @@
       %tr
         %td.indent
         - td_form(f, @form_params, @placeholder, class_name: "formText", label: "キャラクター名", params_name: "pc_name_form", placeholder: "Name")
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, params_name: "is_sub_form", colspan: 3, label_td_class_name: "indent",
+                    checkboxes: [{label: "メインキャラ", params_name: "is_main", class_name: "after_space mobile_br"},
+                                 {label: "サブキャラ",   params_name: "is_sub"}])
 <% attributes.reject(&:password_digest?).each do |attribute| -%>
       %tr
         %td.indent
@@ -65,10 +70,10 @@
     - @<%= plural_table_name %>.each do |<%= singular_table_name %>|
       %tr
         %td= <%= singular_table_name %>.result_no
-        %td= pc_name_text(<%= singular_table_name %>.e_no, <%= singular_table_name %>.pc_name)
+        %td= pc_name_text(<%= singular_table_name %>.e_no, <%= singular_table_name %>.sub_no, <%= singular_table_name %>.pc_name)
 <% attributes.reject(&:password_digest?).each do |attribute| -%>
         %td= <%= singular_table_name %>.<%= attribute.name %>
 <% end -%>
-        %td.sep= character_link(<%= singular_table_name %>.e_no)
-        %td= character_old_link(@latest_result, <%= singular_table_name %>.e_no, <%= singular_table_name %>.result_no, <%= singular_table_name %>.generate_no)
+        %td.sep= character_link(<%= singular_table_name %>.e_no, <%= singular_table_name %>.sub_no)
+        %td= character_old_link(@latest_result, <%= singular_table_name %>.e_no, <%= singular_table_name %>.sub_no, <%= singular_table_name %>.result_no, <%= singular_table_name %>.generate_no)
 = paginate(@<%= plural_table_name %>)
