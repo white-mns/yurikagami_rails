@@ -11,9 +11,18 @@ class CurrentPlacesController < ApplicationController
     @current_places	= @search.result.per(50)
   end
 
+  # GET /current_place/start
+  def start_graph
+    index
+  end
+
   def param_set
     @last_result = Name.maximum('result_no')
-    params["result_no_form"] = params["result_no_form"] ? params["result_no_form"] : sprintf('%d',@last_result)
+    if action_name == "start_graph" then
+        params["result_no_form"] = params["result_no_form"] ? params["result_no_form"] : "1~" + sprintf('%d',@last_result)
+    else
+        params["result_no_form"] = params["result_no_form"] ? params["result_no_form"] : sprintf('%d',@last_result)
+    end
     params[:q]  = params[:q] ? params[:q] : {}
     
     reference_number_assign(params, "result_no", "result_no_form")

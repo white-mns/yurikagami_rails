@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :enemy_names
   resources :smiths
   resources :new_places
+  get "current_place/start",  :to => "current_places#start_graph",  :as => "current_places_start"
   resources :current_places
   resources :place_names
   resources :party_infos
