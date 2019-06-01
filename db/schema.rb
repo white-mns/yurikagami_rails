@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_31_143111) do
+ActiveRecord::Schema.define(version: 2019_06_01_013518) do
 
   create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
     t.integer "result_no"
@@ -75,6 +75,18 @@ ActiveRecord::Schema.define(version: 2019_05_31_143111) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["result_no", "e_no", "sub_no", "generate_no"], name: "resultno_eno"
+  end
+
+  create_table "parties", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+    t.integer "result_no"
+    t.integer "generate_no"
+    t.integer "party_no"
+    t.integer "e_no"
+    t.integer "sub_no"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["party_no"], name: "index_parties_on_party_no"
+    t.index ["result_no", "e_no", "sub_no", "generate_no"], name: "resultno_no"
   end
 
   create_table "profiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|

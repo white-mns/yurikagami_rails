@@ -59,6 +59,19 @@ module ApplicationHelper
         link_to " キャラ過去結果", "https://archives.teiki.org/yk/5/turn"+result_no_text+generate_text+"/status"+file_name+".html", :target => "_blank"
     end
 
+    def battle_link(party_no)
+        file_name = sprintf("%d",party_no)
+        link_to " 戦闘結果", "http://csyuki.sakura.ne.jp/cgi-bin/prism/result/result"+file_name+".html", :target => "_blank"
+    end
+
+    def battle_old_link(last_result_no, party_no, result_no)
+        if result_no < last_result_no
+            file_name = sprintf("%d",party_no)
+            result_no_text = sprintf("%d",result_no)
+            link_to " 戦闘過去結果", "https://archives.teiki.org/yk/5/turn"+result_no_text+"/result"+file_name+".html", :target => "_blank"
+        end
+    end
+
     def search_submit_button()
         haml_tag :button, class: "btn submit", type: "submit" do
             haml_concat fa_icon "search", text: "検索する"
