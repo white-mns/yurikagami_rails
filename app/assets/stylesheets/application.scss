@@ -116,6 +116,11 @@ h2 {
     margin-top: 0.5rem;
 }
 
+h3.graph_title {
+    border-left: $gray 6px solid;
+    border-bottom: $gray-light 2px solid;
+}
+
 label {
     font-weight: bold;
 }
