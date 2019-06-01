@@ -14,5 +14,6 @@ class ApplicationController < ActionController::Base
         @placeholder["Target"]   = "例）自分/敵単"
         @placeholder["SkillProperty"]   = "例）無/物/魔/技"
         @placeholder["Element"]   = "例）無/斬/突/熱"
+        @placeholder["Place"]   = "例）キュースター/応礁"
     end
 end

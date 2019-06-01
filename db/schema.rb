@@ -10,7 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_01_030711) do
+ActiveRecord::Schema.define(version: 2019_06_01_054244) do
+
+  create_table "current_places", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+    t.integer "result_no"
+    t.integer "generate_no"
+    t.integer "party_no"
+    t.integer "place_id"
+    t.integer "shop"
+    t.integer "inn"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["inn"], name: "index_current_places_on_inn"
+    t.index ["place_id"], name: "index_current_places_on_place_id"
+    t.index ["result_no", "party_no", "generate_no"], name: "resultno_pno"
+    t.index ["shop"], name: "index_current_places_on_shop"
+  end
 
   create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
     t.integer "result_no"

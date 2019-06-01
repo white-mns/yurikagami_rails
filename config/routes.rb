@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :current_places
   resources :party_infos
   resources :parties
   resources :learnable_skills
