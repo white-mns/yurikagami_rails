@@ -33,7 +33,7 @@ module ApplicationHelper
 
     def battle_link(party_no)
         file_name = sprintf("%d",party_no)
-        link_to " 戦闘結果", "http://csyuki.sakura.ne.jp/cgi-bin/prism/result/result"+file_name+".html", :target => "_blank"
+        link_to " 戦闘結果", "https://archives.teiki.org/yk/4/turn59/result"+file_name+".html", :target => "_blank"
     end
 
     def battle_old_link(last_result_no, party_no, result_no)
