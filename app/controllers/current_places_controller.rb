@@ -12,6 +12,11 @@ class CurrentPlacesController < ApplicationController
     @current_places	= @search.result.per(50)
   end
 
+  # GET /current_place/start
+  def start_graph
+    index
+  end
+
   def param_set
     @form_params = {}
 
@@ -19,6 +24,9 @@ class CurrentPlacesController < ApplicationController
 
     params_clean(params)
     if !params["is_form"] then
+        if action_name == "start_graph" then
+            params["result_no_form"] ||= "1~" + sprintf("%d",@latest_result)
+        end
         params["result_no_form"] ||= sprintf("%d",@latest_result)
     end
 
