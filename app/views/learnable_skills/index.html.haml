@@ -1,0 +1,140 @@
+- @page_title = "戦型－習得可能技一覧"
+%h1= @page_title
+
+.card.desc
+  .card-header
+    - act_icon(true)
+    検索仕様
+    - act_desc(true)
+  .card-body
+    = render "layouts/base_desc"
+    %p
+      %span.example_select.example_toggle.pointer
+        - help_icon
+        入力例
+        - act_desc(false)
+    #example.closed
+      = render "layouts/input_desc"
+= search_form_for @search do |f|
+  %table.search_toggle.table.table-striped.table-bordered.table-hover
+    %tbody.pointer
+      %tr
+        %td{colspan: "5"}
+          - act_icon(true)
+          絞り込み検索
+          - act_desc(true)
+    %tbody
+      %tr
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, params_name: "is_sub_form", colspan: 3, label_td_class_name: "indent",
+                    checkboxes: [{label: "メインキャラ", params_name: "is_main", class_name: "after_space mobile_br"},
+                                 {label: "サブキャラ",   params_name: "is_sub"}])
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "戦型名", params_name: "job_form", placeholder: "Job", colspan: 3)
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "技名", params_name: "name_form", placeholder: "Skill", colspan: 3)
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "No", params_name: "skill_no_form", placeholder: "Number")
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "SP", params_name: "sp_form", placeholder: "Number")
+
+    - #==========================================================================================================================
+    - tbody_toggle(@form_params, params_name: "show_skill",
+                    label: {open: "技の詳細を表示する", close: "技の詳細を非表示にする"}, base_first: true,
+                    act_desc: "AT、CT、発動タイミング、MP、対象、射程、特性、属性、説明")
+    %tbody
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "AT", params_name: "at_form")
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "CT", params_name: "ct_form")
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "発動タイミング", params_name: "timing_form", placeholder: "Timing")
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "MP", params_name: "mp_form")
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "対象", params_name: "target_form", placeholder: "Target")
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "射程", params_name: "range_form")
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, params_name: "equip_form", colspan: 3, label_td_class_name: "indent",
+                    checkboxes: [{label: "武器の射程", params_name: "equip_range", class_name: "after_space mobile_br"},
+                                 {label: "射程なし",   params_name: "no_range"}])
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "特性", params_name: "property_form", placeholder: "SkillProperty")
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "属性", params_name: "element_form", placeholder: "Element")
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "説明", params_name: "text_form", colspan: 3)
+
+    - #==========================================================================================================================
+    %tbody
+      %tr.sep
+        %td.indent
+        %td.indent= hidden_field_tag :is_form, 1
+        %td{colspan: "3"}
+          - search_submit_button
+
+
+= paginate(@learnable_skills)
+%br
+ヒット数：#{ @count }件
+%br
+%br
+
+%table.table.table-striped.table-bordered.table-hover
+  %thead
+    %tr
+      %th= sort_link(@search, :chara_type, "キャラ種別", default_order: :desc)
+      %th= sort_link(@search, :job_id, "戦型", default_order: :desc)
+      %th.sep= sort_link(@search, :skill_no, "No", default_order: :desc)
+      %th= sort_link(@search, :sp, "SP", default_order: :desc)
+      %th= sort_link(@search, :skill_id, "技名", default_order: :desc)
+      - if @form_params["show_skill"] == "1"
+        %th.sep= sort_link(@search, :skill_at, "AT", default_order: :desc)
+        %th= sort_link(@search, :skill_ct, "CT", default_order: :desc)
+        %th= sort_link(@search, :skill_timing_id, "発動", default_order: :desc)
+        %th= sort_link(@search, :skill_mp, "MP", default_order: :desc)
+        %th= sort_link(@search, :skill_target_id, "対象", default_order: :desc)
+        %th= sort_link(@search, :skill_range, "射程", default_order: :desc)
+        %th= sort_link(@search, :skill_property_id, "特性", default_order: :desc)
+        %th= sort_link(@search, :skill_element_id, "属性", default_order: :desc)
+        %th.sep= sort_link(@search, :skill_text, "説明", default_order: :desc)
+
+  %tbody
+    - @learnable_skills.each do |learnable_skill|
+      %tr
+        %td
+          - if learnable_skill.chara_type == 0
+            メイン
+          - else
+            サブ
+        %td= learnable_skill.job.name if learnable_skill.job
+        %td.sep= learnable_skill.skill_no
+        %td= learnable_skill.sp
+        %td= learnable_skill.skill.name if learnable_skill.skill
+        - if @form_params["show_skill"] == "1"
+          %td.sep= learnable_skill.skill.at if learnable_skill.skill
+          %td
+            - if learnable_skill.skill && learnable_skill.skill.ct && learnable_skill.skill.ct >= 0
+              = learnable_skill.skill.ct
+            - elsif learnable_skill.skill && learnable_skill.skill.ct && learnable_skill.skill.ct == -2
+              多
+          %td= learnable_skill.skill.timing.name if learnable_skill.skill && learnable_skill.skill.timing
+          %td= learnable_skill.skill.mp if learnable_skill.skill
+          %td= learnable_skill.skill.target.name if learnable_skill.skill && learnable_skill.skill.target
+          %td
+            - if learnable_skill.skill.range == -2
+              = "武"
+            - elsif learnable_skill.skill.range == -1
+              = "-"
+            - else
+              = learnable_skill.skill.range
+          %td= learnable_skill.skill.property.name if learnable_skill.skill && learnable_skill.skill.property
+          %td= learnable_skill.skill.element.name if learnable_skill.skill && learnable_skill.skill.element
+          %td.sep= learnable_skill.skill.text if learnable_skill.skill
+= paginate(@learnable_skills)

@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+  get "current_place/start",  :to => "current_places#start_graph",  :as => "current_places_start"
+  resources :current_places
+  resources :party_infos
+  resources :parties
+  resources :learnable_skills
+  resources :skills
+  resources :skill_data
+  resources :items
+  get "status/graphs",  :to => "statuses#graph",  :as => "status_graphs"
+  resources :statuses
   resources :profiles
   resources :names
   resources :proper_names

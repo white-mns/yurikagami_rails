@@ -1,0 +1,93 @@
+- @page_title = "ステータス分布グラフ"
+%h1= @page_title
+
+.card.desc
+  .card-header
+    - act_icon(true)
+    検索仕様
+    - act_desc(true)
+  .card-body
+    = render "layouts/base_desc"
+    %p
+      %span.example_select.example_toggle.pointer
+        - help_icon
+        入力例
+        - act_desc(false)
+    #example.closed
+      = render "layouts/input_desc"
+= search_form_for @search, url: status_graphs_path do |f|
+  %table.search_toggle.table.table-striped.table-bordered.table-hover
+    %tbody.pointer
+      %tr
+        %td{colspan: "5"}
+          - act_icon(true)
+          絞り込み検索
+          - act_desc(true)
+    %tbody
+      %tr
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "更新回", params_name: "result_no_form", placeholder: nil, colspan: 3)
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "Eno", params_name: "e_no_form", placeholder: "Number")
+        - td_form(f, @form_params, @placeholder, class_name: "formText", label: "キャラクター名", params_name: "pc_name_form", placeholder: "Name")
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, params_name: "is_sub_form", colspan: 3, label_td_class_name: "indent",
+                    checkboxes: [{label: "メインキャラ", params_name: "is_main", class_name: "after_space mobile_br"},
+                                 {label: "サブキャラ",   params_name: "is_sub"}])
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "Lv", params_name: "lv_form", colspan: 3)
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "戦型1", params_name: "job1_form", placeholder: "Job")
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "戦型2", params_name: "job2_form", placeholder: "Job")
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "腕力", params_name: "str_form")
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "魔力", params_name: "int_form")
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "器用", params_name: "tec_form")
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "反応", params_name: "agi_form")
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "守護", params_name: "def_form")
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "熟練", params_name: "skill_form")
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "性格", params_name: "personality_form", placeholder: "Personality")
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "種族", params_name: "tribe_form", placeholder: "Tribe")
+      %tr.sep
+        %td.indent
+        %td.indent= hidden_field_tag :is_form, 1
+        %td{colspan: "3"}
+          - search_submit_button
+
+
+%br
+%br
+%h3.graph_title 戦型1
+= column_chart Status.search(params[:q]).result.to_job_graph(:job1_id), xtitle:"戦型1", ytitle:"人数"
+%h3.graph_title 戦型2
+= column_chart Status.search(params[:q]).result.to_job_graph(:job2_id), xtitle:"戦型2", ytitle:"人数"
+%h3.graph_title Lv
+= column_chart Status.search(params[:q]).result.to_range_graph(:lv), xtitle:"Lv", ytitle:"人数"
+%h3.graph_title HP
+= column_chart Status.search(params[:q]).result.to_range_graph(:hp), xtitle:"HP", ytitle:"人数"
+%h3.graph_title MP
+= column_chart Status.search(params[:q]).result.to_range_graph(:mp), xtitle:"MP", ytitle:"人数"
+%h3.graph_title 腕力
+= column_chart Status.search(params[:q]).result.to_range_graph(:str), xtitle:"腕力", ytitle:"人数"
+%h3.graph_title 魔力
+= column_chart Status.search(params[:q]).result.to_range_graph(:int), xtitle:"魔力", ytitle:"人数"
+%h3.graph_title 器用
+= column_chart Status.search(params[:q]).result.to_range_graph(:tec), xtitle:"器用", ytitle:"人数"
+%h3.graph_title 反応
+= column_chart Status.search(params[:q]).result.to_range_graph(:agi), xtitle:"反応", ytitle:"人数"
+%h3.graph_title 守護
+= column_chart Status.search(params[:q]).result.to_range_graph(:def), xtitle:"守護", ytitle:"人数"
+%h3.graph_title 熟練
+= column_chart Status.search(params[:q]).result.to_range_graph(:skill), xtitle:"熟練", ytitle:"人数"

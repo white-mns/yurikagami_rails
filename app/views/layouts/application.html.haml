@@ -22,17 +22,29 @@
           %ul.navbar-nav
             %li.nav-item.dropdown
               %a.nav-link.dropdown-toggle#themes{ :data => {:toggle =>"dropdown"}, :href => "#"}
-                個人データ
+                個人
                 %span.caret
               .dropdown-menu
                 = link_to "プロフィール一覧", profiles_path, class: "dropdown-item"
-                .dropdown-divider
+                = link_to "ステータス一覧", statuses_path, class: "dropdown-item"
+                = link_to "所有アイテム一覧", items_path, class: "dropdown-item"
+                = link_to "所有技一覧", skills_path, class: "dropdown-item"
             %li.nav-item.dropdown
               %a.nav-link.dropdown-toggle#themes{ :data => {:toggle =>"dropdown"}, :href => "#"}
-                結果データ
+                行動
                 %span.caret
               .dropdown-menu
-                .dropdown-divider
+                = link_to "パーティ情報一覧", party_infos_path, class: "dropdown-item"
+                = link_to "現在地一覧", current_places_path, class: "dropdown-item"
+            %li.nav-item.dropdown
+              %a.nav-link.dropdown-toggle#themes{ :data => {:toggle =>"dropdown"}, :href => "#"}
+                グラフ
+                %span.caret
+              .dropdown-menu
+                = link_to "ステータス分布グラフ", status_graphs_path, class: "dropdown-item"
+                = link_to "出発国分布グラフ", current_places_start_path, class: "dropdown-item"
+            %li.nav-item.dropdown
+              = link_to "戦型－習得技", learnable_skills_path, class: "nav-link"
 
     .container
       .row
@@ -46,4 +58,8 @@
           = link_to "プライバシーポリシー", top_page_privacy_path
           %br
           ソースコード [#{link_to "解析部分", "https://github.com/white-mns/yurikagami_parse"}] [#{link_to "表示部分", "https://github.com/white-mns/yurikagami_rails"}]
+          %br
+          #{link_to "その他ゲームのデータ小屋", "https://data.teiki.org/"}
+          %br
+          #{link_to "百合鏡4期データ小屋", "https://data.teiki.org/yk_4/"}
       = render "layouts/analytics"

@@ -33,8 +33,9 @@ $navbar-light-active-color:         $gray-darker;
 $navbar-light-toggler-border-color: transparent;
 $dropdown-link-hover-bg:            $link-color;
 $dropdown-link-active-bg:           $link-color;
-$table-border-color:                $gray-light;
-$table-hover-bg:                    #ddd;
+$table-accent-bg:                   $light;
+$table-border-color:                #ddd;
+$table-hover-bg:                    #eee;
 $nav-border-color:                  $gray-light;
 
 $card-bg:                           #fcfcfc;
@@ -43,7 +44,7 @@ $card-bg:                           #fcfcfc;
 
 $pagination-color:                  $link-color;
 $pagination-bg:                     #fff;
-$pagination-border-color:           $gray-light;
+$pagination-border-color:           #ddd;
 $pagination-border-width:           0.05rem;
 
 $pagination-hover-color:            $link-color;
@@ -51,12 +52,12 @@ $pagination-hover-bg:               $hover-bg-color;
 $pagination-hover-border-color:     $gray;
 
 $pagination-active-color:           $link-color;
-$pagination-active-bg:              #ccc;
-$pagination-active-border-color:    $gray;
+$pagination-active-bg:              #eee;
+$pagination-active-border-color:    #ddd;
 
 $pagination-disabled-color:         $gray-darker;
 $pagination-disabled-bg:            #fff;
-$pagination-disabled-border-color:  $gray;
+$pagination-disabled-border-color:  #ddd;
 
 @import "bootswatch/flatly/variables";
 @import "bootstrap";
@@ -115,6 +116,11 @@ h2 {
     margin-top: 0.5rem;
 }
 
+h3.graph_title {
+    border-left: $gray 6px solid;
+    border-bottom: $gray-light 2px solid;
+}
+
 label {
     font-weight: bold;
 }
@@ -142,6 +148,10 @@ label {
 .card.desc .card-header {
     margin-left: 1px;
     cursor: pointer;
+}
+
+.card.desc .card-body {
+    background-color: #fff;
 }
 
 .formText {
@@ -192,20 +202,20 @@ table tbody:nth-child(1) span.act_desc{
 }
 
 table tbody:nth-child(1) td{
-    background-color: #ddd;
+    background-color: #eee;
 }
 
 table tbody:nth-child(1) td:hover{
-    background-color: #bbb;
+    background-color: #ddd;
 }
 
 table tbody.tbody_toggle td{
-    background-color: #ddd;
+    background-color: #eee;
     padding-left: 2em;
 }
 
 table tbody.tbody_toggle td:hover{
-    background-color: #bbb;
+    background-color: #ddd;
 }
 
 $submit-color: $gray;
