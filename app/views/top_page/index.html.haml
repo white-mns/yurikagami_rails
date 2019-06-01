@@ -4,8 +4,7 @@
   %a{:href => "http://csyuki.sakura.ne.jp/cgi-bin/prism/", :target => "_blank"} 百合鏡
   を解析して得られる情報を扱っています。
 %br
-%p 
-  #{top_result_no(nil,nil)}更新結果まで反映済です。
+%p= top_text(@latest_result, @latest_generate, @uploaded_result)
 
 .card.top
   .card-body
