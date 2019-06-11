@@ -66,7 +66,7 @@
       %th= sort_link(@search, :party_info_party_members_e_no,"キャラクター(Eno)", default_order: :desc)
       %th= sort_link(@search, :party_info_battler_num, "参戦", default_order: :desc)
       %th= sort_link(@search, :enemy_num, "敵数", default_order: :desc)
-      %th= sort_link(@search, :enemy_num, "敵名", default_order: :desc)
+      %th= sort_link(@search, :enemy_members_enemy_name, "敵名", default_order: :desc)
       %th= sort_link(@search, :current_place_place_id, "現在地", default_order: :desc)
       %th.sep{colspan: "2"} 結果リンク
   %tbody
