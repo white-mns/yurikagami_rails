@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :event_proceeds
   resources :events
   get "current_place/start",  :to => "current_places#start_graph",  :as => "current_places_start"
   resources :current_places

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_11_055641) do
+ActiveRecord::Schema.define(version: 2019_06_11_062045) do
 
   create_table "current_places", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
     t.integer "result_no"
@@ -25,6 +25,22 @@ ActiveRecord::Schema.define(version: 2019_06_11_055641) do
     t.index ["place_id"], name: "index_current_places_on_place_id"
     t.index ["result_no", "party_no", "generate_no"], name: "resultno_pno"
     t.index ["shop"], name: "index_current_places_on_shop"
+  end
+
+  create_table "event_proceeds", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+    t.integer "result_no"
+    t.integer "generate_no"
+    t.integer "e_no"
+    t.integer "sub_no"
+    t.integer "event_id"
+    t.integer "last_flag_id"
+    t.integer "flag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_event_proceeds_on_event_id"
+    t.index ["flag_id"], name: "index_event_proceeds_on_flag_id"
+    t.index ["last_flag_id"], name: "index_event_proceeds_on_last_flag_id"
+    t.index ["result_no", "e_no", "sub_no", "generate_no"], name: "resultno_eno"
   end
 
   create_table "events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
