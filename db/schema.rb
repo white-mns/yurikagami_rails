@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_11_062045) do
+ActiveRecord::Schema.define(version: 2019_06_11_063817) do
 
   create_table "current_places", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
     t.integer "result_no"
@@ -122,6 +122,18 @@ ActiveRecord::Schema.define(version: 2019_06_11_062045) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["result_no", "e_no", "sub_no", "generate_no"], name: "resultno_eno"
+  end
+
+  create_table "new_events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+    t.integer "result_no"
+    t.integer "generate_no"
+    t.integer "event_id"
+    t.integer "flag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_new_events_on_event_id"
+    t.index ["flag_id"], name: "index_new_events_on_flag_id"
+    t.index ["result_no", "generate_no"], name: "resultno_generateno"
   end
 
   create_table "parties", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|

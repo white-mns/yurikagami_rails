@@ -46,6 +46,12 @@
                 = link_to "ステータス分布グラフ", status_graphs_path, class: "dropdown-item"
                 = link_to "出発国分布グラフ", current_places_start_path, class: "dropdown-item"
             %li.nav-item.dropdown
+              %a.nav-link.dropdown-toggle#themes{ :data => {:toggle =>"dropdown"}, :href => "#"}
+                新出
+                %span.caret
+              .dropdown-menu
+                = link_to "新出イベント状況グラフ", new_events_path, class: "dropdown-item"
+            %li.nav-item.dropdown
               = link_to "戦型－習得技", learnable_skills_path, class: "nav-link"
 
     .container
