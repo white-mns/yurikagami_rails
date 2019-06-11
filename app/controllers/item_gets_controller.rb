@@ -35,7 +35,6 @@ class ItemGetsController < ApplicationController
 
     params_to_form(params, @form_params, column_name: "item_data_prize", params_name: "prize_form", type: "number")
     params_to_form(params, @form_params, column_name: "current_place_place_name", params_name: "place_form", type: "text")
-    reference_number_assign(params, "item_data_prize", "prize_form")
 
     checkbox_params_set_query_any(params, @form_params, query_name: "is_pk_eq_any",
                              checkboxes: [{params_name: "no_pk", value: 0, first_checked: true},
