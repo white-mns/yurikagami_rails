@@ -41,6 +41,9 @@
         - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "敵数", params_name: "enemy_num_form", placeholder: "Number")
       %tr
         %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "敵名", params_name: "enemy_form", placeholder: "Enemy", colspan: 3)
+      %tr
+        %td.indent
         - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "現在地", params_name: "place_form", placeholder: "Place", colspan: 3)
       %tr.sep
         %td.indent
@@ -79,6 +82,10 @@
         %td= enemy_party_info.party_info.battler_num if enemy_party_info.party_info
         %td= enemy_party_info.enemy_num
         %td
+          - if enemy_party_info.enemy_members
+            - enemy_party_info.enemy_members.each do |enemy_member|
+              = enemy_name_text(enemy_member)
+              %br
         %td= enemy_party_info.current_place.place.name if enemy_party_info.current_place && enemy_party_info.current_place.place
         %td.sep= battle_link(enemy_party_info.party_no)
         %td= battle_old_link(@latest_result, enemy_party_info.party_no, enemy_party_info.result_no)

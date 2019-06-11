@@ -6,8 +6,8 @@ class EnemyPartyInfosController < ApplicationController
   def index
     placeholder_set
     param_set
-    @count	= EnemyPartyInfo.notnil().includes([current_place: :place], [party_info: [party_members: :pc_name]]).search(params[:q]).result.hit_count()
-    @search	= EnemyPartyInfo.notnil().includes([current_place: :place], [party_info: [party_members: :pc_name]]).page(params[:page]).search(params[:q])
+    @count	= EnemyPartyInfo.notnil().includes([enemy_members: :enemy], [current_place: :place], [party_info: [party_members: :pc_name]]).search(params[:q]).result.hit_count()
+    @search	= EnemyPartyInfo.notnil().includes([enemy_members: :enemy], [current_place: :place], [party_info: [party_members: :pc_name]]).page(params[:page]).search(params[:q])
     @search.sorts = "id asc" if @search.sorts.empty?
     @enemy_party_infos	= @search.result.per(50)
   end
@@ -31,6 +31,7 @@ class EnemyPartyInfosController < ApplicationController
     params_to_form(params, @form_params, column_name: "party_info_party_members_e_no", params_name: "e_no_form", type: "number")
     params_to_form(params, @form_params, column_name: "party_info_battler_num", params_name: "battler_num_form", type: "number")
     params_to_form(params, @form_params, column_name: "current_place_place_name", params_name: "place_form", type: "text")
+    params_to_form(params, @form_params, column_name: "enemy_members_enemy_name", params_name: "enemy_form", type: "text")
 
     is_sub_hash =  {"is_main"=> @form_params["is_main"],"is_sub" => @form_params["is_sub"]}
     sub_no_set(params, is_sub_hash)

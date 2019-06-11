@@ -175,19 +175,9 @@ module ApplicationHelper
         end
     end
 
+    def enemy_name_text(enemy)
+        if !enemy || !enemy.enemy || !enemy.suffix then return end
 
-    def all_assembly_text(assembly)
-        if !assembly then
-            return
-        end
-
-        assembly_text = ""
-
-        assembly.each do |parts|
-          assembly_text += parts.orig_name_name.name + "、" if parts.orig_name_name
-        end
-
-        assembly_text.chop()
+        enemy.enemy.name + " " + enemy.suffix.name
     end
-
 end
