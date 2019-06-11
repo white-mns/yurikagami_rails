@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+  resources :battle_results
+  resources :new_enemies
+  resources :enemies
+  resources :enemy_party_infos
+  resources :item_gets
+  resources :searches
+  resources :new_places
+  resources :new_events
+  resources :event_proceeds
+  resources :events
   get "current_place/start",  :to => "current_places#start_graph",  :as => "current_places_start"
   resources :current_places
   resources :party_infos

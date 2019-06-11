@@ -18,12 +18,17 @@
             %li= link_to "ステータス一覧", statuses_path
             %li= link_to "所有アイテム一覧", items_path
             %li= link_to "所有技一覧", skills_path
+            %li= link_to "イベントフラグ一覧", events_path
+            %li= link_to "イベント進行一覧", event_proceeds_path
+            %li= link_to "サブキャラ探索結果一覧", searches_path
       .col-md-6
         %ul
           %li 行動データ
           %ul  
             %li= link_to "パーティ情報一覧", party_infos_path
             %li= link_to "現在地一覧", current_places_path
+            %li= link_to "戦闘結果一覧", battle_results_path
+            %li= link_to "アイテムドロップ一覧", item_gets_path
       .col-md-6
         %ul
           %li グラフデータ
@@ -32,12 +37,23 @@
             %li= link_to "出発国分布グラフ", current_places_start_path
       .col-md-6
         %ul
+          %li 新出データ
+          %ul  
+            %li= link_to "新出イベント状況一覧", new_events_path
+            %li= link_to "新出地点一覧", new_places_path
+            %li= link_to "新出敵一覧", new_enemies_path
+      .col-md-6
+      .col-md-6
+        %ul
           %li= link_to "戦型－習得可能技一覧", learnable_skills_path
 
 .card.top
   .card-body
     %h2 更新履歴
     %ul
+      %li 2019/6/11
+      %ul
+        %li イベントフラグ一覧、イベント進行一覧、サブキャラ探索結果一覧、戦闘結果一覧、アイテムドロップ一覧、新出イベント状況一覧、新出地点一覧、新出敵一覧を公開
       %li 2019/6/2
       %ul
         %li サイト公開

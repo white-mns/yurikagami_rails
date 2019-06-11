@@ -1,0 +1,92 @@
+- @page_title = "出現敵情報一覧"
+%h1= @page_title
+
+.card.desc
+  .card-header
+    - act_icon(true)
+    検索仕様
+    - act_desc(true)
+  .card-body
+    = render "layouts/base_desc"
+    %p
+      %span.example_select.example_toggle.pointer
+        - help_icon
+        入力例
+        - act_desc(false)
+    #example.closed
+      = render "layouts/input_desc"
+= search_form_for @search do |f|
+  %table.search_toggle.table.table-striped.table-bordered.table-hover
+    %tbody.pointer
+      %tr
+        %td{colspan: "5"}
+          - act_icon(true)
+          絞り込み検索
+          - act_desc(true)
+    %tbody
+      %tr
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "更新回", params_name: "result_no_form", placeholder: nil, colspan: 3)
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "パーティ番号", params_name: "party_no_form", placeholder: "Number", colspan: 3)
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "Eno", params_name: "e_no_form", placeholder: "Number")
+        - td_form(f, @form_params, @placeholder, class_name: "formText", label: "キャラクター名", params_name: "pc_name_form", placeholder: "Name")
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "参戦人数", params_name: "battler_num_form", placeholder: "Number")
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "敵数", params_name: "enemy_num_form", placeholder: "Number")
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "敵名", params_name: "enemy_form", placeholder: "Enemy", colspan: 3)
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "現在地", params_name: "place_form", placeholder: "Place", colspan: 3)
+      %tr.sep
+        %td.indent
+        %td.indent= hidden_field_tag :is_form, 1
+        %td{colspan: "3"}
+          - search_submit_button
+
+
+= paginate(@enemy_party_infos)
+%br
+ヒット数：#{ @count }件
+%br
+%br
+
+%table.table.table-striped.table-bordered.table-hover
+  %thead
+    %tr
+      %th= sort_link(@search, :result_no,"更新回", default_order: :desc)
+      %th= sort_link(@search, :party_no, "Pno", default_order: :desc)
+      %th= sort_link(@search, :party_info_party_members_e_no,"キャラクター(Eno)", default_order: :desc)
+      %th= sort_link(@search, :party_info_battler_num, "参戦", default_order: :desc)
+      %th= sort_link(@search, :enemy_num, "敵数", default_order: :desc)
+      %th= sort_link(@search, :enemy_members_enemy_name, "敵名", default_order: :desc)
+      %th= sort_link(@search, :current_place_place_id, "現在地", default_order: :desc)
+      %th.sep{colspan: "2"} 結果リンク
+  %tbody
+    - @enemy_party_infos.each do |enemy_party_info|
+      %tr
+        %td= enemy_party_info.result_no
+        %td= enemy_party_info.party_no
+        %td
+          - if enemy_party_info.party_info
+            - enemy_party_info.party_info.party_members.each do |party_member|
+              = pc_name_text(party_member.e_no, party_member.sub_no, party_member.pc_name)
+              %br
+        %td= enemy_party_info.party_info.battler_num if enemy_party_info.party_info
+        %td= enemy_party_info.enemy_num
+        %td
+          - if enemy_party_info.enemy_members
+            - enemy_party_info.enemy_members.each do |enemy_member|
+              = enemy_name_text(enemy_member)
+              %br
+        %td= enemy_party_info.current_place.place.name if enemy_party_info.current_place && enemy_party_info.current_place.place
+        %td.sep= battle_link(enemy_party_info.party_no)
+        %td= battle_old_link(@latest_result, enemy_party_info.party_no, enemy_party_info.result_no)
+= paginate(@enemy_party_infos)

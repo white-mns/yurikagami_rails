@@ -10,7 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_01_054244) do
+ActiveRecord::Schema.define(version: 2019_06_11_134119) do
+
+  create_table "battle_results", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+    t.integer "result_no"
+    t.integer "generate_no"
+    t.integer "party_no"
+    t.integer "battle_result"
+    t.integer "is_pk"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["battle_result"], name: "index_battle_results_on_battle_result"
+    t.index ["is_pk"], name: "index_battle_results_on_is_pk"
+    t.index ["result_no", "party_no", "generate_no"], name: "resultno_pno"
+  end
 
   create_table "current_places", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
     t.integer "result_no"
@@ -25,6 +38,82 @@ ActiveRecord::Schema.define(version: 2019_06_01_054244) do
     t.index ["place_id"], name: "index_current_places_on_place_id"
     t.index ["result_no", "party_no", "generate_no"], name: "resultno_pno"
     t.index ["shop"], name: "index_current_places_on_shop"
+  end
+
+  create_table "enemies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+    t.integer "result_no"
+    t.integer "generate_no"
+    t.integer "party_no"
+    t.integer "enemy_id"
+    t.integer "suffix_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["enemy_id"], name: "index_enemies_on_enemy_id"
+    t.index ["result_no", "party_no", "generate_no"], name: "resultno_pno"
+    t.index ["suffix_id"], name: "index_enemies_on_suffix_id"
+  end
+
+  create_table "enemy_party_infos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+    t.integer "result_no"
+    t.integer "generate_no"
+    t.integer "party_no"
+    t.integer "enemy_num"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["enemy_num"], name: "index_enemy_party_infos_on_enemy_num"
+    t.index ["result_no", "party_no", "generate_no"], name: "resultno_pno"
+  end
+
+  create_table "event_proceeds", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+    t.integer "result_no"
+    t.integer "generate_no"
+    t.integer "e_no"
+    t.integer "sub_no"
+    t.integer "event_id"
+    t.integer "last_flag_id"
+    t.integer "flag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_event_proceeds_on_event_id"
+    t.index ["flag_id"], name: "index_event_proceeds_on_flag_id"
+    t.index ["last_flag_id"], name: "index_event_proceeds_on_last_flag_id"
+    t.index ["result_no", "e_no", "sub_no", "generate_no"], name: "resultno_eno"
+  end
+
+  create_table "events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+    t.integer "result_no"
+    t.integer "generate_no"
+    t.integer "e_no"
+    t.integer "sub_no"
+    t.integer "event_id"
+    t.integer "flag_id"
+    t.integer "text_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_events_on_event_id"
+    t.index ["flag_id"], name: "index_events_on_flag_id"
+    t.index ["result_no", "e_no", "sub_no", "generate_no"], name: "resultno_eno"
+    t.index ["text_id"], name: "index_events_on_text_id"
+  end
+
+  create_table "item_gets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+    t.integer "result_no"
+    t.integer "generate_no"
+    t.integer "party_no"
+    t.integer "e_no"
+    t.integer "sub_no"
+    t.integer "enemy_id"
+    t.integer "item_id"
+    t.integer "i_no"
+    t.integer "is_pk"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["enemy_id"], name: "index_item_gets_on_enemy_id"
+    t.index ["i_no"], name: "index_item_gets_on_i_no"
+    t.index ["is_pk"], name: "index_item_gets_on_is_pk"
+    t.index ["item_id"], name: "index_item_gets_on_item_id"
+    t.index ["party_no"], name: "index_item_gets_on_party_no"
+    t.index ["result_no", "e_no", "sub_no", "generate_no"], name: "resultno_eno"
   end
 
   create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
@@ -92,6 +181,38 @@ ActiveRecord::Schema.define(version: 2019_06_01_054244) do
     t.index ["result_no", "e_no", "sub_no", "generate_no"], name: "resultno_eno"
   end
 
+  create_table "new_enemies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+    t.integer "result_no"
+    t.integer "generate_no"
+    t.integer "enemy_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["enemy_id"], name: "index_new_enemies_on_enemy_id"
+    t.index ["result_no", "generate_no"], name: "resultno_generateno"
+  end
+
+  create_table "new_events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+    t.integer "result_no"
+    t.integer "generate_no"
+    t.integer "event_id"
+    t.integer "flag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_new_events_on_event_id"
+    t.index ["flag_id"], name: "index_new_events_on_flag_id"
+    t.index ["result_no", "generate_no"], name: "resultno_generateno"
+  end
+
+  create_table "new_places", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+    t.integer "result_no"
+    t.integer "generate_no"
+    t.integer "place_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["place_id"], name: "index_new_places_on_place_id"
+    t.index ["result_no", "generate_no"], name: "resultno_generateno"
+  end
+
   create_table "parties", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
     t.integer "result_no"
     t.integer "generate_no"
@@ -144,6 +265,27 @@ ActiveRecord::Schema.define(version: 2019_06_01_054244) do
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_proper_names_on_name"
     t.index ["proper_id"], name: "index_proper_names_on_proper_id"
+  end
+
+  create_table "searches", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+    t.integer "result_no"
+    t.integer "generate_no"
+    t.integer "last_result_no"
+    t.integer "last_generate_no"
+    t.integer "e_no"
+    t.integer "sub_no"
+    t.integer "main_no"
+    t.integer "i_no"
+    t.string "i_name"
+    t.integer "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["i_name"], name: "index_searches_on_i_name"
+    t.index ["i_no"], name: "index_searches_on_i_no"
+    t.index ["last_result_no", "last_generate_no"], name: "last_num"
+    t.index ["main_no"], name: "index_searches_on_main_no"
+    t.index ["result_no", "e_no", "sub_no", "generate_no"], name: "resultno_eno"
+    t.index ["value"], name: "index_searches_on_value"
   end
 
   create_table "skill_data", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|

@@ -29,6 +29,9 @@
                 = link_to "ステータス一覧", statuses_path, class: "dropdown-item"
                 = link_to "所有アイテム一覧", items_path, class: "dropdown-item"
                 = link_to "所有技一覧", skills_path, class: "dropdown-item"
+                = link_to "イベントフラグ一覧", events_path, class: "dropdown-item"
+                = link_to "イベント進行一覧", event_proceeds_path, class: "dropdown-item"
+                = link_to "サブキャラ探索結果一覧", searches_path, class: "dropdown-item"
             %li.nav-item.dropdown
               %a.nav-link.dropdown-toggle#themes{ :data => {:toggle =>"dropdown"}, :href => "#"}
                 行動
@@ -36,6 +39,8 @@
               .dropdown-menu
                 = link_to "パーティ情報一覧", party_infos_path, class: "dropdown-item"
                 = link_to "現在地一覧", current_places_path, class: "dropdown-item"
+                = link_to "戦闘結果一覧", battle_results_path, class: "dropdown-item"
+                = link_to "アイテムドロップ一覧", item_gets_path, class: "dropdown-item"
             %li.nav-item.dropdown
               %a.nav-link.dropdown-toggle#themes{ :data => {:toggle =>"dropdown"}, :href => "#"}
                 グラフ
@@ -43,6 +48,14 @@
               .dropdown-menu
                 = link_to "ステータス分布グラフ", status_graphs_path, class: "dropdown-item"
                 = link_to "出発国分布グラフ", current_places_start_path, class: "dropdown-item"
+            %li.nav-item.dropdown
+              %a.nav-link.dropdown-toggle#themes{ :data => {:toggle =>"dropdown"}, :href => "#"}
+                新出
+                %span.caret
+              .dropdown-menu
+                = link_to "新出イベント状況一覧", new_events_path, class: "dropdown-item"
+                = link_to "新出地点一覧", new_places_path, class: "dropdown-item"
+                = link_to "新出敵一覧", new_enemies_path, class: "dropdown-item"
             %li.nav-item.dropdown
               = link_to "戦型－習得技", learnable_skills_path, class: "nav-link"
 
