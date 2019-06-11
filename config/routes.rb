@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :searches
   resources :new_places
   resources :new_events
   resources :event_proceeds
