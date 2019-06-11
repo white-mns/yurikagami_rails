@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_11_074321) do
+ActiveRecord::Schema.define(version: 2019_06_11_091926) do
 
   create_table "current_places", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
     t.integer "result_no"
@@ -57,6 +57,26 @@ ActiveRecord::Schema.define(version: 2019_06_11_074321) do
     t.index ["flag_id"], name: "index_events_on_flag_id"
     t.index ["result_no", "e_no", "sub_no", "generate_no"], name: "resultno_eno"
     t.index ["text_id"], name: "index_events_on_text_id"
+  end
+
+  create_table "item_gets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+    t.integer "result_no"
+    t.integer "generate_no"
+    t.integer "party_no"
+    t.integer "e_no"
+    t.integer "sub_no"
+    t.integer "enemy_id"
+    t.integer "item_id"
+    t.integer "i_no"
+    t.integer "is_pk"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["enemy_id"], name: "index_item_gets_on_enemy_id"
+    t.index ["i_no"], name: "index_item_gets_on_i_no"
+    t.index ["is_pk"], name: "index_item_gets_on_is_pk"
+    t.index ["item_id"], name: "index_item_gets_on_item_id"
+    t.index ["party_no"], name: "index_item_gets_on_party_no"
+    t.index ["result_no", "e_no", "sub_no", "generate_no"], name: "resultno_eno"
   end
 
   create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|

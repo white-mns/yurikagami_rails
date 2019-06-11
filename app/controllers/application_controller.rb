@@ -16,5 +16,6 @@ class ApplicationController < ActionController::Base
         @placeholder["Element"]   = "例）無/斬/突/熱"
         @placeholder["Place"]   = "例）キュースター/応礁"
         @placeholder["Event"]   = "例）配達任務/国籍"
+        @placeholder["Enemy"]   = "例）ビースト/ナイトレトネ"
     end
 end
