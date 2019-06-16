@@ -32,7 +32,7 @@ class SearchesController < ApplicationController
     params_to_form(params, @form_params, column_name: "sub_no", params_name: "sub_no_form", type: "number")
     params_to_form(params, @form_params, column_name: "main_no", params_name: "main_no_form", type: "number")
     params_to_form(params, @form_params, column_name: "i_no", params_name: "i_no_form", type: "number")
-    params_to_form(params, @form_params, column_name: "item_name", params_name: "i_name_form", type: "number")
+    params_to_form(params, @form_params, column_name: "item_name", params_name: "i_name_form", type: "text")
     params_to_form(params, @form_params, column_name: "value", params_name: "value_form", type: "number")
 
     params_to_form(params, @form_params, column_name: "status_money", params_name: "money_form", type: "number")
@@ -40,10 +40,6 @@ class SearchesController < ApplicationController
     checkbox_params_set_query_single(params, @form_params, checkbox: {params_name: "is_item", query_name:"i_no_gteq_any",  value: 0})
     checkbox_params_set_query_single(params, @form_params, checkbox: {params_name: "no_item", query_name:"i_no_eq_any",    value: -1})
 
-    is_sub_hash =  {"is_main"=> @form_params["is_main"],"is_sub" => @form_params["is_sub"]}
-    sub_no_set(params, is_sub_hash)
-    @form_params["is_main"] = is_sub_hash["is_main"]
-    @form_params["is_sub"] = is_sub_hash["is_sub"]
   end
   # GET /searches/1
   #def show
