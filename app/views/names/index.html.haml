@@ -61,6 +61,6 @@
       %tr
         %td= name.result_no
         %td= pc_name_text(name.e_no, name.sub_no, name)
-        %td.sep= character_link(name.e_no)
-        %td= character_old_link(@latest_result, name.e_no, name.result_no, name.generate_no)
+        %td.sep= character_link(name.e_no, name.sub_no)
+        %td= character_old_link(@latest_result, name.e_no, name.sub_no, name.result_no, name.generate_no)
 = paginate(@names)
