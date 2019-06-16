@@ -48,15 +48,14 @@ module ApplicationHelper
         if e_no <= 0 then return end
         if result_no == latest_result_no then return end
 
-        result_no_text = sprintf("%03d", result_no)
-        generate_text  = generate_no > 0 ? "_" + sprintf("%d", generate_no) : ""
+        result_no_text = sprintf("%d", result_no)
 
         file_name = sprintf("%d", e_no)
         if sub_no > 0 then
             file_name += "_" + sprintf("%d",sub_no)
         end
 
-        link_to " キャラ過去結果", "https://archives.teiki.org/yk/5/turn"+result_no_text+generate_text+"/status"+file_name+".html", :target => "_blank"
+        link_to " キャラ過去結果", "https://archives.teiki.org/yk/5/turn"+result_no_text+"/status"+file_name+".html", :target => "_blank"
     end
 
     def battle_link(party_no)
@@ -64,8 +63,8 @@ module ApplicationHelper
         link_to " 戦闘結果", "http://csyuki.sakura.ne.jp/cgi-bin/prism/result/result"+file_name+".html", :target => "_blank"
     end
 
-    def battle_old_link(last_result_no, party_no, result_no)
-        if result_no < last_result_no
+    def battle_old_link(latest_result_no, party_no, result_no)
+        if result_no < latest_result_no
             file_name = sprintf("%d",party_no)
             result_no_text = sprintf("%d",result_no)
             link_to " 戦闘過去結果", "https://archives.teiki.org/yk/5/turn"+result_no_text+"/result"+file_name+".html", :target => "_blank"
