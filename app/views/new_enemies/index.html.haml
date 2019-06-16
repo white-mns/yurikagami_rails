@@ -48,10 +48,13 @@
   %thead
     %tr
       %th= sort_link(@search, :result_no,"更新回", default_order: :desc)
-      %th= sort_link(@search, :enemy_id, "Enemy", default_order: :desc)
+      %th= sort_link(@search, :enemy_id, "敵名", default_order: :desc)
   %tbody
     - @new_enemies.each do |new_enemy|
       %tr
         %td= new_enemy.result_no
-        %td= new_enemy.enemy.name if new_enemy.enemy
+        %td
+          -if new_enemy.enemy
+            - @result_num = sprintf("%d", new_enemy.result_no)
+            = link_to new_enemy.enemy.name, battle_results_path + "?result_no_form=" + @result_num + "&enemy_form=\"" + new_enemy.enemy.name + "\""
 = paginate(@new_enemies)
