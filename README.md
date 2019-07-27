@@ -1,6 +1,6 @@
 # 百合鏡データ小屋　表示用Railsアプリ
-四城半データ小屋は[百合鏡](http://csyuki.sakura.ne.jp/cgi-bin/prism/)を解析して得られるデータを扱った情報サイトです。  
-このプログラムは四城半データ小屋で実際に使用している表示用のRailsアプリです。  
+百合鏡データ小屋は[百合鏡](http://csyuki.sakura.ne.jp/cgi-bin/prism/)を解析して得られるデータを扱った情報サイトです。  
+このプログラムは百合鏡データ小屋で実際に使用している表示用のRailsアプリです。  
 データ小屋の解析部分については[別リポジトリ](https://github.com/white-mns/yurikagami_parse)を参照ください。
 
 # サイト
