@@ -1,0 +1,178 @@
+- @page_title = "装備作成一覧"
+%h1= @page_title
+
+.card.desc
+  .card-header
+    - act_icon(true)
+    検索仕様
+    - act_desc(true)
+  .card-body
+    = render "layouts/base_desc"
+    %p
+      %span.example_select.example_toggle.pointer
+        - help_icon
+        入力例
+        - act_desc(false)
+    #example.closed
+      = render "layouts/input_desc"
+= search_form_for @search do |f|
+  %table.search_toggle.table.table-striped.table-bordered.table-hover
+    %tbody.pointer
+      %tr
+        %td{colspan: "5"}
+          - act_icon(true)
+          絞り込み検索
+          - act_desc(true)
+    %tbody
+      %tr
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "更新回", params_name: "result_no_form", placeholder: nil, colspan: 3)
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "Eno", params_name: "e_no_form", placeholder: "Number")
+        - td_form(f, @form_params, @placeholder, class_name: "formText", label: "キャラクター名", params_name: "pc_name_form", placeholder: "Name")
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "パーティ番号", params_name: "party_no_form", placeholder: "Number", colspan: 3)
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formText", label: "作成装備名", params_name: "result_name_form")
+        - td_form(f, @form_params, @placeholder, class_name: "formText", label: "参考装備名", params_name: "source_name_form")
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "種類", params_name: "kind_form", placeholder: "ItemKind", colspan: 3)
+
+    - #==========================================================================================================================
+    - tbody_toggle(@form_params, params_name: "show_result_detail",
+                    label: {open: "作成装備の性能を表示する", close: "作成装備の性能を表示しない"},
+                    act_desc: "斬撃、突撃、魔力、防御、守護、能力、価値", base_first: true)
+    %tbody
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "斬撃", params_name: "result_slash_form", placeholder: "Number")
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "突撃", params_name: "result_charge_form", placeholder: "Number")
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "魔力", params_name: "result_magic_form", placeholder: "Number")
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "防御", params_name: "result_guard_form", placeholder: "Number")
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "守護", params_name: "result_protect_form", placeholder: "Number", colspan: 3)
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "能力", params_name: "result_ability_form", placeholder: "ItemAbility")
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "価値", params_name: "result_prize_form", placeholder: "Number")
+
+    - #==========================================================================================================================
+    - tbody_toggle(@form_params, params_name: "show_material",
+                    label: {open: "素材を表示する", close: "素材を表示しない"},
+                    act_desc: "メイン素材、サブ素材1～4の名前", base_first: false)
+    %tbody.closed
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "メイン素材名", params_name: "main_material_name_form")
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "サブ素材名", params_name: "sub_material_name_form")
+
+    - #==========================================================================================================================
+    %tbody
+      %tr.sep
+        %td.indent
+        %td.indent= hidden_field_tag :is_form, 1
+        %td{colspan: "3"}
+          - search_submit_button
+
+
+= paginate(@smiths)
+%br
+ヒット数：#{ @count }件
+%br
+%br
+
+%table.table.table-striped.table-bordered.table-hover
+  %thead
+    %tr
+      %th= sort_link(@search, :result_no,"更新回", default_order: :desc)
+      %th= sort_link(@search, :e_no,"キャラクター(Eno)", default_order: :desc)
+      %th= sort_link(@search, :party_no, "パーティ", default_order: :desc)
+      %th.sep
+      %th= sort_link(@search, :result_i_no, "INo", default_order: :desc)
+      %th= sort_link(@search, :result_name, "名前", default_order: :desc)
+      %th= sort_link(@search, :result_kind_id, "種類", default_order: :desc)
+      - if @form_params["show_result_detail"] == "1"
+        %th= sort_link(@search, :result_slash, "斬撃", default_order: :desc)
+        %th= sort_link(@search, :result_charge, "突撃", default_order: :desc)
+        %th= sort_link(@search, :result_magic, "魔力", default_order: :desc)
+        %th= sort_link(@search, :result_guard, "防御", default_order: :desc)
+        %th= sort_link(@search, :result_protect, "守護", default_order: :desc)
+        %th= sort_link(@search, :result_ability_id, "能力", default_order: :desc)
+        %th= sort_link(@search, :result_prize, "価値", default_order: :desc)
+      - if @form_params["show_material"] == "1"
+        %th.sep= sort_link(@search, :main_material_name, "メイン素材", default_order: :desc)
+        %th= sort_link(@search, :sub_material_1_name, "サブ素材1", default_order: :desc)
+        %th= sort_link(@search, :sub_material_2_name, "サブ素材2", default_order: :desc)
+        %th= sort_link(@search, :sub_material_3_name, "サブ素材3", default_order: :desc)
+        %th= sort_link(@search, :sub_material_4_name, "サブ素材4", default_order: :desc)
+      %th.sep{colspan: "2"} 結果リンク
+  %tbody
+    - @smiths.each do |smith|
+      %tr
+        %td{rowspan:2}= smith.result_no
+        %td{rowspan:2}= pc_name_text(smith.e_no, smith.sub_no, smith.pc_name)
+        %td{rowspan:2}= smith.party_no
+        %td.sep 作成
+        %td= smith.result_i_no
+        %td
+          = "作成失敗" if smith.result_i_no == -1
+          = "推測不可" if smith.result_i_no == 0
+          = smith.result.name if smith.result
+        %td= smith.result.kind.name if smith.result && smith.result.kind
+        - if @form_params["show_result_detail"] == "1"
+          %td= smith.result.slash   if smith.result
+          %td= smith.result.charge  if smith.result
+          %td= smith.result.magic   if smith.result
+          %td= smith.result.guard   if smith.result
+          %td= smith.result.protect if smith.result
+          %td= smith.result.ability.name if smith.result && smith.result.ability
+          %td= smith.result.prize if smith.result
+        - if @form_params["show_material"] == "1"
+          %td.sep
+            = smith.main_material_name.name if smith.main_material_name
+            = "(INo." + sprintf("%d", smith.main_material_i_no) + ")" if smith.main_material_i_no > 0
+          %td
+            = smith.sub_material_1_name.name if smith.sub_material_1_name
+            = "(INo." + sprintf("%d", smith.sub_material_1_i_no) + ")" if smith.sub_material_1_i_no > 0
+          %td
+            = smith.sub_material_2_name.name if smith.sub_material_2_name
+            = "(INo." + sprintf("%d", smith.sub_material_2_i_no) + ")" if smith.sub_material_2_i_no > 0
+          %td
+            = smith.sub_material_3_name.name if smith.sub_material_3_name
+            = "(INo." + sprintf("%d", smith.sub_material_3_i_no) + ")" if smith.sub_material_3_i_no > 0
+          %td
+            = smith.sub_material_4_name.name if smith.sub_material_4_name
+            = "(INo." + sprintf("%d", smith.sub_material_4_i_no) + ")" if smith.sub_material_4_i_no > 0
+        %td.sep{rowspan:2}= character_link(smith.e_no, smith.sub_no)
+        %td{rowspan:2}= character_old_link(@latest_result, smith.e_no, smith.sub_no, smith.result_no, smith.generate_no)
+      %tr
+        %td.sep 参考
+        %td= smith.source_i_no
+        %td
+          = "推測不可" if smith.source_i_no == 0
+          = smith.source.name if smith.source
+        %td= smith.source.kind.name if smith.source && smith.source.kind
+        - if @form_params["show_result_detail"] == "1"
+          %td= smith.source.slash   if smith.source
+          %td= smith.source.charge  if smith.source
+          %td= smith.source.magic   if smith.source
+          %td= smith.source.guard   if smith.source
+          %td= smith.source.protect if smith.source
+          %td= smith.source.ability.name if smith.source && smith.source.ability
+          %td= smith.source.prize if smith.source
+        - if @form_params["show_material"] == "1"
+          %td.sep= smith.main_material.prize if smith.main_material
+          %td= smith.sub_material_1.prize if smith.sub_material_1
+          %td= smith.sub_material_2.prize if smith.sub_material_2
+          %td= smith.sub_material_3.prize if smith.sub_material_3
+          %td= smith.sub_material_4.prize if smith.sub_material_4
+      %tr
+= paginate(@smiths)

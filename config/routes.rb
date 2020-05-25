@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :smiths
   resources :battle_results
   resources :new_enemies
   resources :enemies
