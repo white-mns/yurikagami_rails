@@ -1,0 +1,2 @@
+json.extract! smith, :id, :result_no, :generate_no, :last_result_no, :last_generate_no, :party_no, :e_no, :sub_no, :result_i_no, :source_i_no, :main_material_i_no, :sub_material_1_i_no, :sub_material_2_i_no, :sub_material_3_i_no, :sub_material_4_i_no, :main_material_name_id, :sub_material_1_name_id, :sub_material_2_name_id, :sub_material_3_name_id, :sub_material_4_name_id, :created_at, :updated_at
+json.url smith_url(smith, format: :json)
