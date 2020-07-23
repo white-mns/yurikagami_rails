@@ -2,7 +2,7 @@
 %p
   このサイトでは
   %a{:href => "http://csyuki.sakura.ne.jp/cgi-bin/prism/", :target => "_blank"} 百合鏡
-  を解析して得られる情報を扱っています。
+  の5期結果を解析して得られる情報を扱っていました。
   %br
   過去結果へのリンクは弊サイト
   = link_to "データ小屋アーカイブス", "https://archives.teiki.org/yk/5/"
@@ -18,6 +18,8 @@
         %ul
           %li 個人データ
           %ul  
+            %li= link_to "キャラクター名一覧", names_path
+            %br
             %li= link_to "プロフィール一覧", profiles_path
             %li= link_to "ステータス一覧", statuses_path
             %li= link_to "所有アイテム一覧", items_path

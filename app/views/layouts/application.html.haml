@@ -26,6 +26,8 @@
                 個人
                 %span.caret
               .dropdown-menu
+                = link_to "キャラクター名一覧", names_path, class: "dropdown-item"
+                .dropdown-divider
                 = link_to "プロフィール一覧", profiles_path, class: "dropdown-item"
                 = link_to "ステータス一覧", statuses_path, class: "dropdown-item"
                 = link_to "所有アイテム一覧", items_path, class: "dropdown-item"
