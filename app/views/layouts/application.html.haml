@@ -16,7 +16,7 @@
   %body
     %nav.navbar.navbar-expand-md.fixed-top.navbar-light.bg-light.navbar-custom.p-0
       .container
-        = link_to "百合鏡データ小屋", root_path, :class => "navbar-brand"
+        = link_to "百合鏡3期データ小屋", root_path, :class => "navbar-brand"
         %button.navbar-toggler{type: "button", data: {toggle: "collapse", target: "#navbarResponsive"}, area: {controls: "navbarResponsive", expanded: "false", label: "Toggle navigation"}}
           %span.navbar-toggler-icon
         .collapse.navbar-collapse#navbarResponsive
@@ -80,6 +80,4 @@
           ソースコード [#{link_to "解析部分", "https://github.com/white-mns/yurikagami_parse"}] [#{link_to "表示部分", "https://github.com/white-mns/yurikagami_rails"}]
           %br
           #{link_to "その他ゲームのデータ小屋", "https://data.teiki.org/"}
-          %br
-          #{link_to "百合鏡4期データ小屋", "https://data.teiki.org/yk_4/"}
       = render "layouts/analytics"

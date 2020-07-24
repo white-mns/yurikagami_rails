@@ -56,19 +56,6 @@
         - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "MP", params_name: "mp_form")
       %tr
         %td.indent
-        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "対象", params_name: "target_form", placeholder: "Target")
-        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "射程", params_name: "range_form")
-      %tr
-        %td.indent
-        - td_form(f, @form_params, @placeholder, params_name: "equip_form", colspan: 3, label_td_class_name: "indent",
-                    checkboxes: [{label: "武器の射程", params_name: "equip_range", class_name: "after_space mobile_br"},
-                                 {label: "射程なし",   params_name: "no_range"}])
-      %tr
-        %td.indent
-        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "特性", params_name: "property_form", placeholder: "SkillProperty")
-        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "属性", params_name: "element_form", placeholder: "Element")
-      %tr
-        %td.indent
         - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "説明", params_name: "text_form", colspan: 3)
 
     - #==========================================================================================================================
@@ -99,10 +86,6 @@
         %th= sort_link(@search, :skill_ct, "CT", default_order: :desc)
         %th= sort_link(@search, :skill_timing_id, "発動", default_order: :desc)
         %th= sort_link(@search, :skill_mp, "MP", default_order: :desc)
-        %th= sort_link(@search, :skill_target_id, "対象", default_order: :desc)
-        %th= sort_link(@search, :skill_range, "射程", default_order: :desc)
-        %th= sort_link(@search, :skill_property_id, "特性", default_order: :desc)
-        %th= sort_link(@search, :skill_element_id, "属性", default_order: :desc)
         %th.sep= sort_link(@search, :skill_text, "説明", default_order: :desc)
 
   %tbody
@@ -126,15 +109,5 @@
               多
           %td= learnable_skill.skill.timing.name if learnable_skill.skill && learnable_skill.skill.timing
           %td= learnable_skill.skill.mp if learnable_skill.skill
-          %td= learnable_skill.skill.target.name if learnable_skill.skill && learnable_skill.skill.target
-          %td
-            - if learnable_skill.skill.range == -2
-              = "武"
-            - elsif learnable_skill.skill.range == -1
-              = "-"
-            - else
-              = learnable_skill.skill.range
-          %td= learnable_skill.skill.property.name if learnable_skill.skill && learnable_skill.skill.property
-          %td= learnable_skill.skill.element.name if learnable_skill.skill && learnable_skill.skill.element
           %td.sep= learnable_skill.skill.text if learnable_skill.skill
 = paginate(@learnable_skills)

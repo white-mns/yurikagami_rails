@@ -1,11 +1,11 @@
-%h1 百合鏡データ小屋
+%h1 百合鏡3期データ小屋
 %p
   このサイトでは
   %a{:href => "http://csyuki.sakura.ne.jp/cgi-bin/prism/", :target => "_blank"} 百合鏡
-  の5期結果を解析して得られる情報を扱っていました。
+  の3期結果を解析して得られる情報を扱っていました。
   %br
-  過去結果へのリンクは弊サイト
-  = link_to "データ小屋アーカイブス", "https://archives.teiki.org/yk/5/"
+  結果へのリンクは弊サイト
+  = link_to "データ小屋アーカイブス", "https://archives.teiki.org/"
   に保存したものに置き換えています。
 %br
 %p= top_text(@latest_result, @latest_generate, @uploaded_result)
@@ -53,17 +53,3 @@
       .col-md-6
         %ul
           %li= link_to "戦型－習得可能技一覧", learnable_skills_path
-
-.card.top
-  .card-body
-    %h2 更新履歴
-    %ul
-      %li 2020/5/25
-      %ul
-        %li 装備作成一覧を公開
-      %li 2019/6/11
-      %ul
-        %li イベントフラグ一覧、イベント進行一覧、サブキャラ探索結果一覧、戦闘結果一覧、アイテムドロップ一覧、新出イベント状況一覧、新出地点一覧、新出敵一覧を公開
-      %li 2019/6/2
-      %ul
-        %li サイト公開

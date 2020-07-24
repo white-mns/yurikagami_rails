@@ -44,7 +44,7 @@
     - #==========================================================================================================================
     - tbody_toggle(@form_params, params_name: "show_skill",
                     label: {open: "技の詳細を表示する", close: "技の詳細を非表示にする"},
-                    act_desc: "AT、CT、発動タイミング、MP、対象、射程、特性、属性、説明", base_first: false)
+                    act_desc: "AT、CT、発動タイミング、MP、説明", base_first: false)
     %tbody.closed
       %tr
         %td.indent
@@ -54,19 +54,6 @@
         %td.indent
         - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "発動タイミング", params_name: "timing_form", placeholder: "Timing")
         - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "MP", params_name: "mp_form")
-      %tr
-        %td.indent
-        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "対象", params_name: "target_form", placeholder: "Target")
-        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "射程", params_name: "range_form")
-      %tr
-        %td.indent
-        - td_form(f, @form_params, @placeholder, params_name: "equip_form", colspan: 3, label_td_class_name: "indent",
-                    checkboxes: [{label: "武器の射程", params_name: "equip_range", class_name: "after_space mobile_br"},
-                                 {label: "射程なし",   params_name: "no_range"}])
-      %tr
-        %td.indent
-        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "特性", params_name: "property_form", placeholder: "SkillProperty")
-        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "属性", params_name: "element_form", placeholder: "Element")
       %tr
         %td.indent
         - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "説明", params_name: "text_form", colspan: 3)
@@ -98,10 +85,6 @@
         %th= sort_link(@search, :skill_ct, "CT", default_order: :desc)
         %th= sort_link(@search, :skill_timing_id, "発動", default_order: :desc)
         %th= sort_link(@search, :skill_mp, "MP", default_order: :desc)
-        %th= sort_link(@search, :skill_target_id, "対象", default_order: :desc)
-        %th= sort_link(@search, :skill_range, "射程", default_order: :desc)
-        %th= sort_link(@search, :skill_property_id, "特性", default_order: :desc)
-        %th= sort_link(@search, :skill_element_id, "属性", default_order: :desc)
         %th= sort_link(@search, :skill_text, "説明", default_order: :desc)
       %th.sep{colspan: "2"} 結果リンク
   %tbody
@@ -120,16 +103,6 @@
               多
           %td= skill.skill.timing.name if skill.skill && skill.skill.timing
           %td= skill.skill.mp if skill.skill
-          %td= skill.skill.target.name if skill.skill && skill.skill.target
-          %td
-            - if skill.skill.range == -2
-              = "武"
-            - elsif skill.skill.range == -1
-              = "-"
-            - else
-              = skill.skill.range
-          %td= skill.skill.property.name if skill.skill && skill.skill.property
-          %td= skill.skill.element.name if skill.skill && skill.skill.element
           %td= skill.skill.text if skill.skill
         %td.sep= character_link(skill.e_no, skill.sub_no)
         %td= character_old_link(@latest_result, skill.e_no, skill.sub_no, skill.result_no, skill.generate_no)
