@@ -2,11 +2,11 @@
 %p
   このサイトでは
   %a{:href => "http://csyuki.sakura.ne.jp/cgi-bin/prism/", :target => "_blank"} 百合鏡
-  の3期結果を解析して得られる情報を扱っていました。
+  の3期結果を解析して得られる情報を扱っています。
   %br
   結果へのリンクは弊サイト
   = link_to "データ小屋アーカイブス", "https://archives.teiki.org/"
-  に保存したものに置き換えています。
+  に保存したものとなっています。
 %br
 %p= top_text(@latest_result, @latest_generate, @uploaded_result)
 
@@ -26,7 +26,6 @@
             %li= link_to "所有技一覧", skills_path
             %li= link_to "イベントフラグ一覧", events_path
             %li= link_to "イベント進行一覧", event_proceeds_path
-            %li= link_to "サブキャラ探索結果一覧", searches_path
       .col-md-6
         %ul
           %li 行動データ
