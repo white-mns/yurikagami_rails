@@ -34,9 +34,6 @@
       %tr
         %td.indent
         - td_form(f, @form_params, @placeholder, class_name: "formText", label: "キャラクター名", params_name: "name_form", placeholder: "Name")
-      %tr
-        %td.indent
-        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "サブキャラ番号", params_name: "sub_no_form", placeholder: "Number")
       %tr.sep
         %td.indent
         %td.indent= hidden_field_tag :is_form, 1
