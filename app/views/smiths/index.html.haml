@@ -67,12 +67,11 @@
     - #==========================================================================================================================
     - tbody_toggle(@form_params, params_name: "show_material",
                     label: {open: "素材を表示する", close: "素材を表示しない"},
-                    act_desc: "メイン素材、サブ素材1～4の名前", base_first: false)
+                    act_desc: "素材1～4の名前", base_first: false)
     %tbody.closed
       %tr
         %td.indent
-        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "メイン素材名", params_name: "main_material_name_form")
-        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "サブ素材名", params_name: "sub_material_name_form")
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "素材名", params_name: "sub_material_name_form")
 
     - #==========================================================================================================================
     %tbody
@@ -108,11 +107,10 @@
         %th= sort_link(@search, :result_ability_id, "能力", default_order: :desc)
         %th= sort_link(@search, :result_prize, "価値", default_order: :desc)
       - if @form_params["show_material"] == "1"
-        %th.sep= sort_link(@search, :main_material_name, "メイン素材", default_order: :desc)
-        %th= sort_link(@search, :sub_material_1_name, "サブ素材1", default_order: :desc)
-        %th= sort_link(@search, :sub_material_2_name, "サブ素材2", default_order: :desc)
-        %th= sort_link(@search, :sub_material_3_name, "サブ素材3", default_order: :desc)
-        %th= sort_link(@search, :sub_material_4_name, "サブ素材4", default_order: :desc)
+        %th.sep= sort_link(@search, :sub_material_1_name, "素材1", default_order: :desc)
+        %th= sort_link(@search, :sub_material_2_name, "素材2", default_order: :desc)
+        %th= sort_link(@search, :sub_material_3_name, "素材3", default_order: :desc)
+        %th= sort_link(@search, :sub_material_4_name, "素材4", default_order: :desc)
       %th.sep{colspan: "2"} 結果リンク
   %tbody
     - @smiths.each do |smith|
@@ -137,9 +135,6 @@
           %td= smith.result.prize if smith.result
         - if @form_params["show_material"] == "1"
           %td.sep
-            = smith.main_material_name.name if smith.main_material_name
-            = "(INo." + sprintf("%d", smith.main_material_i_no) + ")" if smith.main_material_i_no > 0
-          %td
             = smith.sub_material_1_name.name if smith.sub_material_1_name
             = "(INo." + sprintf("%d", smith.sub_material_1_i_no) + ")" if smith.sub_material_1_i_no > 0
           %td
@@ -169,8 +164,7 @@
           %td= smith.source.ability.name if smith.source && smith.source.ability
           %td= smith.source.prize if smith.source
         - if @form_params["show_material"] == "1"
-          %td.sep= smith.main_material.prize if smith.main_material
-          %td= smith.sub_material_1.prize if smith.sub_material_1
+          %td.sep= smith.sub_material_1.prize if smith.sub_material_1
           %td= smith.sub_material_2.prize if smith.sub_material_2
           %td= smith.sub_material_3.prize if smith.sub_material_3
           %td= smith.sub_material_4.prize if smith.sub_material_4

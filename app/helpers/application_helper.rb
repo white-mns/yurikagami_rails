@@ -1,6 +1,6 @@
 module ApplicationHelper
     def page_title
-        title = "百合鏡3期データ小屋"
+        title = "百合鏡2.9期データ小屋"
         title = @page_title + " | " + title if @page_title
         title
     end
@@ -41,7 +41,7 @@ module ApplicationHelper
             file_name += "_" + sprintf("%d",sub_no)
         end
 
-        link_to " キャラ結果", "https://archives.teiki.org/yk/3/turn94/status"+file_name+".html", :target => "_blank"
+        link_to " 最終キャラ結果", "https://archives.teiki.org/yk/2.9/turn42/status"+file_name+".html", :target => "_blank"
     end
     
     def character_old_link(latest_result_no, e_no, sub_no, result_no, generate_no)
@@ -55,19 +55,19 @@ module ApplicationHelper
             file_name += "_" + sprintf("%d",sub_no)
         end
 
-        link_to " キャラ過去結果", "https://archives.teiki.org/yk/3/turn"+result_no_text+"/status"+file_name+".html", :target => "_blank"
+        link_to " キャラ過去結果", "https://archives.teiki.org/yk/2.9/turn"+result_no_text+"/status"+file_name+".html", :target => "_blank"
     end
 
     def battle_link(party_no)
         file_name = sprintf("%d",party_no)
-        link_to " 戦闘結果", "https://archives.teiki.org/yk/3/turn94/result"+file_name+".html", :target => "_blank"
+        link_to " 最終戦闘結果", "https://archives.teiki.org/yk/2.9/turn42/result"+file_name+".html", :target => "_blank"
     end
 
     def battle_old_link(latest_result_no, party_no, result_no)
         if result_no < latest_result_no
             file_name = sprintf("%d",party_no)
             result_no_text = sprintf("%d",result_no)
-            link_to " 戦闘過去結果", "https://archives.teiki.org/yk/3/turn"+result_no_text+"/result"+file_name+".html", :target => "_blank"
+            link_to " 戦闘過去結果", "https://archives.teiki.org/yk/2.9/turn"+result_no_text+"/result"+file_name+".html", :target => "_blank"
         end
     end
 

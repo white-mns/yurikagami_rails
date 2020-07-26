@@ -26,7 +26,7 @@ class NamesController < ApplicationController
     params_to_form(params, @form_params, column_name: "generate_no", params_name: "generate_no_form", type: "number")
     params_to_form(params, @form_params, column_name: "e_no", params_name: "e_no_form", type: "number")
     params_to_form(params, @form_params, column_name: "sub_no", params_name: "sub_no_form", type: "number")
-    params_to_form(params, @form_params, column_name: "name", params_name: "name_form", type: "number")
+    params_to_form(params, @form_params, column_name: "name", params_name: "name_form", type: "text")
   end
   # GET /names/1
   #def show
