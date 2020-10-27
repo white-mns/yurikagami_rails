@@ -10,11 +10,11 @@
 # 動作環境
 以下の環境での動作を確認しています  
   
-OS:CentOS release 6.5 (Final)  
-DB:MySQL 8.0.13  
-Ruby:2.5.0  
-Rails:5.2.1  
-gcc:7.3.1
+CentOS Linux release 8.2.2004  
+DB:MySQL 8.0.21  
+Ruby:2.7.1  
+Rails:6.x  
+gcc:8.3.1
 
 ## 使い方
 ・Railsの使い方を調べてなんやかんやして自分のRailsアプリが動くようにします。  
@@ -25,9 +25,7 @@ gcc:7.3.1
 ・動かします。  
 
     cd yurikagami_rails
-    bundle install --path vendor/bundler
-（Gemのインストール先をアプリのディレクトリ内のvendor/bundleに指定します。  
-　この指定をしない場合、システム全体で共有されるgemを利用します）
+    bundle install
  
 ・DBを作成し、必要なテーブルの設定を行います。
  
@@ -76,7 +74,7 @@ scaffoldで必要なものは大体用意されます。
 また、Modelはテンプレートで作成できなかったので、以下の行をModelの中に記述します。  
 これでキャラクター名が関連付けられるようになります。
 
-	belongs_to :p_name,	    :foreign_key => [:e_no, :result_no, :generate_no], :primary_key => [:e_no, :result_no, :generate_no], :class_name => 'Name'
+	belongs_to :p_name,	:foreign_key => [:e_no, :result_no, :generate_no], :primary_key => [:e_no, :result_no, :generate_no], :class_name => 'Name'
 
 あとは[解析プログラム](https://github.com/white-mns/yurikagami_parse)側に圧縮ファイルを用意し、解析とアップロード機能を追加してデータを入れれば新しい解析項目が公開されます。
 
