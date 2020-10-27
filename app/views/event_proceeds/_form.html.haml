@@ -1,0 +1,32 @@
+= form_with(model: event_proceed, local: true) do |form|
+  - if event_proceed.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(event_proceed.errors.count, "error")
+        prohibited this event_proceed from being saved:
+      %ul
+        - event_proceed.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = form.label :result_no
+    = form.number_field :result_no, id: :event_proceed_result_no
+  .field
+    = form.label :generate_no
+    = form.number_field :generate_no, id: :event_proceed_generate_no
+  .field
+    = form.label :e_no
+    = form.number_field :e_no, id: :event_proceed_e_no
+  .field
+    = form.label :sub_no
+    = form.number_field :sub_no, id: :event_proceed_sub_no
+  .field
+    = form.label :event
+    = form.number_field :event, id: :event_proceed_event
+  .field
+    = form.label :last_flag
+    = form.number_field :last_flag, id: :event_proceed_last_flag
+  .field
+    = form.label :flag
+    = form.number_field :flag, id: :event_proceed_flag
+  .actions
+    = form.submit

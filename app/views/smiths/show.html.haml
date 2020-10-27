@@ -1,0 +1,61 @@
+%p#notice= notice
+%p
+  %strong Result no:
+  = @smith.result_no
+%p
+  %strong Generate no:
+  = @smith.generate_no
+%p
+  %strong Last result no:
+  = @smith.last_result_no
+%p
+  %strong Last generate no:
+  = @smith.last_generate_no
+%p
+  %strong Party no:
+  = @smith.party_no
+%p
+  %strong E no:
+  = @smith.e_no
+%p
+  %strong Sub no:
+  = @smith.sub_no
+%p
+  %strong Result i no:
+  = @smith.result_i_no
+%p
+  %strong Source i no:
+  = @smith.source_i_no
+%p
+  %strong Main material i no:
+  = @smith.main_material_i_no
+%p
+  %strong Sub material 1 i no:
+  = @smith.sub_material_1_i_no
+%p
+  %strong Sub material 2 i no:
+  = @smith.sub_material_2_i_no
+%p
+  %strong Sub material 3 i no:
+  = @smith.sub_material_3_i_no
+%p
+  %strong Sub material 4 i no:
+  = @smith.sub_material_4_i_no
+%p
+  %strong Main material name:
+  = @smith.main_material_name_id
+%p
+  %strong Sub material 1 name:
+  = @smith.sub_material_1_name_id
+%p
+  %strong Sub material 2 name:
+  = @smith.sub_material_2_name_id
+%p
+  %strong Sub material 3 name:
+  = @smith.sub_material_3_name_id
+%p
+  %strong Sub material 4 name:
+  = @smith.sub_material_4_name_id
+= link_to 'Edit', edit_smith_path(@smith)
+|
+= link_to 'Back', smiths_path

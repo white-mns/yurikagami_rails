@@ -1,0 +1,10 @@
+%p#notice= notice
+%p
+  %strong Enemy:
+  = @enemy_name.enemy_id
+%p
+  %strong Name:
+  = @enemy_name.name
+= link_to 'Edit', edit_enemy_name_path(@enemy_name)
+|
+= link_to 'Back', enemy_names_path

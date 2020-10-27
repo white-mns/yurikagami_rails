@@ -1,0 +1,120 @@
+%h1 現在地一覧
+.bs-docs-section
+  .row
+    .col-md-12
+      %p.formNum
+        テキストフォームの隣に赤い破線がある項目は数値検索です。
+        %br/
+        「/」区切りでOR、「100~」や「100~200」のように「~」をつけて範囲指定となります。
+        %br/
+        OR指定と範囲指定を同時に行うことはできません。
+      %p.formText
+        テキストフォームの隣に青い太線がある項目は文字検索です。
+        %br/
+        半角スペース区切りでAND、「/」区切りでOR、単語の前に「-」でNOT、単語の前後に「"」をつけて完全一致が使えます
+        %br/
+        ANDとORを組み合わせた時は、ANDで区切った後にORで区切るという順番になります。
+      %p
+        %span#example_open.example_select.pointer{:onclick => "example_open(true)"}
+          入力例（クリックで開きます）
+          %br/
+        %span#example_close.example_select.pointer{:onclick => "example_open(false)", :style => "display:none;"}
+          入力例（クリックで閉じます）
+          %br/
+      #example{:style => "display:none;"}
+        %p.formNum
+          数値入力で「100/105/110」と入力　→ 入力した項目の数値が100、105、110の結果がヒット
+          %br/
+          「100~」で100以上、「~100」で100以下、「-200~100」で-200～-100の範囲指定となります。
+        %p.formText
+          現在地に「テネルメント」と入力　→　テネルメント、テネルメント城が検索結果にヒット
+          %br/
+          現在地に「"テネルメント"」　→　完全一致で「テネルメント」のみ検索結果にヒット
+          %br/
+          現在地に「-テネルメント」　→　「テネルメント」の単語を含まない目的が検索結果にヒット
+          %br/
+          現在地に「-"テネルメント"」　→　完全一致で「テネルメント」以外が検索結果にヒット
+          %br/
+          現在地に「テネルメント -"テネルメント"」　→　「テネルメント」が含まれる単語で完全一致の「テネルメント」以外がヒット。つまり、テネルメント城がヒットします。
+          %br/
+          現在地に「プラインカルド城 中庭」　→　「プラインカルド城」と「中庭」の2つの単語が含まれる現在地が検索結果にヒット
+          %br/
+          現在地に「プラインカルド城 北側/中庭」　→　「プラインカルド城」が含まれ、さらに「北側」か「中庭」の現在地が検索結果にヒット
+          %br/
+          現在地に「-テネルメント -プラインカルド城」　→　「テネルメント」もしくは「プラインカルド」という単語が入った現在地を検索結果から除外
+      = search_form_for @search do |f|
+        %table#search_close.table.table-striped.table-bordered.table-hover{:onclick => "search_open(true);", :style => "display:none;"}
+          %tbody
+            %tr
+              %td{:colspan => "2", :style => "cursor:pointer;"}
+                絞り込み検索
+                %span{:style => "font-size:80%"} (クリックで開きます)
+        %table#search_table.table.table-striped.table-bordered.table-hover
+          %tbody
+            %tr
+              %td{:colspan => "4", :onclick => "search_open(false);", :style => "cursor:pointer;"}
+                絞り込み検索
+                %span{:style => "font-size:80%"} (クリックで閉じます)
+            %tr
+              %td= f.label :result_no_form, '更新回'
+              %td.formNum{:colspan => "3"}= text_field_tag :result_no_form, @result_no_form
+            %tr
+              %td= f.label :party_no_form, 'パーティ番号'
+              %td.formNum= text_field_tag :party_no_form, @party_no_form
+              %td= f.label :party_name_form, 'パーティ名'
+              %td.formText= text_field_tag :party_name_form, @party_name_form
+            %tr
+              %td= f.label :e_no_form, 'Eno'
+              %td.formNum= text_field_tag :e_no_form, @e_no_form
+              %td= f.label :p_name_form, 'キャラクター名'
+              %td.formText= text_field_tag :p_name_form, @p_name_form
+            %tr
+              %td= f.label :place_form, '地名'
+              %td.formText{:colspan => "3"}= text_field_tag :place_form, @place_form
+            %tr
+              %td= f.label :shop_form, '店番号'
+              %td.formNum{:colspan => "3"}= text_field_tag :shop_form, @shop_form
+            %tr
+              %td
+              %td{:colspan => "3"}
+                = check_box_tag :is_inn, @is_inn, @is_inn
+                = f.label_tag :is_inn, '宿あり'
+                　#{check_box_tag :no_inn, @no_inn, @no_inn}#{f.label_tag :no_inn, '宿なし'}
+            %tr
+              %td
+              %td{:colspan => "3"}
+                = f.submit '検索する'
+= paginate(@current_places)
+%br/
+ヒット数：#{@count}件
+%br/
+%br/
+.bs-docs-section
+  .row
+    .col-lg-12
+      %table.table.table-striped.table-bordered.table-hover
+        %thead
+          %tr
+            %th= sort_link(@search, :result_no,'更新回', default_order: :desc)
+            %th= sort_link(@search, :party_no, 'Pno', default_order: :desc)
+            %th= sort_link(@search, :party_info_party_members_e_no, 'メンバー', default_order: :desc)
+            %th= sort_link(@search, :place, '地名', default_order: :desc)
+            %th= sort_link(@search, :shop, '店', default_order: :desc)
+            %th= sort_link(@search, :inn, '宿', default_order: :desc)
+            %th{:colspan => "2"} 結果リンク
+        %tbody
+          - @current_places.each do |current_place|
+            %tr
+              %td= current_place.result_no
+              %td= current_place.party_no
+              %td
+                - if current_place.party_info then
+                  - current_place.party_info.party_members.each do |party_member|
+                    = p_name_text(party_member.e_no, party_member.sub_no, party_member.p_name)
+                    %br
+              %td= current_place.place_name.name if current_place.place_name
+              %td= link_to " ○" + "(" + sprintf("%d", current_place.shop) + ")", "http://csyuki.sakura.ne.jp/cgi-bin/prism/result/shop"+sprintf("%d", current_place.shop)+".html", :target => "_blank" if current_place.shop > 0
+              %td= "○" if current_place.inn > 0
+              %td= battle_link(current_place.party_no)
+              %td= battle_old_link(@last_result, current_place.party_no, current_place.result_no)
+= paginate(@current_places)

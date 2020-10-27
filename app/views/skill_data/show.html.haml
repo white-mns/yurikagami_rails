@@ -1,0 +1,37 @@
+%p#notice= notice
+%p
+  %strong Skill:
+  = @skill_datum.skill_id
+%p
+  %strong Name:
+  = @skill_datum.name
+%p
+  %strong At:
+  = @skill_datum.at
+%p
+  %strong Ct:
+  = @skill_datum.ct
+%p
+  %strong Timing:
+  = @skill_datum.timing
+%p
+  %strong Mp:
+  = @skill_datum.mp
+%p
+  %strong Target:
+  = @skill_datum.target
+%p
+  %strong Range:
+  = @skill_datum.range
+%p
+  %strong Property:
+  = @skill_datum.property
+%p
+  %strong Element:
+  = @skill_datum.element
+%p
+  %strong Text:
+  = @skill_datum.text
+= link_to 'Edit', edit_skill_datum_path(@skill_datum)
+|
+= link_to 'Back', skill_data_path

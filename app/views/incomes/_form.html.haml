@@ -1,0 +1,38 @@
+= form_with(model: income, local: true) do |form|
+  - if income.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(income.errors.count, "error")
+        prohibited this income from being saved:
+      %ul
+        - income.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = form.label :result_no
+    = form.number_field :result_no, id: :income_result_no
+  .field
+    = form.label :generate_no
+    = form.number_field :generate_no, id: :income_generate_no
+  .field
+    = form.label :party_no
+    = form.number_field :party_no, id: :income_party_no
+  .field
+    = form.label :e_no
+    = form.number_field :e_no, id: :income_e_no
+  .field
+    = form.label :sub_no
+    = form.number_field :sub_no, id: :income_sub_no
+  .field
+    = form.label :money
+    = form.number_field :money, id: :income_money
+  .field
+    = form.label :sundries
+    = form.number_field :sundries, id: :income_sundries
+  .field
+    = form.label :exp
+    = form.number_field :exp, id: :income_exp
+  .field
+    = form.label :is_pk
+    = form.number_field :is_pk, id: :income_is_pk
+  .actions
+    = form.submit

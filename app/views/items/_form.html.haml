@@ -1,0 +1,68 @@
+= form_with(model: item, local: true) do |form|
+  - if item.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(item.errors.count, "error")
+        prohibited this item from being saved:
+      %ul
+        - item.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = form.label :result_no
+    = form.number_field :result_no, id: :item_result_no
+  .field
+    = form.label :generate_no
+    = form.number_field :generate_no, id: :item_generate_no
+  .field
+    = form.label :e_no
+    = form.number_field :e_no, id: :item_e_no
+  .field
+    = form.label :sub_no
+    = form.number_field :sub_no, id: :item_sub_no
+  .field
+    = form.label :item_no
+    = form.number_field :item_no, id: :item_item_no
+  .field
+    = form.label :name
+    = form.text_field :name, id: :item_name
+  .field
+    = form.label :kind
+    = form.number_field :kind, id: :item_kind
+  .field
+    = form.label :effect
+    = form.number_field :effect, id: :item_effect
+  .field
+    = form.label :effect_num
+    = form.number_field :effect_num, id: :item_effect_num
+  .field
+    = form.label :slash
+    = form.number_field :slash, id: :item_slash
+  .field
+    = form.label :charge
+    = form.number_field :charge, id: :item_charge
+  .field
+    = form.label :magic
+    = form.number_field :magic, id: :item_magic
+  .field
+    = form.label :guard
+    = form.number_field :guard, id: :item_guard
+  .field
+    = form.label :protect
+    = form.number_field :protect, id: :item_protect
+  .field
+    = form.label :have_rest
+    = form.number_field :have_rest, id: :item_have_rest
+  .field
+    = form.label :have_max
+    = form.number_field :have_max, id: :item_have_max
+  .field
+    = form.label :prize
+    = form.number_field :prize, id: :item_prize
+  .field
+    = form.label :ability
+    = form.number_field :ability, id: :item_ability
+  .field
+    = form.label :equip
+    = form.number_field :equip, id: :item_equip
+  .actions
+    = form.submit

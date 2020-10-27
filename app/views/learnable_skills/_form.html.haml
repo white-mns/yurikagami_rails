@@ -1,0 +1,26 @@
+= form_with(model: learnable_skill, local: true) do |form|
+  - if learnable_skill.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(learnable_skill.errors.count, "error")
+        prohibited this learnable_skill from being saved:
+      %ul
+        - learnable_skill.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = form.label :chara_type
+    = form.number_field :chara_type, id: :learnable_skill_chara_type
+  .field
+    = form.label :job_id
+    = form.number_field :job_id, id: :learnable_skill_job_id
+  .field
+    = form.label :sp
+    = form.number_field :sp, id: :learnable_skill_sp
+  .field
+    = form.label :skill_no
+    = form.number_field :skill_no, id: :learnable_skill_skill_no
+  .field
+    = form.label :skill_id
+    = form.number_field :skill_id, id: :learnable_skill_skill_id
+  .actions
+    = form.submit

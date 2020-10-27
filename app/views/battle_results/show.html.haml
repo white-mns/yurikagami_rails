@@ -1,0 +1,16 @@
+%p#notice= notice
+%p
+  %strong Result no:
+  = @battle_result.result_no
+%p
+  %strong Generate no:
+  = @battle_result.generate_no
+%p
+  %strong Party no:
+  = @battle_result.party_no
+%p
+  %strong Battle result:
+  = @battle_result.battle_result
+= link_to 'Edit', edit_battle_result_path(@battle_result)
+|
+= link_to 'Back', battle_results_path

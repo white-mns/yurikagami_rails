@@ -14,6 +14,8 @@ gem 'sqlite3'
 gem 'puma'
 # Use SCSS for stylesheets
 gem 'sass-rails'
+# Use Haml
+gem 'haml-rails'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier'
 # See https://github.com/rails/execjs#readme for more supported runtimes

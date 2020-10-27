@@ -1,0 +1,135 @@
+%h1 サブキャラ探索結果一覧
+.col-md-12
+  .bs-component
+    %ul.breadcrumb{:style => "margin-bottom: 5px;"}
+      %li サブキャラ探索結果一覧
+      %li= link_to "サブキャラ探索結果グラフ", search_graph_path
+%br/
+.bs-docs-section
+  .row
+    .col-md-12
+      %p.formNum
+        テキストフォームの隣に赤い破線がある項目は数値検索です。
+        %br/
+        「/」区切りでOR、「100~」や「100~200」のように「~」をつけて範囲指定となります。
+        %br/
+        OR指定と範囲指定を同時に行うことはできません。
+      %p.formText
+        テキストフォームの隣に青い太線がある項目は文字検索です。
+        %br/
+        半角スペース区切りでAND、「/」区切りでOR、単語の前に「-」でNOT、単語の前後に「"」をつけて完全一致が使えます
+        %br/
+        ANDとORを組み合わせた時は、ANDで区切った後にORで区切るという順番になります。
+      %p
+        ・取得したアイテムの価格、取得したLemを「収入」として表示しています。
+        %br/
+        ・アイテムを持ちきれなかった場合、収入は「取得不可」と表示されます。
+        %br/
+        ・平均値・中央値の計算は、サブキャラごとにアイテムの価値と「ついでに取得したLem」の値を合算した値に対して行っています。
+      %p
+        %span#example_open.example_select.pointer{:onclick => "example_open(true)"}
+          入力例（クリックで開きます）
+          %br/
+        %span#example_close.example_select.pointer{:onclick => "example_open(false)", :style => "display:none;"}
+          入力例（クリックで閉じます）
+          %br/
+      #example{:style => "display:none;"}
+        %p.formNum
+          数値入力で「100/105/110」と入力　→ 入力した項目の数値が100、105、110の結果がヒット
+          %br/
+          「100~」で100以上、「~100」で100以下、「-200~100」で-200～-100の範囲指定となります。
+        %p.formText
+          現在地に「テネルメント」と入力　→　テネルメント、テネルメント城が検索結果にヒット
+          %br/
+          現在地に「"テネルメント"」　→　完全一致で「テネルメント」のみ検索結果にヒット
+          %br/
+          現在地に「-テネルメント」　→　「テネルメント」の単語を含まない目的が検索結果にヒット
+          %br/
+          現在地に「-"テネルメント"」　→　完全一致で「テネルメント」以外が検索結果にヒット
+          %br/
+          現在地に「テネルメント -"テネルメント"」　→　「テネルメント」が含まれる単語で完全一致の「テネルメント」以外がヒット。つまり、テネルメント城がヒットします。
+          %br/
+          現在地に「プラインカルド城 中庭」　→　「プラインカルド城」と「中庭」の2つの単語が含まれる現在地が検索結果にヒット
+          %br/
+          現在地に「プラインカルド城 北側/中庭」　→　「プラインカルド城」が含まれ、さらに「北側」か「中庭」の現在地が検索結果にヒット
+          %br/
+          現在地に「-テネルメント -プラインカルド城」　→　「テネルメント」もしくは「プラインカルド」という単語が入った現在地を検索結果から除外
+      = search_form_for @search do |f|
+        %table#search_close.table.table-striped.table-bordered.table-hover{:onclick => "search_open(true);", :style => "display:none;"}
+          %tbody
+            %tr
+              %td{:colspan => "2", :style => "cursor:pointer;"}
+                絞り込み検索
+                %span{:style => "font-size:80%"} (クリックで開きます)
+        %table#search_table.table.table-striped.table-bordered.table-hover
+          %tbody
+            %tr
+              %td{:colspan => "2", :onclick => "search_open(false);", :style => "cursor:pointer;"}
+                絞り込み検索
+                %span{:style => "font-size:80%"} (クリックで閉じます)
+            %tr
+              %td= f.label :result_no_form, '更新回'
+              %td.formNum= text_field_tag :result_no_form, @result_no_form
+            %tr
+              %td= f.label :e_no_form, 'Eno'
+              %td.formNum= text_field_tag :e_no_form, @e_no_form
+            %tr
+              %td= f.label :sub_no_form, 'Fno'
+              %td.formNum= text_field_tag :sub_no_form, @sub_no_form
+            %tr
+              %td= f.label :p_name_form, 'キャラクター名'
+              %td.formText= text_field_tag :p_name_form, @p_name_form
+            %tr
+              %td= f.label :i_name_form, 'アイテム名'
+              %td.formText= text_field_tag :i_name_form, @i_name_form
+            %tr
+              %td= f.label :value_form, '収入（アイテム価格or取得Lem）'
+              %td.formNum= text_field_tag :value_form, @value_form
+            %tr
+              %td= f.label :money_form, '所持金'
+              %td.formNum= text_field_tag :money_form, @money_form
+            %tr
+              %td
+              %td
+                = check_box_tag :is_item, @is_item, @is_item
+                = f.label_tag :is_item, 'アイテム取得のみ'
+                　#{check_box_tag :no_item, @no_item, @no_item}#{f.label_tag :no_item, 'Lem増減のみ'}
+            %tr
+              %td
+              %td
+                = f.submit '検索する'
+= paginate(@searches)
+%br/
+ヒット数：#{@count}件
+%br/
+%br/
+収入合計：#{@values.inject(:+).to_i if @values.size > 0}Lem
+%br/
+収入平均：#{(@values.inject(:+)/@values.size).to_i if @values.size > 0}Lem
+%br/
+収入中央値：#{((@values.size % 2).zero? ? @values[@values.size/2 - 1, 2].inject(:+) / 2.0 : @values[@values.size/2]).to_i if @values.size > 0}Lem
+%br/
+%br/
+.bs-docs-section
+  .row
+    .col-lg-12
+      %table.table.table-striped.table-bordered.table-hover
+        %thead
+          %tr
+            %th= sort_link(@search, :result_no,'更新回', default_order: :desc)
+            %th= sort_link(@search, :e_no,'キャラクター(Eno)', default_order: :desc)
+            %th= sort_link(@search, :status_money, '所持金', default_order: :desc)
+            %th= sort_link(@search, :item_name, 'アイテム名', default_order: :desc)
+            %th= sort_link(@search, :value, '収入', default_order: :desc)
+            %th{:colspan => "2"} 結果リンク
+        %tbody
+          - @searches.each do |search|
+            %tr
+              %td= search.result_no
+              %td= p_name_text(search.e_no, search.sub_no, search.p_name)
+              %td= search.status.money
+              %td= if search.item then search.item.name else search.i_name end
+              %td= if search.value > -90000 then search.value else "取得不可" end
+              %td= character_link(search.e_no, search.sub_no)
+              %td= character_old_link(@last_result, search.e_no, search.sub_no, search.result_no)
+= paginate(@searches)

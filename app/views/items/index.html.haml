@@ -1,0 +1,166 @@
+%h1 アイテム一覧
+.bs-docs-section
+  .row
+    .col-md-12
+      %p.formNum
+        テキストフォームの隣に赤い破線がある項目は数値検索です。
+        %br/
+        「/」区切りでOR、「100~」や「100~200」のように「~」をつけて範囲指定となります。
+        %br/
+        OR指定と範囲指定を同時に行うことはできません。
+      %p.formText
+        テキストフォームの隣に青い太線がある項目は文字検索です。
+        %br/
+        半角スペース区切りでAND、「/」区切りでOR、単語の前に「-」でNOT、単語の前後に「"」をつけて完全一致が使えます
+        %br/
+        ANDとORを組み合わせた時は、ANDで区切った後にORで区切るという順番になります。
+      %p
+        %span#example_open.example_select.pointer{:onclick => "example_open(true)"}
+          入力例（クリックで開きます）
+          %br/
+        %span#example_close.example_select.pointer{:onclick => "example_open(false)", :style => "display:none;"}
+          入力例（クリックで閉じます）
+          %br/
+      #example{:style => "display:none;"}
+        %p.formNum
+          数値入力で「100/105/110」と入力　→ 入力した項目の数値が100、105、110の結果がヒット
+          %br/
+          「100~」で100以上、「~100」で100以下、「-200~100」で-200～-100の範囲指定となります。
+        %p.formText
+          現在地に「テネルメント」と入力　→　テネルメント、テネルメント城が検索結果にヒット
+          %br/
+          現在地に「"テネルメント"」　→　完全一致で「テネルメント」のみ検索結果にヒット
+          %br/
+          現在地に「-テネルメント」　→　「テネルメント」の単語を含まない目的が検索結果にヒット
+          %br/
+          現在地に「-"テネルメント"」　→　完全一致で「テネルメント」以外が検索結果にヒット
+          %br/
+          現在地に「テネルメント -"テネルメント"」　→　「テネルメント」が含まれる単語で完全一致の「テネルメント」以外がヒット。つまり、テネルメント城がヒットします。
+          %br/
+          現在地に「プラインカルド城 中庭」　→　「プラインカルド城」と「中庭」の2つの単語が含まれる現在地が検索結果にヒット
+          %br/
+          現在地に「プラインカルド城 北側/中庭」　→　「プラインカルド城」が含まれ、さらに「北側」か「中庭」の現在地が検索結果にヒット
+          %br/
+          現在地に「-テネルメント -プラインカルド城」　→　「テネルメント」もしくは「プラインカルド」という単語が入った現在地を検索結果から除外
+      = search_form_for @search do |f|
+        %table#search_close.table.table-striped.table-bordered.table-hover{:onclick => "search_open(true);", :style => "display:none;"}
+          %tbody
+            %tr
+              %td{:colspan => "2", :style => "cursor:pointer;"}
+                絞り込み検索
+                %span{:style => "font-size:80%"} (クリックで開きます)
+        %table#search_table.table.table-striped.table-bordered.table-hover
+          %tbody
+            %tr
+              %td{:colspan => "4", :onclick => "search_open(false);", :style => "cursor:pointer;"}
+                絞り込み検索
+                %span{:style => "font-size:80%"} (クリックで閉じます)
+            %tr
+              %td= f.label :result_no_form, '更新回'
+              %td.formNum{:colspan => "3"}= text_field_tag :result_no_form, @result_no_form
+            %tr
+              %td= f.label :e_no_form, 'Eno'
+              %td.formNum= text_field_tag :e_no_form, @e_no_form
+              %td= f.label :p_name_form, 'キャラクター名'
+              %td.formText= text_field_tag :p_name_form, @p_name_form
+            %tr
+              %td
+              %td{:colspan => "3"}
+                = check_box_tag :show_main, @show_main, @show_main
+                = f.label_tag :show_main, 'メインキャラ'
+                　#{check_box_tag :show_sub, @show_sub, @show_sub}#{f.label_tag :show_sub, 'サブキャラ'}
+            %tr
+              %td= f.label :name_form, 'アイテム名'
+              %td.formText= text_field_tag :name_form, @name_form
+              %td= f.label :kind_form, '種類'
+              %td.formText= text_field_tag :kind_form, @kind_form
+            %tr
+              %td= f.label :effect_form, '効果'
+              %td.formText= text_field_tag :effect_form, @effect_form
+              %td= f.label :effect_num_form, '効果量'
+              %td.formNum= text_field_tag :effect_num_form, @effect_num_form
+            %tr
+              %td= f.label :slash_form, '斬撃'
+              %td.formNum= text_field_tag :slash_form, @slash_form
+              %td= f.label :charge_form, '突撃'
+              %td.formNum= text_field_tag :charge_form, @charge_form
+            %tr
+              %td= f.label :magic_form, '魔力'
+              %td.formNum= text_field_tag :magic_form, @magic_form
+              %td= f.label :guard_form, '防御'
+              %td.formNum= text_field_tag :guard_form, @guard_form
+            %tr
+              %td= f.label :protect_form, '守護'
+              %td.formNum{:colspan => "3"}= text_field_tag :protect_form, @protect_form
+            %tr
+              %td= f.label :have_rest_form, '個数'
+              %td.formNum= text_field_tag :have_rest_form, @have_rest_form
+              %td= f.label :have_max_form, '最大個数'
+              %td.formNum= text_field_tag :have_max_form, @have_max_form
+            %tr
+              %td= f.label :prize_form, '価値'
+              %td.formNum= text_field_tag :prize_form, @prize_form
+              %td= f.label :ability_form, '能力'
+              %td.formText= text_field_tag :ability_form, @ability_form
+            %tr
+              %td
+              %td{:colspan => "3"}
+                = check_box_tag :is_equiped, @is_equiped, @is_equiped
+                = f.label_tag :is_equiped, '装備中'
+                　#{check_box_tag :no_equiped, @no_equiped, @no_equiped}#{f.label_tag :no_equiped, '未装備'}
+            %tr
+              %td
+              %td{:colspan => "3"}
+                = f.submit '検索する'
+= paginate(@items)
+%br/
+ヒット数：#{@count}件
+%br/
+%br/
+.bs-docs-section
+  .row
+    .col-lg-12
+      %table.table.table-striped.table-bordered.table-hover
+        %thead
+          %tr
+            %th= sort_link(@search, :result_no,'更新回', default_order: :desc)
+            %th= sort_link(@search, :e_no,'キャラクター(Eno)', default_order: :desc)
+            %th= sort_link(@search, :item_no, 'No', default_order: :desc)
+            %th= sort_link(@search, :name, 'アイテム名', default_order: :desc)
+            %th= sort_link(@search, :kind, '種類', default_order: :desc)
+            %th= sort_link(@search, :effect, '効果', default_order: :desc)
+            %th= sort_link(@search, :effect_num, '効果量', default_order: :desc)
+            %th= sort_link(@search, :slash, '斬撃', default_order: :desc)
+            %th= sort_link(@search, :charge, '突撃', default_order: :desc)
+            %th= sort_link(@search, :magic, '魔力', default_order: :desc)
+            %th= sort_link(@search, :guard, '防御', default_order: :desc)
+            %th= sort_link(@search, :protect, '守護', default_order: :desc)
+            %th= sort_link(@search, :have_rest, '個数', default_order: :desc)
+            %th= sort_link(@search, :have_max, '最大個数', default_order: :desc)
+            %th= sort_link(@search, :prize, '価値', default_order: :desc)
+            %th= sort_link(@search, :ability, '能力', default_order: :desc)
+            %th= sort_link(@search, :equip, '装備', default_order: :desc)
+            %th{:colspan => "2"} 結果リンク
+        %tbody
+          - @items.each do |item|
+            %tr
+              %td= item.result_no
+              %td= p_name_text(item.e_no, item.sub_no, item.p_name)
+              %td= item.item_no
+              %td= item.name.html_safe
+              %td= item.kind_name.name
+              %td= item.effect_name.name
+              %td= item.effect_num
+              %td= item.slash
+              %td= item.charge
+              %td= item.magic
+              %td= item.guard
+              %td= item.protect
+              %td= item.have_rest
+              %td= item.have_max
+              %td= item.prize
+              %td= item.ability_name.name
+              %td= "装備" if item.equip == 1
+              %td= character_link(item.e_no, item.sub_no)
+              %td= character_old_link(@last_result, item.e_no, item.sub_no, item.result_no)
+= paginate(@items)

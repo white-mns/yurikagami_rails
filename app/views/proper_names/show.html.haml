@@ -1,0 +1,10 @@
+%p#notice= notice
+%p
+  %strong Proper:
+  = @proper_name.proper_id
+%p
+  %strong Name:
+  = @proper_name.name
+= link_to 'Edit', edit_proper_name_path(@proper_name)
+|
+= link_to 'Back', proper_names_path

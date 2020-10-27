@@ -1,0 +1,26 @@
+= form_with(model: party, local: true) do |form|
+  - if party.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(party.errors.count, "error")
+        prohibited this party from being saved:
+      %ul
+        - party.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = form.label :result_no
+    = form.number_field :result_no, id: :party_result_no
+  .field
+    = form.label :generate_no
+    = form.number_field :generate_no, id: :party_generate_no
+  .field
+    = form.label :party_no
+    = form.number_field :party_no, id: :party_party_no
+  .field
+    = form.label :e_no
+    = form.number_field :e_no, id: :party_e_no
+  .field
+    = form.label :sub_no
+    = form.number_field :sub_no, id: :party_sub_no
+  .actions
+    = form.submit

@@ -1,0 +1,22 @@
+%p#notice= notice
+%p
+  %strong Result no:
+  = @current_place.result_no
+%p
+  %strong Generate no:
+  = @current_place.generate_no
+%p
+  %strong Party no:
+  = @current_place.party_no
+%p
+  %strong Place:
+  = @current_place.place
+%p
+  %strong Shop:
+  = @current_place.shop
+%p
+  %strong Inn:
+  = @current_place.inn
+= link_to 'Edit', edit_current_place_path(@current_place)
+|
+= link_to 'Back', current_places_path

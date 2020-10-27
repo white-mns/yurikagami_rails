@@ -1,0 +1,10 @@
+%p#notice= notice
+%p
+  %strong Job:
+  = @job_name.job_id
+%p
+  %strong Name:
+  = @job_name.name
+= link_to 'Edit', edit_job_name_path(@job_name)
+|
+= link_to 'Back', job_names_path

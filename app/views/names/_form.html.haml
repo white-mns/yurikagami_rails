@@ -1,0 +1,26 @@
+= form_with(model: name, local: true) do |form|
+  - if name.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(name.errors.count, "error")
+        prohibited this name from being saved:
+      %ul
+        - name.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = form.label :result_no
+    = form.number_field :result_no, id: :name_result_no
+  .field
+    = form.label :generate_no
+    = form.number_field :generate_no, id: :name_generate_no
+  .field
+    = form.label :e_no
+    = form.number_field :e_no, id: :name_e_no
+  .field
+    = form.label :sub_no
+    = form.number_field :sub_no, id: :name_sub_no
+  .field
+    = form.label :name
+    = form.text_field :name, id: :name_name
+  .actions
+    = form.submit

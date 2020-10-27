@@ -1,0 +1,35 @@
+= form_with(model: item_get, local: true) do |form|
+  - if item_get.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(item_get.errors.count, "error")
+        prohibited this item_get from being saved:
+      %ul
+        - item_get.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = form.label :result_no
+    = form.number_field :result_no, id: :item_get_result_no
+  .field
+    = form.label :generate_no
+    = form.number_field :generate_no, id: :item_get_generate_no
+  .field
+    = form.label :party_no
+    = form.number_field :party_no, id: :item_get_party_no
+  .field
+    = form.label :e_no
+    = form.number_field :e_no, id: :item_get_e_no
+  .field
+    = form.label :sub_no
+    = form.number_field :sub_no, id: :item_get_sub_no
+  .field
+    = form.label :enemy
+    = form.number_field :enemy, id: :item_get_enemy
+  .field
+    = form.label :item
+    = form.text_field :item, id: :item_get_item
+  .field
+    = form.label :is_pk
+    = form.number_field :is_pk, id: :item_get_is_pk
+  .actions
+    = form.submit

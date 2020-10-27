@@ -1,0 +1,82 @@
+%p#notice= notice
+%p
+  %strong Result no:
+  = @status.result_no
+%p
+  %strong Generate no:
+  = @status.generate_no
+%p
+  %strong E no:
+  = @status.e_no
+%p
+  %strong Sub no:
+  = @status.sub_no
+%p
+  %strong Lv:
+  = @status.lv
+%p
+  %strong Exp:
+  = @status.exp
+%p
+  %strong Mexp:
+  = @status.mexp
+%p
+  %strong Job1:
+  = @status.job1
+%p
+  %strong Job2:
+  = @status.job2
+%p
+  %strong Hp:
+  = @status.hp
+%p
+  %strong Mhp:
+  = @status.mhp
+%p
+  %strong Hp rate:
+  = @status.hp_rate
+%p
+  %strong Mp:
+  = @status.mp
+%p
+  %strong Mmp:
+  = @status.mmp
+%p
+  %strong Mp rate:
+  = @status.mp_rate
+%p
+  %strong Sp:
+  = @status.sp
+%p
+  %strong Str:
+  = @status.str
+%p
+  %strong Int:
+  = @status.int
+%p
+  %strong Tec:
+  = @status.tec
+%p
+  %strong Agi:
+  = @status.agi
+%p
+  %strong Def:
+  = @status.def
+%p
+  %strong Skill:
+  = @status.skill
+%p
+  %strong Personality:
+  = @status.personality
+%p
+  %strong Tribe:
+  = @status.tribe
+%p
+  %strong Money:
+  = @status.money
+%p
+  %strong Sundries:
+  = @status.sundries
+= link_to 'Edit', edit_status_path(@status)
+|
+= link_to 'Back', statuses_path

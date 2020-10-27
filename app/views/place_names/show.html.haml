@@ -1,0 +1,10 @@
+%p#notice= notice
+%p
+  %strong Place:
+  = @place_name.place_id
+%p
+  %strong Name:
+  = @place_name.name
+= link_to 'Edit', edit_place_name_path(@place_name)
+|
+= link_to 'Back', place_names_path

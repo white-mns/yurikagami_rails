@@ -1,0 +1,13 @@
+%p#notice= notice
+%p
+  %strong Result no:
+  = @new_place.result_no
+%p
+  %strong Generate no:
+  = @new_place.generate_no
+%p
+  %strong Place:
+  = @new_place.place
+= link_to 'Edit', edit_new_place_path(@new_place)
+|
+= link_to 'Back', new_places_path

@@ -1,0 +1,25 @@
+%p#notice= notice
+%p
+  %strong Result no:
+  = @party_info.result_no
+%p
+  %strong Generate no:
+  = @party_info.generate_no
+%p
+  %strong Party no:
+  = @party_info.party_no
+%p
+  %strong Name:
+  = @party_info.name
+%p
+  %strong Member num:
+  = @party_info.member_num
+%p
+  %strong Battler num:
+  = @party_info.battler_num
+%p
+  %strong Sook num:
+  = @party_info.sook_num
+= link_to 'Edit', edit_party_info_path(@party_info)
+|
+= link_to 'Back', party_infos_path

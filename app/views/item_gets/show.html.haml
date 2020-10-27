@@ -1,0 +1,28 @@
+%p#notice= notice
+%p
+  %strong Result no:
+  = @item_get.result_no
+%p
+  %strong Generate no:
+  = @item_get.generate_no
+%p
+  %strong Party no:
+  = @item_get.party_no
+%p
+  %strong E no:
+  = @item_get.e_no
+%p
+  %strong Sub no:
+  = @item_get.sub_no
+%p
+  %strong Enemy:
+  = @item_get.enemy
+%p
+  %strong Item:
+  = @item_get.item
+%p
+  %strong Is pk:
+  = @item_get.is_pk
+= link_to 'Edit', edit_item_get_path(@item_get)
+|
+= link_to 'Back', item_gets_path

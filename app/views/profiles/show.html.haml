@@ -1,0 +1,40 @@
+%p#notice= notice
+%p
+  %strong Result no:
+  = @profile.result_no
+%p
+  %strong Generate no:
+  = @profile.generate_no
+%p
+  %strong E no:
+  = @profile.e_no
+%p
+  %strong Sub no:
+  = @profile.sub_no
+%p
+  %strong Nickname:
+  = @profile.nickname
+%p
+  %strong Title:
+  = @profile.title
+%p
+  %strong Job:
+  = @profile.job
+%p
+  %strong Tribe:
+  = @profile.tribe
+%p
+  %strong Sex:
+  = @profile.sex
+%p
+  %strong Age:
+  = @profile.age
+%p
+  %strong Height:
+  = @profile.height
+%p
+  %strong Weight:
+  = @profile.weight
+= link_to 'Edit', edit_profile_path(@profile)
+|
+= link_to 'Back', profiles_path

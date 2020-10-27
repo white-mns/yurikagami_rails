@@ -99,14 +99,29 @@ GEM
     crass (1.0.6)
     debug_inspector (0.0.3)
     erubi (1.9.0)
+    erubis (2.7.0)
     execjs (2.7.0)
     ffi (1.13.1)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    haml (5.2.0)
+      temple (>= 0.8.0)
+      tilt
+    haml-rails (2.0.1)
+      actionpack (>= 5.1)
+      activesupport (>= 5.1)
+      haml (>= 4.0.6, < 6.0)
+      html2haml (>= 1.0.1)
+      railties (>= 5.1)
     hirb (0.7.3)
     hirb-unicode (0.0.5)
       hirb (~> 0.5)
       unicode-display_width (~> 0.1.1)
+    html2haml (2.2.0)
+      erubis (~> 2.7.0)
+      haml (>= 4.0, < 6)
+      nokogiri (>= 1.6.0)
+      ruby_parser (~> 3.5)
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
     jbuilder (2.10.1)
@@ -214,6 +229,8 @@ GEM
     rb-readline (0.5.5)
     ref (2.0.0)
     regexp_parser (1.8.2)
+    ruby_parser (3.15.0)
+      sexp_processor (~> 4.9)
     rubyzip (2.3.0)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
@@ -228,6 +245,7 @@ GEM
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
+    sexp_processor (4.15.1)
     spring (2.1.1)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -243,6 +261,7 @@ GEM
     sshkit (1.21.0)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
+    temple (0.8.2)
     therubyracer (0.12.3)
       libv8 (~> 3.16.14.15)
       ref
@@ -290,6 +309,7 @@ DEPENDENCIES
   coffee-rails
   composite_primary_keys
   execjs
+  haml-rails
   hirb-unicode
   jbuilder
   jquery-rails

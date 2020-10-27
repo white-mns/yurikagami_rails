@@ -1,0 +1,19 @@
+%p#notice= notice
+%p
+  %strong Result no:
+  = @name.result_no
+%p
+  %strong Generate no:
+  = @name.generate_no
+%p
+  %strong E no:
+  = @name.e_no
+%p
+  %strong Sub no:
+  = @name.sub_no
+%p
+  %strong Name:
+  = @name.name
+= link_to 'Edit', edit_name_path(@name)
+|
+= link_to 'Back', names_path

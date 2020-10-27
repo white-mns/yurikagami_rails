@@ -1,0 +1,22 @@
+%p#notice= notice
+%p
+  %strong Result no:
+  = @skill.result_no
+%p
+  %strong Generate no:
+  = @skill.generate_no
+%p
+  %strong E no:
+  = @skill.e_no
+%p
+  %strong Sub no:
+  = @skill.sub_no
+%p
+  %strong Skill no:
+  = @skill.skill_no
+%p
+  %strong Skill:
+  = @skill.skill_id
+= link_to 'Edit', edit_skill_path(@skill)
+|
+= link_to 'Back', skills_path

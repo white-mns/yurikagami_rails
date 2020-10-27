@@ -1,0 +1,20 @@
+= form_with(model: new_enemy, local: true) do |form|
+  - if new_enemy.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(new_enemy.errors.count, "error")
+        prohibited this new_enemy from being saved:
+      %ul
+        - new_enemy.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = form.label :result_no
+    = form.number_field :result_no, id: :new_enemy_result_no
+  .field
+    = form.label :generate_no
+    = form.number_field :generate_no, id: :new_enemy_generate_no
+  .field
+    = form.label :enemy
+    = form.number_field :enemy, id: :new_enemy_enemy
+  .actions
+    = form.submit

@@ -1,0 +1,61 @@
+%p#notice= notice
+%p
+  %strong Result no:
+  = @item.result_no
+%p
+  %strong Generate no:
+  = @item.generate_no
+%p
+  %strong E no:
+  = @item.e_no
+%p
+  %strong Sub no:
+  = @item.sub_no
+%p
+  %strong Item no:
+  = @item.item_no
+%p
+  %strong Name:
+  = @item.name
+%p
+  %strong Kind:
+  = @item.kind
+%p
+  %strong Effect:
+  = @item.effect
+%p
+  %strong Effect num:
+  = @item.effect_num
+%p
+  %strong Slash:
+  = @item.slash
+%p
+  %strong Charge:
+  = @item.charge
+%p
+  %strong Magic:
+  = @item.magic
+%p
+  %strong Guard:
+  = @item.guard
+%p
+  %strong Protect:
+  = @item.protect
+%p
+  %strong Have rest:
+  = @item.have_rest
+%p
+  %strong Have max:
+  = @item.have_max
+%p
+  %strong Prize:
+  = @item.prize
+%p
+  %strong Ability:
+  = @item.ability
+%p
+  %strong Equip:
+  = @item.equip
+= link_to 'Edit', edit_item_path(@item)
+|
+= link_to 'Back', items_path

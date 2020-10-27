@@ -1,0 +1,25 @@
+%p#notice= notice
+%p
+  %strong Result no:
+  = @event.result_no
+%p
+  %strong Generate no:
+  = @event.generate_no
+%p
+  %strong E no:
+  = @event.e_no
+%p
+  %strong Sub no:
+  = @event.sub_no
+%p
+  %strong Event:
+  = @event.event
+%p
+  %strong Flag:
+  = @event.flag
+%p
+  %strong Text:
+  = @event.text
+= link_to 'Edit', edit_event_path(@event)
+|
+= link_to 'Back', events_path

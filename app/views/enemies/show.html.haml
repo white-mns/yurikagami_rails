@@ -1,0 +1,19 @@
+%p#notice= notice
+%p
+  %strong Result no:
+  = @enemy.result_no
+%p
+  %strong Generate no:
+  = @enemy.generate_no
+%p
+  %strong Party no:
+  = @enemy.party_no
+%p
+  %strong Enemy:
+  = @enemy.enemy
+%p
+  %strong Suffix:
+  = @enemy.suffix
+= link_to 'Edit', edit_enemy_path(@enemy)
+|
+= link_to 'Back', enemies_path

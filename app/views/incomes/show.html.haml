@@ -1,0 +1,31 @@
+%p#notice= notice
+%p
+  %strong Result no:
+  = @income.result_no
+%p
+  %strong Generate no:
+  = @income.generate_no
+%p
+  %strong Party no:
+  = @income.party_no
+%p
+  %strong E no:
+  = @income.e_no
+%p
+  %strong Sub no:
+  = @income.sub_no
+%p
+  %strong Money:
+  = @income.money
+%p
+  %strong Sundries:
+  = @income.sundries
+%p
+  %strong Exp:
+  = @income.exp
+%p
+  %strong Is pk:
+  = @income.is_pk
+= link_to 'Edit', edit_income_path(@income)
+|
+= link_to 'Back', incomes_path

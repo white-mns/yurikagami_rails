@@ -1,0 +1,23 @@
+= form_with(model: new_event, local: true) do |form|
+  - if new_event.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(new_event.errors.count, "error")
+        prohibited this new_event from being saved:
+      %ul
+        - new_event.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = form.label :result_no
+    = form.number_field :result_no, id: :new_event_result_no
+  .field
+    = form.label :generate_no
+    = form.number_field :generate_no, id: :new_event_generate_no
+  .field
+    = form.label :event
+    = form.number_field :event, id: :new_event_event
+  .field
+    = form.label :flag
+    = form.number_field :flag, id: :new_event_flag
+  .actions
+    = form.submit

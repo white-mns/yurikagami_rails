@@ -1,0 +1,206 @@
+%h1 ステータス一覧
+.col-md-12
+  .bs-component
+    %ul.breadcrumb{:style => "margin-bottom: 5px;"}
+      %li ステータス一覧
+      %li= link_to "ステータス分布グラフ", status_graph_path
+%br/
+%br/
+%br/
+.bs-docs-section
+  .row
+    .col-md-12
+      %p.formNum
+        テキストフォームの隣に赤い破線がある項目は数値検索です。
+        %br/
+        「/」区切りでOR、「100~」や「100~200」のように「~」をつけて範囲指定となります。
+        %br/
+        OR指定と範囲指定を同時に行うことはできません。
+      %p.formText
+        テキストフォームの隣に青い太線がある項目は文字検索です。
+        %br/
+        半角スペース区切りでAND、「/」区切りでOR、単語の前に「-」でNOT、単語の前後に「"」をつけて完全一致が使えます
+        %br/
+        ANDとORを組み合わせた時は、ANDで区切った後にORで区切るという順番になります。
+      %p
+        %span#example_open.example_select.pointer{:onclick => "example_open(true)"}
+          入力例（クリックで開きます）
+          %br/
+        %span#example_close.example_select.pointer{:onclick => "example_open(false)", :style => "display:none;"}
+          入力例（クリックで閉じます）
+          %br/
+      #example{:style => "display:none;"}
+        %p.formNum
+          数値入力で「100/105/110」と入力　→ 入力した項目の数値が100、105、110の結果がヒット
+          %br/
+          「100~」で100以上、「~100」で100以下、「-200~100」で-200～-100の範囲指定となります。
+        %p.formText
+          現在地に「テネルメント」と入力　→　テネルメント、テネルメント城が検索結果にヒット
+          %br/
+          現在地に「"テネルメント"」　→　完全一致で「テネルメント」のみ検索結果にヒット
+          %br/
+          現在地に「-テネルメント」　→　「テネルメント」の単語を含まない目的が検索結果にヒット
+          %br/
+          現在地に「-"テネルメント"」　→　完全一致で「テネルメント」以外が検索結果にヒット
+          %br/
+          現在地に「テネルメント -"テネルメント"」　→　「テネルメント」が含まれる単語で完全一致の「テネルメント」以外がヒット。つまり、テネルメント城がヒットします。
+          %br/
+          現在地に「プラインカルド城 中庭」　→　「プラインカルド城」と「中庭」の2つの単語が含まれる現在地が検索結果にヒット
+          %br/
+          現在地に「プラインカルド城 北側/中庭」　→　「プラインカルド城」が含まれ、さらに「北側」か「中庭」の現在地が検索結果にヒット
+          %br/
+          現在地に「-テネルメント -プラインカルド城」　→　「テネルメント」もしくは「プラインカルド」という単語が入った現在地を検索結果から除外
+      = search_form_for @search do |f|
+        %table#search_close.table.table-striped.table-bordered.table-hover{:onclick => "search_open(true);", :style => "display:none;"}
+          %tbody
+            %tr
+              %td{:colspan => "2", :style => "cursor:pointer;"}
+                絞り込み検索
+                %span{:style => "font-size:80%"} (クリックで開きます)
+        %table#search_table.table.table-striped.table-bordered.table-hover
+          %tbody
+            %tr
+              %td{:colspan => "4", :onclick => "search_open(false);", :style => "cursor:pointer;"}
+                絞り込み検索
+                %span{:style => "font-size:80%"} (クリックで閉じます)
+            %tr
+              %td= f.label :result_no_form, '更新回'
+              %td.formNum{:colspan => "3"}= text_field_tag :result_no_form, @result_no_form
+            %tr
+              %td= f.label :e_no_form, 'Eno'
+              %td.formNum= text_field_tag :e_no_form, @e_no_form
+              %td= f.label :p_name_form, 'キャラクター名'
+              %td.formText= text_field_tag :p_name_form, @p_name_form
+            %tr
+              %td
+              %td{:colspan => "4"}
+                = check_box_tag :show_main, @show_main, @show_main
+                = f.label_tag :show_main, 'メインキャラ'
+                　#{check_box_tag :show_sub, @show_sub, @show_sub}#{f.label_tag :show_sub, 'サブキャラ'}
+            %tr
+              %td= f.label :lv_form, 'Lv'
+              %td.formNum{:colspan => "3"}= text_field_tag :lv_form, @lv_form
+            %tr
+              %td= f.label :exp_form, 'Exp'
+              %td.formNum= text_field_tag :exp_form, @exp_form
+              %td= f.label :mexp_form, 'MExp'
+              %td.formNum= text_field_tag :mexp_form, @mexp_form
+            %tr
+              %td= f.label :job1_form, '戦型1'
+              %td.formText= text_field_tag :job1_form, @job1_form
+              %td= f.label :job2_form, '戦型2'
+              %td.formText= text_field_tag :job2_form, @job2_form
+            %tr
+              %td= f.label :hp_form, 'HP'
+              %td.formNum= text_field_tag :hp_form, @hp_form
+              %td= f.label :mhp_form, 'MHP'
+              %td.formNum= text_field_tag :mhp_form, @mhp_form
+            %tr
+              %td= f.label :hp_rate_form, 'HP割合'
+              %td.formNum{:colspan => "3"}= text_field_tag :hp_rate_form, @hp_rate_form
+            %tr
+              %td= f.label :mp_form, 'MP'
+              %td.formNum= text_field_tag :mp_form, @mp_form
+              %td= f.label :mmp_form, 'MMP'
+              %td.formNum= text_field_tag :mmp_form, @mmp_form
+            %tr
+              %td= f.label :mp_rate_form, 'MP割合'
+              %td.formNum{:colspan => "3"}= text_field_tag :mp_rate_form, @mp_rate_form
+            %tr
+              %td= f.label :sp_form, 'SP'
+              %td.formNum{:colspan => "3"}= text_field_tag :sp_form, @sp_form
+            %tr
+              %td= f.label :str_form, '腕力'
+              %td.formNum= text_field_tag :str_form, @str_form
+              %td= f.label :int_form, '魔力'
+              %td.formNum= text_field_tag :int_form, @int_form
+            %tr
+              %td= f.label :tec_form, '器用'
+              %td.formNum= text_field_tag :tec_form, @tec_form
+              %td= f.label :agi_form, '反応'
+              %td.formNum= text_field_tag :agi_form, @agi_form
+            %tr
+              %td= f.label :def_form, '守護'
+              %td.formNum= text_field_tag :def_form, @def_form
+              %td= f.label :skill_form, '熟練'
+              %td.formNum= text_field_tag :skill_form, @skill_form
+            %tr
+              %td= f.label :personality_form, '性格'
+              %td.formNum= text_field_tag :personality_form, @personality_form
+              %td= f.label :tribe_form, '種族'
+              %td.formText= text_field_tag :tribe_form, @tribe_form
+            %tr
+              %td= f.label :money_form, '金'
+              %td.formNum= text_field_tag :money_form, @money_form
+              %td= f.label :sundries_form, '雑貨'
+              %td.formNum= text_field_tag :sundries_form, @sundries_form
+            %tr
+              %td
+              %td{:colspan => "3"}
+                = f.submit '検索する'
+= paginate(@statuses)
+%br/
+ヒット数：#{@count}件
+%br/
+%br/
+.bs-docs-section
+  .row
+    .col-lg-12
+      %table.table.table-striped.table-bordered.table-hover
+        %thead
+          %tr
+            %th= sort_link(@search, :result_no,'更新回', default_order: :desc)
+            %th= sort_link(@search, :e_no,'キャラクター(Eno)', default_order: :desc)
+            %th= sort_link(@search, :lv, 'Lv', default_order: :desc)
+            %th= sort_link(@search, :exp, 'Exp', default_order: :desc)
+            %th= sort_link(@search, :mexp, 'MExp', default_order: :desc)
+            %th= sort_link(@search, :job1, '戦型1', default_order: :desc)
+            %th= sort_link(@search, :job2, '戦型2', default_order: :desc)
+            %th= sort_link(@search, :hp, 'HP', default_order: :desc)
+            %th= sort_link(@search, :mhp, 'MHP', default_order: :desc)
+            %th= sort_link(@search, :hp_rate, 'HP割合', default_order: :desc)
+            %th= sort_link(@search, :mp, 'MP', default_order: :desc)
+            %th= sort_link(@search, :mmp, 'MMP', default_order: :desc)
+            %th= sort_link(@search, :mp_rate, 'MP割合', default_order: :desc)
+            %th= sort_link(@search, :sp, 'SP', default_order: :desc)
+            %th= sort_link(@search, :str, '腕力', default_order: :desc)
+            %th= sort_link(@search, :int, '魔力', default_order: :desc)
+            %th= sort_link(@search, :tec, '器用', default_order: :desc)
+            %th= sort_link(@search, :agi, '反応', default_order: :desc)
+            %th= sort_link(@search, :def, '守護', default_order: :desc)
+            %th= sort_link(@search, :skill, '熟練', default_order: :desc)
+            %th= sort_link(@search, :personality, '性格', default_order: :desc)
+            %th= sort_link(@search, :tribe, '種族', default_order: :desc)
+            %th= sort_link(@search, :money, '金', default_order: :desc)
+            %th= sort_link(@search, :sundries, '雑貨', default_order: :desc)
+            %th{:colspan => "1"} 結果リンク
+        %tbody
+          - @statuses.each do |status|
+            %tr
+              %td= status.result_no
+              %td= p_name_text(status.e_no, status.sub_no, status.p_name)
+              %td= status.lv
+              %td= status.exp
+              %td= status.mexp
+              %td= status.job1_name.name
+              %td= status.job2_name.name
+              %td= status.hp
+              %td= status.mhp
+              %td= status.hp_rate
+              %td= status.mp
+              %td= status.mmp
+              %td= status.mp_rate
+              %td= status.sp
+              %td= status.str
+              %td= status.int
+              %td= status.tec
+              %td= status.agi
+              %td= status.def
+              %td= status.skill
+              %td= status.personality
+              %td= status.tribe_name.name
+              %td= status.money
+              %td= status.sundries
+              %td= character_link(status.e_no, status.sub_no)
+              %td= character_old_link(@last_result, status.e_no, status.sub_no, status.result_no)
+= paginate(@statuses)

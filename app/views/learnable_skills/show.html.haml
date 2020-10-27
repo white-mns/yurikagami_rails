@@ -1,0 +1,19 @@
+%p#notice= notice
+%p
+  %strong Chara type:
+  = @learnable_skill.chara_type
+%p
+  %strong Job:
+  = @learnable_skill.job_id
+%p
+  %strong Sp:
+  = @learnable_skill.sp
+%p
+  %strong Skill no:
+  = @learnable_skill.skill_no
+%p
+  %strong Skill:
+  = @learnable_skill.skill_id
+= link_to 'Edit', edit_learnable_skill_path(@learnable_skill)
+|
+= link_to 'Back', learnable_skills_path

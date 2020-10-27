@@ -1,0 +1,23 @@
+= form_with(model: battle_result, local: true) do |form|
+  - if battle_result.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(battle_result.errors.count, "error")
+        prohibited this battle_result from being saved:
+      %ul
+        - battle_result.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = form.label :result_no
+    = form.number_field :result_no, id: :battle_result_result_no
+  .field
+    = form.label :generate_no
+    = form.number_field :generate_no, id: :battle_result_generate_no
+  .field
+    = form.label :party_no
+    = form.number_field :party_no, id: :battle_result_party_no
+  .field
+    = form.label :battle_result
+    = form.number_field :battle_result, id: :battle_result_battle_result
+  .actions
+    = form.submit

@@ -1,0 +1,99 @@
+%h1 敵一覧
+.bs-docs-section
+  .row
+    .col-md-12
+      %p.formNum
+        テキストフォームの隣に赤い破線がある項目は数値検索です。
+        %br/
+        「/」区切りでOR、「100~」や「100~200」のように「~」をつけて範囲指定となります。
+        %br/
+        OR指定と範囲指定を同時に行うことはできません。
+      %p.formText
+        テキストフォームの隣に青い太線がある項目は文字検索です。
+        %br/
+        半角スペース区切りでAND、「/」区切りでOR、単語の前に「-」でNOT、単語の前後に「"」をつけて完全一致が使えます
+        %br/
+        ANDとORを組み合わせた時は、ANDで区切った後にORで区切るという順番になります。
+      %p
+        %span#example_open.example_select.pointer{:onclick => "example_open(true)"}
+          入力例（クリックで開きます）
+          %br/
+        %span#example_close.example_select.pointer{:onclick => "example_open(false)", :style => "display:none;"}
+          入力例（クリックで閉じます）
+          %br/
+      #example{:style => "display:none;"}
+        %p.formNum
+          数値入力で「100/105/110」と入力　→ 入力した項目の数値が100、105、110の結果がヒット
+          %br/
+          「100~」で100以上、「~100」で100以下、「-200~100」で-200～-100の範囲指定となります。
+        %p.formText
+          現在地に「テネルメント」と入力　→　テネルメント、テネルメント城が検索結果にヒット
+          %br/
+          現在地に「"テネルメント"」　→　完全一致で「テネルメント」のみ検索結果にヒット
+          %br/
+          現在地に「-テネルメント」　→　「テネルメント」の単語を含まない目的が検索結果にヒット
+          %br/
+          現在地に「-"テネルメント"」　→　完全一致で「テネルメント」以外が検索結果にヒット
+          %br/
+          現在地に「テネルメント -"テネルメント"」　→　「テネルメント」が含まれる単語で完全一致の「テネルメント」以外がヒット。つまり、テネルメント城がヒットします。
+          %br/
+          現在地に「プラインカルド城 中庭」　→　「プラインカルド城」と「中庭」の2つの単語が含まれる現在地が検索結果にヒット
+          %br/
+          現在地に「プラインカルド城 北側/中庭」　→　「プラインカルド城」が含まれ、さらに「北側」か「中庭」の現在地が検索結果にヒット
+          %br/
+          現在地に「-テネルメント -プラインカルド城」　→　「テネルメント」もしくは「プラインカルド」という単語が入った現在地を検索結果から除外
+      = search_form_for @search do |f|
+        %table#search_close.table.table-striped.table-bordered.table-hover{:onclick => "search_open(true);", :style => "display:none;"}
+          %tbody
+            %tr
+              %td{:colspan => "2", :style => "cursor:pointer;"}
+                絞り込み検索
+                %span{:style => "font-size:80%"} (クリックで開きます)
+        %table#search_table.table.table-striped.table-bordered.table-hover
+          %tbody
+            %tr
+              %td{:colspan => "2", :onclick => "search_open(false);", :style => "cursor:pointer;"}
+                絞り込み検索
+                %span{:style => "font-size:80%"} (クリックで閉じます)
+            %tr
+              %td= f.label :result_no_form, '更新回'
+              %td.formNum= text_field_tag :result_no_form, @result_no_form
+            %tr
+              %td= f.label :party_no_form, 'パーティ番号'
+              %td.formNum= text_field_tag :party_no_form, @party_no_form
+            %tr
+              %td= f.label :enemy_form, '敵名'
+              %td.formText= text_field_tag :enemy_form, @enemy_form
+            %tr
+              %td= f.label :suffix_form, '添字'
+              %td.formText= text_field_tag :suffix_form, @suffix_form
+            %tr
+              %td
+              %td
+                = f.submit '検索する'
+= paginate(@enemies)
+%br/
+ヒット数：#{@count}件
+%br/
+%br/
+.bs-docs-section
+  .row
+    .col-lg-12
+      %table.table.table-striped.table-bordered.table-hover
+        %thead
+          %tr
+            %th= sort_link(@search, :result_no,'更新回', default_order: :desc)
+            %th= sort_link(@search, :party_no, 'Pno', default_order: :desc)
+            %th= sort_link(@search, :enemy, '敵名', default_order: :desc)
+            %th= sort_link(@search, :suffix, '添字', default_order: :desc)
+            %th{:colspan => "2"} 結果リンク
+        %tbody
+          - @enemies.each do |enemy|
+            %tr
+              %td= enemy.result_no
+              %td= enemy.party_no
+              %td= enemy.enemy_name.name
+              %td= enemy.suffix
+              %td= battle_link(enemy.party_no)
+              %td= battle_old_link(@last_result, enemy.party_no, enemy.result_no)
+= paginate(@enemies)

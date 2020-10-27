@@ -1,0 +1,89 @@
+= form_with(model: status, local: true) do |form|
+  - if status.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(status.errors.count, "error")
+        prohibited this status from being saved:
+      %ul
+        - status.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = form.label :result_no
+    = form.number_field :result_no, id: :status_result_no
+  .field
+    = form.label :generate_no
+    = form.number_field :generate_no, id: :status_generate_no
+  .field
+    = form.label :e_no
+    = form.number_field :e_no, id: :status_e_no
+  .field
+    = form.label :sub_no
+    = form.number_field :sub_no, id: :status_sub_no
+  .field
+    = form.label :lv
+    = form.number_field :lv, id: :status_lv
+  .field
+    = form.label :exp
+    = form.number_field :exp, id: :status_exp
+  .field
+    = form.label :mexp
+    = form.number_field :mexp, id: :status_mexp
+  .field
+    = form.label :job1
+    = form.number_field :job1, id: :status_job1
+  .field
+    = form.label :job2
+    = form.number_field :job2, id: :status_job2
+  .field
+    = form.label :hp
+    = form.number_field :hp, id: :status_hp
+  .field
+    = form.label :mhp
+    = form.number_field :mhp, id: :status_mhp
+  .field
+    = form.label :hp_rate
+    = form.text_field :hp_rate, id: :status_hp_rate
+  .field
+    = form.label :mp
+    = form.number_field :mp, id: :status_mp
+  .field
+    = form.label :mmp
+    = form.number_field :mmp, id: :status_mmp
+  .field
+    = form.label :mp_rate
+    = form.text_field :mp_rate, id: :status_mp_rate
+  .field
+    = form.label :sp
+    = form.number_field :sp, id: :status_sp
+  .field
+    = form.label :str
+    = form.number_field :str, id: :status_str
+  .field
+    = form.label :int
+    = form.number_field :int, id: :status_int
+  .field
+    = form.label :tec
+    = form.number_field :tec, id: :status_tec
+  .field
+    = form.label :agi
+    = form.number_field :agi, id: :status_agi
+  .field
+    = form.label :def
+    = form.number_field :def, id: :status_def
+  .field
+    = form.label :skill
+    = form.number_field :skill, id: :status_skill
+  .field
+    = form.label :personality
+    = form.number_field :personality, id: :status_personality
+  .field
+    = form.label :tribe
+    = form.number_field :tribe, id: :status_tribe
+  .field
+    = form.label :money
+    = form.number_field :money, id: :status_money
+  .field
+    = form.label :sundries
+    = form.number_field :sundries, id: :status_sundries
+  .actions
+    = form.submit

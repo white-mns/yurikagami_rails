@@ -1,0 +1,28 @@
+%p#notice= notice
+%p
+  %strong Result no:
+  = @smith_display.result_no
+%p
+  %strong Generate no:
+  = @smith_display.generate_no
+%p
+  %strong Party no:
+  = @smith_display.party_no
+%p
+  %strong E no:
+  = @smith_display.e_no
+%p
+  %strong Sub no:
+  = @smith_display.sub_no
+%p
+  %strong Total price:
+  = @smith_display.total_price
+%p
+  %strong Price rate:
+  = @smith_display.price_rate
+%p
+  %strong Display rate:
+  = @smith_display.display_rate
+= link_to 'Edit', edit_smith_display_path(@smith_display)
+|
+= link_to 'Back', smith_displays_path

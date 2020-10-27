@@ -1,0 +1,34 @@
+%p#notice= notice
+%p
+  %strong Result no:
+  = @search.result_no
+%p
+  %strong Generate no:
+  = @search.generate_no
+%p
+  %strong Last result no:
+  = @search.last_result_no
+%p
+  %strong Last generate no:
+  = @search.last_generate_no
+%p
+  %strong E no:
+  = @search.e_no
+%p
+  %strong Sub no:
+  = @search.sub_no
+%p
+  %strong Main no:
+  = @search.main_no
+%p
+  %strong I no:
+  = @search.i_no
+%p
+  %strong I name:
+  = @search.i_name
+%p
+  %strong Value:
+  = @search.value
+= link_to 'Edit', edit_search_path(@search)
+|
+= link_to 'Back', searches_path
