@@ -26,7 +26,7 @@ gem 'turbolinks'
 gem 'jbuilder'
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '~> 1.5.0', require: false
+gem 'bootsnap', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
