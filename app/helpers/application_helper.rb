@@ -41,7 +41,7 @@ module ApplicationHelper
             file_name += "_" + sprintf("%d",sub_no)
         end
 
-        link_to " キャラ結果", "http://csyuki.sakura.ne.jp/cgi-bin/prism/result/status"+file_name+".html", :target => "_blank"
+        link_to " キャラ最終結果", "https://archives.teiki.org/yk/5/turn56/status"+file_name+".html", :target => "_blank"
     end
     
     def character_old_link(latest_result_no, e_no, sub_no, result_no, generate_no)
@@ -60,7 +60,7 @@ module ApplicationHelper
 
     def battle_link(party_no)
         file_name = sprintf("%d",party_no)
-        link_to " 戦闘結果", "http://csyuki.sakura.ne.jp/cgi-bin/prism/result/result"+file_name+".html", :target => "_blank"
+        link_to " 戦闘結果", "https://archives.teiki.org/yk/5/turn56/result"+file_name+".html", :target => "_blank"
     end
 
     def battle_old_link(latest_result_no, party_no, result_no)
