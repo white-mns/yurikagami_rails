@@ -55,7 +55,7 @@ module ApplicationHelper
             file_name += "_" + sprintf("%d",sub_no)
         end
 
-        link_to " キャラ過去結果", "https://archives.teiki.org/yk/5/turn"+result_no_text+"/status"+file_name+".html", :target => "_blank"
+        link_to " キャラ過去結果", "https://archives.teiki.org/yk/6/turn"+result_no_text+"/status"+file_name+".html", :target => "_blank"
     end
 
     def battle_link(party_no)
@@ -67,7 +67,7 @@ module ApplicationHelper
         if result_no < latest_result_no
             file_name = sprintf("%d",party_no)
             result_no_text = sprintf("%d",result_no)
-            link_to " 戦闘過去結果", "https://archives.teiki.org/yk/5/turn"+result_no_text+"/result"+file_name+".html", :target => "_blank"
+            link_to " 戦闘過去結果", "https://archives.teiki.org/yk/6/turn"+result_no_text+"/result"+file_name+".html", :target => "_blank"
         end
     end
 
