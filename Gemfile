@@ -26,7 +26,7 @@ gem 'turbolinks'
 gem 'jbuilder'
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', require: false
+gem 'bootsnap', '~> 1.5.0', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -60,6 +60,6 @@ gem 'unicorn'
 
 gem 'kaminari'
 gem 'ransack'
-gem 'composite_primary_keys'
+gem 'composite_primary_keys', '>= 12.0'
 gem 'chartkick'
 gem 'font-awesome-rails'
