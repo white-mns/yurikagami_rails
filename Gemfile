@@ -60,6 +60,6 @@ gem 'unicorn'
 
 gem 'kaminari'
 gem 'ransack'
-gem 'composite_primary_keys'
+gem 'composite_primary_keys', '>= 12.0'
 gem 'chartkick'
 gem 'font-awesome-rails'
