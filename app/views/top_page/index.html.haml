@@ -2,12 +2,10 @@
 %p
   このサイトでは『
   %a{:href => "http://csyuki.sakura.ne.jp/cgi-bin/prism/", :target => "_blank"} 百合鏡
-  』の5期結果を解析して得られる情報を扱っていました。
-  %br
-  ゲーム運営終了に伴い、全結果から取得したデータを残しています。
+  』の6期結果を解析して得られる情報を扱っています。
   %br
   過去結果へのリンクは弊サイト
-  = link_to "データ小屋アーカイブス", "https://archives.teiki.org/yk/5/"
+  = link_to "データ小屋アーカイブス", "https://archives.teiki.org/yk/6/"
   に保存したものに置き換えています。
 %br
 %p= top_text(@latest_result, @latest_generate, @uploaded_result)
@@ -60,6 +58,9 @@
   .card-body
     %h2 更新履歴
     %ul
+      %li 2021/3/22
+      %ul
+        %li 6期データに対応
       %li 2020/5/25
       %ul
         %li 装備作成一覧を公開
