@@ -1,16 +1,17 @@
-%h1 百合鏡データ小屋
+%h1 百合鏡5期データ小屋
 %p
   このサイトでは『
   %a{:href => "http://csyuki.sakura.ne.jp/cgi-bin/prism/", :target => "_blank"} 百合鏡
   』の5期結果を解析して得られる情報を扱っていました。
   %br
-  ゲーム運営終了に伴い、全結果から取得したデータを残しています。
+  5期運営終了に伴い、全結果から取得したデータを残しています。
   %br
-  過去結果へのリンクは弊サイト
-  = link_to "データ小屋アーカイブス", "https://archives.teiki.org/yk/5/"
-  に保存したものに置き換えています。
+  結果へのリンクは弊サイト#{link_to "データ小屋アーカイブス", "https://archives.teiki.org/yk/5/"}に保存したものに置き換えています。
 %br
 %p= top_text(@latest_result, @latest_generate, @uploaded_result)
+%p{:style => "font-size:x-large;"}
+  %br
+  = link_to "⇒次期：百合鏡データ小屋", "https://data.teiki.org/yk/"
 
 .card.top
   .card-body
