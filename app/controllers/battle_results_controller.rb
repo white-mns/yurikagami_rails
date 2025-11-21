@@ -6,8 +6,8 @@ class BattleResultsController < ApplicationController
   def index
     placeholder_set
     param_set
-    @count	= BattleResult.notnil().includes([current_place: :place], [party_info: [party_members: :pc_name]], :enemy_party_info, [enemy_members: :enemy]).search(params[:q]).result.hit_count()
-    @search	= BattleResult.notnil().includes([current_place: :place], [party_info: [party_members: :pc_name]], :enemy_party_info, [enemy_members: :enemy]).page(params[:page]).search(params[:q])
+    @count	= BattleResult.notnil().includes([current_place: :place], [party_info: [party_members: :pc_name]], :enemy_party_info, [enemy_members: :enemy]).ransack(params[:q]).result.hit_count()
+    @search	= BattleResult.notnil().includes([current_place: :place], [party_info: [party_members: :pc_name]], :enemy_party_info, [enemy_members: :enemy]).page(params[:page]).ransack(params[:q])
     @search.sorts = "id asc" if @search.sorts.empty?
     @battle_results	= @search.result.per(50)
   end
