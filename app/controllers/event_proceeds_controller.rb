@@ -6,8 +6,8 @@ class EventProceedsController < ApplicationController
   def index
     placeholder_set
     param_set
-    @count	= EventProceed.notnil().includes(:pc_name).search(params[:q]).result.hit_count()
-    @search	= EventProceed.notnil().includes(:pc_name).page(params[:page]).search(params[:q])
+    @count	= EventProceed.notnil().includes(:pc_name).ransack(params[:q]).result.hit_count()
+    @search	= EventProceed.notnil().includes(:pc_name).page(params[:page]).ransack(params[:q])
     @search.sorts = "id asc" if @search.sorts.empty?
     @event_proceeds	= @search.result.per(50)
   end

@@ -6,9 +6,9 @@ class SearchesController < ApplicationController
   def index
     placeholder_set
     param_set
-    @count	= Search.notnil().includes(:pc_name, :status, :item).search(params[:q]).result.hit_count()
-    @values	= Search.notnil().includes(:pc_name, :status, :item).where("value > -90000").group(:result_no,:e_no,:sub_no).search(params[:q]).result.sum(:value).values.sort
-    @search	= Search.notnil().includes(:pc_name, :status, :item).page(params[:page]).search(params[:q])
+    @count	= Search.notnil().includes(:pc_name, :status, :item).ransack(params[:q]).result.hit_count()
+    @values	= Search.notnil().includes(:pc_name, :status, :item).where("value > -90000").group(:result_no,:e_no,:sub_no).ransack(params[:q]).result.sum(:value).values.sort
+    @search	= Search.notnil().includes(:pc_name, :status, :item).page(params[:page]).ransack(params[:q])
     @search.sorts = "id asc" if @search.sorts.empty?
     @searches	= @search.result.per(50)
   end

@@ -6,8 +6,8 @@ class StatusesController < ApplicationController
   def index
     placeholder_set
     param_set
-    @count	= Status.notnil().includes(:pc_name, :job1, :job2, :tribe).search(params[:q]).result.hit_count()
-    @search	= Status.notnil().includes(:pc_name, :job1, :job2, :tribe).page(params[:page]).search(params[:q])
+    @count	= Status.notnil().includes(:pc_name, :job1, :job2, :tribe).ransack(params[:q]).result.hit_count()
+    @search	= Status.notnil().includes(:pc_name, :job1, :job2, :tribe).page(params[:page]).ransack(params[:q])
     @search.sorts = "id asc" if @search.sorts.empty?
     @statuses	= @search.result.per(50)
   end

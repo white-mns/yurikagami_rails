@@ -6,8 +6,8 @@ class ProfilesController < ApplicationController
   def index
     placeholder_set
     param_set
-    @count	= Profile.notnil().includes(:pc_name).search(params[:q]).result.hit_count()
-    @search	= Profile.notnil().includes(:pc_name).page(params[:page]).search(params[:q])
+    @count	= Profile.notnil().includes(:pc_name).ransack(params[:q]).result.hit_count()
+    @search	= Profile.notnil().includes(:pc_name).page(params[:page]).ransack(params[:q])
     @search.sorts = "id asc" if @search.sorts.empty?
     @profiles	= @search.result.per(50)
   end
