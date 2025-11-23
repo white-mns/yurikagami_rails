@@ -6,8 +6,8 @@ class SmithsController < ApplicationController
   def index
     placeholder_set
     param_set
-    @count	= Smith.notnil().includes(:pc_name, :main_material_name, :sub_material_1_name, :sub_material_2_name, :sub_material_3_name, :sub_material_4_name, :main_material, :sub_material_1, :sub_material_2, :sub_material_3, :sub_material_4, [result: [:kind, :ability]], [source_last: [:kind, :ability]], [source: [:kind, :ability]]).search(params[:q]).result.hit_count()
-    @search	= Smith.notnil().includes(:pc_name, :main_material_name, :sub_material_1_name, :sub_material_2_name, :sub_material_3_name, :sub_material_4_name, :main_material, :sub_material_1, :sub_material_2, :sub_material_3, :sub_material_4, [result: [:kind, :ability]], [source_last: [:kind, :ability]], [source: [:kind, :ability]]).page(params[:page]).search(params[:q])
+    @count	= Smith.notnil().includes(:pc_name, :main_material_name, :sub_material_1_name, :sub_material_2_name, :sub_material_3_name, :sub_material_4_name, :main_material, :sub_material_1, :sub_material_2, :sub_material_3, :sub_material_4, [result: [:kind, :ability]], [source_last: [:kind, :ability]], [source: [:kind, :ability]]).ransack(params[:q]).result.hit_count()
+    @search	= Smith.notnil().includes(:pc_name, :main_material_name, :sub_material_1_name, :sub_material_2_name, :sub_material_3_name, :sub_material_4_name, :main_material, :sub_material_1, :sub_material_2, :sub_material_3, :sub_material_4, [result: [:kind, :ability]], [source_last: [:kind, :ability]], [source: [:kind, :ability]]).page(params[:page]).ransack(params[:q])
     @search.sorts = "id asc" if @search.sorts.empty?
     @smiths	= @search.result.per(50)
   end
