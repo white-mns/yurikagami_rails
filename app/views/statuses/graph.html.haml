@@ -70,24 +70,24 @@
 %br
 %br
 %h3.graph_title 戦型1
-= column_chart Status.search(params[:q]).result.to_job_graph(:job1_id), xtitle:"戦型1", ytitle:"人数"
+= column_chart Status.ransack(params[:q]).result.to_job_graph(:job1_id), xtitle:"戦型1", ytitle:"人数"
 %h3.graph_title 戦型2
-= column_chart Status.search(params[:q]).result.to_job_graph(:job2_id), xtitle:"戦型2", ytitle:"人数"
+= column_chart Status.ransack(params[:q]).result.to_job_graph(:job2_id), xtitle:"戦型2", ytitle:"人数"
 %h3.graph_title Lv
-= column_chart Status.search(params[:q]).result.to_range_graph(:lv), xtitle:"Lv", ytitle:"人数"
+= column_chart Status.ransack(params[:q]).result.to_range_graph(:lv), xtitle:"Lv", ytitle:"人数"
 %h3.graph_title HP
-= column_chart Status.search(params[:q]).result.to_range_graph(:hp), xtitle:"HP", ytitle:"人数"
+= column_chart Status.ransack(params[:q]).result.to_range_graph(:hp), xtitle:"HP", ytitle:"人数"
 %h3.graph_title MP
-= column_chart Status.search(params[:q]).result.to_range_graph(:mp), xtitle:"MP", ytitle:"人数"
+= column_chart Status.ransack(params[:q]).result.to_range_graph(:mp), xtitle:"MP", ytitle:"人数"
 %h3.graph_title 腕力
-= column_chart Status.search(params[:q]).result.to_range_graph(:str), xtitle:"腕力", ytitle:"人数"
+= column_chart Status.ransack(params[:q]).result.to_range_graph(:str), xtitle:"腕力", ytitle:"人数"
 %h3.graph_title 魔力
-= column_chart Status.search(params[:q]).result.to_range_graph(:int), xtitle:"魔力", ytitle:"人数"
+= column_chart Status.ransack(params[:q]).result.to_range_graph(:int), xtitle:"魔力", ytitle:"人数"
 %h3.graph_title 器用
-= column_chart Status.search(params[:q]).result.to_range_graph(:tec), xtitle:"器用", ytitle:"人数"
+= column_chart Status.ransack(params[:q]).result.to_range_graph(:tec), xtitle:"器用", ytitle:"人数"
 %h3.graph_title 反応
-= column_chart Status.search(params[:q]).result.to_range_graph(:agi), xtitle:"反応", ytitle:"人数"
+= column_chart Status.ransack(params[:q]).result.to_range_graph(:agi), xtitle:"反応", ytitle:"人数"
 %h3.graph_title 守護
-= column_chart Status.search(params[:q]).result.to_range_graph(:def), xtitle:"守護", ytitle:"人数"
+= column_chart Status.ransack(params[:q]).result.to_range_graph(:def), xtitle:"守護", ytitle:"人数"
 %h3.graph_title 熟練
-= column_chart Status.search(params[:q]).result.to_range_graph(:skill), xtitle:"熟練", ytitle:"人数"
+= column_chart Status.ransack(params[:q]).result.to_range_graph(:skill), xtitle:"熟練", ytitle:"人数"

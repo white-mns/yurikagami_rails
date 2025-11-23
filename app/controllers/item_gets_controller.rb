@@ -6,8 +6,8 @@ class ItemGetsController < ApplicationController
   def index
     placeholder_set
     param_set
-    @count	= ItemGet.notnil().includes(:pc_name, :enemy, :item, :item_data, [current_place: :place]).search(params[:q]).result.hit_count()
-    @search	= ItemGet.notnil().includes(:pc_name, :enemy, :item, :item_data, [current_place: :place]).page(params[:page]).search(params[:q])
+    @count	= ItemGet.notnil().includes(:pc_name, :enemy, :item, :item_data, [current_place: :place]).ransack(params[:q]).result.hit_count()
+    @search	= ItemGet.notnil().includes(:pc_name, :enemy, :item, :item_data, [current_place: :place]).page(params[:page]).ransack(params[:q])
     @search.sorts = "id asc" if @search.sorts.empty?
     @item_gets	= @search.result.per(50)
   end

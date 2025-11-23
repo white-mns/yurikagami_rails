@@ -6,8 +6,8 @@ class CurrentPlacesController < ApplicationController
   def index
     placeholder_set
     param_set
-    @count	= CurrentPlace.notnil().includes(:place, party_info: [party_members: :pc_name]).search(params[:q]).result.hit_count()
-    @search	= CurrentPlace.notnil().includes(:place, party_info: [party_members: :pc_name]).page(params[:page]).search(params[:q])
+    @count	= CurrentPlace.notnil().includes(:place, party_info: [party_members: :pc_name]).ransack(params[:q]).result.hit_count()
+    @search	= CurrentPlace.notnil().includes(:place, party_info: [party_members: :pc_name]).page(params[:page]).ransack(params[:q])
     @search.sorts = "id asc" if @search.sorts.empty?
     @current_places	= @search.result.per(50)
   end

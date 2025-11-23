@@ -6,8 +6,8 @@ class ItemsController < ApplicationController
   def index
     placeholder_set
     param_set
-    @count	= Item.notnil().includes(:pc_name, :kind, :effect, :ability).search(params[:q]).result.hit_count()
-    @search	= Item.notnil().includes(:pc_name, :kind, :effect, :ability).page(params[:page]).search(params[:q])
+    @count	= Item.notnil().includes(:pc_name, :kind, :effect, :ability).ransack(params[:q]).result.hit_count()
+    @search	= Item.notnil().includes(:pc_name, :kind, :effect, :ability).page(params[:page]).ransack(params[:q])
     @search.sorts = "id asc" if @search.sorts.empty?
     @items	= @search.result.per(50)
   end

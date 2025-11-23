@@ -6,8 +6,8 @@ class LearnableSkillsController < ApplicationController
   def index
     placeholder_set
     param_set
-    @count	= LearnableSkill.includes(:job, [skill: [:timing, :target, :property, :element]]).search(params[:q]).result.hit_count()
-    @search	= LearnableSkill.includes(:job, [skill: [:timing, :target, :property, :element]]).page(params[:page]).search(params[:q])
+    @count	= LearnableSkill.includes(:job, [skill: [:timing, :target, :property, :element]]).ransack(params[:q]).result.hit_count()
+    @search	= LearnableSkill.includes(:job, [skill: [:timing, :target, :property, :element]]).page(params[:page]).ransack(params[:q])
     @search.sorts = "id asc" if @search.sorts.empty?
     @learnable_skills	= @search.result.per(50)
   end

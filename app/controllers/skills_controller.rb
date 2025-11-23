@@ -6,8 +6,8 @@ class SkillsController < ApplicationController
   def index
     placeholder_set
     param_set
-    @count	= Skill.notnil().includes(:pc_name, [skill: [:timing, :target, :property, :element]]).search(params[:q]).result.hit_count()
-    @search	= Skill.notnil().includes(:pc_name, [skill: [:timing, :target, :property, :element]]).page(params[:page]).search(params[:q])
+    @count	= Skill.notnil().includes(:pc_name, [skill: [:timing, :target, :property, :element]]).ransack(params[:q]).result.hit_count()
+    @search	= Skill.notnil().includes(:pc_name, [skill: [:timing, :target, :property, :element]]).page(params[:page]).ransack(params[:q])
     @search.sorts = "id asc" if @search.sorts.empty?
     @skills	= @search.result.per(50)
   end

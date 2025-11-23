@@ -6,8 +6,8 @@ class NewPlacesController < ApplicationController
   def index
     placeholder_set
     param_set
-    @count	= NewPlace.notnil().includes(:place).search(params[:q]).result.hit_count()
-    @search	= NewPlace.notnil().includes(:place).page(params[:page]).search(params[:q])
+    @count	= NewPlace.notnil().includes(:place).ransack(params[:q]).result.hit_count()
+    @search	= NewPlace.notnil().includes(:place).page(params[:page]).ransack(params[:q])
     @search.sorts = "id asc" if @search.sorts.empty?
     @new_places	= @search.result.per(50)
   end

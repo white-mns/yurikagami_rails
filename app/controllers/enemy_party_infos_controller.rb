@@ -6,8 +6,8 @@ class EnemyPartyInfosController < ApplicationController
   def index
     placeholder_set
     param_set
-    @count	= EnemyPartyInfo.notnil().includes([enemy_members: :enemy], [current_place: :place], [party_info: [party_members: :pc_name]]).search(params[:q]).result.hit_count()
-    @search	= EnemyPartyInfo.notnil().includes([enemy_members: :enemy], [current_place: :place], [party_info: [party_members: :pc_name]]).page(params[:page]).search(params[:q])
+    @count	= EnemyPartyInfo.notnil().includes([enemy_members: :enemy], [current_place: :place], [party_info: [party_members: :pc_name]]).ransack(params[:q]).result.hit_count()
+    @search	= EnemyPartyInfo.notnil().includes([enemy_members: :enemy], [current_place: :place], [party_info: [party_members: :pc_name]]).page(params[:page]).ransack(params[:q])
     @search.sorts = "id asc" if @search.sorts.empty?
     @enemy_party_infos	= @search.result.per(50)
   end
