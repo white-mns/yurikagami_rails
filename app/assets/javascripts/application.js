@@ -14,7 +14,6 @@
 //= require turbolinks
 //= require jquery
 //= require jquery_ujs
-//= require twitter/bootstrap
 //= require "jquery.cleanQuery"
 //= require chartkick
 //= require_tree .
