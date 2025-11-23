@@ -5,8 +5,8 @@ class IncomesController < ApplicationController
   # GET /incomes
   def index
     param_set
-    @count	= Income.includes([:p_name]).search(params[:q]).result.count()
-    @search	= Income.includes([:p_name]).page(params[:page]).search(params[:q])
+    @count	= Income.includes([:p_name]).ransack(params[:q]).result.count()
+    @search	= Income.includes([:p_name]).page(params[:page]).ransack(params[:q])
     @search.sorts = 'id asc' if @search.sorts.empty?
     @incomes	= @search.result.per(50)
   end

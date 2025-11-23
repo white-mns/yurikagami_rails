@@ -5,8 +5,8 @@ class ItemGetsController < ApplicationController
   # GET /item_gets
   def index
     param_set
-    @count	= ItemGet.includes([:p_name, :enemy_name, :item_data, current_place: :place_name]).search(params[:q]).result.count()
-    @search	= ItemGet.includes([:p_name, :enemy_name, :item_data, current_place: :place_name]).page(params[:page]).search(params[:q])
+    @count	= ItemGet.includes([:p_name, :enemy_name, :item_data, current_place: :place_name]).ransack(params[:q]).result.count()
+    @search	= ItemGet.includes([:p_name, :enemy_name, :item_data, current_place: :place_name]).page(params[:page]).ransack(params[:q])
     @search.sorts = 'id asc' if @search.sorts.empty?
     @item_gets	= @search.result.per(50)
   end

@@ -5,8 +5,8 @@ class StatusesController < ApplicationController
   # GET /statuses
   def index
     param_set
-    @count	= Status.includes([:p_name, :tribe_name, :job1_name, :job2_name]).search(params[:q]).result.count()
-    @search	= Status.includes([:p_name, :tribe_name, :job1_name, :job2_name]).page(params[:page]).search(params[:q])
+    @count	= Status.includes([:p_name, :tribe_name, :job1_name, :job2_name]).ransack(params[:q]).result.count()
+    @search	= Status.includes([:p_name, :tribe_name, :job1_name, :job2_name]).page(params[:page]).ransack(params[:q])
     @search.sorts = 'id asc' if @search.sorts.empty?
     @statuses	= @search.result.per(50)
   end
@@ -14,8 +14,8 @@ class StatusesController < ApplicationController
   # GET /statuses
   def graph
     param_set
-    @count	= Status.includes([:p_name, :tribe_name, :job1_name, :job2_name]).search(params[:q]).result.count()
-    @search = Status.includes([:p_name, :tribe_name, :job1_name, :job2_name]).search(params[:q])
+    @count	= Status.includes([:p_name, :tribe_name, :job1_name, :job2_name]).ransack(params[:q]).result.count()
+    @search = Status.includes([:p_name, :tribe_name, :job1_name, :job2_name]).ransack(params[:q])
     @search.sorts = 'id asc' if @search.sorts.empty?
     @statuses	= @search.result
   end

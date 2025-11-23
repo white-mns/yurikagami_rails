@@ -5,8 +5,8 @@ class JobNamesController < ApplicationController
   # GET /job_names
   def index
     param_set
-    @count	= JobName.search(params[:q]).result.count()
-    @search	= JobName.page(params[:page]).search(params[:q])
+    @count	= JobName.ransack(params[:q]).result.count()
+    @search	= JobName.page(params[:page]).ransack(params[:q])
     @search.sorts = 'id asc' if @search.sorts.empty?
     @job_names	= @search.result.per(50)
   end

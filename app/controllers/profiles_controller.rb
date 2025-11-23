@@ -5,8 +5,8 @@ class ProfilesController < ApplicationController
   # GET /profiles
   def index
     param_set
-    @count	= Profile.includes([:p_name, :tribe_name]).search(params[:q]).result.count()
-    @search	= Profile.includes([:p_name, :tribe_name]).page(params[:page]).search(params[:q])
+    @count	= Profile.includes([:p_name, :tribe_name]).ransack(params[:q]).result.count()
+    @search	= Profile.includes([:p_name, :tribe_name]).page(params[:page]).ransack(params[:q])
     @search.sorts = 'id asc' if @search.sorts.empty?
     @profiles	= @search.result.per(50)
   end

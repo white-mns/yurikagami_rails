@@ -5,8 +5,8 @@ class CurrentPlacesController < ApplicationController
   # GET /current_places
   def index
     param_set
-    @count	= CurrentPlace.includes(:place_name, party_info: [party_members: :p_name]).search(params[:q]).result.count()
-    @search	= CurrentPlace.includes(:place_name, party_info: [party_members: :p_name]).page(params[:page]).search(params[:q])
+    @count	= CurrentPlace.includes(:place_name, party_info: [party_members: :p_name]).ransack(params[:q]).result.count()
+    @search	= CurrentPlace.includes(:place_name, party_info: [party_members: :p_name]).page(params[:page]).ransack(params[:q])
     @search.sorts = 'id asc' if @search.sorts.empty?
     @current_places	= @search.result.per(50)
   end

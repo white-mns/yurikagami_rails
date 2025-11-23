@@ -5,16 +5,16 @@ class SmithsController < ApplicationController
   # GET /smiths
   def index
     param_set
-    @count	= Smith.includes(:p_name, :smith_display, :main_material_name, :sub_material_1_name, :sub_material_2_name, :sub_material_3_name, :sub_material_4_name, :main_material, :sub_material_1, :sub_material_2, :sub_material_3, :sub_material_4, [result: [:kind_name, :ability_name]], [source_last: [:kind_name, :ability_name]], [source: [:kind_name, :ability_name]]).search(params[:q]).result.count()
-    @search	= Smith.includes(:p_name, :smith_display, :main_material_name, :sub_material_1_name, :sub_material_2_name, :sub_material_3_name, :sub_material_4_name, :main_material, :sub_material_1, :sub_material_2, :sub_material_3, :sub_material_4, [result: [:kind_name, :ability_name]], [source_last: [:kind_name, :ability_name]], [source: [:kind_name, :ability_name]]).page(params[:page]).search(params[:q])
+    @count	= Smith.includes(:p_name, :smith_display, :main_material_name, :sub_material_1_name, :sub_material_2_name, :sub_material_3_name, :sub_material_4_name, :main_material, :sub_material_1, :sub_material_2, :sub_material_3, :sub_material_4, [result: [:kind_name, :ability_name]], [source_last: [:kind_name, :ability_name]], [source: [:kind_name, :ability_name]]).ransack(params[:q]).result.count()
+    @search	= Smith.includes(:p_name, :smith_display, :main_material_name, :sub_material_1_name, :sub_material_2_name, :sub_material_3_name, :sub_material_4_name, :main_material, :sub_material_1, :sub_material_2, :sub_material_3, :sub_material_4, [result: [:kind_name, :ability_name]], [source_last: [:kind_name, :ability_name]], [source: [:kind_name, :ability_name]]).page(params[:page]).ransack(params[:q])
     @search.sorts = 'id asc' if @search.sorts.empty?
     @smiths	= @search.result.per(50)
   end
 
   def display
     param_set
-    @count	= Smith.includes(:p_name, :status, :smith_display, :main_material_name, :sub_material_1_name, :sub_material_2_name, :sub_material_3_name, :sub_material_4_name, [main_material: :original_price], [sub_material_1: :original_price], [sub_material_2: :original_price], [sub_material_3: :original_price], [sub_material_4: :original_price], [result: [:kind_name, :ability_name]], [source_last: [:kind_name, :ability_name]], [source: [:kind_name, :ability_name]]).search(params[:q]).result.count()
-    @search	= Smith.includes(:p_name, :status, :smith_display, :main_material_name, :sub_material_1_name, :sub_material_2_name, :sub_material_3_name, :sub_material_4_name, [main_material: :original_price], [sub_material_1: :original_price], [sub_material_2: :original_price], [sub_material_3: :original_price], [sub_material_4: :original_price], [result: [:kind_name, :ability_name]], [source_last: [:kind_name, :ability_name]], [source: [:kind_name, :ability_name]]).page(params[:page]).search(params[:q])
+    @count	= Smith.includes(:p_name, :status, :smith_display, :main_material_name, :sub_material_1_name, :sub_material_2_name, :sub_material_3_name, :sub_material_4_name, [main_material: :original_price], [sub_material_1: :original_price], [sub_material_2: :original_price], [sub_material_3: :original_price], [sub_material_4: :original_price], [result: [:kind_name, :ability_name]], [source_last: [:kind_name, :ability_name]], [source: [:kind_name, :ability_name]]).ransack(params[:q]).result.count()
+    @search	= Smith.includes(:p_name, :status, :smith_display, :main_material_name, :sub_material_1_name, :sub_material_2_name, :sub_material_3_name, :sub_material_4_name, [main_material: :original_price], [sub_material_1: :original_price], [sub_material_2: :original_price], [sub_material_3: :original_price], [sub_material_4: :original_price], [result: [:kind_name, :ability_name]], [source_last: [:kind_name, :ability_name]], [source: [:kind_name, :ability_name]]).page(params[:page]).ransack(params[:q])
     @search.sorts = 'id asc' if @search.sorts.empty?
     @smiths	= @search.result.per(50)
   end

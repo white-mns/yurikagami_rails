@@ -5,8 +5,8 @@ class PlaceNamesController < ApplicationController
   # GET /place_names
   def index
     param_set
-    @count	= PlaceName.search(params[:q]).result.count()
-    @search	= PlaceName.page(params[:page]).search(params[:q])
+    @count	= PlaceName.ransack(params[:q]).result.count()
+    @search	= PlaceName.page(params[:page]).ransack(params[:q])
     @search.sorts = 'id asc' if @search.sorts.empty?
     @place_names	= @search.result.per(50)
   end

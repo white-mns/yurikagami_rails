@@ -5,8 +5,8 @@ class BattleResultsController < ApplicationController
   # GET /battle_results
   def index
     param_set
-    @count	= BattleResult.includes(:income, enemy_party_info: [enemy_members: :enemy_name, current_place: [:place_name, party_info: [party_members: :p_name]]]).group(:party_no, :result_no).search(params[:q]).result.count().keys().size()
-    @search	= BattleResult.includes(:income, enemy_party_info: [enemy_members: :enemy_name, current_place: [:place_name, party_info: [party_members: :p_name]]]).group(:party_no, :result_no).page(params[:page]).search(params[:q])
+    @count	= BattleResult.includes(:income, enemy_party_info: [enemy_members: :enemy_name, current_place: [:place_name, party_info: [party_members: :p_name]]]).group(:party_no, :result_no).ransack(params[:q]).result.count().keys().size()
+    @search	= BattleResult.includes(:income, enemy_party_info: [enemy_members: :enemy_name, current_place: [:place_name, party_info: [party_members: :p_name]]]).group(:party_no, :result_no).page(params[:page]).ransack(params[:q])
     @search.sorts = 'id asc' if @search.sorts.empty?
     @battle_results	= @search.result.per(50)
   end

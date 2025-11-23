@@ -5,8 +5,8 @@ class PartyInfosController < ApplicationController
   # GET /party_infos
   def index
     param_set
-    @count	= PartyInfo.includes(party_members: :p_name).search(params[:q]).result.count()
-    @search	= PartyInfo.includes(party_members: :p_name).page(params[:page]).search(params[:q])
+    @count	= PartyInfo.includes(party_members: :p_name).ransack(params[:q]).result.count()
+    @search	= PartyInfo.includes(party_members: :p_name).page(params[:page]).ransack(params[:q])
     @search.sorts = 'id asc' if @search.sorts.empty?
     @party_infos	= @search.result.per(50)
   end

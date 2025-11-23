@@ -5,8 +5,8 @@ class EventProceedsController < ApplicationController
   # GET /event_proceeds
   def index
     param_set
-    @count	= EventProceed.includes([:p_name, :event_name, :last_flag_name, :flag_name]).search(params[:q]).result.count()
-    @search	= EventProceed.includes([:p_name, :event_name, :last_flag_name, :flag_name]).page(params[:page]).search(params[:q])
+    @count	= EventProceed.includes([:p_name, :event_name, :last_flag_name, :flag_name]).ransack(params[:q]).result.count()
+    @search	= EventProceed.includes([:p_name, :event_name, :last_flag_name, :flag_name]).page(params[:page]).ransack(params[:q])
     @search.sorts = 'id asc' if @search.sorts.empty?
     @event_proceeds	= @search.result.per(50)
   end

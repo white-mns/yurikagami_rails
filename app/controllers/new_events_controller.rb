@@ -5,8 +5,8 @@ class NewEventsController < ApplicationController
   # GET /new_events
   def index
     param_set
-    @count	= NewEvent.includes([:event_name, :flag_name]).search(params[:q]).result.count()
-    @search	= NewEvent.includes([:event_name, :flag_name]).page(params[:page]).search(params[:q])
+    @count	= NewEvent.includes([:event_name, :flag_name]).ransack(params[:q]).result.count()
+    @search	= NewEvent.includes([:event_name, :flag_name]).page(params[:page]).ransack(params[:q])
     @search.sorts = 'id asc' if @search.sorts.empty?
     @new_events	= @search.result.per(50)
   end

@@ -5,8 +5,8 @@ class MaterialPricesController < ApplicationController
   # GET /material_prices
   def index
     param_set
-    @count	= MaterialPrice.search(params[:q]).result.count()
-    @search	= MaterialPrice.page(params[:page]).search(params[:q])
+    @count	= MaterialPrice.ransack(params[:q]).result.count()
+    @search	= MaterialPrice.page(params[:page]).ransack(params[:q])
     @search.sorts = 'id asc' if @search.sorts.empty?
     @material_prices	= @search.result.per(50)
   end

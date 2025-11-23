@@ -5,8 +5,8 @@ class NewEnemiesController < ApplicationController
   # GET /new_enemies
   def index
     param_set
-    @count	= NewEnemy.includes([:enemy_name]).search(params[:q]).result.count()
-    @search	= NewEnemy.includes([:enemy_name]).page(params[:page]).search(params[:q])
+    @count	= NewEnemy.includes([:enemy_name]).ransack(params[:q]).result.count()
+    @search	= NewEnemy.includes([:enemy_name]).page(params[:page]).ransack(params[:q])
     @search.sorts = 'id asc' if @search.sorts.empty?
     @new_enemies	= @search.result.per(50)
   end

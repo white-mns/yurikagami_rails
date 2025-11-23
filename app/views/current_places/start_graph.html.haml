@@ -63,4 +63,4 @@
               %td{:colspan => "3"}
                 = f.submit '検索する'
 %h3.graph_title 出発国
-= column_chart CurrentPlace.where_start.search(params[:q]).result.to_start_graph(:place), xtitle:"出発国", ytitle:"人数"
+= column_chart CurrentPlace.where_start.ransack(params[:q]).result.to_start_graph(:place), xtitle:"出発国", ytitle:"人数"

@@ -5,8 +5,8 @@ class SkillsController < ApplicationController
   # GET /skills
   def index
     param_set
-    @count	= Skill.includes([:p_name, :skill_data]).search(params[:q]).result.count()
-    @search	= Skill.includes([:p_name, :skill_data]).page(params[:page]).search(params[:q])
+    @count	= Skill.includes([:p_name, :skill_data]).ransack(params[:q]).result.count()
+    @search	= Skill.includes([:p_name, :skill_data]).page(params[:page]).ransack(params[:q])
     @search.sorts = 'id asc' if @search.sorts.empty?
     @skills	= @search.result.per(50)
   end
