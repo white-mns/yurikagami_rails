@@ -14,6 +14,8 @@
 //= require turbolinks
 //= require jquery
 //= require jquery_ujs
+//= require popper
+//= require bootstrap-sprockets
 //= require "jquery.cleanQuery"
 //= require chartkick
 //= require_tree .

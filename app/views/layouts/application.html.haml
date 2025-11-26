@@ -1,11 +1,10 @@
 !!!
 %html{:lang => "ja"}
   %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %meta{:charset => "utf-8"}/
-    %meta{:content => "IE=Edge,chrome=1", "http-equiv" => "X-UA-Compatible"}/
-    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %meta{charset: "utf-8"}
     %title= content_for?(:title) ? yield(:title) : "百合鏡4期データ小屋"
+    %meta{name: "viewport", content:"width=device-width, initial-scale=1"}
+    %meta{http: {equiv: "X-UA-Compatible"}, content: "IE=edge"}
     = csrf_meta_tags
     = csp_meta_tag
 
@@ -14,56 +13,55 @@
     = stylesheet_link_tag "https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css", media: "all"
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = javascript_include_tag "https://www.gstatic.com/charts/loader.js"
+
   %body
-    .navbar.navbar-default.navbar-fixed-top
+    %nav.navbar.navbar-expand-md.fixed-top.navbar-light.bg-light.navbar-custom.p-0
       .container
-        .navbar-header
-          = link_to "百合鏡4期データ小屋", root_path, :class => "navbar-brand"
-          %button.navbar-toggle{"data-target" => "#navbar-main", "data-toggle" => "collapse", :type => "button"}
-            %span.icon-bar
-            %span.icon-bar
-            %span.icon-bar
-        #navbar-main.navbar-collapse.collapse
+        = link_to "百合鏡4期データ小屋", root_path, :class => "navbar-brand"
+        %button.navbar-toggler{type: "button", data: {bs: {toggle: "collapse", target: "#navbarNavDropdown"}}, area: {controls: "navbarNavDropdown", expanded: "false", label: "Toggle navigation"}}
+          %span.navbar-toggler-icon
+        .collapse.navbar-collapse#navbarResponsive
           %ul.nav.navbar-nav
-            %li.dropdown
-              %a#themes.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+            %li.nav-item.dropdown
+              %a.nav-link.dropdown-toggle#navbarDropdownMenuLink{ data: {bs: {toggle: "dropdown"}}, :href => "#", role: "button", area: {expanded: "false"}}
                 個人データ
                 %span.caret
-              %ul.dropdown-menu{"aria-labelledby" => "themes"}
-                %li= link_to "キャラクター名一覧", names_path
-                %li.divider
-                %li= link_to "プロフィール一覧", profiles_path
-                %li= link_to "ステータス一覧", statuses_path
-                %li= link_to "アイテム一覧", items_path
-                %li= link_to "技一覧", skills_path
-                %li= link_to "イベントフラグ一覧", events_path
-                %li= link_to "イベント進行一覧", event_proceeds_path
-                %li= link_to "サブキャラ探索結果一覧", searches_path
-                %li.divider
-                %li= link_to "ステータス分布グラフ", status_graph_path
-                %li= link_to "サブキャラ探索結果グラフ", search_graph_path
-            %li.dropdown
-              %a#themes.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              .dropdown-menu
+                = link_to "キャラクター名一覧", names_path, class: "dropdown-item"
+                .dropdown-divider
+                = link_to "プロフィール一覧", profiles_path, class: "dropdown-item"
+                = link_to "ステータス一覧", statuses_path, class: "dropdown-item"
+                = link_to "アイテム一覧", items_path, class: "dropdown-item"
+                = link_to "技一覧", skills_path, class: "dropdown-item"
+                = link_to "イベントフラグ一覧", events_path, class: "dropdown-item"
+                = link_to "イベント進行一覧", event_proceeds_path, class: "dropdown-item"
+                = link_to "サブキャラ探索結果一覧", searches_path, class: "dropdown-item"
+                .dropdown-divider
+                = link_to "ステータス分布グラフ", status_graph_path, class: "dropdown-item"
+                = link_to "サブキャラ探索結果グラフ", search_graph_path, class: "dropdown-item"
+            %li.nav-item.dropdown
+              %a.nav-link.dropdown-toggle#navbarDropdownMenuLink{ data: {bs: {toggle: "dropdown"}}, :href => "#", role: "button", area: {expanded: "false"}}
                 行動データ
                 %span.caret
-              %ul.dropdown-menu{"aria-labelledby" => "themes"}
-                %li= link_to "パーティ情報一覧", party_infos_path
-                %li= link_to "現在地一覧", current_places_path
-                %li= link_to "戦闘結果一覧", battle_results_path
-                %li= link_to "アイテムドロップ一覧", item_gets_path
-                %li= link_to "装備作成一覧", smiths_path
-                %li= link_to "装備作成一覧 | 作成直後価値減衰率", smith_display_rates_path
-                %li.divider
-                %li= link_to "出発国分布グラフ", current_places_start_path
-            %li.dropdown
-              %a#themes.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              .dropdown-menu
+                = link_to "パーティ情報一覧", party_infos_path, class: "dropdown-item"
+                = link_to "現在地一覧", current_places_path, class: "dropdown-item"
+                = link_to "戦闘結果一覧", battle_results_path, class: "dropdown-item"
+                = link_to "アイテムドロップ一覧", item_gets_path, class: "dropdown-item"
+                = link_to "装備作成一覧", smiths_path, class: "dropdown-item"
+                = link_to "装備作成一覧 | 作成直後価値減衰率", smith_display_rates_path, class: "dropdown-item"
+                .dropdown-divider
+                = link_to "出発国分布グラフ", current_places_start_path, class: "dropdown-item"
+            %li.nav-item.dropdown
+              %a.nav-link.dropdown-toggle#navbarDropdownMenuLink{ data: {bs: {toggle: "dropdown"}}, :href => "#", role: "button", area: {expanded: "false"}}
                 新出データ
                 %span.caret
-              %ul.dropdown-menu{"aria-labelledby" => "themes"}
-                %li= link_to "新出イベント状況一覧", new_events_path
-                %li= link_to "新出地点一覧", new_places_path
-                %li= link_to "新出敵一覧", new_enemies_path
-            %li= link_to "戦型-習得技", learnable_skills_path
+              .dropdown-menu
+                = link_to "新出イベント状況一覧", new_events_path, class: "dropdown-item"
+                = link_to "新出地点一覧", new_places_path, class: "dropdown-item"
+                = link_to "新出敵一覧", new_enemies_path, class: "dropdown-item"
+            %li.nav-item.dropdown
+              = link_to "戦型-習得技", learnable_skills_path, class: "nav-link"
     .container
       .row
         .col-md-12
