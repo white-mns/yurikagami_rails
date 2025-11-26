@@ -1,11 +1,9 @@
 %h1 装備作成一覧
 .col-md-12
   .bs-component
-    %ul.breadcrumb{:style => "margin-bottom: 5px;"}
-      %li 装備作成一覧
-      %li= link_to "装備作成一覧 | 作成直後価値減衰率", smith_display_rates_path
-%br/
-%br/
+    %ol.breadcrumb{:style => "margin-bottom: 5px;"}
+      %li.breadcrumb-item.active 装備作成一覧
+      %li.breadcrumb-item= link_to "装備作成一覧 | 作成直後価値減衰率", smith_display_rates_path
 %br/
 .bs-docs-section
   .row

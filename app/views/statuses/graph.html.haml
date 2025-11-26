@@ -1,11 +1,9 @@
 %h1 ステータス分布グラフ
 .col-md-12
   .bs-component
-    %ul.breadcrumb{:style => "margin-bottom: 5px;"}
-      %li= link_to "ステータス一覧", statuses_path
-      %li ステータス分布グラフ
-%br/
-%br/
+    %ol.breadcrumb{:style => "margin-bottom: 5px;"}
+      %li.breadcrumb-item= link_to "ステータス一覧", statuses_path
+      %li.breadcrumb-item.active ステータス分布グラフ
 %br/
 .bs-docs-section
   .row

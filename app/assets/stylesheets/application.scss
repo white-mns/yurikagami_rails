@@ -183,6 +183,14 @@ p.formNum {
     display:none;
 }
 
+ol.breadcrumb{
+  background-color: #f5f5f5;
+}
+
+.breadcrumb a{
+  color: $link-color;
+}
+
 .table-striped>tbody>tr:nth-of-type(odd)>* {
     --bs-table-bg-type: #f8f8f8;
 }
