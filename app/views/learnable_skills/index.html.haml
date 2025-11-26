@@ -59,8 +59,8 @@
               %td
               %td{:colspan => "3"}
                 = check_box_tag :show_main, @show_main, @show_main
-                = f.label_tag :show_main, 'メインキャラ'
-                　#{check_box_tag :show_sub, @show_sub, @show_sub}#{f.label_tag :show_sub, 'サブキャラ'}
+                = label_tag :show_main, 'メインキャラ'
+                　#{check_box_tag :show_sub, @show_sub, @show_sub}#{label_tag :show_sub, 'サブキャラ'}
             %tr
               %td= f.label :job_id_form, '戦型名'
               %td.formText{:colspan => "3"}= text_field_tag :job_id_form, @job_id_form
@@ -91,8 +91,8 @@
               %td{:colspan => "2"}
               %td{:colspan => "2"}
                 = check_box_tag :equip_range, @equip_range, @equip_range
-                = f.label_tag :equip_range, '武器の射程'
-                　#{check_box_tag :no_range, @no_range, @no_range}#{f.label_tag :no_range, '射程なし'}
+                = label_tag :equip_range, '武器の射程'
+                　#{check_box_tag :no_range, @no_range, @no_range}#{label_tag :no_range, '射程なし'}
             %tr
               %td= f.label :property_form, '特性'
               %td.formText= text_field_tag :property_form, @property_form

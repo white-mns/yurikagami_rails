@@ -92,14 +92,14 @@
               %td= f.label :is_pk_form, '戦闘種別'
               %td{:colspan => "3"}
                 = check_box_tag :is_enemy, @is_enemy, @is_enemy
-                = f.label_tag :is_enemy, '通常戦'
-                　#{check_box_tag :is_practice, @is_practice, @is_practice}#{f.label_tag :is_practice, '練習試合'}　#{check_box_tag :is_pk, @is_pk, @is_pk}#{f.label_tag :is_pk, 'PK戦'}
+                = label_tag :is_enemy, '通常戦'
+                　#{check_box_tag :is_practice, @is_practice, @is_practice}#{label_tag :is_practice, '練習試合'}　#{check_box_tag :is_pk, @is_pk, @is_pk}#{label_tag :is_pk, 'PK戦'}
             %tr
               %td= f.label :battle_result_form, '戦闘結果'
               %td{:colspan => "3"}
                 = check_box_tag :is_win, @is_win, @is_win
-                = f.label_tag :is_win, '勝利'
-                　#{check_box_tag :is_draw, @is_draw, @is_draw}#{f.label_tag :is_draw, '引き分け'}　#{check_box_tag :is_lose, @is_lose, @is_lose}#{f.label_tag :is_lose, '敗北'}#{hidden_field_tag :is_unknown, @is_unknown}
+                = label_tag :is_win, '勝利'
+                　#{check_box_tag :is_draw, @is_draw, @is_draw}#{label_tag :is_draw, '引き分け'}　#{check_box_tag :is_lose, @is_lose, @is_lose}#{label_tag :is_lose, '敗北'}#{hidden_field_tag :is_unknown, @is_unknown}
             %tr
               %td
               %td{:colspan => "3"}

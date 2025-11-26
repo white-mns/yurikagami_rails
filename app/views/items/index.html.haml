@@ -67,8 +67,8 @@
               %td
               %td{:colspan => "3"}
                 = check_box_tag :show_main, @show_main, @show_main
-                = f.label_tag :show_main, 'メインキャラ'
-                　#{check_box_tag :show_sub, @show_sub, @show_sub}#{f.label_tag :show_sub, 'サブキャラ'}
+                = label_tag :show_main, 'メインキャラ'
+                　#{check_box_tag :show_sub, @show_sub, @show_sub}#{label_tag :show_sub, 'サブキャラ'}
             %tr
               %td= f.label :name_form, 'アイテム名'
               %td.formText= text_field_tag :name_form, @name_form
@@ -106,8 +106,8 @@
               %td
               %td{:colspan => "3"}
                 = check_box_tag :is_equiped, @is_equiped, @is_equiped
-                = f.label_tag :is_equiped, '装備中'
-                　#{check_box_tag :no_equiped, @no_equiped, @no_equiped}#{f.label_tag :no_equiped, '未装備'}
+                = label_tag :is_equiped, '装備中'
+                　#{check_box_tag :no_equiped, @no_equiped, @no_equiped}#{label_tag :no_equiped, '未装備'}
             %tr
               %td
               %td{:colspan => "3"}

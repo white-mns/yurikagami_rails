@@ -78,8 +78,8 @@
               %td
               %td{:colspan => "3"}
                 = check_box_tag :is_inn, @is_inn, @is_inn
-                = f.label_tag :is_inn, '宿あり'
-                　#{check_box_tag :no_inn, @no_inn, @no_inn}#{f.label_tag :no_inn, '宿なし'}
+                = label_tag :is_inn, '宿あり'
+                　#{check_box_tag :no_inn, @no_inn, @no_inn}#{label_tag :no_inn, '宿なし'}
             %tr
               %td
               %td{:colspan => "3"}

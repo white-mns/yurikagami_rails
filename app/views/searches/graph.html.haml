@@ -94,8 +94,8 @@
               %td
               %td
                 = check_box_tag :is_item, @is_item, @is_item
-                = f.label_tag :is_item, 'アイテム取得のみ'
-                　#{check_box_tag :no_item, @no_item, @no_item}#{f.label_tag :no_item, 'Lem増減のみ'}
+                = label_tag :is_item, 'アイテム取得のみ'
+                　#{check_box_tag :no_item, @no_item, @no_item}#{label_tag :no_item, 'Lem増減のみ'}
             %tr
               %td
               %td

@@ -75,8 +75,8 @@
               %td
               %td{:colspan => "4"}
                 = check_box_tag :show_main, @show_main, @show_main
-                = f.label_tag :show_main, 'メインキャラ'
-                　#{check_box_tag :show_sub, @show_sub, @show_sub}#{f.label_tag :show_sub, 'サブキャラ'}
+                = label_tag :show_main, 'メインキャラ'
+                　#{check_box_tag :show_sub, @show_sub, @show_sub}#{label_tag :show_sub, 'サブキャラ'}
             %tr
               %td= f.label :lv_form, 'Lv'
               %td.formNum{:colspan => "3"}= text_field_tag :lv_form, @lv_form

@@ -67,8 +67,8 @@
               %td
               %td{:colspan => "3"}
                 = check_box_tag :show_main, @show_main, @show_main
-                = f.label_tag :show_main, 'メインキャラ'
-                　#{check_box_tag :show_sub, @show_sub, @show_sub}#{f.label_tag :show_sub, 'サブキャラ'}
+                = label_tag :show_main, 'メインキャラ'
+                　#{check_box_tag :show_sub, @show_sub, @show_sub}#{label_tag :show_sub, 'サブキャラ'}
             %tr
               %td= f.label :party_no_form, 'パーティ番号'
               %td.formNum{:colspan => "3"}= text_field_tag :party_no_form, @party_no_form
@@ -84,8 +84,8 @@
               %td= f.label :is_pk_form, '戦闘種別'
               %td{:colspan => "3"}
                 = check_box_tag :is_enemy, @is_enemy, @is_enemy
-                = f.label_tag :is_enemy, '通常戦'
-                　#{check_box_tag :is_practice, @is_practice, @is_practice}#{f.label_tag :is_practice, '練習試合'}　#{check_box_tag :is_pk, @is_pk, @is_pk}#{f.label_tag :is_pk, 'PK戦'}
+                = label_tag :is_enemy, '通常戦'
+                　#{check_box_tag :is_practice, @is_practice, @is_practice}#{label_tag :is_practice, '練習試合'}　#{check_box_tag :is_pk, @is_pk, @is_pk}#{label_tag :is_pk, 'PK戦'}
             %tr
               %td
               %td{:colspan => "3"}
